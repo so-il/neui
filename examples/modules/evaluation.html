@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>客户评价</title>
+
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../dist/neui.css" />
+    <style>
+        /*评价星星选择器*/
+
+        .ne-star {
+            display: inline-block;
+            box-sizing: border-box;
+            vertical-align: -.5ex;
+            padding: 0 2px;
+            -webkit-transition: border-color .2s;
+            transition: border-color .2s;
+            overflow: hidden;
+        }
+
+        .ne-star::before {
+            font-family: 'neui';
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            -webkit-font-smoothing: antialiased;
+            text-transform: none;
+            text-decoration: inherit;
+            text-align: center;
+            font-variant: normal;
+            text-transform: none;
+            content: "\F05C";
+            color: #ccc;
+            display: block;
+            font-size: 1.2em;
+        }
+
+        .starpicker.score1 .ne-star:nth-last-of-type(n+5)::before,
+        .starpicker.score2 .ne-star:nth-last-of-type(n+4)::before,
+        .starpicker.score3 .ne-star:nth-last-of-type(n+3)::before,
+        .starpicker.score4 .ne-star:nth-last-of-type(n+2)::before,
+        .starpicker.score5 .ne-star:nth-last-of-type(n+1)::before {
+            color: #ffbf00;
+        }
+
+        /*radio tag*/
+        .ne-tag {
+            display: inline-block;
+            padding: .5em 1em;
+            text-align: center;
+            box-sizing: border-box;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: transparent;
+            -webkit-transition: border-color 150ms, background-color 150ms;
+            transition: border-color 150ms, background-color 150ms;
+        }
+
+         :checked+.ne-tag {
+            color: #fff;
+            border-color: #53d669;
+            background-color: #53d669;
+        }
+
+        .ne-textarea:focus {
+            border-color: #53d769;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="ne-page active" ne-role="page">
+        <header class="ne-page-header">
+            <nav class="ne-navbar">
+                <div class="ne-navbar-left">
+                    <a class="action-link" onclick="history.back();">
+                        <i class="ne-icon-arrow-left green-9"></i>
+                    </a>
+                </div>
+                <div class="ne-navbar-center">
+                    <h1>客户评价</h1>
+                </div>
+                <div class="ne-navbar-right">
+                </div>
+            </nav>
+        </header>
+        <div class="ne-page-body bg-lighter">
+            <form>
+
+                <div class="ne-cell">
+                    <div class="padding-15 align-center">
+                        <span class="block">
+                            <i class="ne-icon-doctor ne-flaticon border-circle bg-grey" style="font-size:5em;"></i>
+                        </span>
+                        <span class="text-title block margin-top-5">王小明</span>
+                        <span style="display:inline-block;border-radius:4px;color:#fff;background-color:#FFD700;font-size:.85em;padding:2px 4px;">主治医生</span>
+                    </div>
+                    <div class="hr-meta bg-lighter">
+                        <span>客户评价</span>
+                    </div>
+                    <div class="align-center size-xx-large">
+                        <span class="starpicker">
+                            <input type="radio" value="1" id="ev_star_1" name="ev_score" onchange="starpicker(this);" />
+                            <label class="ne-star" for="ev_star_1"></label>
+                            <input type="radio" value="2" id="ev_star_2" name="ev_score" onchange="starpicker(this);" />
+                            <label class="ne-star" for="ev_star_2"></label>
+                            <input type="radio" value="3" id="ev_star_3" name="ev_score" onchange="starpicker(this);" />
+                            <label class="ne-star" for="ev_star_3"></label>
+                            <input type="radio" value="4" id="ev_star_4" name="ev_score" onchange="starpicker(this);" />
+                            <label class="ne-star" for="ev_star_4"></label>
+                            <input type="radio" value="5" id="ev_star_5" name="ev_score" onchange="starpicker(this);" />
+                            <label class="ne-star" for="ev_star_5"></label>
+                        </span>
+                    </div>
+                    <div class="ne-row padding-bottom-15 padding-top-15">
+                        <div class="ne-col-6 align-center" style="padding:4px 0;">
+                            <input type="checkbox" id="ev_tag_1" name="ev_tag" value="1" />
+                            <label for="ev_tag_1" class="ne-tag">服务态度好</label>
+                        </div>
+                        <div class="ne-col-6 align-center" style="padding:4px 0;">
+                            <input type="checkbox" id="ev_tag_2" name="ev_tag" value="2" />
+                            <label for="ev_tag_2" class="ne-tag">专业知识强</label>
+                        </div>
+                        <div class="ne-col-6 align-center" style="padding:4px 0;">
+                            <input type="checkbox" id="ev_tag_3" name="ev_tag" value="3" />
+                            <label for="ev_tag_3" class="ne-tag">回复很及时</label>
+                        </div>
+                        <div class="ne-col-6 align-center" style="padding:4px 0;">
+                            <input type="checkbox" id="ev_tag_4" name="ev_tag" value="4" checked />
+                            <label for="ev_tag_4" class="ne-tag">沟通能力强</label>
+                        </div>
+                    </div>
+                    <div class="ne-textarea-wrapper">
+                        <textarea class="ne-textarea" placeholder="您对此次服务的总评价" rows="6" maxlength="200" required></textarea>
+                        <div class="ne-textarea-count">0/200</div>
+                    </div>
+                    <button class="ne-btn ne-btn-success ne-btn-circle block margin-top-20" style="box-shadow:0px 0px 15px 0px rgba(0, 0, 0, 0.1);">提交</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!--load scripts-->
+    <script src="../../dist/neui.js"></script>
+    <script>
+        function starpicker(target) {
+            if (target.checked) {
+                var caname = target.parentElement.className;
+                if (caname.indexOf('score') < 0) {
+                    target.parentElement.classList.add('score' + target.value);
+                } else {
+                    target.parentElement.className = caname.replace(/score+[0-5]/ig, 'score' + target.value);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+﻿<h1>Layout 布局</h1>
+<p>栅格系统等。</p>
+<hr />
+<section>
+    <h2>结构与样式</h2>
+    <div class="flexbox">
+        <pre><code class="html">
+&lt;!-- 
+1、12栅格系统； 
+2、行内格子的水平轴对称通过设置vertical-align样式完成；
+3、行内格子靠左居中靠右排列通过设置text-align样式完成；
+--&gt;
+&lt;div class="ne-row align-middle"&gt;
+    &lt;div class="ne-col-3"&gt;&lt;/div&gt;
+    &lt;div class="ne-col-3"&gt;&lt;/div&gt;
+    &lt;div class="ne-col-3"&gt;&lt;/div&gt;
+    &lt;div class="ne-col-3"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- 
+1、cell为左中右结构，左和右紧凑而中自适应宽度； 
+2、cell左中右等高，同样通过设置vertical-align样式完成水平轴对称；
+--&gt;
+&lt;div class="ne-cell"&gt;
+    &lt;div class="ne-cell-left"&gt;&lt;/div&gt;
+    &lt;div class="ne-cell-center"&gt;&lt;/div&gt;
+    &lt;div class="ne-cell-right"&gt;&lt;/div&gt;
+&lt;/div&gt;
+                            </code></pre>
+        <div class="preview">
+            <div class="preview-browser">
+                <div class="preview-browser-header">
+                    <div class="preview-browser-statbar">
+                        <img src="assets/images/ui-statbar.png">
+                    </div>
+                    <div class="preview-browser-url-box">http://neui.nelabs.cn/examples/base/layout.html</div>
+                </div>
+                <div class="preview-browser-body">
+                    <iframe src="../examples/base/layout.html"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

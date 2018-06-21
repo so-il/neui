@@ -1,0 +1,66 @@
+﻿
+/** 
+ * @textarea.css 
+**/
+
+.ne-textarea {
+    box-sizing: border-box;
+    line-height: 1.2em; 
+    padding:1em .7em 1.6em .7em;
+    border: 1px solid @grey-5;
+    border-radius:@round-radius;
+    background-color: white;
+    outline: none;
+    font-family: inherit;
+    font-size:1em;
+    word-break: break-word;
+    vertical-align: top;
+    resize: none;
+    overflow: auto;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-appearance: none;
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
+}
+.ne-textarea::-webkit-input-placeholder{
+    color:@grey-6;
+}
+div.ne-textarea:empty::before{
+    content: attr(placeholder);
+    color:@grey-6;
+}
+div.ne-textarea:focus::before{
+    content:none;
+}
+
+/* focus */
+.ne-textarea:focus{
+    border-color: @blue-6;
+}
+
+/* textarea with count */
+
+
+.ne-textarea-wrapper {
+    position: relative;
+}
+
+    .ne-textarea-wrapper .ne-textarea {
+        width: 100%; 
+    }
+
+.ne-textarea-count {
+    display: inline-block;
+    position: absolute;
+    right: 1px;
+    bottom: 1px;
+    padding: 0 .5em .4em 0;
+    color: @grey-5;
+    font-size: .857em;
+    border-radius: @round-radius;
+}
+.ne-textarea.border-none{
+    padding: 0;
+    border:none;
+}

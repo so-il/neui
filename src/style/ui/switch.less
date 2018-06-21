@@ -1,0 +1,73 @@
+﻿
+/** 
+ * @switch.css 
+**/
+
+input.ne-switch {
+    clip: auto;
+    position: relative;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.ne-switch {
+    position: relative;
+    width: 3.5em;
+    height: 1.857em;
+    border: 1px solid @grey-5;
+    outline: 0;
+    border-radius: 2em;
+    box-sizing: content-box;
+    background-color: @grey-5;
+    display: inline-block;
+    vertical-align: -.7ex;
+}
+
+    .ne-switch::before {
+        content: " ";
+        position: absolute;
+        top: 0;
+        bottom:0;
+        left: 0;
+        right:0;
+        border-radius: inherit;
+        background-color: @grey-1;
+        -webkit-transition: -webkit-transform 300ms;
+        transition: transform 300ms;
+    }
+
+    .ne-switch::after {
+        content: " ";
+        position: absolute;
+        top: 1px;
+        left: 1px;
+        width: 1.714em;
+        height: 1.714em;
+        border-radius: 50%;
+        background-color: white;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
+        -webkit-transition: -webkit-transform 300ms;
+        transition: -webkit-transform 300ms;
+        transition: transform 300ms;
+        transition: transform 300ms, -webkit-transform 300ms;
+    }
+
+    :checked + .ne-switch, .ne-switch:checked {
+        border-color: @green-6;
+        background-color: @green-6;
+    }
+
+        :checked + .ne-switch::before, .ne-switch:checked::before {
+            -webkit-transform: scale(0);
+            transform: scale(0);
+        }
+
+        :checked + .ne-switch::after, .ne-switch:checked::after {
+            -webkit-transform: translateX(1.64257em);
+            transform: translateX(1.64257em);
+        }
+
+    :disabled + .ne-switch, .ne-switch:disabled {
+        opacity: .38;
+        cursor: default;
+    }

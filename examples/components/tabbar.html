@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>tabbar</title>
+
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../dist/neui.css" />
+</head>
+<body>
+    <section class="ne-page active" ne-role="page">
+        <div class="ne-page-body">
+            <h4 class="hr-title">自适应宽度</h4>
+            <div style="height:80px;">
+                <div class="ne-tabs-wrapper" ne-role="tabview">
+                    <div class="ne-tabs ne-tabs-top" ne-role="tablist">
+                        <div class="ne-tab active" ne-tap="toggle:#tab_top_default_style_1" ne-role="tab">
+                            <span>Tab1</span>
+                        </div>
+                        <div class="ne-tab" ne-tap="toggle:#tab_top_default_style_2" ne-role="tab">
+                            <span>Tab2</span>
+                        </div>
+                        <div class="ne-tab" ne-tap="toggle:#tab_top_default_style_3" ne-role="tab">
+                            <span>Tab3</span>
+                        </div>
+                    </div>
+                    <div class="ne-tabs-content">
+                        <div id="tab_top_default_style_1" class="ne-tabpanel active" ne-swipeable="true" ne-role="tabpanel">
+                            <span class="block padding-top-15 align-center text-meta">Content of Tab1</span>
+                        </div>
+                        <div id="tab_top_default_style_2" class="ne-tabpanel" ne-swipeable="true" ne-role="tabpanel">
+                            <span class="block padding-top-15 align-center text-meta">Content of Tab2</span>
+                        </div>
+                        <div id="tab_top_default_style_3" class="ne-tabpanel" ne-swipeable="true" ne-role="tabpanel">
+                            <span class="block padding-top-15 align-center text-meta">Content of Tab3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h4 class="hr-title">固定宽度（可滑动显示更多）</h4>
+            <div style="height:80px;">
+                <div class="ne-tabs-wrapper" ne-role="tabview">
+                    <div class="ne-tabs ne-tabs-top fixed" ne-role="tablist">
+                        <div class="ne-tab" ne-tap="toggle:#tab_top_fixed_style_1" ne-role="tab">
+                            <span>Tab1</span>
+                        </div>
+                        <div class="ne-tab active" ne-tap="toggle:#tab_top_fixed_style_2" ne-role="tab">
+                            <span>Tab2</span>
+                        </div>
+                        <div class="ne-tab" ne-tap="toggle:#tab_top_fixed_style_3" ne-role="tab">
+                            <span>Tab3</span>
+                        </div>
+                        <div class="ne-tab" ne-tap="toggle:#tab_top_fixed_style_4" ne-role="tab">
+                            <span>Tab4</span>
+                        </div>
+                        <div class="ne-tab" ne-tap="toggle:#tab_top_fixed_style_5" ne-role="tab">
+                            <span>Tab5</span>
+                        </div>
+                        <div class="ne-tab" ne-tap="toggle:#tab_top_fixed_style_6" ne-role="tab">
+                            <span>Tab6</span>
+                        </div>
+                        <div class="ne-tab" ne-tap="toggle:#tab_top_fixed_style_7" ne-role="tab">
+                            <span>Tab7</span>
+                        </div>
+                        <div class="ne-tab" ne-tap="toggle:#tab_top_fixed_style_8" ne-role="tab">
+                            <span>Tab8</span>
+                        </div>
+                    </div>
+                    <div class="ne-tabs-content">
+                        <div id="tab_top_fixed_style_1" class="ne-tabpanel" ne-swipeable="true" ne-role="tabpanel">
+                            <span class="block padding-top-15 align-center text-meta">Content of Tab1</span>
+                        </div>
+                        <div id="tab_top_fixed_style_2" class="ne-tabpanel active" ne-swipeable="true" ne-role="tabpanel">
+                            <span class="block padding-top-15 align-center text-meta">Content of Tab2</span>
+                        </div>
+                        <div id="tab_top_fixed_style_3" class="ne-tabpanel" ne-swipeable="true" ne-role="tabpanel">
+                            <span class="block padding-top-15 align-center text-meta">Content of Tab3</span>
+                        </div>
+                        <div id="tab_top_fixed_style_4" class="ne-tabpanel" ne-swipeable="true" ne-role="tabpanel">
+                            <span class="block padding-top-15 align-center text-meta">Content of Tab4</span>
+                        </div>
+                        <div id="tab_top_fixed_style_5" class="ne-tabpanel" ne-swipeable="true" ne-role="tabpanel">
+                            <span class="block padding-top-15 align-center text-meta">Content of Tab5</span>
+                        </div>
+                        <div id="tab_top_fixed_style_6" class="ne-tabpanel" ne-swipeable="true" ne-role="tabpanel">
+                            <span class="block padding-top-15 align-center text-meta">Content of Tab6</span>
+                        </div>
+                        <div id="tab_top_fixed_style_7" class="ne-tabpanel" ne-swipeable="true" ne-role="tabpanel">
+                            <span class="block padding-top-15 align-center text-meta">Content of Tab7</span>
+                        </div>
+                        <div id="tab_top_fixed_style_8" class="ne-tabpanel" ne-swipeable="true" ne-role="tabpanel">
+                            <span class="block padding-top-15 align-center text-meta">Content of Tab8</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h4 class="hr-title">带小图标</h4>
+            <div style="height:80px;">
+                <div class="ne-tabs-wrapper" ne-role="tabview">
+                    <div class="ne-tabs ne-tabs-top" ne-role="tablist">
+                        <div class="ne-tab" ne-tap="toggle:#tab_top_withicon_1" ne-role="tab">
+                            <i class="ne-icon-star"></i><span class="text-tagged">Tab1</span>
+                        </div>
+                        <div class="ne-tab" ne-tap="toggle:#tab_top_withicon_2" ne-role="tab">
+                            <i class="ne-icon-warn-o"></i><span class="text-tagged">Tab2</span>
+                        </div>
+                        <div class="ne-tab active" ne-tap="toggle:#tab_top_withicon_3" ne-role="tab">
+                            <i class="ne-icon-success-o"></i><span class="text-tagged">Tab3</span>
+                        </div>
+                    </div>
+                    <div class="ne-tabs-content">
+                        <div id="tab_top_withicon_1" class="ne-tabpanel" ne-role="tabpanel">
+                            <span class="block padding-top-15 align-center text-meta">Content of Tab1</span>
+                        </div>
+                        <div id="tab_top_withicon_2" class="ne-tabpanel" ne-role="tabpanel">
+                            <span class="block padding-top-15 align-center text-meta">Content of Tab2</span>
+                        </div>
+                        <div id="tab_top_withicon_3" class="ne-tabpanel active" ne-role="tabpanel">
+                            <span class="block padding-top-15 align-center text-meta">Content of Tab3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h4 class="hr-title">带大图标</h4>
+            <div style="height:100px;">
+                <div class="ne-tabs-wrapper" ne-role="tabview">
+                    <div class="ne-tabs ne-tabs-top ne-tabs-withicon" ne-role="tablist">
+                        <div class="ne-tab" ne-tap="toggle:#tab_top_withlargeicon_1" ne-role="tab">
+                            <i class="ne-icon-speech"></i><span class="block">Tab1</span>
+                        </div>
+                        <div class="ne-tab active" ne-tap="toggle:#tab_top_withlargeicon_2" ne-role="tab">
+                            <i class="ne-icon-doctor"></i><span class="block">Tab2</span>
+                        </div>
+                        <div class="ne-tab" ne-tap="toggle:#tab_top_withlargeicon_3" ne-role="tab">
+                            <i class="ne-icon-moments"></i><span class="block">Tab3</span>
+                        </div>
+                    </div>
+                    <div class="ne-tabs-content">
+                        <div id="tab_top_withlargeicon_1" class="ne-tabpanel" ne-role="tabpanel">
+                            <span class="block padding-top-15 align-center text-meta">Content of Tab1</span>
+                        </div>
+                        <div id="tab_top_withlargeicon_2" class="ne-tabpanel active" ne-role="tabpanel">
+                            <span class="block padding-top-15 align-center text-meta">Content of Tab2</span>
+                        </div>
+                        <div id="tab_top_withlargeicon_3" class="ne-tabpanel" ne-role="tabpanel">
+                            <span class="block padding-top-15 align-center text-meta">Content of Tab3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hr-title">竖向排列的标签</div>
+            <div style="height:300px;">
+                <div class="ne-tabs-wrapper border-top" ne-role="tabview">
+                    <div class="ne-tabs ne-tabs-left" ne-role="tablist">
+                        <div class="ne-tab active" ne-tap="toggle:#tab_left_withicon_1" ne-role="tab">
+                            <i class="ne-icon-star"></i><span class="text-tagged">Tab1</span>
+                        </div>
+                        <div class="ne-tab" ne-tap="toggle:#tab_left_withicon_2" ne-role="tab">
+                            <i class="ne-icon-warn-o"></i><span class="text-tagged">Tab2</span>
+                        </div>
+                        <div class="ne-tab" ne-tap="toggle:#tab_left_withicon_3" ne-role="tab">
+                            <i class="ne-icon-success-o"></i><span class="text-tagged">Tab3</span>
+                        </div>
+                    </div>
+                    <div class="ne-tabs-content">
+                        <div id="tab_left_withicon_1" class="ne-tabpanel active" ne-role="tabpanel">
+                            <span class="block padding-top-15 align-center text-meta">Content of Tab1</span>
+                        </div>
+                        <div id="tab_left_withicon_2" class="ne-tabpanel" ne-role="tabpanel">
+                            <span class="block padding-top-15 align-center text-meta">Content of Tab2</span>
+                        </div>
+                        <div id="tab_left_withicon_3" class="ne-tabpanel" ne-role="tabpanel">
+                            <span class="block padding-top-15 align-center text-meta">Content of Tab3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--load scripts-->
+    <script src="../../dist/neui.js"></script>
+</body>
+</html>

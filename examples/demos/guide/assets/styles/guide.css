@@ -1,0 +1,26 @@
+﻿
+.ne-list.style-odd li:nth-of-type(odd) {
+    background: white;
+}
+
+.ne-list.style-odd li:nth-of-type(even) {
+    background-color: #f0f0f0;
+}
+
+.ui-affix {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+}
+
+.ui-bodysil {
+    margin: 20px 50px;
+}
+
+.ui-bodysil-part {
+    fill: #aaa;
+}
+
+    .ui-bodysil-part:hover {
+        fill: #f00;
+    }

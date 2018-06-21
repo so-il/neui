@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>popover</title>
+
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../dist/neui.css" />
+</head>
+
+<body>
+    <section class="ne-page active" ne-role="page">
+        <div class="ne-page-body">
+            <div class="ne-cell">
+                <div class="hr-meta margin-bottom-15">
+                    <span>靠近顶部打开气泡</span>
+                </div>
+                <div class="ne-btn-group fixed">
+                    <a class="ne-btn ne-btn-default" ne-tap="show:#popover1">
+                        <i class="ne-icon-ellipsis_horizontal"></i>
+                    </a>
+                    <a class="ne-btn ne-btn-default" ne-tap="show:#popover1">
+                        <i class="ne-icon-ellipsis_horizontal"></i>
+                    </a>
+                    <a class="ne-btn ne-btn-default" ne-tap="show:#popover1">
+                        <i class="ne-icon-ellipsis_horizontal"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ne-cell align-center">
+                <div class="hr-meta margin-bottom-15">
+                    <span>不同方位的气泡</span>
+                </div>
+                <div class="ne-bubble ne-bubble-alignright ne-bubble-directiondown">
+                    <div class="ne-bubble-content w12">
+                        <ul class="ne-list border-none">
+                            <li>
+                                <a class="ne-cell">
+                                    <div class="ne-cell-left">
+                                        <i class="ne-icon-delete-f"></i>
+                                    </div>
+                                    <div class="ne-cell-center">
+                                        忽略这条动态
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="ne-cell">
+                                    <div class="ne-cell-left">
+                                        <i class="ne-icon-prohibit-f"></i>
+                                    </div>
+                                    <div class="ne-cell-center">
+                                        不再接收此动态
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="ne-cell">
+                <div class="hr-meta margin-bottom-15">
+                    <span>不同方位的气泡</span>
+                </div>
+                <div class="ne-row spaceing">
+                    <div class="ne-col-4 align-center">
+                        <div class="ne-bubble ne-bubble-alignleft ne-bubble-directiondown">
+                            <div class="ne-bubble-content">
+                                <div class="ne-cell align-center"> T#T</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ne-col-4 align-center">
+                        <div class="ne-bubble ne-bubble-aligncenter ne-bubble-directiondown">
+                            <div class="ne-bubble-content">
+                                <div class="ne-cell align-center"> T_T</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ne-col-4 align-center">
+                        <div class="ne-bubble ne-bubble-alignright ne-bubble-directiondown">
+                            <div class="ne-bubble-content">
+                                <div class="ne-cell align-center"> T~T</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ne-col-4 align-center">
+                        <div class="ne-bubble ne-bubble-alignleft ne-bubble-directionup">
+                            <div class="ne-bubble-content">
+                                <div class="ne-cell align-center"> T^T</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ne-col-4 align-center">
+                        <div class="ne-bubble ne-bubble-aligncenter ne-bubble-directionup">
+                            <div class="ne-bubble-content">
+                                <div class="ne-cell align-center"> ToT</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ne-col-4 align-center">
+                        <div class="ne-bubble ne-bubble-alignright ne-bubble-directionup">
+                            <div class="ne-bubble-content">
+                                <div class="ne-cell align-center"> TwT</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ne-col-6 align-center">
+                        <div class="ne-bubble ne-bubble-directionleft">
+                            <div class="ne-bubble-content">
+                                <div class="ne-cell align-center"> .________.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ne-col-6 align-center">
+                        <div class="ne-bubble ne-bubble-directionright">
+                            <div class="ne-bubble-content">
+                                <div class="ne-cell align-center"> .~~~~~~~~.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="ne-cell">
+                    <div class="hr-meta margin-bottom-15">
+                        <span>靠近底部打开气泡</span>
+                    </div>
+                    <div class="ne-btn-group fixed">
+                        <a class="ne-btn ne-btn-default" ne-tap="show:#popover1">
+                            <i class="ne-icon-ellipsis_horizontal"></i>
+                        </a>
+                        <a class="ne-btn ne-btn-default" ne-tap="show:#popover1">
+                            <i class="ne-icon-ellipsis_horizontal"></i>
+                        </a>
+                        <a class="ne-btn ne-btn-default" ne-tap="show:#popover1">
+                            <i class="ne-icon-ellipsis_horizontal"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="popover1" class="ne-popover" ne-role="popover">
+            <div class="ne-mask" ne-tap="hide:popover"></div>
+            <div class="ne-bubble">
+                <div class="ne-bubble-content w9">
+                    <ul class="ne-list border-none">
+                        <li>
+                            <a class="ne-cell" ne-tap="hide:popover">
+                                <div class="ne-cell-left">
+                                    <i class="ne-icon-scan"></i>
+                                </div>
+                                <div class="ne-cell-center">
+                                    扫一扫
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="ne-cell" ne-tap="hide:popover">
+                                <div class="ne-cell-left">
+                                    <i class="ne-icon-qrcode"></i>
+                                </div>
+                                <div class="ne-cell-center">
+                                    我的二维码
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="ne-cell" ne-tap="hide:popover">
+                                <div class="ne-cell-left">
+                                    <i class="ne-icon-question-o"></i>
+                                </div>
+                                <div class="ne-cell-center">
+                                    帮助
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--load scripts-->
+    <script src="../../dist/neui.js"></script>
+</body>
+
+</html>

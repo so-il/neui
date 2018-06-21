@@ -1,0 +1,507 @@
+﻿
+
+/****************************************************************** 
+ * @ 
+ * Author:Ethan Gor
+ * Description: raffle project
+*******************************************************************/
+
+/************ index ************/
+.loadingmask-canvas {
+    height: 100%;
+    width: 100%;
+    background-color: #de0c25;
+}
+
+    .loadingmask-canvas::before {
+        content: '';
+        background-color: white;
+        border-radius: 100%;
+        margin: 2px;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        border: 2px solid #fff;
+        border-bottom-color: transparent;
+        height: 20px;
+        width: 20px;
+        background: transparent !important;
+        display: inline-block;
+        -webkit-animation: square-spin 0.75s 0s linear infinite;
+        animation: square-spin 0.75s 0s linear infinite;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-left: -10px;
+        margin-top: -10px;
+    }
+
+
+@-webkit-keyframes square-spin {
+    0% {
+        -webkit-transform: rotate(0deg) scale(1);
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        -webkit-transform: rotate(180deg) scale(0.9);
+        transform: rotate(180deg) scale();
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg) scale(1);
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+@keyframes square-spin {
+    0% {
+        -webkit-transform: rotate(0deg) scale(1);
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        -webkit-transform: rotate(180deg) scale(0.9);
+        transform: rotate(180deg) scale(0.9);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg) scale(1);
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+.loadingmask-canvas > img {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+}
+
+    .loadingmask-canvas > img:nth-child(1) {
+        top: 0;
+    }
+
+.loadingmask-canvas-in::before, .loadingmask-canvas-active::before {
+    display: none;
+}
+
+.loadingmask-canvas-in > img {
+    -webkit-animation-name: scalefadein;
+    -webkit-animation-timing-function: cubic-bezier(0, 0, 0, 0.99);
+    -webkit-animation-fill-mode: both;
+    -webkit-animation-duration: 500ms;
+    animation-name: scalefadein;
+    animation-timing-function: cubic-bezier(0, 0, 0, 0.99);
+    animation-fill-mode: both;
+    animation-duration: 500ms;
+}
+
+    .loadingmask-canvas-in > img:nth-child(1) {
+        -webkit-animation-duration: 1100ms;
+        -webkit-animation-delay: 0;
+        animation-duration: 1100ms;
+        animation-delay: 0;
+    }
+
+    .loadingmask-canvas-in > img:nth-child(2) {
+        -webkit-animation-duration: 500ms;
+        -webkit-animation-delay: 0;
+        animation-duration: 500ms;
+        animation-delay: 0;
+    }
+
+    .loadingmask-canvas-in > img:nth-child(3) {
+        -webkit-animation-duration: 500ms;
+        -webkit-animation-delay: 200ms;
+        animation-duration: 500ms;
+        animation-delay: 200ms;
+    }
+
+    .loadingmask-canvas-in > img:nth-child(4) {
+        -webkit-animation-duration: 500ms;
+        -webkit-animation-delay: 200ms;
+        animation-duration: 500ms;
+        animation-delay: 200ms;
+    }
+
+    .loadingmask-canvas-in > img:nth-child(5) {
+        -webkit-animation-duration: 700ms;
+        -webkit-animation-delay: 100ms;
+        animation-duration: 700ms;
+        animation-delay: 300ms;
+    }
+
+
+
+.loadingmask-canvas-active > img {
+    opacity: 1;
+}
+
+    .loadingmask-canvas-active > img:nth-child(3) {
+        -webkit-animation: shackphone 1.4s infinite cubic-bezier(0, 0, 0, 0.99);
+        animation: shackphone 1.4s infinite cubic-bezier(0, 0, 0, 0.99);
+        transform-origin: bottom left;
+    }
+
+    .loadingmask-canvas-active > img:nth-child(4) {
+        -webkit-animation: shacktitle 1.4s infinite cubic-bezier(1, 0.01, 1, 1);
+        animation: shacktitle 1.4s infinite cubic-bezier(1, 0.01, 1, 1);
+    }
+
+
+@-webkit-keyframes scalefadein {
+    from {
+        opacity: 0;
+        -webkit-transform: scale(1.2);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes scalefadein {
+    from {
+        opacity: 0;
+        transform: scale(1.2);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+@-webkit-keyframes shackphone {
+    7% {
+        -webkit-transform: rotate(5deg);
+    }
+
+    14% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    21% {
+        -webkit-transform: rotate(5deg);
+    }
+
+    28% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(0deg);
+    }
+}
+
+@keyframes shackphone {
+    7% {
+        transform: rotate(5deg);
+    }
+
+    14% {
+        transform: rotate(0deg);
+    }
+
+    21% {
+        transform: rotate(5deg);
+    }
+
+    28% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@-webkit-keyframes shacktitle {
+    72% {
+        -webkit-transform: scale(1);
+    }
+
+    79% {
+        -webkit-transform: scale(.99);
+    }
+
+    86% {
+        -webkit-transform: scale(1);
+    }
+
+    93% {
+        -webkit-transform: scale(.99);
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes shacktitle {
+    72% {
+        transform: scale(1);
+    }
+
+    79% {
+        transform: scale(.99);
+    }
+
+    86% {
+        transform: scale(1);
+    }
+
+    93% {
+        transform: scale(.99);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+ 
+
+/*********************************************/
+.raffle-canvas {
+    height: 100%;
+    width: 100%;
+    background-color: #de0c25;
+    position: fixed;
+}
+
+    .raffle-canvas > img {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+    }
+
+
+        .raffle-canvas > img:nth-child(2) {
+            -webkit-animation: shackmoneybag 1.4s infinite cubic-bezier(0, 0, 0, 0.99);
+            animation: shackmoneybag 1.4s infinite cubic-bezier(0, 0, 0, 0.99);
+            transform-origin: bottom left;
+        }
+
+        .raffle-canvas > img:nth-child(4) {
+            bottom: 0 !important;
+            top: initial !important;
+        }
+
+@-webkit-keyframes shackmoneybag {
+    50% {
+        -webkit-transform: scaleY(1) translateY(0);
+    }
+
+    70% {
+        -webkit-transform: scaleY(.9) translateY(0);
+    }
+
+    80% {
+        -webkit-transform: scaleY(1) translateY(-5px);
+    }
+
+    90% {
+        -webkit-transform: scaleY(.9) translateY(0);
+    }
+
+    100% {
+        -webkit-transform: scaleY(1) translateY(0);
+    }
+}
+
+@keyframes shackmoneybag {
+    50% {
+        transform: scaleY(1) translateY(0);
+    }
+
+    70% {
+        transform: scaleY(.9) translateY(0);
+    }
+
+    80% {
+        transform: scaleY(1) translateY(-5px);
+    }
+
+    90% {
+        transform: scaleY(.9) translateY(0);
+    }
+
+    100% {
+        transform: scaleY(1) translateY(0);
+    }
+}
+
+.raffle-turnplate {
+    position: fixed;
+    top: 24%;
+    width: 100%;
+    padding: 0 20px 20px;
+    box-sizing: border-box;
+}
+
+
+/* 大转盘样式 */
+.raffle-turnplate-container {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.turnplate {
+    background-image: url(../Images/turnplate-bg.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    -webkit-animation: turnplatelighton .5s infinite ease;
+    animation: turnplatelighton .5s infinite ease;
+}
+
+@-webkit-keyframes turnplatelighton {
+    0% {
+        background-image: url(../Images/turnplate-bg.png);
+    }
+
+    50% {
+        background-image: url(../Images/turnplate-bg2.png);
+    }
+
+    100% {
+        background-image: url(../Images/turnplate-bg.png);
+    }
+}
+
+.raffle-turnplate-container .turnplate {
+    display: block;
+    width: 100%;
+    position: relative;
+}
+
+.raffle-turnplate-container .turnplate-canvas {
+    width: 100%;
+}
+
+.raffle-turnplate-container .turnplate-gobtn {
+    position: absolute;
+    display: inline-block;
+    width: 31.5%;
+    height: 42.5%;
+    left: 34.6%;
+    top: 24%;
+}
+
+    .raffle-turnplate-container .turnplate-gobtn > img {
+        width: 100%;
+    }
+
+.raffle-bingolist {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+    .raffle-bingolist > ul {
+        color: #4e3936;
+        background-color: #fff8c4;
+        list-style: none;
+        padding: 5px 0;
+        border-radius: 5px;
+        width: 100%;
+        max-height: 74px;
+        overflow: auto;
+    }
+
+        .raffle-bingolist > ul > li {
+            padding: 0 10px;
+            font-size: .857em;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            line-height: 20px;
+        }
+
+.turnplate-active, .turnplate-disabled {
+    pointer-events: none;
+}
+
+.raffleresult-end {
+    margin: 0 auto;
+    width: 290px;
+}
+
+.raffleresult {
+    margin: 0 auto;
+    width: 250px;
+    height: 320px;
+    border-radius: 5px;
+    background-color: #d8341f;
+    position: relative;
+    overflow:hidden;
+}
+
+    .raffleresult::before {
+        content: '';
+        height: 70px;
+        background: #d83520;
+        width: 100%;
+        display: block;
+        position: absolute;
+        border-bottom-right-radius: 50%;
+        border-bottom-left-radius: 50%;
+        border-bottom: 1px solid #981808;
+    }
+
+.raffleresult-header {
+    position: relative;
+    top: 0;
+    height: 80px;
+    text-align: center;
+    padding: 10px 15px;
+    border-bottom-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.raffleresult-title {
+    text-align: center;
+    font-size: 1.2em;
+    color: white;
+    word-break: break-all;
+    margin-top: 5px;
+}
+
+.raffleresult-tips {
+    text-align: center;
+    color: #ffcc01;
+    padding: 7px 5px 15px 5px;
+}
+
+.raffleresult form.ne-fieldset .ne-field {
+    padding: .4em 1em;
+}
+
+.raffleresult .ne-input {
+    background-color: #fce7b6;
+    color: #d8341f;
+    border-color: #fce7b6;
+}
+
+.raffleresult .ne-input-icon {
+    white-space: nowrap;
+    padding-left: 10px;
+    color: #d8341f;
+    width: 3.5em;
+    margin-top: -0.6em;
+}
+
+.raffleresult .ne-input_withicon_left .ne-input {
+    padding-left: 3.8em !important;
+}
+
+
+
+
+ 

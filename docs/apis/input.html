@@ -1,0 +1,70 @@
+﻿<h1>Form Controls 表单控件</h1>
+<p>包含各种用于表单输入的数据采集控件。</p>
+<hr />
+<section>
+    <h2>结构与样式</h2>
+    <div class="flexbox">
+        <pre><code class="html">
+&lt;!--在radio input后紧跟label，并声明label的for属性为radio的id使label与radio形成关联，label添加.ne-radio，label被点击时将联动触发radio切换；--&gt;
+&lt;input type="radio" id="radio_1" /&gt;
+&lt;label class="ne-radio" for="radio_1"&gt;&lt;/label&gt;
+
+&lt;!--勾形的radio样式：.ne-radio_hook--&gt;
+&lt;input type="radio" id="radio_hook" /&gt;
+&lt;label class="ne-radio" for="radio_hook"&gt;&lt;/label&gt;
+
+&lt;!--checkbox的实现方式同理于radio--&gt;
+&lt;input type="checkbox" id="checkbox_1" /&gt;
+&lt;label class="ne-checkbox" for="checkbox_1"&gt;&lt;/label&gt;
+
+&lt;!--利用.ne-checkbox以及使用.border-circle使其圆角边框变圆形边框便可模仿另一种风格的radio--&gt;
+&lt;input type="radio" id="radio_circle" /&gt;
+&lt;label class="ne-checkbox border-circle" for="radio_circle"&gt;&lt;/label&gt;
+
+&lt;!--同理利用.ne-switch使用checkbox实现switch开关控件--&gt;
+&lt;input type="checkbox" id="checkbox_switch" checked=""&gt;
+&lt;label class="ne-switch" for="checkbox_switch"&gt;&lt;/label&gt;
+
+&lt;!--数字输入控件numbox需声明ne-role--&gt;
+&lt;div class="ne-numbox" ne-role="numbox"&gt;
+&lt;button class="ne-btn ne-btn-default" type="button" ne-tap="minus:numbox"&gt;-&lt;/button&gt;
+&lt;input type="number" class="ne-input" min="1" max="20" step="2" value="1"&gt;
+&lt;button class="ne-btn ne-btn-default" type="button" ne-tap="plus:numbox"&gt;+&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!--滑动选择输入控件需声明ne-role--&gt;
+&lt;input type="range" class="ne-range" min="10" max="200" value="150" ne-role="range" /&gt;
+
+&lt;!--普通的文本输入控件使用样式.ne-input--&gt;
+&lt;input class="ne-input" type="text" placeholder="placeholder..." /&gt;
+
+&lt;!--日期和时间输入控件需声明ne-role=“picker”，点击时会呼出选择器--&gt;
+&lt;input class="ne-input" type="datetime" ne-role="picker" /&gt;
+&lt;input class="ne-input" type="date" ne-role="picker" /&gt;
+&lt;input class="ne-input" type="time" ne-role="picker" /&gt;
+
+&lt;!--多行文本输入控件.ne-textarea,设置maxlength属性便可自动计算和控制输入字数--&gt;
+&lt;textarea class="ne-textarea" placeholder="120字，相关输入提示" rows="6" maxlength="120"&gt;&lt;/textarea&gt;
+
+&lt;!--select下拉选择控件设置ne-role=“picker”也可达到选择器效果--&gt;
+&lt;select class="ne-select" aria-label="请选择" ne-role="picker"&gt;&lt;/select&gt;
+
+&lt;!--带清除按钮的文本输入控件需设置属性ne-clearable="true"--&gt;
+&lt;input type="text" class="ne-input" ne-clearable="true"&gt;
+                            </code></pre>
+        <div class="preview">
+            <div class="preview-browser">
+                <div class="preview-browser-header">
+                    <div class="preview-browser-statbar">
+                        <img src="assets/images/ui-statbar.png">
+                    </div>
+                    <div class="preview-browser-url-box">http://neui.nelabs.cn/examples/components/input.html</div>
+                </div>
+                <div class="preview-browser-body">
+                    <iframe src="../examples/components/input.html"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+ 

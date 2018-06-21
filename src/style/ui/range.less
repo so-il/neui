@@ -1,0 +1,107 @@
+﻿
+/** 
+ * @range.css
+**/
+
+.ne-range-thumb, input.ne-range[type=range]::-webkit-slider-thumb {
+    width: 1.7142857em;
+    height: 1.7142857em;
+    border-radius: 50%;
+    border: 1px solid @inputborder-color;
+    background-color: white;
+    box-shadow: 0 1px 4px rgba(0,0,0,.2);
+    -webkit-transition: border-color 150ms, background-color 150ms;
+    transition: border-color 150ms, background-color 150ms;
+    cursor: pointer;
+    background-clip: padding-box;
+    box-sizing: border-box;
+}
+
+    .ne-range-thumb:active, input.ne-range[type=range]::-webkit-slider-thumb:active {
+        border: 1px solid @grey-6;
+        background-color: @grey-1;
+    }
+
+.ne-range-track, input.ne-range[type=range] {
+    width: 100%;
+    height: 1px;
+    margin: .857em 0;
+    padding: 0;
+    cursor: pointer;
+    border: 0;
+    background-color: @grey-6;
+}
+
+    .ne-range-track > span {
+        display: block;
+        width: 0%;
+        height: 100%;
+        background-color: @green-7;
+    }
+
+.ne-range-tips {
+    position: absolute;
+    margin-top: -2em;
+    width: 6em;
+    text-align: center;
+    margin-left: -3em;
+}
+.ne-range-thumb>.ne-range-tips{
+    margin-left: -2.15em;
+}
+
+    .ne-range-tips > span {
+        position: relative;
+        display: inline-block;
+        padding: 0 3px;
+        min-width: 1.2em;
+        color: white;
+        background-color: rgba(0, 0, 0, .5);
+        border-radius: @round-radius;
+        text-align: center;
+    }
+
+        .ne-range-tips > span::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -.25em;
+            margin-left: -.3em;
+            border: .3em solid rgba(0, 0, 0, .5);
+            border-right-color: transparent;
+            border-left-color: transparent;
+            border-bottom: 0;
+        }
+
+
+/*Real Range*/
+input.ne-range[type=range] {
+    position: relative;
+    outline: 0;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+}
+
+    input.ne-range[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none !important;
+        appearance: none !important;
+    }
+
+
+/*Virtual Range*/
+.ne-range {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    font-size:1em;
+}
+
+.ne-range-thumb {
+    position: absolute;
+    top: 0;
+    margin-left: -.85em;
+}
+
+    .ne-range-thumb.ondrag > .ne-range-tips {
+        visibility: visible;
+    }

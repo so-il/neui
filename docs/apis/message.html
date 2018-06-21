@@ -1,0 +1,51 @@
+﻿<h1>Result 结果页</h1>
+<p>在整张页面中组织插画、图标、文字等内容，向用户反馈操作结果。</p>
+<hr />
+<section>
+    <h2>结构与样式</h2>
+    <div class="flexbox">
+        <pre><code class="html">
+&lt;!--
+1、结果页采用的是msg消息体结构；
+2、msg通过填充不同的内容来体现不同状态的结果页反馈
+--&gt;                 
+          
+&lt;!--msg的基本结构--&gt;
+&lt;div class="ne-msg"&gt;
+    &lt;div class="ne-msg-icon"&gt;&lt;/div&gt;
+    &lt;div class="ne-msg-desc"&gt;
+        &lt;strong&gt;&lt;/strong&gt;
+        &lt;p&gt;&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="ne-msg-actions"&gt;&lt;/div&gt;
+&lt;/div&gt;                 
+          
+&lt;!--成功状态的消息反馈--&gt;
+&lt;div class="ne-msg"&gt;
+    &lt;div class="ne-msg-icon"&gt;
+         &lt;i class="ne-icon-success-f green" style="font-size:5em;"&gt;&lt;/i&gt;
+    &lt;/div&gt;
+    &lt;div class="ne-msg-desc"&gt;
+        &lt;strong&gt;报名成功&lt;/strong&gt;
+        &lt;p&gt;这里是状态辅助说明信息。&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="ne-msg-actions"&gt;
+        &lt;a href="#" class="ne-btn ne-btn-success block"&gt;返回首页&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                            </code></pre>
+        <div class="preview">
+            <div class="preview-browser">
+                <div class="preview-browser-header">
+                    <div class="preview-browser-statbar">
+                        <img src="assets/images/ui-statbar.png">
+                    </div>
+                    <div class="preview-browser-url-box">http://neui.nelabs.cn/examples/components/message.html</div>
+                </div>
+                <div class="preview-browser-body">
+                    <iframe src="../examples/components/message.html"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

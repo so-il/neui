@@ -1,0 +1,106 @@
+
+/** 
+ * @dialog.css
+**/
+
+.ne-dialog {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.ne-dialog-container {
+    display: table-cell;
+    vertical-align: middle;
+    position: relative;
+    z-index: 2;
+}
+
+/*animation*/
+.ne-dialog {
+    display: none;
+}
+
+.ne-dialog.ne-animate-show, 
+.ne-dialog.ne-animate-hide {
+    display: table;
+}
+
+.ne-animate-show > .ne-dialog-container,
+.ne-animate-hide > .ne-dialog-container {
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-duration: 300ms;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    animation-duration: 300ms;
+}
+
+.ne-animate-show > .ne-dialog-container {
+    -webkit-animation-name: lowerin;
+    animation-name: lowerin;
+}
+
+.ne-animate-hide > .ne-dialog-container {
+    -webkit-animation-name: lowerout;
+    animation-name: lowerout;
+}
+
+
+
+
+/*alert and confirm*/
+.ne-dialog-alert, .ne-dialog-confirm, .ne-dialog-actions {
+    margin: 0 auto;
+    width: 20em;
+    background-color: @layer-bgcolor;
+    border-radius: @card-radius;
+    overflow: hidden;
+}
+
+.ne-dialog-header {
+    padding: 1.2em 1.5em .5em;
+    text-align: center;
+}
+
+    .ne-dialog-header > strong {
+        font-weight: 500;
+        font-size: 1.2857em;
+    }
+
+.ne-dialog-body {
+    padding: 0 1.5em 1.2em;
+    text-align: center;
+}
+
+.ne-dialog-footer {
+    position: relative;
+    border-top: 1px solid @grey-4;
+}
+
+.ne-dialog-confirm > .ne-dialog-body {
+    text-align: left;
+}
+
+.ne-dialog-confirm > .ne-dialog-footer {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+    .ne-dialog-confirm > .ne-dialog-footer .ne-action {
+        display: table-cell;
+    }
+
+        .ne-dialog-confirm > .ne-dialog-footer .ne-action:not(:first-child)::before {
+            top: 0;
+            left: -1px;
+            width: 1px;
+            height: 100%;
+        }

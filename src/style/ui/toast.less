@@ -1,0 +1,83 @@
+﻿
+/** 
+ * @toast.css
+ **/
+
+.ne-toast {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: 100%;
+    width: 100%;
+    display: table;
+}
+
+.ne-toast-container {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+
+.ne-toast-msg {
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: center;
+    vertical-align: middle;
+    padding: .7142857em;
+    color: white;
+    background-color: rgba(0, 0, 0,.65);
+    border-radius: 5px;
+}
+
+.ne-toast-icon {
+    box-sizing: border-box;
+    text-align: center;
+}
+.ne-toast-icon+.ne-toast-text {
+    margin-top: 5px;
+}
+
+/*error*/
+.ne-toast-error .ne-toast-icon {
+    display: none;
+}
+.ne-toast-error .ne-toast-text{
+    margin-top: 0;
+}
+
+/*animation*/
+.ne-toast {
+    opacity: 0;
+    display: none;
+}
+
+.ne-toast.ne-animate-show, 
+.ne-toast.ne-animate-hide {
+    display: table;
+}
+
+.ne-toast.ne-animate-show, 
+.ne-toast.ne-animate-hide {
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-duration: 300ms;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    animation-duration: 300ms;
+}
+
+.ne-toast.ne-animate-show {
+    -webkit-animation-name: fadein;
+    animation-name: fadein;
+}
+
+.ne-toast.ne-animate-hide {
+    -webkit-animation-name: fadeout;
+    animation-name: fadeout;
+}

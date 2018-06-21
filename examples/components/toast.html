@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>toast</title>
+
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../dist/neui.css" />
+</head>
+<body>
+    <section class="ne-page active" ne-role="page">
+        <div class="ne-page-body">
+            <h4 class="hr-title">Spinner</h4>
+            <div class="ne-cell align-center">
+                <i class="ne-spinner primary"></i>
+                <i class="ne-preloader margin-left-10"></i>
+            </div>
+            <h4 class="hr-title">Spinner加文字</h4>
+            <div class="ne-cell align-center">
+                <span><i class="ne-spinner primary size-large"></i><span class="text-tagged">Loading...</span></span>
+                <span class="margin-left-10"><i class="ne-preloader size-large"></i><span class="text-tagged">Loading...</span></span>
+            </div>
+            <h4 class="hr-title">仅带图标的toast</h4>
+            <div class="ne-cell align-center">
+                <div class="ne-toast-msg">
+                    <div class="ne-toast-icon"><i class="ne-preloader white size-double"></i></div>
+                </div>
+                <div class="ne-toast-msg">
+                    <div class="ne-toast-icon"><i class="ne-icon-success normalsize size-double"></i></div>
+                </div>
+                <div class="ne-toast-msg">
+                    <div class="ne-toast-icon"><i class="ne-icon-delete normalsize size-double"></i></div>
+                </div>
+            </div>
+            <h4 class="hr-title">仅带图标和文字的toast</h4>
+            <div class="ne-cell align-center">
+                <div class="ne-toast-msg">
+                    <div class="ne-toast-icon"><i class="ne-preloader white size-double"></i></div>
+                    <div class="ne-toast-text">加载中</div>
+                </div>
+                <div class="ne-toast-msg">
+                    <div class="ne-toast-icon"><i class="ne-icon-success normalsize size-double"></i></div>
+                    <div class="ne-toast-text">加载成功</div>
+                </div>
+                <div class="ne-toast-msg">
+                    <div class="ne-toast-icon"><i class="ne-icon-delete normalsize size-double"></i></div>
+                    <div class="ne-toast-text">加载失败</div>
+                </div>
+            </div>
+            <h4 class="hr-title">show toast</h4>
+            <div class="ne-cell">
+                <button class="ne-btn block ne-btn-primary" onclick="Ne.toast.showLoading('loading',2000);">Show Loading Toast</button>
+            </div>
+            <div class="ne-cell">
+                <button class="ne-btn block ne-btn-primary" onclick="Ne.toast.showSuccess('操作成功',2000);">Show Success Toast</button>
+            </div>
+            <div class="ne-cell">
+                <button class="ne-btn block ne-btn-primary" onclick="Ne.toast.showError('错误信息');">Show Error Toast</button>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="../../dist/neui.js"></script>
+</body>
+
+</html>

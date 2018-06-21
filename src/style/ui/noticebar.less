@@ -1,0 +1,62 @@
+﻿
+/**
+ * @noticebar.css
+**/
+
+
+.ne-noticebar {
+    display: block;
+    box-sizing: border-box;
+    padding: .6em @wingblank-width;
+    background-color:@orange-1;
+    color:@red-5;
+}
+
+    /*left-center-right structure*/
+    .ne-noticebar > .ne-noticebar-icon,
+    .ne-noticebar > .ne-noticebar-content,
+    .ne-noticebar > .ne-noticebar-action {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    .ne-noticebar > .ne-noticebar-icon {
+        width: 1%;
+        padding-right: .75em;
+    }
+
+    .ne-noticebar > .ne-noticebar-content {
+        width: 100%;
+        white-space: normal;
+        position:relative;
+    }
+
+    .ne-noticebar > .ne-noticebar-action {
+        width: 1%;
+        text-align: right;
+        padding-left: .75em;
+    }
+
+    .marqueebox{
+        position: absolute;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        top: 0;
+    }
+    .marqueebox-content{
+        position: relative;
+        white-space: nowrap;
+        right: 0;
+        animation: marquee 5s linear 1s infinite;
+    }
+    @keyframes marquee{
+        from {
+             transform: translateX(0%);
+        }
+        to{
+           transform: translateX(-100%);
+        }
+    }

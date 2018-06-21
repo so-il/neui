@@ -1,0 +1,33 @@
+
+/**
+ * @fieldset.css
+**/
+
+.ne-fieldset {
+    display: table;
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    padding:0;
+    margin:0;
+}
+
+.ne-field {
+    width: 100%;
+    box-sizing: border-box;
+    padding: .75em 1em;
+    position: relative;
+}
+
+    .ne-field > label, .ne-field > label + p, .ne-field > label + div {
+        display: table-cell;
+        vertical-align: baseline;
+    }
+
+    .ne-field > label {
+        padding-right: .36em;
+        width: 1%;
+        white-space: nowrap;
+        color:@label-color;
+        text-align: right;
+    }

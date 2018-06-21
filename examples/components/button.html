@@ -1,0 +1,454 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>button</title>
+
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../dist/neui.css" />
+</head>
+<body>
+    <section class="ne-page active" ne-role="page">
+        <div class="ne-page-body">
+            <div class="ne-tabs-wrapper" ne-role="tabview">
+                <div class="ne-tabs ne-tabs-top" ne-role="tablist">
+                    <div class="ne-tab active" ne-tap="toggle:#tab_btn_default_style" ne-role="tab">
+                        <span>Default Style</span>
+                    </div>
+                    <div class="ne-tab" ne-tap="toggle:#tab_btn_outline_style" ne-role="tab">
+                        <span>Outline Style</span>
+                    </div>
+                </div>
+                <div class="ne-tabs-content">
+                    <div id="tab_btn_default_style" class="ne-tabpanel active" ne-role="tabpanel">
+                        <h4 class="hr-title">Normal State</h4>
+                        <div class="align-center padding-top-10 padding-bottom-20 wingblank border-bottom">
+                            <div class="margin-bottom-10">
+                                <button class="ne-btn ne-btn-default">Default</button>
+                                <button class="ne-btn ne-btn-primary">Primary</button>
+                            </div>
+                            <div class="space-nowrap margin-bottom-10">
+                                <button class="ne-btn ne-btn-success">Green</button>
+                                <button class="ne-btn ne-btn-info">Blue</button>
+                                <button class="ne-btn ne-btn-warning">Yellow</button>
+                                <button class="ne-btn ne-btn-danger">Red</button>
+                            </div>
+                        </div>
+                        <h4 class="hr-title">Disabled State</h4>
+                        <div class="align-center padding-top-10 padding-bottom-20 wingblank border-bottom">
+                            <div class="margin-bottom-10">
+                                <button class="ne-btn ne-btn-default disabled">Default</button>
+                                <button class="ne-btn ne-btn-primary disabled">Primary</button>
+                            </div>
+                            <div class="space-nowrap margin-bottom-10">
+                                <button class="ne-btn ne-btn-success disabled">Green</button>
+                                <button class="ne-btn ne-btn-info disabled">Blue</button>
+                                <button class="ne-btn ne-btn-warning disabled">Yellow</button>
+                                <button class="ne-btn ne-btn-danger disabled">Red</button>
+                            </div>
+                        </div>
+                        <h4 class="hr-title">Loading State</h4>
+                        <div class="align-center padding-top-10 padding-bottom-20 wingblank border-bottom">
+                            <div class="margin-bottom-10">
+                                <button class="ne-btn ne-btn-default ne-btn-loading">Default</button>
+                                <button class="ne-btn ne-btn-primary ne-btn-loading">Primary</button>
+                            </div>
+                            <div class="space-nowrap margin-bottom-10">
+                                <button class="ne-btn ne-btn-success ne-btn-loading">Green</button>
+                                <button class="ne-btn ne-btn-info ne-btn-loading">Blue</button>
+                                <button class="ne-btn ne-btn-warning ne-btn-loading">Yellow</button>
+                                <button class="ne-btn ne-btn-danger ne-btn-loading">Red</button>
+                            </div>
+                        </div>
+                        <h4 class="hr-title">Circle Bordered</h4>
+                        <div class="align-center padding-top-10 padding-bottom-20 wingblank border-bottom">
+                            <div class="margin-bottom-10">
+                                <button class="ne-btn ne-btn-default ne-btn-circle">Default</button>
+                                <button class="ne-btn ne-btn-primary ne-btn-circle">Primary</button>
+                            </div>
+                            <div class="space-nowrap margin-bottom-10">
+                                <button class="ne-btn ne-btn-success ne-btn-circle">Green</button>
+                                <button class="ne-btn ne-btn-info ne-btn-circle">Blue</button>
+                                <button class="ne-btn ne-btn-warning ne-btn-circle">Yellow</button>
+                                <button class="ne-btn ne-btn-danger ne-btn-circle">Red</button>
+                            </div>
+                        </div>
+                        <h4 class="hr-title">Size</h4>
+                        <div class="align-center padding-top-10 padding-bottom-20 wingblank border-bottom position-relative">
+                            <div class="align-left">
+                                <div class="margin-bottom-10">
+                                    <button class="ne-btn ne-btn-primary block">Block Button</button>
+                                </div>
+                                <div class="margin-bottom-10">
+                                    <button class="ne-btn ne-btn-primary ne-btn-large">Large Button</button>
+                                </div>
+                                <div class="margin-bottom-10">
+                                    <button class="ne-btn ne-btn-info">Normal</button>
+                                </div>
+                                <div>
+                                    <button class="ne-btn ne-btn-info ne-btn-small">Small</button>
+                                </div>
+                            </div>
+                            <div class="hr-meta"><span>Circle Bordered</span></div>
+                            <div style="height: 90%;position: absolute;width: 0;border-left: 1px solid #ddd;top:5%;left: 50%;transform: rotate(45deg);-webkit-transform: rotate(45deg);"></div>
+                            <div class="align-right">
+                                <div class="margin-bottom-10">
+                                    <button class="ne-btn ne-btn-warning ne-btn-small ne-btn-circle">Small</button>
+                                </div>
+                                <div class="margin-bottom-10">
+                                    <button class="ne-btn ne-btn-warning ne-btn-circle">Normal</button>
+                                </div>
+                                <div class="margin-bottom-10">
+                                    <button class="ne-btn ne-btn-danger ne-btn-large ne-btn-circle">Large Button</button>
+                                </div>
+                                <div class="margin-bottom-10">
+                                    <button class="ne-btn ne-btn-danger block ne-btn-circle">Block Button</button>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="hr-title">Group</h4>
+                        <div class="align-center padding-top-10 padding-bottom-20 wingblank border-bottom">
+                            <div class="margin-bottom-10">
+                                <div class="ne-btn-group">
+                                    <button class="ne-btn ne-btn-success ne-btn-small">
+                                        Button
+                                    </button>
+                                    <button class="ne-btn ne-btn-success ne-btn-small">
+                                        Button
+                                    </button>
+                                    <button class="ne-btn ne-btn-success ne-btn-small">
+                                        Button
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="margin-bottom-10">
+                                <div class="ne-btn-group">
+                                    <a class="ne-btn ne-btn-info">
+                                        Button
+                                    </a>
+                                    <a class="ne-btn ne-btn-info">
+                                        Button
+                                    </a>
+                                    <a class="ne-btn ne-btn-info">
+                                        Button
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="margin-bottom-10">
+                                <div class="ne-btn-group fixed">
+                                    <a class="ne-btn ne-btn-primary">
+                                        <i class="ne-icon-star"></i><span class="text-tagged">Button</span>
+                                    </a>
+                                    <a class="ne-btn ne-btn-primary">
+                                        <i class="ne-icon-equalizer"></i><span class="text-tagged">Button</span>
+                                    </a>
+                                    <a class="ne-btn ne-btn-primary">
+                                        <i class="ne-icon-setting"></i><span class="text-tagged">Button</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="margin-bottom-10">
+                                <div class="ne-btn-group ">
+                                    <a class="ne-btn ne-btn-danger ne-btn-circle">
+                                        Button
+                                    </a>
+                                    <a class="ne-btn ne-btn-danger ne-btn-circle">
+                                        Button
+                                    </a>
+                                    <a class="ne-btn ne-btn-danger ne-btn-circle">
+                                        Button
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="margin-bottom-10">
+                                <div class="ne-btn-group ">
+                                    <a class="ne-btn ne-btn-warning ne-btn-circle ne-btn-small">
+                                        Button
+                                    </a>
+                                    <a class="ne-btn ne-btn-warning ne-btn-circle ne-btn-small">
+                                        Button
+                                    </a>
+                                    <a class="ne-btn ne-btn-warning ne-btn-circle ne-btn-small">
+                                        Button
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="hr-title">With Icon</h4>
+                        <div class="align-center padding-top-10 padding-bottom-20 wingblank border-bottom">
+                            <div class="space-nowrap margin-bottom-10">
+                                <button class="ne-btn ne-btn-default"><i class="ne-icon-prohibit-f grey-white"></i><span class="text-tagged">Default</span></button>
+                                <button class="ne-btn ne-btn-primary"><i class="ne-icon-question-f"></i><span class="text-tagged">Primary</span></button>
+                                <button class="ne-btn ne-btn-info"><i class="ne-icon-info-f"></i><span class="text-tagged">Blue</span></button>
+                            </div>
+                            <div class="space-nowrap margin-bottom-10">
+                                <button class="ne-btn ne-btn-success"><i class="ne-icon-success-f"></i><span class="text-tagged">Green</span></button>
+                                <button class="ne-btn ne-btn-warning"><i class="ne-icon-warn-f"></i><span class="text-tagged">Yellow</span></button>
+                                <button class="ne-btn ne-btn-danger"><i class="ne-icon-delete-f"></i><span class="text-tagged">Red</span></button>
+                            </div>
+                            <div>
+                                <button class="ne-btn ne-btn-primary block"><span class="align-middle margin-right-5">Block Button With Icon</span><i class="ne-icon-iarrow-right-o"></i></button>
+                            </div>
+                            <div class="hr-meta"><span>Circle Bordered</span></div>
+                            <div class="margin-bottom-10">
+                                <button class="ne-btn ne-btn-primary block ne-btn-circle"><i class="ne-icon-arrow-left-o"></i><span class="text-tagged">Block Button With Icon</span></button>
+                            </div>
+                            <div class="space-nowrap margin-bottom-10">
+                                <button class="ne-btn ne-btn-default ne-btn-circle"><i class="ne-icon-prohibit-f grey-white"></i><span class="text-tagged">Default</span></button>
+                                <button class="ne-btn ne-btn-primary ne-btn-circle"><i class="ne-icon-question-f"></i><span class="text-tagged">Primary</span></button>
+                                <button class="ne-btn ne-btn-info ne-btn-circle"><i class="ne-icon-info-f"></i><span class="text-tagged">Blue</span></button>
+                            </div>
+                            <div class="space-nowrap margin-bottom-10">
+                                <button class="ne-btn ne-btn-success ne-btn-circle"><i class="ne-icon-success-f"></i><span class="text-tagged">Green</span></button>
+                                <button class="ne-btn ne-btn-warning ne-btn-circle"><i class="ne-icon-warn-f"></i><span class="text-tagged">Yellow</span></button>
+                                <button class="ne-btn ne-btn-danger ne-btn-circle"><i class="ne-icon-delete-f"></i><span class="text-tagged">Red</span></button>
+                            </div>
+                        </div>
+                        <h4 class="hr-title">Icon Only</h4>
+                        <div class="align-center padding-top-10 padding-bottom-20 wingblank border-bottom">
+                            <div class="margin-bottom-10">
+                                <button class="ne-btn ne-btn-icononly"><i class="ne-icon-iarrow-left-o"></i></button>
+                                <button class="ne-btn ne-btn-default ne-btn-icononly"><i class="ne-icon-prohibit-f grey-white"></i></button>
+                                <button class="ne-btn ne-btn-primary ne-btn-icononly"><i class="ne-icon-question-f"></i></button>
+                                <button class="ne-btn ne-btn-success ne-btn-icononly"><i class="ne-icon-success-f"></i></button>
+                                <button class="ne-btn ne-btn-info ne-btn-icononly"><i class="ne-icon-info-f"></i></button>
+                                <button class="ne-btn ne-btn-warning ne-btn-icononly"><i class="ne-icon-warn-f"></i></button>
+                                <button class="ne-btn ne-btn-danger ne-btn-icononly"><i class="ne-icon-delete-f"></i></button>
+                            </div>
+                            <div>
+                                <button class="ne-btn ne-btn-default ne-btn-icononly ne-btn-circle"><i class="ne-icon-pencil"></i></button>
+                                <button class="ne-btn ne-btn-primary ne-btn-icononly ne-btn-circle"><i class="ne-icon-link"></i></button>
+                                <button class="ne-btn ne-btn-success ne-btn-icononly ne-btn-circle"><i class="ne-icon-success"></i></button>
+                                <button class="ne-btn ne-btn-info ne-btn-icononly ne-btn-circle"><i class="ne-icon-refresh"></i></button>
+                                <button class="ne-btn ne-btn-warning ne-btn-icononly ne-btn-circle"><i class="ne-icon-bulb"></i></button>
+                                <button class="ne-btn ne-btn-danger ne-btn-icononly ne-btn-circle"><i class="ne-icon-trash"></i></button>
+                            </div>
+                            <div class="hr-meta"><span>Big Size</span></div>
+                            <div class="margin-bottom-10">
+                                <button class="ne-btn ne-btn-primary ne-btn-icononly ne-btn-circle" style="font-size: 2.5em;border-radius: 25px!important;"><i class="ne-icon-link"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tab_btn_outline_style" class="ne-tabpanel" ne-role="tabpanel">
+                        <h4 class="hr-title">Normal State</h4>
+                        <div class="align-center padding-top-10 padding-bottom-20 wingblank border-bottom">
+                            <div class="margin-bottom-10">
+                                <button class="ne-btn ne-btn-default ne-btn-outline">Default</button>
+                                <button class="ne-btn ne-btn-primary ne-btn-outline">Primary</button>
+                            </div>
+                            <div class="space-nowrap margin-bottom-10">
+                                <button class="ne-btn ne-btn-success ne-btn-outline">Green</button>
+                                <button class="ne-btn ne-btn-info ne-btn-outline">Blue</button>
+                                <button class="ne-btn ne-btn-warning ne-btn-outline">Yellow</button>
+                                <button class="ne-btn ne-btn-danger ne-btn-outline">Red</button>
+                            </div>
+                        </div>
+                        <h4 class="hr-title">Disabled State</h4>
+                        <div class="align-center padding-top-10 padding-bottom-20 wingblank border-bottom">
+                            <div class="margin-bottom-10">
+                                <button class="ne-btn ne-btn-default ne-btn-outline disabled">Default</button>
+                                <button class="ne-btn ne-btn-primary ne-btn-outline disabled">Primary</button>
+                            </div>
+                            <div class="space-nowrap margin-bottom-10">
+                                <button class="ne-btn ne-btn-success ne-btn-outline disabled">Green</button>
+                                <button class="ne-btn ne-btn-info ne-btn-outline disabled">Blue</button>
+                                <button class="ne-btn ne-btn-warning ne-btn-outline disabled">Yellow</button>
+                                <button class="ne-btn ne-btn-danger ne-btn-outline disabled">Red</button>
+                            </div>
+                        </div>
+                        <h4 class="hr-title">Loading State</h4>
+                        <div class="align-center padding-top-10 padding-bottom-20 wingblank border-bottom">
+                            <div class="margin-bottom-10">
+                                <button class="ne-btn ne-btn-default ne-btn-outline ne-btn-loading">Default</button>
+                                <button class="ne-btn ne-btn-primary ne-btn-outline ne-btn-loading">Primary</button>
+                            </div>
+                            <div class="space-nowrap margin-bottom-10">
+                                <button class="ne-btn ne-btn-success ne-btn-outline ne-btn-loading">Green</button>
+                                <button class="ne-btn ne-btn-info ne-btn-outline ne-btn-loading">Blue</button>
+                                <button class="ne-btn ne-btn-warning ne-btn-outline ne-btn-loading">Yellow</button>
+                                <button class="ne-btn ne-btn-danger ne-btn-outline ne-btn-loading">Red</button>
+                            </div>
+                        </div>
+                        <h4 class="hr-title">Circle Bordered</h4>
+                        <div class="align-center padding-top-10 padding-bottom-20 wingblank border-bottom">
+                            <div class="margin-bottom-10">
+                                <button class="ne-btn ne-btn-default ne-btn-circle ne-btn-outline">Default</button>
+                                <button class="ne-btn ne-btn-primary ne-btn-circle ne-btn-outline">Primary</button>
+                            </div>
+                            <div class="space-nowrap margin-bottom-10">
+                                <button class="ne-btn ne-btn-success ne-btn-circle ne-btn-outline">Green</button>
+                                <button class="ne-btn ne-btn-info ne-btn-circle ne-btn-outline">Blue</button>
+                                <button class="ne-btn ne-btn-warning ne-btn-circle ne-btn-outline">Yellow</button>
+                                <button class="ne-btn ne-btn-danger ne-btn-circle ne-btn-outline">Red</button>
+                            </div>
+                        </div>
+                        <h4 class="hr-title">Size</h4>
+                        <div class="align-center padding-top-10 padding-bottom-20 wingblank border-bottom position-relative">
+                            <div class="align-left">
+                                <div class="margin-bottom-10">
+                                    <a class="ne-btn ne-btn-primary block ne-btn-outline">Block Button</a>
+                                </div>
+                                <div class="margin-bottom-10">
+                                    <a class="ne-btn ne-btn-primary ne-btn-large ne-btn-outline">Large Button</a>
+                                </div>
+                                <div class="margin-bottom-10">
+                                    <a class="ne-btn ne-btn-info ne-btn-outline">Normal</a>
+                                </div>
+                                <div>
+                                    <a class="ne-btn ne-btn-info ne-btn-small ne-btn-outline">Small</a>
+                                </div>
+                            </div>
+                            <div class="hr-meta"><span>Circle Bordered</span></div>
+                            <div style="height: 90%;position: absolute;width: 0;border-left: 1px solid #ddd;top: 5%;left: 50%;transform: rotate(45deg);-webkit-transform"></div>
+                            <div class="align-right">
+                                <div class="margin-bottom-10">
+                                    <a class="ne-btn ne-btn-warning ne-btn-small ne-btn-circle ne-btn-outline">Small</a>
+                                </div>
+                                <div class="margin-bottom-10">
+                                    <a class="ne-btn ne-btn-warning ne-btn-circle ne-btn-outline">Normal</a>
+                                </div>
+                                <div class="margin-bottom-10">
+                                    <a class="ne-btn ne-btn-danger ne-btn-large ne-btn-circle ne-btn-outline">Large Button</a>
+                                </div>
+                                <div class="margin-bottom-10">
+                                    <a class="ne-btn ne-btn-danger block ne-btn-circle ne-btn-outline">Block Button</a>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="hr-title">Group</h4>
+                        <div class="align-center padding-top-10 padding-bottom-20 wingblank border-bottom">
+                            <div class="margin-bottom-10">
+                                <div class="ne-btn-group" ne-role="tablist">
+                                    <a class="ne-btn ne-btn-success ne-btn-small ne-btn-outline" ne-tap="toggle:tab" ne-role="tab">
+                                        Button
+                                    </a>
+                                    <a class="ne-btn ne-btn-success ne-btn-small ne-btn-outline" ne-tap="toggle:tab" ne-role="tab">
+                                        Button
+                                    </a>
+                                    <a class="ne-btn ne-btn-success ne-btn-small ne-btn-outline" ne-tap="toggle:tab" ne-role="tab">
+                                        Button
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="margin-bottom-10">
+                                <div class="ne-btn-group" ne-role="tablist">
+                                    <a class="ne-btn ne-btn-info ne-btn-outline" ne-tap="toggle:tab" ne-role="tab">
+                                        Button
+                                    </a>
+                                    <a class="ne-btn ne-btn-info ne-btn-outline" ne-tap="toggle:tab" ne-role="tab">
+                                        Button
+                                    </a>
+                                    <a class="ne-btn ne-btn-info ne-btn-outline" ne-tap="toggle:tab" ne-role="tab">
+                                        Button
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="margin-bottom-10">
+                                <div class="ne-btn-group fixed" ne-role="tablist">
+                                    <a class="ne-btn ne-btn-primary ne-btn-outline" ne-tap="toggle:tab" ne-role="tab">
+                                        <i class="ne-icon-star"></i><span class="text-tagged">Button</span>
+                                    </a>
+                                    <a class="ne-btn ne-btn-primary ne-btn-outline" ne-tap="toggle:tab" ne-role="tab">
+                                        <i class="ne-icon-equalizer"></i><span class="text-tagged">Button</span>
+                                    </a>
+                                    <a class="ne-btn ne-btn-primary ne-btn-outline" ne-tap="toggle:tab" ne-role="tab">
+                                        <i class="ne-icon-setting"></i><span class="text-tagged">Button</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="margin-bottom-10">
+                                <div class="ne-btn-group " ne-role="tablist">
+                                    <a class="ne-btn ne-btn-danger ne-btn-circle ne-btn-outline" ne-tap="toggle:tab" ne-role="tab">
+                                        Button
+                                    </a>
+                                    <a class="ne-btn ne-btn-danger ne-btn-circle ne-btn-outline" ne-tap="toggle:tab" ne-role="tab">
+                                        Button
+                                    </a>
+                                    <a class="ne-btn ne-btn-danger ne-btn-circle ne-btn-outline" ne-tap="toggle:tab" ne-role="tab">
+                                        Button
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="margin-bottom-10">
+                                <div class="ne-btn-group " ne-role="tablist">
+                                    <a class="ne-btn ne-btn-warning ne-btn-circle ne-btn-small ne-btn-outline" ne-tap="toggle:tab" ne-role="tab">
+                                        Button
+                                    </a>
+                                    <a class="ne-btn ne-btn-warning ne-btn-circle ne-btn-small ne-btn-outline" ne-tap="toggle:tab" ne-role="tab">
+                                        Button
+                                    </a>
+                                    <a class="ne-btn ne-btn-warning ne-btn-circle ne-btn-small ne-btn-outline" ne-tap="toggle:tab" ne-role="tab">
+                                        Button
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="hr-title">With Icon</h4>
+                        <div class="align-center padding-top-10 padding-bottom-20 wingblank border-bottom">
+                            <div class="space-nowrap margin-bottom-10">
+                                <button class="ne-btn ne-btn-default ne-btn-outline"><i class="ne-icon-prohibit-f grey-white"></i><span class="text-tagged">White</span></button>
+                                <button class="ne-btn ne-btn-primary ne-btn-outline"><i class="ne-icon-question-f"></i><span class="text-tagged">Primary</span></button>
+                                <button class="ne-btn ne-btn-info ne-btn-outline"><i class="ne-icon-info-f"></i><span class="text-tagged">Blue</span></button>
+                            </div>
+                            <div class="space-nowrap margin-bottom-10">
+                                <button class="ne-btn ne-btn-success ne-btn-outline"><i class="ne-icon-success-f"></i><span class="text-tagged">Green</span></button>
+                                <button class="ne-btn ne-btn-warning ne-btn-outline"><i class="ne-icon-warn-f"></i><span class="text-tagged">Yellow</span></button>
+                                <button class="ne-btn ne-btn-danger ne-btn-outline"><i class="ne-icon-delete-f"></i><span class="text-tagged">Red</span></button>
+                            </div>
+                            <div>
+                                <button class="ne-btn ne-btn-primary block ne-btn-outline"><span class="inline-block align-middle margin-right-5">Block Button With Icon</span><i class="ne-icon-iarrow-right-o"></i></button>
+                            </div>
+                            <div class="hr-meta"><span>Circle Bordered</span></div>
+                            <div class="margin-bottom-10">
+                                <button class="ne-btn ne-btn-primary block ne-btn-circle ne-btn-outline"><i class="ne-icon-arrow-left-o"></i><span class="text-tagged">Block Button With Icon</span></button>
+                            </div>
+                            <div class="space-nowrap margin-bottom-10">
+                                <button class="ne-btn ne-btn-default ne-btn-circle ne-btn-outline"><i class="ne-icon-prohibit-f grey-white"></i><span class="text-tagged">White</span></button>
+                                <button class="ne-btn ne-btn-primary ne-btn-circle ne-btn-outline"><i class="ne-icon-question-f"></i><span class="text-tagged">Primary</span></button>
+                                <button class="ne-btn ne-btn-info ne-btn-circle ne-btn-outline"><i class="ne-icon-info-f"></i><span class="text-tagged">Blue</span></button>
+                            </div>
+                            <div class="space-nowrap margin-bottom-10">
+                                <button class="ne-btn ne-btn-success ne-btn-circle ne-btn-outline"><i class="ne-icon-success-f"></i><span class="text-tagged">Green</span></button>
+                                <button class="ne-btn ne-btn-warning ne-btn-circle ne-btn-outline"><i class="ne-icon-warn-f"></i><span class="text-tagged">Yellow</span></button>
+                                <button class="ne-btn ne-btn-danger ne-btn-circle ne-btn-outline"><i class="ne-icon-delete-f"></i><span class="text-tagged">Red</span></button>
+                            </div>
+                        </div>
+                        <h4 class="hr-title">Icon Only</h4>
+                        <hr class="hr-blank" />
+                        <div class="align-center padding-top-10 padding-bottom-20 wingblank border-bottom">
+                            <div class="margin-bottom-10">
+                                <button class="ne-btn ne-btn-icononly ne-btn-outline"><i class="ne-icon-iarrow-left-o"></i></button>
+                                <button class="ne-btn ne-btn-default ne-btn-icononly ne-btn-outline"><i class="ne-icon-prohibit-f grey-white"></i></button>
+                                <button class="ne-btn ne-btn-primary ne-btn-icononly ne-btn-outline"><i class="ne-icon-question-f"></i></button>
+                                <button class="ne-btn ne-btn-success ne-btn-icononly ne-btn-outline"><i class="ne-icon-success-f"></i></button>
+                                <button class="ne-btn ne-btn-info ne-btn-icononly ne-btn-outline"><i class="ne-icon-info-f"></i></button>
+                                <button class="ne-btn ne-btn-warning ne-btn-icononly ne-btn-outline"><i class="ne-icon-warn-f"></i></button>
+                                <button class="ne-btn ne-btn-danger ne-btn-icononly ne-btn-outline"><i class="ne-icon-delete-f"></i></button>
+                            </div>
+                            <div>
+                                <button class="ne-btn ne-btn-default ne-btn-icononly ne-btn-circle ne-btn-outline"><i class="ne-icon-pencil"></i></button>
+                                <button class="ne-btn ne-btn-primary ne-btn-icononly ne-btn-circle ne-btn-outline"><i class="ne-icon-link"></i></button>
+                                <button class="ne-btn ne-btn-success ne-btn-icononly ne-btn-circle ne-btn-outline"><i class="ne-icon-success"></i></button>
+                                <button class="ne-btn ne-btn-info ne-btn-icononly ne-btn-circle ne-btn-outline"><i class="ne-icon-refresh"></i></button>
+                                <button class="ne-btn ne-btn-warning ne-btn-icononly ne-btn-circle ne-btn-outline"><i class="ne-icon-bulb"></i></button>
+                                <button class="ne-btn ne-btn-danger ne-btn-icononly ne-btn-circle ne-btn-outline"><i class="ne-icon-trash"></i></button>
+                            </div>
+                            <div class="hr-meta"><span>Big Size</span></div>
+                            <div class="margin-bottom-10">
+                                <button class="ne-btn ne-btn-primary ne-btn-icononly ne-btn-circle ne-btn-outline" style="font-size: 2.5em;border-radius: 25px!important;"><i class="ne-icon-link"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--load scripts-->
+    <script src="../../dist/neui.js"></script>
+</body>
+
+</html>

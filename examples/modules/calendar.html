@@ -1,0 +1,444 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title></title>
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../../dist/neui.css" />
+    <style>
+        /****** calendar *******/
+
+        .ne-calendar-control {
+            display: block;
+            box-sizing: border-box;
+            padding: .75em 1.5em;
+        }
+
+        .ne-calendar-control-prev,
+        .ne-calendar-control-date,
+        .ne-calendar-control-next {
+            display: table-cell;
+            vertical-align: middle;
+            width: 1%;
+            white-space: nowrap;
+            text-align: center;
+            font-size: 1.42857em;
+            color: #20a6a5;
+        }
+
+        .ne-calendar-control .ne-icon-arrow-right-o,
+        .ne-calendar-control .ne-icon-arrow-left-o {
+            line-height: normal;
+        }
+
+        .ne-calendar-control-prev {
+            padding-right: .75em;
+            text-align: left;
+        }
+
+        .ne-calendar-control-date {
+            width: 100%;
+            font-size: 1.6em;
+            font-weight: bold;
+        }
+
+        .ne-calendar-control-date>span+span {
+            margin-left: 20px;
+        }
+
+        .ne-calendar-control-next {
+            text-align: right;
+            padding-left: .75em;
+        }
+
+        .ne-calendar-head {
+            overflow: hidden;
+            background-color: #20a6a5;
+        }
+
+        .ne-calendar-th,
+        .ne-calendar-td {
+            border-bottom: 1px solid #e8e8e8;
+            width: 14.25%;
+            float: left;
+            text-align: center;
+        }
+
+        .ne-calendar-th {
+            line-height: 45px;
+            color: #fff;
+            font-weight: bolder;
+        }
+
+        .ne-calendar-td {
+            padding: 4px 0 6px;
+        }
+
+        .ne-calendar-body {
+            overflow: hidden;
+        }
+
+        .ne-calendar-day {
+            font-size: 15px;
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            vertical-align: middle;
+            text-align: center;
+            border-radius: 50%;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .ne-calendar-td-recorded>.ne-calendar-day {
+            background-color: #20a6a5;
+            color: #fff;
+        }
+
+        .ne-calendar-td-pass.ne-calendar-td-recorded>.ne-calendar-day {
+            background-color: #eaeaea;
+            color: #757575;
+        }
+
+        .ne-calendar-td-pass.ne-calendar-td-recorded>.ne-calendar-day::after {
+            content: "\F045";
+            font-family: 'neui';
+            position: absolute;
+            right: -5px;
+        }
+
+        .ne-calendar-td-curr.ne-calendar-td-recorded>.ne-calendar-day {
+            background-color: #ffc266;
+            border: 2px dashed;
+            line-height: 36px;
+        }
+
+        .ne-calendar-td-recorded.ne-calendar-td-active>.ne-calendar-day {
+            background-color: #5bc583;
+            color: #fff;
+        }
+
+        .ne-calendar-td-passm>.ne-calendar-day,
+        .ne-calendar-td-nextm>.ne-calendar-day {
+            color: #c5c5c5;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="ne-page active" ne-role="page">
+        <div class="ne-page-body">
+            <div id="j-calendar" class="bg-white"></div>
+            <hr class="hr-blank" />
+            <ul class="ne-list">
+                <li>
+                    <div class="ne-cell">
+                        <div class="ne-cell-center">运动提醒</div>
+                        <div class="ne-cell-right">16:00-17:00</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ne-cell">
+                        <div class="ne-cell-center">用药提醒</div>
+                        <div class="ne-cell-right">10:00-11:00</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <!--load scripts-->
+    <script src="../../../dist/neui.js"></script>
+    <script>
+        (function (window, document) {
+            //判断是否日期类型
+            function isDate(obj) {
+                return obj instanceof Date
+            }
+            //字符串转为日期类型
+            function strToDate(timeStr) {
+                timeStr = timeStr.replace(/-/g, '/')
+                return new Date(timeStr)
+            }
+            //日期格式转换
+            function dateFormat(date, format) { //yyyy/MM/dd hh:mm:ss 
+                date = isDate(date) ? date : strToDate(date)
+                var o = {
+                    'M+': date.getMonth() + 1, //month
+                    'd+': date.getDate(), //day
+                    'h+': date.getHours(), //hour
+                    'm+': date.getMinutes(), //minute
+                    's+': date.getSeconds(), //second
+                    'q+': Math.floor((date.getMonth() + 3) / 3), //quarter
+                    'S': date.getMilliseconds() //millisecond
+                }
+                if (/(y+)/.test(format)) format = format.replace(RegExp.$1, (date.getFullYear() + '').substr(4 -
+                    RegExp.$1.length))
+                for (var k in o)
+                    if (new RegExp('(' + k + ')').test(format))
+                        format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(('' +
+                            o[k]).length))
+                return format;
+            }
+            //数组转哈希表
+            function arrayToTable(arr, generateIndex) {
+                var table = {};
+                arr.forEach(function (item, i) {
+                    var index = generateIndex(item, i);
+                    table[index] = item;
+                });
+                return table;
+            }
+            //html转Element
+            function htmlToElement(html) {
+                var _tempEl = document.createElement('div');
+                _tempEl.innerHTML = html;
+                if (_tempEl.children.length > 1) {
+                    var _fragment = document.createDocumentFragment();
+                    Array.prototype.slice.call(_tempEl.children).forEach(function (item) {
+                        _fragment.appendChild(item);
+                    });
+                    return _fragment;
+                } else {
+                    return _tempEl.children[0];
+                }
+            }
+            //日期生成索引
+            function generateIndex(date) {
+                return dateFormat(date, 'i_yyyy_MM_dd');
+            }
+
+            //对象
+            function constDate(year, month, day, monthPoint, remindlist) {
+                var _date = {
+                    year: year,
+                    month: month,
+                    day: day,
+                    dayPoint: '', //pass,curr,next
+                    monthPoint: monthPoint //pass,curr,next
+                }
+                var dateStr = _date.year + '-' + _date.month + '-' + _date.day;
+                //日期差
+                var _diff = strToDate(dateStr) - strToDate(dateFormat(new Date(), 'yyyy-MM-dd'));
+                _date.dayPoint = _diff === 0 ? 'curr' : _diff > 0 ? 'next' : 'pass';
+                //绑定数据
+                var index = generateIndex(dateStr);
+                _date.dataIndex = remindlist[index] ? index : null;
+                return _date;
+            }
+
+            function constDates(year, month, remindlist) {
+                var _dates = [],
+                    //上月年月
+                    lastYear = parseInt(month) == 1 ? year - 1 : year,
+                    lastMonth = parseInt(month) == 1 ? 12 : month - 1,
+                    lastDays = new Date(lastYear, lastMonth, 0).getDate(),
+                    //下月年月
+                    nextYear = parseInt(month) == 12 ? year + 1 : year,
+                    nextMonth = parseInt(month) == 12 ? 1 : month + 1,
+                    //上个月、本月、下个月分别显示天数
+                    lastMonthDaysCount = new Date(year + "/" + month + "/1").getDay() || 7,
+                    monthDaysCount = new Date(year, month, 0).getDate(),
+                    nextMonthDaysCount = 42 - monthDaysCount - lastMonthDaysCount;
+
+                for (var i = lastMonthDaysCount; i > 0; i--) {
+                    _dates.push(constDate(lastYear, lastMonth, lastDays - i + 1, 'pass', remindlist));
+                }
+                for (var j = 0; j < monthDaysCount; j++) {
+                    _dates.push(constDate(year, month, j + 1, 'curr', remindlist));
+                }
+                for (var k = 0; k < nextMonthDaysCount; k++) {
+                    _dates.push(constDate(nextYear, nextMonth, k + 1, 'next', remindlist));
+                }
+                return _dates;
+            }
+
+            function constCalendar(opt) {
+                var calendar = {};
+                var currDate = opt.currentDate ? new Date(opt.currentDate) : new Date();
+                calendar.year = currDate.getFullYear(),
+                    calendar.month = currDate.getMonth() + 1;
+                calendar.remindList = opt.data ? arrayToTable(opt.data, function (item) {
+                    return generateIndex(item.date);
+                }) : {};
+                calendar.onItemClick = opt.onItemClick;
+                calendar.onMonthSwitch = opt.onMonthSwitch;
+                return calendar;
+            }
+
+            //生成html
+            function dateToHtml(date) {
+                var html = '';
+                var date_str = date.year + '-' + date.month + '-' + date.day;
+                var cls = 'ne-calendar-td ';
+                cls += 'ne-calendar-td-' + (date.dataIndex ? 'recorded ' : 'unrecorded ');
+                cls += 'ne-calendar-td-' + date.monthPoint + 'm ';
+                cls += 'ne-calendar-td-' + date.dayPoint + ' ';
+                html = '<div class="' + cls + '" data-date="' + date_str + '">' +
+                    '<span class="ne-calendar-day">' + date.day + '</span>' +
+                    '</div>';
+                return html;
+            }
+
+            function datesToHtml(dates) {
+                var html = '';
+                dates.forEach(function (item) {
+                    html += dateToHtml(item);
+                });
+                return html;
+            }
+
+            function toTitleHtml(year, month) {
+                return '<span>' + year + '年</span><span>' + month + '月</span>'
+            }
+
+            function calendarToHtml() {
+                var tpl_calendar = '<div class="ne-calendar">' +
+                    '<div class="ne-calendar-control">' +
+                    '<span class="ne-calendar-control-prev"><i class="ne-icon-arrow-left"></i></span>' +
+                    '<span class="ne-calendar-control-date"></span>' +
+                    '<span class="ne-calendar-control-next"><i class="ne-icon-arrow-right"></i></span>' +
+                    '</div>' +
+                    '<div class="ne-calendar-head">' +
+                    '<div class="ne-calendar-th">日</div>' +
+                    '<div class="ne-calendar-th">一</div>' +
+                    '<div class="ne-calendar-th">二</div>' +
+                    '<div class="ne-calendar-th">三</div>' +
+                    '<div class="ne-calendar-th">四</div>' +
+                    '<div class="ne-calendar-th">五</div>' +
+                    '<div class="ne-calendar-th">六</div>' +
+                    '</div>' +
+                    '<div class="ne-calendar-body">' +
+                    '</div>' +
+                    '</div>';
+
+                return tpl_calendar;
+            }
+
+            //操作
+            function prevMonth(calendar) {
+                if (calendar.month == 1) {
+                    calendar.year -= 1;
+                    calendar.month = 12;
+                } else {
+                    calendar.month -= 1;
+                }
+                monthSwitch(calendar);
+            }
+
+            function nextMonth(calendar) {
+                if (calendar.month == 12) {
+                    calendar.year += 1;
+                    calendar.month = 1;
+                } else {
+                    calendar.month += 1;
+                }
+                monthSwitch(calendar);
+            }
+
+            function itemActived(calendar, itemElm) {
+                if (itemElm.classList.contains('ne-calendar-td-recorded')) {
+                    Array.prototype.slice.call(calendar.el.querySelectorAll('.ne-calendar-td-active')).forEach(
+                        function (el) {
+                            el.classList.remove('ne-calendar-td-active');
+                        });
+                    itemElm.classList.add('ne-calendar-td-active');
+                    var itemData = calendar.remindList[generateIndex(itemElm.getAttribute('data-date'))];
+                    calendar.onItemClick && calendar.onItemClick(itemElm, itemData);
+                }
+            }
+
+            function monthSwitch(calendar) {
+                if (calendar.onMonthSwitch) {
+                    calendar.onMonthSwitch(calendar.year, calendar.month);
+                }
+                renderDates(calendar);
+            }
+
+            function renderDates(calendar) {
+                calendar.el.querySelector('.ne-calendar-control-date').innerHTML = toTitleHtml(calendar.year,
+                    calendar.month);
+                calendar.el.querySelector('.ne-calendar-body').innerHTML = datesToHtml(constDates(calendar.year,
+                    calendar.month, calendar.remindList));
+            }
+
+
+            //初始化
+            function init(opt) {
+                var _calendar = constCalendar(opt);
+                _calendar.el = htmlToElement(calendarToHtml());
+                renderDates(_calendar);
+
+                _calendar.el.querySelector('.ne-calendar-control-prev').addEventListener('click', function () {
+                    prevMonth(_calendar);
+                });
+                _calendar.el.querySelector('.ne-calendar-control-next').addEventListener('click', function () {
+                    nextMonth(_calendar);
+                });
+                _calendar.el.addEventListener('click', function (event) {
+                    var target = event.target || event.touches[0];
+                    var getDayItem = function (el) {
+                        return el.classList.contains('ne-calendar-td') ? el : el.parentElement ?
+                            getDayItem(el.parentElement) : null;
+                    }
+                    target = getDayItem(target);
+                    if (target) {
+                        itemActived(_calendar, target);
+                    }
+                });
+
+                return _calendar;
+            }
+
+            window.neCalendar = function (opt) {
+                var calendar = init(opt);
+                calendar.refreshRemindList = function (data) {
+                    calendar.remindList = data ? arrayToTable(data, function (item) {
+                        return generateIndex(item.date);
+                    }) : {};
+                    renderDates(calendar);
+                };
+                return calendar;
+            }
+
+        })(window, document);
+    </script>
+    <script>
+        var calendar = neCalendar({
+            data: [{
+                    date: '2018-06-07',
+                    data: ''
+                },
+                {
+                    date: '2018-6-10',
+                    data: ''
+                },
+                {
+                    date: '2018-7-24',
+                    data: ''
+                },
+                {
+                    date: '2018-8-1',
+                    data: ''
+                },
+                {
+                    date: '2018-7-13',
+                    data: ''
+                },
+                {
+                    date: '2018-7-01',
+                    data: ''
+                }
+            ],
+            onItemClick: function (el, data) {
+                console.log(data);
+            }
+        });
+        document.querySelector('#j-calendar').appendChild(calendar.el);
+    </script>
+</body>
+
+</html>

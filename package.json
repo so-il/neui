@@ -1,0 +1,42 @@
+{
+  "name": "neui",
+  "version": "1.0.0",
+  "description": "A UI library",
+  "keywords": [
+    "ui"
+  ],
+  "directories": {
+    "doc": "docs",
+    "example": "examples"
+  },
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "gulp build"
+  },
+  "author": "ethan.gor",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/so-il/neui.git"
+  },
+  "homepage": "https://github.com/so-il/neui.git",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.18.12",
+    "browserify": "^16.2.2",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-header": "^1.8.8",
+    "gulp-jshint": "^2.1.0",
+    "gulp-less": "^3.3.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-uglify": "^3.0.0",
+    "jshint": "^2.9.5",
+    "merge-stream": "^1.0.1",
+    "stream-combiner": "^0.2.2",
+    "stream-combiner2": "^1.1.1",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  }
+}

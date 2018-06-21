@@ -1,0 +1,40 @@
+﻿
+/**
+ * @badge.css
+**/
+
+.ne-badge {
+    display: inline-block;
+    box-sizing: border-box;
+    vertical-align: middle;
+    line-height: 1;
+    font-size: .857em;
+    min-height: .834em;
+    padding: .23em .417em;
+    border-radius: 100px;
+    color: white;
+    background-color: @grey-5;
+}
+    sup.ne-badge,.ne-badge.position-sup {
+        position: absolute;
+        margin-left: -7px;
+        margin-top: -2px;
+    }
+
+
+/**/
+.signal-notice {
+    position: relative;
+}
+
+    .signal-notice::after {
+        content: '\3000';
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border: 7px solid @red-6;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+    }

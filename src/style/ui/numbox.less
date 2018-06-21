@@ -1,0 +1,44 @@
+﻿
+/** 
+ * @numbox.css
+**/
+
+.ne-numbox {
+    display: inline-block;
+    border-radius:@round-radius;
+    border: 1px solid @inputborder-color;
+    background-color: white;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+
+    .ne-numbox > .ne-btn {
+        display: inline-block;
+        border: none;
+    }
+
+        .ne-numbox > .ne-btn:not(:first-child) {
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+            border-left: 1px solid;
+            border-left-color: inherit;
+        }
+
+        .ne-numbox > .ne-btn:not(:last-child) {
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+            border-right:1px solid;
+            border-right-color: inherit;
+        }
+
+    .ne-numbox > .ne-input {
+        width: auto;
+        border: none;
+        height: inherit;
+        text-align: center;
+        padding: 0;
+    }
+
+    .ne-numbox input::-webkit-inner-spin-button{
+        display: none;
+    }

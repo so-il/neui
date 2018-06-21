@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>badge</title>
+
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../dist/neui.css" />
+</head>
+<body>
+    <section class="ne-page active" ne-role="page">
+        <div class="ne-page-body">
+            <div class="hr-meta margin-left-15 margin-right-15"><span>Badges</span></div>
+            <div class="ne-cell align-center">
+                <span class="ne-badge black">1</span>
+                <span class="ne-badge bg-primary">12</span>
+                <span class="ne-badge bg-blue">123</span>
+                <span class="ne-badge bg-red">···</span>
+                <span class="ne-badge bg-orange">321</span>
+                <span class="ne-badge bg-green">21</span>
+                <span class="ne-badge bg-dark">1</span>
+            </div>
+            <div class="hr-meta margin-left-15 margin-right-15"><span>Badge On List</span></div>
+            <ul class="ne-list ne-card">
+                <li>
+                    <div class="ne-cell">
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>List Item 1</strong>
+                        </div>
+                        <div class="ne-cell-right">
+                            <span class="ne-badge black">1</span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ne-cell">
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>List Item 2</strong>
+                        </div>
+                        <div class="ne-cell-right">
+                            <span class="ne-badge bg-primary">12</span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ne-cell">
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>List Item 3</strong>
+                        </div>
+                        <div class="ne-cell-right">
+                            <span class="ne-badge bg-blue">123</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="hr-meta margin-left-15 margin-right-15"><span>Badge On Link</span></div>
+            <ul class="ne-list">
+                <li>
+                    <a class="ne-cell">
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>List Item 3</strong>
+                        </div>
+                        <div class="ne-cell-right">
+                            <span class="ne-badge bg-primary"></span><span> 相关描述</span><i class="ne-icon-arrow-right"></i>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <div class="hr-meta margin-left-15 margin-right-15"><span>Badge On Cell</span></div>
+            <ul class="ne-list">
+                <li>
+                    <div class="ne-cell">
+                        <div class="ne-cell-left">
+                            <img class="iconsize-normal bg-grey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                            <sup class="ne-badge bg-red"></sup>
+                        </div>
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>标题文字</strong>
+                            <p>截断的辅助说明、摘要...</p>
+                        </div>
+                        <div class="ne-cell-right align-top">
+                            <div class="text-meta">10:00</div>
+                            <span class="ne-badge bg-red margin-top-5">5</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="hr-meta margin-left-15 margin-right-15"><span>Badge On Tab</span></div>
+            <div class="ne-tabs ne-tabs-withicon border-bottom border-top" ne-role="tablist">
+                <div class="ne-tab" ne-tap="toggle:tab" ne-role="tab">
+                    <i class="ne-icon-speech"></i>
+                    <sup class="ne-badge bg-red"></sup>
+                    <span class="block">tab1</span>
+                </div>
+                <div class="ne-tab" ne-tap="toggle:tab" ne-role="tab">
+                    <i class="ne-icon-doctor"></i>
+                    <span class="block">tab2</span>
+                </div>
+                <div class="ne-tab" ne-tap="toggle:tab" ne-role="tab">
+                    <i class="ne-icon-moments"></i>
+                    <sup class="ne-badge bg-red">99+</sup>
+                    <span class="block">tab3</span>
+                </div>
+                <div class="ne-tab" ne-tap="toggle:tab" ne-role="tab">
+                    <i class="ne-icon-user"></i>
+                    <span class="block">tab4</span>
+                </div>
+            </div>
+            <div class="hr-meta margin-left-15 margin-right-15"><span>Badge On Navbar</span></div>
+            <nav class="ne-navbar">
+                <div class="ne-navbar-left">
+                    <a class="action-link" href="javascript:history.back();"><i class="ne-icon-arrow-left"></i><span class="text-tagged">返回</span></a>
+                </div>
+                <div class="ne-navbar-center"><h1>Title</h1></div>
+                <div class="ne-navbar-right">
+                    <a class="action-link"><i class="ne-icon-message"></i><sup class="ne-badge bg-red"></sup></a>
+                </div>
+            </nav>
+            <div class="hr-meta margin-left-15 margin-right-15"><span>Button With Badge</span></div>
+            <div class="ne-cell align-center margin-bottom-10">
+                <button class="ne-btn ne-btn-primary">Button <span class="ne-badge bg-white black margin-left-5">5</span></button>
+                <button class="ne-btn ne-btn-primary ne-btn-outline margin-left-5">Button <span class="ne-badge ne-badge bg-primary margin-left-5">5</span></button></div>
+        </div>
+    </section>
+
+    <!--load scripts-->
+    <script src="../../dist/neui.js"></script>
+</body>
+</html>

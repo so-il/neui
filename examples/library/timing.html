@@ -1,0 +1,291 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Timing Function</title>
+
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../dist/neui.css" />
+    <style>
+        .radio-item {
+            width: 31%;
+            display: inline-block;
+            padding: 2px 0;
+            white-space: nowrap;
+        }
+
+        .chartpanel-warp {
+            position: relative;
+            width: 100%;
+            height: 150px;
+        }
+
+        .chartpanel {
+            height: 150px;
+            background: #A0F5F1;
+        }
+
+        .chartpanel-cursor {
+            position: absolute;
+            top: 0;
+            left: -1px;
+            height: 150px;
+            width: 1px;
+            background: #ccc;
+        }
+
+        .squarepanel-wrap {
+            width: 100%;
+            height: 37px;
+            background-color: white;
+            padding: 2px 0;
+        }
+
+        .square {
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            background: #007aff;
+            left: 0;
+            display: inline-block;
+            border-radius: 50%;
+            box-sizing: border-box;
+        }
+
+        .dot {
+            width: 1px;
+            height: 1px;
+            background-color: #000;
+            position: absolute;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="ne-page active" ne-role="page">
+        <div class="ne-page-body">
+            <div class="squarepanel-wrap">
+                <span id="square" class="square fade"></span>
+            </div>
+            <div class="chartpanel-warp">
+                <div id="chart" class="chartpanel"> </div>
+                <div id="cursor" class="chartpanel-cursor"></div>
+            </div>
+            <div class="ne-panel">
+                <div class="ne-panel-header">
+                    <div class="header-title">
+                        <span>Timing Type:</span>
+                    </div>
+                </div>
+                <div class="ne-panel-body">
+                    <div class="padding-15" style="padding-right: 0!important;">
+
+                        <span class="radio-item">
+                            <input type="radio" name="tweenType" id="Linear" value="Linear" checked=c hecked checked=c hecked checked=c hecked checked=c
+                                hecked checked=c hecked checked=c hecked checked=c hecked checked=c hecked />
+                            <label class="ne-radio" for="Linear"></label>
+                            <label for="Linear">Linear</label>
+                        </span>
+
+                        <span class="radio-item">
+                            <input type="radio" name="tweenType" id="Quad" value="Quad" />
+                            <label class="ne-radio" for="Quad"></label>
+                            <label for="Quad">Quadratic</label>
+                        </span>
+
+                        <span class="radio-item">
+                            <input type="radio" name="tweenType" id="Cubic" value="Cubic" />
+                            <label class="ne-radio" for="Cubic"></label>
+                            <label for="Cubic">Cubic</label>
+                        </span>
+
+                        <span class="radio-item">
+                            <input type="radio" name="tweenType" id="Quart" value="Quart" />
+                            <label class="ne-radio" for="Quart"></label>
+                            <label for="Quart">Quartic</label>
+                        </span>
+
+                        <span class="radio-item">
+                            <input type="radio" name="tweenType" id="Quint" value="Quint" />
+                            <label class="ne-radio" for="Quint"></label>
+                            <label for="Quint">Quintic</label>
+                        </span>
+
+                        <span class="radio-item">
+                            <input type="radio" name="tweenType" id="Sine" value="Sine" />
+                            <label class="ne-radio" for="Sine"></label>
+                            <label for="Sine">Sinusoidal</label>
+                        </span>
+
+                        <span class="radio-item">
+                            <input type="radio" name="tweenType" id="Expo" value="Expo" />
+                            <label class="ne-radio" for="Expo"></label>
+                            <label for="Expo">Exponential</label>
+                        </span>
+
+                        <span class="radio-item">
+                            <input type="radio" name="tweenType" id="Circ" value="Circ" />
+                            <label class="ne-radio" for="Circ"></label>
+                            <label for="Circ">Circular</label>
+                        </span>
+
+                        <span class="radio-item">
+                            <input type="radio" name="tweenType" id="Elastic" value="Elastic" />
+                            <label class="ne-radio" for="Elastic"></label>
+                            <label for="Elastic">Elastic</label>
+                        </span>
+
+                        <span class="radio-item">
+                            <input type="radio" name="tweenType" id="Back" value="Back" />
+                            <label class="ne-radio" for="Back"></label>
+                            <label for="Back">Back</label>
+                        </span>
+
+                        <span class="radio-item">
+                            <input type="radio" name="tweenType" id="Bounce" value="Bounce" />
+                            <label class="ne-radio" for="Bounce"></label>
+                            <label for="Bounce">Bounce</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <hr class="hr-blank" />
+            <div class="ne-panel">
+                <div class="ne-panel-header">
+                    <div class="header-title">
+                        <span>Easeing Type:</span>
+                    </div>
+                </div>
+                <div class="ne-panel-body">
+                    <div class="padding-15" style="padding-right: 0!important;">
+
+                        <span class="radio-item">
+                            <input type="radio" name="easeType" id="easeIn" value="easeIn" checked=c hecked checked=c hecked checked=c hecked checked=c
+                                hecked checked=c hecked checked=c hecked checked=c hecked checked=c hecked />
+                            <label class="ne-radio" for="easeIn"></label>
+                            <label for="easeIn">easeIn</label>
+                        </span>
+
+                        <span class="radio-item">
+                            <input type="radio" name="easeType" id="easeOut" value="easeOut" />
+                            <label class="ne-radio" for="easeOut"></label>
+                            <label for="easeOut">easeOut</label>
+                        </span>
+
+                        <span class="radio-item">
+                            <input type="radio" name="easeType" id="easeInOut" value="easeInOut" />
+                            <label class="ne-radio" for="easeInOut"></label>
+                            <label for="easeInOut">easeInOut</label>
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+            <div class="padding-15 align-center">
+                <button id="idSpeed" type="button" class="ne-btn ne-btn-primary" onclick="changeSpeed(this);">Fast / Slow</button>
+                <button id="idRun" type="button" class="ne-btn ne-btn-success" onclick="run(this);">Run</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="../../dist/neui.js"></script>
+    <script>
+        //////////////////////////////////////////////////////////
+        var DURATION = 1000;
+        //方块
+        var square = {
+            el: document.querySelector('#square'),
+            cursorEl: document.querySelector('#cursor'),
+            reset: function (callback) {
+                //重置方块
+                square._timeline && square._timeline.stop();
+                square.el.style[Ne.dom.transformProperty] = "translate3d(0,0,0)";
+                //重置游标
+                square.cursorEl.style[Ne.dom.transformProperty] = "translate3d(0,0,0)";
+                callback && callback();
+            },
+            animateMove: function (timingFunction, distanceX) {
+                square.reset();
+                var _timeline = new Ne.motion.timeline({
+                    duration: DURATION,
+                    origin: [0, 0],
+                    transition: [distanceX, 0],
+                    timingFunction: timingFunction,
+                    keyframeFunction: function (x, y, keyframe_index) {
+                        var _style_transform = square.el.style[Ne.dom.transformProperty];
+                        var _style_translate3d = 'translate3d(' + x + 'px,' + y + 'px,0)';
+                        if (_style_transform.indexOf('translate3d') < 0) {
+                            _style_transform = _style_transform + _style_translate3d;
+                        } else {
+                            _style_transform = _style_transform.replace(
+                                /translate3d\(+[0-9px,\.\-\s]+\)/ig, _style_translate3d);
+                        }
+                        square.el.style['webkitAnimationTimingFunction'] = 'ease';
+                        square.el.style[Ne.dom.transformProperty] = _style_transform;
+                        //移动游标
+                        square.cursorEl.style[Ne.dom.transformProperty] = "translate3d(" + Math.ceil(
+                                window.innerWidth / this.keyframesLength * keyframe_index) +
+                            "px,0,0)";
+                    }
+                });
+                _timeline.run();
+                square._timeline = _timeline;
+                return _timeline;
+            }
+        }
+        //曲线
+        var chart = {
+            el: document.querySelector('#chart'),
+            draw: function (timingFunction) {
+                var chartheight = chart.el.offsetHeight - 1;
+                timingFunction = function (name) {
+                    name = name.split('-');
+                    if (name.length == 2) {
+                        return Ne.motion.timingFunction[name[0]][name[1]];
+                    } else {
+                        return Ne.motion.timingFunction[name[0]];
+                    }
+                }(timingFunction);
+                var dotArr = [];
+                for (var i = 0; i < window.innerWidth; i++) {
+                    dotArr.push('<span class="dot" style="left:' + (i - 1) + 'px;top:' + (Math.ceil(
+                            timingFunction(i, chartheight, -chartheight, window.innerWidth))) +
+                        'px;"></span>');
+                }
+                chart.el.innerHTML = dotArr.join("");
+            }
+        }
+
+        ////////////////////////////////////////////////////////
+        function run() {
+            var tweenType = document.querySelector('input[name="tweenType"]:checked').value,
+                easeType = document.querySelector('input[name="easeType"]:checked').value,
+                timingFunction = tweenType != 'Linear' ? (tweenType + '-' + easeType) : 'Linear';
+            //画曲线
+            chart.draw(timingFunction);
+            //播放动画
+            square.animateMove(timingFunction, window.innerWidth - square.el.offsetWidth);
+        }
+
+        ////////////////////////////////////////////////////////
+        document.addEventListener('change', function (event) {
+            var target = event.target || event.touches[0];
+            if (target.tagName.toLowerCase() == 'input') {
+                run();
+            }
+        });
+
+        function changeSpeed(btn) {
+            DURATION = DURATION == 1000 ? 5000 : 1000;
+            btn.innerText = DURATION == 2000 ? "Speed Up" : "Slow Down";
+            run();
+        }
+        run();
+    </script>
+</body>
+
+</html>

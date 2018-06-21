@@ -1,0 +1,240 @@
+﻿<h1>Dialog 对话框</h1>
+<p>用作显示系统的重要信息，并请求用户进行操作反馈，eg：删除某个重要内容时，弹出 Modal 进行二次确认。</p>
+<hr />
+<section>
+    <h2>结构与样式</h2>
+    <div class="flexbox">
+        <pre><code class="html">
+&lt;!-- 
+1、dialog需声明ne-role="dialog"； 
+2、默认不可见，通过添加.ne-animate-show展示； 
+3、container内容按需添加,通常结合dialog-alert或dialog-confirm结构使用；                                                        
+4、dialog-actions的底部操作按钮是ne-actions结构;                  
+5、声明ne-tap="show:#elementId"的元素点击可展示id对应的dialog；                                  
+6、dialog内声明ne-tap="hide:dialog"的元素点击可关闭dialog;                                                
+7、除了6，声明ne-tap="hide:#elementId"的元素点击也可关闭dialog;  
+--&gt;                 
+
+&lt;!--dialog的基本结构--&gt;
+&lt;div class="ne-dialog ne-animate-show" id="j-dialog" ne-role="dialog"&gt;
+    &lt;div class="ne-mask"&gt;&lt;/div&gt;
+    &lt;div class="ne-dialog-container"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!--点击即可展示dialog的按钮--&gt;
+&lt;button ne-tap="show:#j-dialog"&gt;show dialog&lt;/button&gt;
+
+&lt;!--dialog-actions的结构--&gt;
+&lt;div class="ne-dialog-actions"&gt;
+    &lt;div class="ne-dialog-header"&gt;提示窗标题&lt;/div&gt;
+    &lt;div class="ne-dialog-body"&gt;自定义弹窗内容，告知信息并提供多个可选择的操作&lt;/div&gt;
+    &lt;div class="ne-dialog-footer"&gt;
+        &lt;div class="ne-action"&gt;执行操作A&lt;/div&gt;
+        &lt;div class="ne-action weight-bold red"&gt;危险选项红色加粗&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;  
+
+                            </code></pre>
+        <div class="preview">
+            <div class="preview-browser">
+                <div class="preview-browser-header">
+                    <div class="preview-browser-statbar">
+                        <img src="assets/images/ui-statbar.png">
+                    </div>
+                    <div class="preview-browser-url-box">http://neui.nelabs.cn/examples/components/dialog.html</div>
+                </div>
+                <div class="preview-browser-body">
+                    <iframe src="../examples/components/dialog.html"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>交互与功能</h2>
+    <h4>范式说明</h4>
+    <p>大部分时候只需要通过html声明即可完成所有组件所有交互行为，但也会有需要通过js触发交互行为方法的情况，关于如何触发组件交互行为方法的详细介绍请查阅-<a href="#component" target="_blank">《Component 组件封装支持》</a></p>
+    <pre><code class="javascript">
+        //通过Js触发组件行为功能的范式：
+        Ne.acts(selector).propsName(args[]);
+        </code></pre>
+    <h4>actionsheet支持的交互功能</h4>
+    <table>
+        <tbody>
+            <tr>
+                <td>方法名</td>
+                <td>说明</td>
+            </tr>
+            <tr>
+                <td>.show()</td>
+                <td>展示dialog</td>
+            </tr>
+            <tr>
+                <td>.hide()</td>
+                <td>隐藏dialog</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>举例说明</h4>
+    <pre><code class="html">
+        &lt;!--假设现在有如下dialog：--&gt;
+      &lt;div id="j-dialog" class="ne-dialog" ne-role="dialog"&gt;
+          &lt;div class="ne-mask"> &lt;/div&gt;
+          &lt;div class="ne-dialog-container"&gt;
+            ...
+          &lt;/div&gt;
+      &lt;/div&gt;
+    </code><code class="javascript">
+        //展示和隐藏该dialog：
+        Ne.acts('#j-dialog').show();
+        Ne.acts('#j-dialog').hide();
+    </code></pre>
+</section>
+<section>
+    <h2>创建组件</h2>
+    <pre><code class="javascript">
+        Ne.dialog({ 
+            type: '',
+            title: '',
+            content: '',
+            actions: [
+                { 
+                    text: '', 
+                    handler: function () {} 
+                }
+            ] 
+        });
+        </code></pre>
+    <h4>功能描述</h4>
+    <p>通过js创建dialog并自动调用dialog的show交互方法，弹出提示窗。</p>
+    <h4>参数说明</h4>
+    <table>
+        <tbody>
+            <tr>
+                <th>参数</th>
+                <th>类型</th>
+                <th>描述</th>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>string</td>
+                <td>可选项有‘alert’、‘confirm’、‘actions’三项。</td>
+            </tr>
+            <tr>
+                <td>title</td>
+                <td>string</td>
+                <td>弹出窗标题。</td>
+            </tr>
+            <tr>
+                <td>content</td>
+                <td>string</td>
+                <td>自定义弹窗内容。</td>
+            </tr>
+            <tr>
+                <td>actions</td>
+                <td>array</td>
+                <td>弹出底部的操作按钮。</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>举例说明</h4>
+    <pre><code class="javascript">
+        Ne.dialog({
+            type: 'actions',
+            title: '提示窗标题', 
+            content: '自定义弹窗内容，告知信息并提供多个可选择的操作', 
+            actions: [
+            { 
+                text: '执行操作A', 
+                handler: function () {}
+            }, 
+            {
+            text: '执行操作B',
+                handler: function () {}
+            },{ 
+                text: '放弃',
+                focused:true,
+                color:'red',
+                handler: function () {} 
+            }]
+        })
+        </code></pre>
+</section>
+<section>
+    <h2>创建Alert窗体</h2>
+    <pre><code class="javascript">
+        Ne.dialog.alert(title,content, callback);
+        </code></pre>
+    <h4>功能描述</h4>
+    <p>Ne.dialog.alert是基于Ne.dialog封装的简易API，底部操作按钮的文字默认是‘确定’。</p>
+    <h4>参数说明</h4>
+    <table>
+        <tbody>
+            <tr>
+                <th>参数</th>
+                <th>类型</th>
+                <th>描述</th>
+            </tr>
+            <tr>
+                <td>title</td>
+                <td>string</td>
+                <td>提示窗标题。</td>
+            </tr>
+            <tr>
+                <td>content</td>
+                <td>string</td>
+                <td>弹窗内容，告知当前页面信息等。</td>
+            </tr>
+            <tr>
+                <td>callback</td>
+                <td>function</td>
+                <td>dialog底部的操作按钮的点击回调。</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>举例说明</h4>
+    <pre><code class="javascript">
+        Ne.dialog.alert('提示窗标题','弹窗内容，告知当前页面信息等', function () {
+            console.log('callback')
+        })
+        </code></pre>
+</section>
+<section>
+    <h2>创建Confirm窗体</h2>
+    <pre><code class="javascript">
+        Ne.dialog.confirm(title,content, callback);
+        </code></pre>
+    <h4>功能描述</h4>
+    <p>Ne.dialog.confirm是基于Ne.dialog封装的简易API，底部操作按钮的文字默认是‘取消’和‘确定’。</p>
+    <h4>参数说明</h4>
+    <table>
+        <tbody>
+            <tr>
+                <th>参数</th>
+                <th>类型</th>
+                <th>描述</th>
+            </tr>
+            <tr>
+                <td>title</td>
+                <td>string</td>
+                <td>提示窗标题。</td>
+            </tr>
+            <tr>
+                <td>content</td>
+                <td>string</td>
+                <td>自定义弹窗内容，居左对齐显示，告知需要确认的信息等。</td>
+            </tr>
+            <tr>
+                <td>callback</td>
+                <td>function</td>
+                <td>dialog底部的操作按钮的点击回调，callback接收一个bool参数，true为点击了确定按钮，false为点击了取消按钮。</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>举例说明</h4>
+    <pre><code class="javascript">
+        Ne.dialog.confirm('提示窗标题', '自定义弹窗内容，居左对齐显示，告知需要确认的信息等', function (flag) {
+            console.log(flag) 
+        })
+        </code></pre>
+</section>

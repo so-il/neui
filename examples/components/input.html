@@ -1,0 +1,659 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>input</title>
+
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../dist/neui.css" />
+</head>
+
+<body>
+    <section class="ne-page active" ne-role="page">
+        <div class="ne-page-body">
+            <h4 class="hr-title">列表排列的单选项</h4>
+            <ul class="ne-list ne-card">
+                <li>
+                    <label class="ne-cell" for="default_radio_1">
+                        <span class="ne-cell-center">
+                            选项1 文字说明
+                        </span>
+                        <span class="ne-cell-right">
+                            <input type="radio" id="default_radio_1" name="default_radio" value="1" checked>
+                            <label class="ne-radio" for="default_radio_1"></label>
+                        </span>
+                    </label>
+                </li>
+                <li>
+                    <label class="ne-cell" for="default_radio_2">
+                        <span class="ne-cell-center">
+                            选项2 文字说明
+                        </span>
+                        <span class="ne-cell-right">
+                            <input type="radio" id="default_radio_2" name="default_radio" value="2">
+                            <label class="ne-radio" for="default_radio_2"></label>
+                        </span>
+                    </label>
+                </li>
+                <li>
+                    <label class="ne-cell disabled" for="default_radio_3">
+                        <span class="ne-cell-center">
+                            选项3 不可选择状态
+                        </span>
+                        <span class="ne-cell-right">
+                            <input type="radio" id="default_radio_3" name="default_radio" value="3">
+                            <label class="ne-radio" for="default_radio_3"></label>
+                        </span>
+                    </label>
+                </li>
+            </ul>
+            <h4 class="hr-title">行内排列的单选项</h4>
+            <div class="ne-cell bg-white">
+                <div class="ne-cell-left">标签：</div>
+                <div class="ne-cell-center">
+                    <label class="inline-block margin-right-5" for="inline_radio_1">
+                        <input type="radio" id="inline_radio_1" name="inline_radio" value="1" checked>
+                        <label class="ne-radio" for="inline_radio_1"></label>
+                        <span class="text-tagged">选项1</span>
+                    </label>
+                    <label class="inline-block margin-right-5" for="inline_radio_2">
+                        <input type="radio" id="inline_radio_2" name="inline_radio" value="2">
+                        <label class="ne-radio" for="inline_radio_2"></label>
+                        <span class="text-tagged">选项2</span>
+                    </label>
+                    <label class="inline-block disabled" for="inline_radio_3">
+                        <input type="radio" id="inline_radio_3" name="inline_radio" value="3">
+                        <label class="ne-radio" for="inline_radio_3"></label>
+                        <span class="text-tagged">选项3</span>
+                    </label>
+                </div>
+            </div>
+            <h4 class="hr-title">不同外形的单选项</h4>
+            <ul class="ne-list">
+                <li>
+                    <label class="ne-cell" for="radio_lddh">
+                        <span class="ne-cell-center">
+                            Radio Item Title
+                        </span>
+                        <span class="ne-cell-right">
+                            <input type="radio" id="radio_lddh" name="radio_0002" value="1" checked>
+                            <label class="ne-radio_hook" for="radio_lddh"></label>
+                        </span>
+                    </label>
+                </li>
+                <li>
+                    <label class="ne-cell" for="radio_ldfh">
+                        <span class="ne-cell-center">
+                            Radio Item Title
+                        </span>
+                        <span class="ne-cell-right">
+                            <input type="radio" id="radio_ldfh" name="radio_0002" value="2">
+                            <label class="ne-radio_hook" for="radio_ldfh"></label>
+                        </span>
+                    </label>
+                </li>
+            </ul>
+            <h4 class="hr-title">列表排列的复选项</h4>
+            <ul class="ne-list">
+                <li>
+                    <label class="ne-cell" for="default_checkbox_1">
+                        <span class="ne-cell-left">
+                            <input type="checkbox" id="default_checkbox_1" name="default_checkbox" value="1" checked>
+                            <label class="ne-checkbox" for="default_checkbox_1"></label>
+                        </span>
+                        <span class="ne-cell-center">
+                            checked checkbox
+                        </span>
+                    </label>
+                </li>
+                <li>
+                    <label class="ne-cell" for="default_checkbox_2">
+                        <span class="ne-cell-left">
+                            <input type="checkbox" id="default_checkbox_2" name="default_checkbox" value="2">
+                            <label class="ne-checkbox" for="default_checkbox_2"></label>
+                        </span>
+                        <span class="ne-cell-center">
+                            unchecked checkbox
+                        </span>
+                    </label>
+                </li>
+            </ul>
+            <h4 class="hr-title">圆边列表复选项</h4>
+            <ul class="ne-list  ne-card">
+                <li>
+                    <label class="ne-cell" for="circle_checkbox_1">
+                        <span class="ne-cell-left">
+                            <input type="checkbox" id="circle_checkbox_1" name="circle_checkbox" value="1" checked>
+                            <label class="ne-checkbox border-circle" for="circle_checkbox_1"></label>
+                        </span>
+                        <span class="ne-cell-center">
+                            checked checkbox
+                        </span>
+                    </label>
+                </li>
+                <li>
+                    <label class="ne-cell" for="circle_checkbox_2">
+                        <span class="ne-cell-left">
+                            <input type="checkbox" id="circle_checkbox_2" name="circle_checkbox" value="2">
+                            <label class="ne-checkbox border-circle" for="circle_checkbox_2"></label>
+                        </span>
+                        <span class="ne-cell-center">
+                            unchecked checkbox
+                        </span>
+                    </label>
+                </li>
+                <li>
+                    <label class="ne-cell disabled" for="circle_checkbox_3">
+                        <span class="ne-cell-left">
+                            <input type="checkbox" id="circle_checkbox_3" name="circle_checkbox" value="2">
+                            <label class="ne-checkbox border-circle" for="circle_checkbox_3"></label>
+                        </span>
+                        <span class="ne-cell-center">
+                            disabled checkbox
+                        </span>
+                    </label>
+                </li>
+            </ul>
+            <h4 class="hr-title">开关</h4>
+            <div class="ne-cell bg-white">
+                <div class="ne-cell-center">开关控制器</div>
+                <div class="ne-cell-right">
+                    <input type="checkbox" id="checkbox_switch" checked />
+                    <label class="ne-switch" for="checkbox_switch"></label>
+                </div>
+            </div>
+            <h4 class="hr-title">数量选择</h4>
+            <div class="ne-cell bg-white">
+                <div class="ne-cell-center">最小值1和最大值20：</div>
+                <div class="ne-cell-right">
+                    <div class="ne-numbox" ne-role="numbox">
+                        <button class="ne-btn ne-btn-default" type="button" ne-tap="minus:numbox">-</button>
+                        <input type="number" class="ne-input" min="1" max="20" step="2" value="1" />
+                        <button class="ne-btn ne-btn-default" type="button" ne-tap="plus:numbox">+</button>
+                    </div>
+                </div>
+            </div>
+            <h4 class="hr-title">范围选择</h4>
+            <div class="ne-cell bg-white">
+                <input id="j-range" type="range" class="ne-range none" min="10" max="200" value="150" ne-role="range" />
+                <input type="range" class="ne-range" min="0" max="200" value="50" ne-role="range" />
+            </div>
+
+            <h4 class="hr-title">文件上传</h4>
+            <div class="ne-uploader bg-white">
+                <div class="ne-cell">
+                    <div class="margin-bottom-10">
+                        <span>请选择要上传的图片</span>
+                        <span class=" float-right text-meta">0/2</span>
+                    </div>
+                    <div class="ne-uploader-bd">
+                        <div class="ne-uploader-files">
+                            <div class="ne-uploader-file ne-uploader-status" style="background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=)">
+                                <div class="ne-uploader-status-content">
+                                    <i class="ne-icon-warn-f yellow" style="font-size: 2em;"></i>
+                                </div>
+                            </div>
+                            <div class="ne-uploader-file ne-uploader-status" style="background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=)">
+                                <div class="ne-uploader-status-content">50%</div>
+                            </div>
+                        </div>
+                        <div class="ne-uploader-input-wrp">
+                            <input class="ne-uploader-input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="hr-title">不同类型的文本输入项</h4>
+            <form>
+                <ul class="ne-list">
+                    <li>
+                        <div class="ne-cell">
+                            <div class="ne-cell-left">
+                                <label class="ne-label w5">Text：</label>
+                            </div>
+                            <div class="ne-cell-center">
+                                <input class="ne-input border-none" type="text" placeholder="三个字母的国家代码" pattern="[A-z]{3}" validationMessage="" title="三个字母的国家代码"
+                                />
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="ne-cell">
+                            <div class="ne-cell-left">
+                                <label class="ne-label w5">Number：</label>
+                            </div>
+                            <div class="ne-cell-center">
+                                <input class="ne-input border-none" type="number" placeholder="只允许输入数字" pattern="[0-9]*" />
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="ne-cell">
+                            <div class="ne-cell-left">
+                                <label class="ne-label w5">Tel：</label>
+                            </div>
+                            <div class="ne-cell-center">
+                                <input class="ne-input border-none" type="tel" placeholder="11位手机号码" pattern="^1(3[4-9]|4[7]|5[0-27-9]|7[08]|8[2-478])\d{8}$"
+                                    title="11位的手机号码" />
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="ne-cell">
+                            <div class="ne-cell-left">
+                                <label class="ne-label w5">Email： </label>
+                            </div>
+                            <div class="ne-cell-center">
+                                <input class="ne-input border-none" type="email" placeholder="邮箱地址" pattern="^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$" title="邮箱地址"
+                                />
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="ne-cell">
+                            <div class="ne-cell-left">
+                                <label class="ne-label w5">Url： </label>
+                            </div>
+                            <div class="ne-cell-center">
+                                <input class="ne-input border-none" type="url" placeholder="url地址" />
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="ne-cell">
+                    <button type="submit" class="ne-btn block ne-btn-primary">Submit</button>
+                </div>
+            </form>
+            <h4 class="hr-title">日期时间选择</h4>
+            <ul class="ne-list">
+                <li>
+                    <div class="ne-cell">
+                        <div class="ne-cell-left">
+                            <label class="ne-label w5">DateTime：</label>
+                        </div>
+                        <div class="ne-cell-center">
+                            <input class="ne-input border-none" type="datetime" placeholder="placeholder..." readonly ne-role="picker" ne-tap="show:picker"
+                            />
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ne-cell">
+                        <div class="ne-cell-left">
+                            <label class="ne-label w5">Date：</label>
+                        </div>
+                        <div class="ne-cell-center">
+                            <input class="ne-input border-none w100" type="date" min="2012-02-01" value="2016-05-05" placeholder="placeholder..." readonly
+                                ne-role="picker" ne-tap="show:picker" />
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ne-cell">
+                        <div class="ne-cell-left">
+                            <label class="ne-label w5">Month：</label>
+                        </div>
+                        <div class="ne-cell-center">
+                            <input class="ne-input border-none" type="month" placeholder="placeholder..." readonly ne-role="picker" ne-tap="show:picker"
+                            />
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ne-cell">
+                        <div class="ne-cell-left">
+                            <label class="ne-label w5">Time：</label>
+                        </div>
+                        <div class="ne-cell-center">
+                            <input class="ne-input border-none" type="time" placeholder="placeholder..." readonly ne-role="picker" ne-tap="show:picker"
+                            />
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <h4 class="hr-title">省市区选择</h4>
+            <ul class="ne-list">
+                <li>
+                    <div class="ne-cell">
+                        <!--
+                            <ul id="demo" style="display:none" ne-role="picker">
+                            <li data-val="Eastern Division">
+                                East
+                                <ul>
+                                    <li data-val="Marketing">
+                                        Marketing
+                                        <ul>
+                                            <li data-val="Eden E">Eden E</li>
+                                            <li data-val="Milda J">Milda J</li>
+                                            <li data-val="Porfirio R">Porfirio R</li>
+                                        </ul>
+                                    </li>
+                                    <li data-val="Research & Development">
+                                        R&D
+                                        <ul>
+                                            <li data-val="Frances P">Frances P</li>
+                                            <li data-val="Frank D">Frank D</li>
+                                            <li data-val="Gianny P">Gianny P</li>
+                                            <li data-val="Ivan F">Ivan F</li>
+                                            <li data-val="John M">John M</li>
+                                            <li data-val="Mildred S">Mildred S</li>
+                                            <li data-val="Sam P">Sam P</li>
+                                        </ul>
+                                    </li>
+                                    <li data-val="Sales">
+                                        Sales
+                                        <ul>
+                                            <li data-val="Edelmira R">Edelmira R</li>
+                                            <li data-val="Francie S">Francie S</li>
+                                            <li data-val="Lean F">Lean F</li>
+                                            <li data-val="Kirby C">Kirby C</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li data-val="Western Division">
+                                West
+                                <ul>
+                                    <li data-val="Marketing">
+                                        Marketing
+                                        <ul>
+                                            <li data-val="Cliff B">Cliff B</li>
+                                            <li data-val="Helen D">Helen D</li>
+                                            <li data-val="Stephan V">Stephan V</li>
+                                        </ul>
+                                    </li>
+                                    <li data-val="Research & Development">
+                                        R&D
+                                        <ul>
+                                            <li data-val="Andy G">Andy G</li>
+                                            <li data-val="Danny A">Danny A</li>
+                                            <li data-val="Ennio M">Ennio M</li>
+                                            <li data-val="Emil E">Emil E</li>
+                                            <li data-val="Frank S">Frank S</li>
+                                            <li data-val="Gonzo G">Gonzo G</li>
+                                            <li data-val="Hal A">Hal A</li>
+                                            <li data-val="Jack G">Jack G</li>
+                                            <li data-val="John A">John A</li>
+                                            <li data-val="Simon D">Simon D</li>
+                                            <li data-val="Victor S">Victor S</li>
+                                        </ul>
+                                    </li>
+                                    <li data-val="Sales">
+                                        Sales
+                                        <ul>
+                                            <li data-val="Dana A">Dana A</li>
+                                            <li data-val="Frank D">Frank D</li>
+                                            <li data-val="Leanna S">Leanna S</li>
+                                            <li data-val="Michael D">Michael D</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                            -->
+                    </div>
+                </li>
+            </ul>
+            <h4 class="hr-title">多行文本输入</h4>
+            <div class="ne-cell ne-textarea-wrapper bg-white">
+                <textarea class="ne-textarea border-none" placeholder="120字，相关输入提示" rows="6" maxlength="120"></textarea>
+                <div class="ne-textarea-count">0/120</div>
+            </div>
+            <h4 class="hr-title">带可选输入列表提示</h4>
+            <div class="ne-cell bg-white">
+                <div class="ne-cell-left">
+                    <label class="ne-label w5">选择输入：</label>
+                </div>
+                <div class="ne-cell-center">
+                    <input class="ne-input border-none" type="text" placeholder="选择输入地方邮编号码" list="j-zipcodelist" />
+                    <datalist id="j-zipcodelist">
+                        <option value="100000">北京</option>
+                        <option value="200000">上海</option>
+                        <option value="510000">广州</option>
+                        <option value="518000">深圳</option>
+                    </datalist>
+                </div>
+            </div>
+            <h4 class="hr-title">手机号码项</h4>
+            <div class="ne-cell bg-white">
+                <div class="ne-cell-left">
+                    <div class="ne-input_withicon_right" ne-tap="show:#select-teltype">
+                        <select class="ne-select border-none w5" id="select-teltype" readonly ne-role="picker">
+                            <option value="1">+86</option>
+                            <option value="2">+80</option>
+                            <option value="3">+84</option>
+                            <option value="4">+87</option>
+                        </select>
+                        <label class="ne-icon-arrow-down ne-input-icon"></label>
+                    </div>
+                </div>
+                <div class="ne-cell-center border-left padding-left-10">
+                    <input class="ne-input border-none" type="tel" placeholder="请输入手机号码" pattern="^1(3[4-9]|4[7]|5[0-27-9]|7[08]|8[2-478])\d{8}$"
+                        title="11位的手机号码" />
+                </div>
+            </div>
+            <h4 class="hr-title">验证码项</h4>
+            <div class="ne-cell bg-white">
+                <div class="ne-cell-left">
+                    <label class="ne-label">验证码：</label>
+                </div>
+                <div class="ne-cell-center">
+                    <input class="ne-input border-none" type="number" placeholder="请输入验证码" />
+                </div>
+                <div class="ne-cell-right">
+                    <button class="ne-btn ne-btn-primary">获取验证码</button>
+                </div>
+            </div>
+            <h4 class="hr-title">密码项</h4>
+            <div class="ne-cell bg-white">
+                <div class="ne-cell-left">
+                    <i class="ne-icon-key"></i>
+                </div>
+                <div class="ne-cell-center border-left padding-left-10 ne-input_withicon_right">
+                    <input class="ne-input border-none" type="password" placeholder="请输入密码" />
+                    <i class="ne-icon-eye ne-input-icon"></i>
+                </div>
+            </div>
+            <h4 class="hr-title">选择项</h4>
+            <ul class="ne-list">
+                <li>
+                    <div class="ne-cell" ne-tap="show:#select-base">
+                        <div class="ne-cell-center">
+                            <select class="ne-select border-none" id="select-base" aria-label="请选择" readonly ne-role="picker">
+                                <option value="1">选项1</option>
+                                <option value="2">选项2</option>
+                                <option value="3">选项3</option>
+                            </select>
+                        </div>
+                        <div class="ne-cell-right">
+                            <i class="ne-icon-arrow-right"></i>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ne-cell" ne-tap="show:#select-group">
+                        <div class="ne-cell-left">
+                            <label class="ne-label">标签：</label>
+                        </div>
+                        <div class="ne-cell-center">
+                            <select class="ne-select border-none" id="select-group" aria-label="请选择" readonly ne-role="picker">
+                                <optgroup label="分组1">
+                                    <option value="1-1">选项1</option>
+                                    <option value="1-2" selected>选项2</option>
+                                    <option value="1-3">选项3</option>
+                                </optgroup>
+                                <optgroup label="分组2">
+                                    <option value="2-1">选项1</option>
+                                    <option value="2-2">选项2</option>
+                                    <option value="2-3">选项3</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="ne-cell-right">
+                            <i class="ne-icon-arrow-right"></i>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <h4 class="hr-title">表单报错</h4>
+            <div class="ne-cell bg-white">
+                <div class="ne-cell-left">
+                    <label class="ne-label">标签：</label>
+                </div>
+                <div class="ne-cell-center">
+                    <div class="ne-input_withicon_right">
+                        <input class="ne-input border-none" type="number" placeholder="占位符..." />
+                        <i class="ne-icon-warn-f red ne-input-icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="hr-blank" />
+            <div class="ne-cell">
+                <div class="hr-meta">
+                    <span>FIELDSET</span>
+                </div>
+            </div>
+            <h4 class="hr-title">字段集</h4>
+            <div class="ne-cell bg-white">
+                <fieldset class="ne-fieldset">
+                    <div class="ne-field padding-0 margin-bottom-5">
+                        <label>主题：</label>
+                        <p>
+                            <span>标题文字</span>
+                        </p>
+                    </div>
+                    <div class="ne-field padding-0 margin-bottom-5">
+                        <label>描述：</label>
+                        <p>左肺叶结2.9x1.5，边界尚清，发展符合情节，经常伴有短时咳嗽。</p>
+                    </div>
+                    <div class="ne-field padding-0 margin-bottom-5">
+                        <label>时间：</label>
+                        <p>2016-01-01 12:00</p>
+                    </div>
+                </fieldset>
+            </div>
+
+            <h4 class="hr-title">带行线的字段集 </h4>
+            <fieldset class="ne-fieldset bg-white">
+                <div class="ne-field border-bottom">
+                    <label>主题：</label>
+                    <p>标题文字</p>
+                </div>
+                <div class="ne-field border-bottom">
+                    <label>描述：</label>
+                    <p>左肺叶结2.9x1.5，边界尚清，发展符合情节，经常伴有短时咳嗽。</p>
+                </div>
+                <div class="ne-field">
+                    <label>时间：</label>
+                    <p>2016-01-01 12:00</p>
+                </div>
+            </fieldset>
+            <h4 class="hr-title">表单字段集</h4>
+            <form class="ne-fieldset bg-white">
+                <div class="ne-field">
+                    <label>标签：</label>
+                    <div>
+                        <div class="ne-input_withicon_right" ne-tap="show:#select-fs">
+                            <select class="ne-select w100" id="select-fs" readonly ne-role="picker">
+                                <option value="1">选项1</option>
+                                <option value="2">选项2</option>
+                                <option value="3">选项3</option>
+                            </select>
+                            <label class="ne-icon-arrow-down ne-input-icon"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="ne-field">
+                    <label>标签：</label>
+                    <div>
+                        <div class="ne-input_withicon_right">
+                            <input type="text" class="ne-input w100" placeholder="占位符...">
+                            <i class="ne-icon-warn-f orange ne-input-icon"></i>
+                        </div>
+                        <span class="orange">错误提示信息</span>
+                    </div>
+                </div>
+                <div class="ne-field">
+                    <label>标签：</label>
+                    <div>
+                        <div class="ne-textarea-wrapper">
+                            <div class="ne-textarea" placeholder="120字，相关输入提示" rows="7" maxlength="120" contenteditable="true" style="height:120px;"
+                                ne-role="textarea"></div>
+                            <div class="ne-textarea-count">0/120</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ne-field">
+                    <label>标签：</label>
+                    <div>
+                        <input type="text" class="ne-input w100" placeholder="带便捷清除按钮" ne-clearable="true">
+                    </div>
+                </div>
+                <div class="ne-cell">
+                    <button type="submit" class="ne-btn block ne-btn-primary">提交</button>
+                </div>
+            </form>
+            <h4 class="hr-title">表单字段集 - 半框风格</h4>
+            <form class="ne-fieldset bg-white">
+                <div class="ne-field">
+                    <label>Label：</label>
+                    <div>
+                        <div class="ne-input_withicon_right ne-halfborder w100" ne-tap="show:#select-hfs">
+                            <select class="ne-select" id="select-hfs" readonly ne-role="picker">
+                                <option value="1">Option1</option>
+                                <option value="2">Option2</option>
+                                <option value="3">Option3</option>
+                            </select>
+                            <label class="ne-icon-arrow-down ne-input-icon"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="ne-field">
+                    <label>Label：</label>
+                    <div>
+                        <div class="ne-halfborder w100 ne-input_withicon_right">
+                            <input type="text" class="ne-input" placeholder="placeholder...">
+                            <i class="ne-icon-warn-f orange ne-input-icon"></i>
+                        </div>
+                        <span class="orange">Some Error Messages</span>
+                    </div>
+                </div>
+
+                <div class="ne-field">
+                    <label>Label：</label>
+                    <div>
+                        <div class="ne-halfborder w100">
+                            <input type="text" class="ne-input" placeholder="placeholder..." ne-clearable="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="ne-cell">
+                    <button type="submit" class="ne-btn block ne-btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!--load scripts-->
+    <script src="../../dist/neui.js"></script>
+    <script>
+        Ne.acts('#j-range').createVirtualRange();
+        /*
+        var instance = mobiscroll.treelist('#demo', {
+            theme: 'ios',                             // Specify theme like: theme: 'ios' or omit setting to use default
+            lang: 'zh',                               // Specify language like: lang: 'pl' or omit setting to use default
+            display: 'bottom',                        // Specify display mode like: display: 'bottom' or omit setting to use default
+            width: [76, 116, 116],                    // More info about width: https://docs.mobiscroll.com/3-2-0/javascript/list#!opt-width
+            placeholder: 'Please Select ...',         // More info about placeholder: https://docs.mobiscroll.com/3-2-0/javascript/list#!opt-placeholder
+            labels: ['Region', 'Supervisor', 'Tech']  // More info about labels: https://docs.mobiscroll.com/3-2-0/javascript/list#!opt-labels
+        });*/
+    </script>
+</body>
+
+</html>

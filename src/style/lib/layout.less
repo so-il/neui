@@ -1,0 +1,153 @@
+
+/****************************************************************** 
+ * @ layout
+ * Description:layout framework
+*******************************************************************/
+/* cloumns */
+.ne-row {
+    box-sizing: border-box;
+    word-spacing: -.2857em;
+}
+
+.ne-col-1, .ne-col-2, .ne-col-3, .ne-col-4, .ne-col-5, .ne-col-6, .ne-col-7, .ne-col-8, .ne-col-9, .ne-col-10, .ne-col-11, .ne-col-12 {
+    display: inline-block;
+    box-sizing: border-box;
+    min-height: 1px;
+    height: 100%;
+    vertical-align: top;
+    word-spacing: normal;
+}
+
+.ne-col-12 {
+    width: 100%;
+}
+
+.ne-col-11 {
+    width: 91.66666667%;
+}
+
+.ne-col-10 {
+    width: 83.33333333%;
+}
+
+.ne-col-9 {
+    width: 75%;
+}
+
+.ne-col-8 {
+    width: 66.66666667%;
+}
+
+.ne-col-7 {
+    width: 58.33333333%;
+}
+
+.ne-col-6 {
+    width: 50%;
+}
+
+.ne-col-5 {
+    width: 41.66666667%;
+}
+
+.ne-col-4 {
+    width: 33.33333333%;
+}
+
+.ne-col-3 {
+    width: 25%;
+}
+
+.ne-col-2 {
+    width: 16.66666667%;
+}
+
+.ne-col-1 {
+    width: 8.33333333%;
+}
+
+.ne-row.spaceing {
+    margin: -.7142857em;
+}
+
+.ne-row.spaceing > .ne-col-1,
+.ne-row.spaceing > .ne-col-2,
+.ne-row.spaceing > .ne-col-3,
+.ne-row.spaceing > .ne-col-4,
+.ne-row.spaceing > .ne-col-5,
+.ne-row.spaceing > .ne-col-6,
+.ne-row.spaceing > .ne-col-7,
+.ne-row.spaceing > .ne-col-8,
+.ne-row.spaceing > .ne-col-9,
+.ne-row.spaceing > .ne-col-10,
+.ne-row.spaceing > .ne-col-11,
+.ne-row.spaceing > .ne-col-12 {
+    padding: .7142857em;
+}
+
+
+/* cell */
+.ne-cell {
+    display: block;
+    box-sizing: border-box;
+    padding: .75em @wingblank-width;
+}
+
+    .ne-cell > .ne-cell-left,
+    .ne-cell > .ne-cell-center,
+    .ne-cell > .ne-cell-right {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: left;
+    }
+
+    .ne-cell > .ne-cell-left {
+        width: 1%;
+        white-space: nowrap;
+        padding-right: .75em;
+    }
+
+    .ne-cell > .ne-cell-center {
+        width: 100%;
+        white-space: normal;
+    }
+
+    .ne-cell > .ne-cell-right {
+        width: 1%;
+        white-space: nowrap;
+        text-align: right;
+        padding-left: .75em;
+    }
+
+
+/* adaptivebox */
+.ne-adaptivebox {
+    position: relative;
+    width: 100%;
+    vertical-align: top;
+    padding-bottom: 100%;
+    height: 0;
+    overflow: hidden;
+}
+
+.ne-adaptivebox-content {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+/* middlebox */
+.ne-middlebox{
+    display: table;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+}
+.ne-middlebox-content{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}

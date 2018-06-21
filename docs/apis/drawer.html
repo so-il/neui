@@ -1,0 +1,87 @@
+﻿<h1>Drawer 抽屉</h1>
+<p>用于在屏幕边缘显示应用导航等内容的面板。</p>
+<hr />
+<section>
+    <h2>结构与样式</h2>
+    <div class="flexbox">
+        <pre><code class="html">
+&lt;!-- 
+1、drawer需声明ne-role="drawer"； 
+2、默认不可见，通过添加.ne-animate-show展示；
+3、默认从左侧划入展示，通过添加.ne-drawer-fromright设置为从右侧划入；
+4、container内容按需添加；                   
+5、声明ne-tap="show:#elementId"的元素点击可展示id对应的drawer； 
+6、声明ne-tap="open:#elementId"的元素点击会有另一种展示方式；                                  
+7、drawer内声明ne-tap="hide:drawer"的元素点击可隐藏drawer;                                
+8、除了8，声明ne-tap="hide:#elementId"的元素点击也可隐藏drawer;
+--&gt;                 
+
+&lt;!--drawer的基本结构--&gt;
+&lt;div class="ne-drawer .ne-animate-show" id="j-drawer" ne-role="drawer"&gt;
+    &lt;div class="ne-mask" ne-tap="hide:drawer"&gt;&lt;/div&gt;
+    &lt;div class="ne-drawer-container"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!--点击即可展示drawer的按钮--&gt;
+&lt;button ne-tap="show:#j-drawer"&gt;show drawer&lt;/button&gt;
+&lt;button ne-tap="open:#j-drawer"&gt;show drawer&lt;/button&gt;
+                            </code></pre>
+        <div class="preview">
+            <div class="preview-browser">
+                <div class="preview-browser-header">
+                    <div class="preview-browser-statbar">
+                        <img src="assets/images/ui-statbar.png">
+                    </div>
+                    <div class="preview-browser-url-box">http://neui.nelabs.cn/examples/components/drawer.html</div>
+                </div>
+                <div class="preview-browser-body">
+                    <iframe src="../examples/components/drawer.html"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>交互与功能</h2>
+    <h4>范式说明</h4>
+    <p>大部分时候只需要通过html声明即可完成所有组件所有交互行为，但也会有需要通过js触发交互行为方法的情况，关于如何触发组件交互行为方法的详细介绍请查阅-<a href="#component" target="_blank">《Component 组件封装支持》</a></p>
+    <pre><code class="javascript">
+        //通过Js触发组件行为功能的范式：
+        Ne.acts(selector).propsName(args[]);
+        </code></pre>
+    <h4>drawer支持的交互功能</h4>
+    <table>
+        <tbody>
+            <tr>
+                <td>方法名</td>
+                <td>说明</td>
+            </tr>
+            <tr>
+                <td>.show()</td>
+                <td>展示drawer（侧滑进入视界）。</td>
+            </tr>
+            <tr>
+                <td>.open()</td>
+                <td>展示drawer（侧滑页面展示隐藏在页面下的drawer，具体与.show()有什么不同的交互效果请看demo）。</td>
+            </tr>
+            <tr>
+                <td>.hide()</td>
+                <td>隐藏drawer。</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>举例说明</h4>
+    <pre><code class="html">
+        &lt;!--假设现在有如下drawer：--&gt;
+        &lt;div class="ne-drawer .ne-animate-show" id="j-drawer" ne-role="drawer"&gt;
+            &lt;div class="ne-mask" ne-tap="hide:drawer"&gt;&lt;/div&gt;
+            &lt;div class="ne-drawer-container"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    </code><code class="javascript">
+        //展示drawer：
+        Ne.acts('#j-drawer').show();
+        Ne.acts('#j-drawer').open();
+        //隐藏drawer：
+        Ne.acts('#j-drawer').hide();
+    </code></pre>
+</section>

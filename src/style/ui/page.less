@@ -1,0 +1,147 @@
+
+/**
+ * @page.css
+ **/
+
+.ne-page {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color:@page-bgcolor;
+    z-index: 0;
+    display: none;
+}
+
+    .ne-page.active {
+        z-index: 1;
+        display: block;
+    }
+
+.ne-page-header, .ne-page-body, .ne-page-footer {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.ne-page-header {
+    top: 0;
+    z-index: 1;
+}
+
+.ne-page-footer {
+    bottom: 0;
+}
+
+.ne-page-body {
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.ne-page-header {
+    height: 3.142857em;
+}
+
+    .ne-page-header + .ne-page-body {
+        top: 3.142857em;
+    }
+
+.bottom-50 {
+    bottom: 3.57142857em;
+}
+
+    .bottom-50 + .ne-page-footer {
+        height: 3.57142857em;
+    }
+
+/*animation*/
+.ne-page-opendrawer, .ne-page-closedrawer {
+    -webkit-transition-timing-function: ease;
+    -webkit-transition-duration: 300ms;
+    -webkit-animation-fill-mode: forwards;
+    transition-timing-function: ease;
+    transition-duration: 300ms;
+    animation-fill-mode: forwards;
+}
+
+    .ne-page-opendrawer::before, .ne-page-closedrawer::before {
+        content: '';
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: @mask-bgcolor;
+        cursor: pointer;
+        -webkit-animation-duration: 225ms;
+        animation-duration: 225ms;
+    }
+
+.ne-page-opendrawer {
+    -webkit-transform: translate3d(70%,0,0);
+    transform: translate3d(70%,0,0);
+    z-index: 3;
+}
+
+.ne-page-opendrawer-fromright.ne-page-opendrawer {
+    -webkit-transform: translate3d(-70%,0,0);
+    transform: translate3d(-70%,0,0);
+    z-index: 3;
+}
+
+.ne-page-opendrawer::before {
+    opacity: 1;
+    -webkit-animation-name: fadein;
+    animation-name: fadein;
+}
+
+.ne-page-closedrawer {
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    z-index: 3;
+}
+
+    .ne-page-closedrawer::before {
+        opacity: 0;
+        -webkit-animation-name: fadeout;
+        animation-name: fadeout;
+    }
+
+
+
+/*orhers*/
+
+header > .ne-navbar {
+    height: 100%;
+    vertical-align: middle;
+    border-bottom: 1px solid @grey-4;
+}
+
+footer > .ne-tabs-withicon {
+    height: 100%;
+    border-top: 1px solid @grey-4;
+    vertical-align: middle;
+}
+
+/*header out*/
+.ne-page-header.out{
+    transform: translateY(-45px);
+}
+.ne-page-header.out+.ne-page-body{
+    top:0;
+}
+.ne-page-header.out,
+.ne-page-header.out+.ne-page-body{
+    -webkit-transition: all 200ms ease;
+    transition: all 200ms ease;
+}

@@ -1,0 +1,955 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Touch</title>
+
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../dist/neui.css" />
+    <style>
+        .radio-item {
+            width: 31%;
+            display: inline-block;
+            padding: 2px 0;
+            white-space: nowrap;
+        }
+
+        .chartpanel-warp {
+            position: relative;
+            width: 100%;
+            height: 150px;
+            display: table;
+        }
+
+        .chartpanel {
+            height: 150px;
+            background: #A0F5F1;
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .console {
+            overflow: auto;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            text-align: left;
+        }
+
+        .square {
+            width: 35px;
+            height: 35px;
+            background: #007aff;
+            display: inline-block;
+            box-shadow: 0 0 2px 0 rgba(0, 165, 224, 0.78);
+            text-align: center;
+            line-height: 35px;
+            color: white;
+            z-index: 1;
+            position: relative;
+        }
+
+        .chartpanel .square {
+            display: inline-block !important;
+        }
+
+        .square.bigger {
+            width: 80px;
+            height: 80px;
+        }
+
+        .chartpanel-tips {
+            background: rgb(0, 99, 94);
+            color: #FFFFFF !important;
+            display: inline-block;
+            font-size: .857em;
+            padding: 0 5px;
+            margin: 5px;
+            border-radius: 50px;
+            min-width: 30px;
+            text-align: center;
+            /* box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.22); */
+            float: right;
+            opacity: .3;
+            line-height: 1.7;
+        }
+
+        .square:active {
+            background: #0496CA;
+            box-shadow: none;
+        }
+
+        .square.disabled {
+            opacity: 1;
+            filter: alpha(opacity=100);
+        }
+
+        .gesture {
+            enable-background: new 0 0 50 50;
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+        }
+
+        .gesture-st2 {
+            fill: none;
+            stroke: #1A1A1A;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+        }
+
+        .gesture-st3 {
+            fill: none;
+            stroke: #59C3BA;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+        }
+
+        .desc-content {
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 10px;
+        }
+
+        .desc-content .ne-icon-arrow-right {
+            font-size: .857em;
+        }
+
+        .desc-content .ne-icon-arrow-right::before {
+            top: 2px;
+            border-color: @lightgrey;
+        }
+
+        #descPanel .none {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="ne-page active" ne-role="page">
+        <div class="ne-page-body">
+            <div class="chartpanel-warp">
+                <div class="chartpanel">
+                    <div id="console" class="console"></div>
+                    <div id="square" class="square"></div>
+                </div>
+            </div>
+            <div class="ne-panel">
+                <div class="ne-panel-header">
+                    <div class="header-title">
+                        <span>Event Type:</span>
+                    </div>
+                </div>
+                <div class="ne-panel-body">
+                    <div class="padding-15" style="padding-right: 0!important;">
+
+                        <span class="radio-item">
+                            <input type="radio" name="eventType" id="tap" value="tap" checked=c hecked checked=c hecked checked=c hecked checked=c hecked
+                            />
+                            <label class="ne-radio" for="tap"></label>
+                            <label for="tap">tap</label>
+                        </span>
+
+                        <span class="radio-item">
+                            <input type="radio" name="eventType" id="doubletap" value="doubletap" />
+                            <label class="ne-radio" for="doubletap"></label>
+                            <label for="doubletap">doubletap</label>
+                        </span>
+
+                        <span class="radio-item">
+                            <input type="radio" name="eventType" id="hold" value="hold" />
+                            <label class="ne-radio" for="hold"></label>
+                            <label for="hold">hold</label>
+                        </span>
+
+                        <span class="radio-item">
+                            <input type="radio" name="eventType" id="drag" value="drag" />
+                            <label class="ne-radio" for="drag"></label>
+                            <label for="drag">drag</label>
+                        </span>
+
+                        <span class="radio-item">
+                            <input type="radio" name="eventType" id="swipe" value="swipe" />
+                            <label class="ne-radio" for="swipe"></label>
+                            <label for="swipe">swipe</label>
+                        </span>
+
+                        <span class="radio-item">
+                            <input type="radio" name="eventType" id="rotate" value="rotate" />
+                            <label class="ne-radio" for="rotate"></label>
+                            <label for="rotate">rotate</label>
+                        </span>
+
+                        <span class="radio-item">
+                            <input type="radio" name="eventType" id="pinch" value="pinch" />
+                            <label class="ne-radio" for="pinch"></label>
+                            <label for="pinch">pinch</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <hr class="hr-blank" />
+            <div class="ne-panel">
+                <div class="ne-panel-header">
+                    <div class="header-title">
+                        <span>Description:</span>
+                    </div>
+                </div>
+                <div class="ne-panel-body ne-cell" id="descPanel">
+                    <div class="fade ne-animate-out none desc-tap">
+                        <div class="align-center">
+                            <svg class="gesture" x="0px" y="0px" viewBox="0 0 50 50">
+                                <g>
+                                    <path class="gesture-st2" d="M22.6,27V11c0-1.8-0.9-2.9-3.2-2.9s-3.2,1.2-3.2,2.9v23.7" />
+                                    <path class="gesture-st2" d="M34.1,29.6v-5.7c0-2.4-0.6-4-2.7-4.2c-1.8-0.2-2.7,0.6-2.7,0.6" />
+                                    <path class="gesture-st2" d="M34.1,22.9c3.2-0.5,4.2,1.2,4.4,4s0.2,4.3,0.2,7.8c0,8.5-4.7,13.4-4.7,13.4" />
+                                    <path class="gesture-st2" d="M16,24.8c-0.3-0.1-1.3-0.2-2-0.2c-1.6,0-2.8,1.3-3,3.5c0,0-0.3,2.3-0.4,5.4c-0.1,4,0.6,5.7,2.2,8    c2.2,3.1,6.7,6.7,6.7,6.7"
+                                    />
+                                    <path class="gesture-st2" d="M28.9,27.6v-5.3c0-2.4-0.7-4.6-3.2-4.6c-2.1,0-3.2,0.6-3.2,0.6" />
+                                    <path class="gesture-st3" d="M12.1,10.5c0-4,3.3-7.3,7.3-7.3s7.3,3.3,7.3,7.3" />
+                                </g>
+                            </svg>
+                        </div>
+                        <p class="desc-content">tap</p>
+                    </div>
+                    <div class="fade ne-animate-out none desc-doubletap">
+                        <div class="align-center">
+                            <svg class="gesture" x="0px" y="0px" viewBox="0 0 50 50">
+                                <g>
+                                    <path class="gesture-st2" d="M22.6,27V11c0-1.8-0.9-2.9-3.2-2.9s-3.2,1.2-3.2,2.9v23.7" />
+                                    <path class="gesture-st2" d="M34.1,29.6v-5.7c0-2.4-0.6-4-2.7-4.2c-1.8-0.2-2.7,0.6-2.7,0.6" />
+                                    <path class="gesture-st2" d="M34.1,22.9c3.2-0.5,4.2,1.2,4.4,4s0.2,4.3,0.2,7.8c0,8.5-4.7,13.4-4.7,13.4" />
+                                    <path class="gesture-st2" d="M16,24.8c-0.3-0.1-1.3-0.2-2-0.2c-1.6,0-2.8,1.3-3,3.5c0,0-0.3,2.3-0.4,5.4c-0.1,4,0.6,5.7,2.2,8    c2.2,3.1,6.7,6.7,6.7,6.7"
+                                    />
+                                    <path class="gesture-st2" d="M28.9,27.6v-5.3c0-2.4-0.7-4.6-3.2-4.6c-2.1,0-3.2,0.6-3.2,0.6" />
+                                    <path class="gesture-st3" d="M12.1,10.5c0-4,3.3-7.3,7.3-7.3s7.3,3.3,7.3,7.3" />
+                                    <path class="gesture-st3" d="M12.1,10.5c0-4,3.3-7.3,7.3-7.3s7.3,3.3,7.3,7.3" />
+                                    <g>
+                                        <polyline class="gesture-st3" points="39,8.8 35,8.8 35,5" />
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <p class="desc-content">doubletap</p>
+                    </div>
+                    <div class="fade ne-animate-out none desc-hold">
+                        <div class="align-center">
+                            <svg class="gesture" x="0px" y="0px" viewBox="0 0 50 50">
+                                <g>
+                                    <path class="gesture-st2" d="M21.1,26.3v-16c0-1.8-0.9-2.9-3.2-2.9s-3.2,1.2-3.2,2.9V34" />
+                                    <path class="gesture-st2" d="M32.6,28.9v-5.7c0-2.4-0.6-4-2.7-4.2c-1.8-0.2-2.7,0.6-2.7,0.6" />
+                                    <path class="gesture-st2" d="M32.6,22.2c3.2-0.5,4.2,1.2,4.4,4s0.2,4.3,0.2,7.8c0,8.5-4.7,13.4-4.7,13.4" />
+                                    <path class="gesture-st2" d="M14.5,24.1c-0.3-0.1-1.3-0.2-2-0.2c-1.6,0-2.8,1.3-3,3.5c0,0-0.3,2.3-0.4,5.4c-0.1,4,0.6,5.7,2.2,8c2.2,3.1,6.7,6.7,6.7,6.7"
+                                    />
+                                    <path class="gesture-st2" d="M27.4,26.9v-5.3c0-2.4-0.7-4.6-3.2-4.6c-2.1,0-3.2,0.6-3.2,0.6" />
+                                    <path class="gesture-st3" d="M10.6,9.8c0-4,3.3-7.3,7.3-7.3s7.3,3.3,7.3,7.3" />
+                                    <g>
+                                        <circle class="gesture-st3" cx="34.9" cy="8.2" r="5.3" />
+                                        <polyline class="gesture-st3" points="39,8.8 35,8.8 35,4" />
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <p class="desc-content">hold</p>
+                    </div>
+                    <div class="fade ne-animate-out none desc-drag">
+                        <div class="align-center">
+                            <svg class="gesture" x="0px" y="0px" viewBox="0 0 50 50">
+                                <g>
+                                    <path class="gesture-st2" d="M21,25.6V8.8c0-1.9-0.9-3.1-3.3-3.1s-3.3,1.2-3.3,3.1v24.9" />
+                                    <path class="gesture-st2" d="M33.1,28.3v-6c0-2.6-0.6-4.2-2.9-4.4c-1.9-0.2-2.9,0.6-2.9,0.6" />
+                                    <path class="gesture-st2" d="M33.1,21.2c3.3-0.6,4.4,1.3,4.6,4.2S38,30,38,33.7c0,8.9-4.9,14.1-4.9,14.1" />
+                                    <path class="gesture-st2" d="M14.1,23.3C13.7,23.1,12.7,23,12,23c-1.7,0-2.9,1.3-3.2,3.7c0,0-0.3,2.4-0.4,5.7c-0.1,4.2,0.7,6,2.3,8.4    c2.3,3.3,7,7,7,7"
+                                    />
+                                    <path class="gesture-st2" d="M27.7,26.2v-5.6c0-2.6-0.7-4.9-3.3-4.9c-2.2,0-3.3,0.6-3.3,0.6" />
+                                    <g>
+                                        <line class="gesture-st3" x1="28.9" y1="5.4" x2="41.6" y2="5.4" />
+                                        <polyline class="gesture-st3" points="30.9,8 28.3,5.4 30.9,2.8    " />
+                                        <polyline class="gesture-st3" points="39.6,2.8 42.2,5.4 39.6,8    " />
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <p class="desc-content">dragstart
+                            <i class="ne-icon-arrow-right"></i> drag
+                            <i class="ne-icon-arrow-right"></i> dragend</p>
+                    </div>
+                    <div class="fade ne-animate-out none desc-swipe">
+                        <div class="align-center">
+                            <svg class="gesture" x="0px" y="0px" viewBox="0 0 50 50">
+                                <g>
+                                    <path class="gesture-st2" d="M21.3,28.4l-12-12c-1.3-1.3-2.9-1.5-4.6,0.2s-1.5,3.3-0.2,4.6l17.8,17.8" />
+                                    <path class="gesture-st2" d="M31.8,21.7l-4.3-4.3c-1.8-1.8-3.4-2.6-5.2-1.1c-1.5,1.2-1.6,2.5-1.6,2.5" />
+                                    <path class="gesture-st2" d="M26.8,16.6c2-2.8,4.1-2.2,6.3-0.3c2.2,2,3.4,3.1,6.1,5.7c6.4,6.4,6.5,13.6,6.5,13.6" />
+                                    <path class="gesture-st2" d="M14.6,31.7c-0.3,0.2-1.1,0.8-1.7,1.4c-1.2,1.2-1.1,3,0.4,4.9c0,0,1.5,2,3.8,4.3c2.9,3,4.8,3.8,7.7,4.3    c4,0.7,10,0,10,0"
+                                    />
+                                    <path class="gesture-st2" d="M26.5,24.1l-4-4c-1.8-1.8-4-3-5.8-1.1c-1.6,1.6-2,2.8-2,2.8" />
+                                    <g>
+                                        <path class="gesture-st3" d="M42.6,8.3C38.3,4.4,32.6,2,26.4,2s-12,2.4-16.2,6.4" />
+                                        <polyline class="gesture-st3" points="13.9,8.6 9.9,8.6 9.9,4.6    " />
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <p class="desc-content">
+                            swipestart
+                            <i class="ne-icon-arrow-right"></i> swiping
+                            <i class="ne-icon-arrow-right"></i> swipeend
+                            <i class="ne-icon-arrow-right"></i> swipeleft
+                            <i class="ne-icon-arrow-right"></i> swiperight
+                            <i class="ne-icon-arrow-right"></i> swipeup
+                            <i class="ne-icon-arrow-right"></i> swipedown
+                            <i class="ne-icon-arrow-right"></i> swipe
+                        </p>
+                    </div>
+                    <div class="fade ne-animate-out none desc-rotate">
+                        <div class="align-center">
+                            <svg class="gesture" x="0px" y="0px" viewBox="0 0 50 50">
+                                <g>
+                                    <g>
+                                        <path class="gesture-st2" d="M29.4,24c-3.2-6.5-6.9-12.9-6.9-12.9c-1.1-2-1.8-2.2-3.7-1.4c-1.9,0.8-1.8,2.2-1.2,3.7c0,0,3.4,6.7,6.1,12.1     c1.8,3.5,3.1,7.2,3.1,7.2"
+                                        />
+                                        <path class="gesture-st2" d="M40,22.1l-2.4-4.7c-1.2-1.9-1.9-3.2-3.8-2.6c-1.6,0.5-2,1.5-2,1.5" />
+                                        <path class="gesture-st2" d="M37.7,16.5c2.5-1.6,4-0.4,5.1,1.9s1.7,3.5,2.9,6.5c3,7.2,0.7,12.9,0.7,12.9" />
+                                        <path class="gesture-st2" d="M26.8,32.7c0.5,1.2-5.8-4.7-8.1-6.1c-0.6-0.4-1-0.6-1.9-0.1c-0.8,0.5-1.3,1.2-1.3,2.3c0,0.3-0.1,0.8,0.9,1.7     c2.3,2,8.1,8,9.8,9.2c2.9,1.9,8,3.3,8,3.3"
+                                        />
+                                        <path class="gesture-st2" d="M35,22.3l-2.2-4.3c-1.1-2.2-2.2-3.7-4.3-2.8c-1.8,0.7-2.7,2-2.7,2" />
+                                    </g>
+                                    <g>
+                                        <polyline class="gesture-st3" points="10,20.4 12.3,19 13.7,21.3    " />
+                                        <path class="gesture-st3" d="M11.9,19.7c0,2.7-2.2,4.9-4.9,4.9s-4.9-2.2-4.9-4.9s2.2-4.9,4.9-4.9" />
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <p class="desc-content">
+                            rotateleft
+                            <i class="ne-icon-arrow-right"></i> rotateright
+                            <i class="ne-icon-arrow-right"></i> rotate
+                        </p>
+                    </div>
+                    <div class="fade ne-animate-out none desc-pinch">
+                        <div class="align-center">
+                            <svg class="gesture" x="0px" y="0px" viewBox="0 0 50 50">
+                                <g>
+                                    <g>
+                                        <path class="gesture-st2" d="M27.8,22.8c-3.5-7.1-7.6-14.1-7.6-14.1c-1.2-2.1-1.9-2.4-4-1.5s-2,2.4-1.3,4.1c0,0,3.8,7.4,6.7,13.2     c1.9,3.8,3.4,7.9,3.4,7.9"
+                                        />
+                                        <path class="gesture-st2" d="M39.4,20.8l-2.6-5.1c-1.3-2.1-2-3.5-4.1-2.8c-1.7,0.5-2.2,1.6-2.2,1.6" />
+                                        <path class="gesture-st2" d="M36.8,14.6c2.7-1.7,4.3-0.5,5.5,2c1.2,2.5,1.9,3.9,3.2,7.1c3.2,7.8,0.8,14.1,0.8,14.1" />
+                                        <path class="gesture-st2" d="M24.9,32.3c0.6,1.4-6.3-5.1-8.9-6.7c-0.6-0.4-1.1-0.7-2.1-0.1c-0.8,0.5-1.4,1.3-1.4,2.5c0,0.3-0.1,0.9,1,1.8     c2.5,2.2,8.8,8.8,10.7,10c3.2,2.1,8.7,3.6,8.7,3.6"
+                                        />
+                                        <path class="gesture-st2" d="M33.8,20.9l-2.4-4.7c-1.2-2.4-2.4-4-4.7-3c-2,0.8-3,2.2-3,2.2" />
+                                    </g>
+                                    <g>
+                                        <line class="gesture-st3" x1="4.7" y1="12.1" x2="4.7" y2="24.1" />
+                                        <polyline class="gesture-st3" points="2.3,14 4.7,11.5 7.2,14    " />
+                                        <polyline class="gesture-st3" points="7.2,22.3 4.7,24.7 2.3,22.3    " />
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <p class="desc-content">
+                            pinchstart
+                            <i class="ne-icon-arrow-right"></i> pinchend
+                            <i class="ne-icon-arrow-right"></i> pinch
+                            <i class="ne-icon-arrow-right"></i> pinchin
+                            <i class="ne-icon-arrow-right"></i> pinchout
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../../dist/neui.js"></script>
+    <script>
+        //////////////////////////////////////////////////////////
+        //方块
+        var square = {
+            el: document.querySelector('#square'),
+            reset: function (callback) {
+                square.el.className = "square";
+                square.el.classList.add('ne-animate-in');
+                square.el.classList.add('ne-animate-flip');
+                square.el.innerHTML = "";
+                square.el.setAttribute('style', '');
+                setTimeout(function () {
+                    square.el.classList.remove('ne-animate-flip');
+                    square.el.classList.remove('ne-animate-in');
+                }, 500);
+            },
+            move: function (option) {
+                Ne.motion.move(Ne._.extend({
+                    el: square.el,
+                    x: 0,
+                    y: 0,
+                    duration: 1000,
+                    timingFunction: 'Elastic-easeOut'
+                }, option));
+                if (option.duration != 0) {
+                    square.el.classList.add('disabled');
+                }
+            },
+            rotate: function (option) {
+                option = Ne._.extend({
+                    duration: 20,
+                    timeout: 50,
+                    X: 0,
+                    Y: 0,
+                    Z: 0,
+                    angle: 0,
+                    tweenFn: timingFunction('Elastic-easeOut')
+                }, option);
+
+                function _rotate(x, y, z, angle) {
+                    var _style_transform = square.el.style[Ne.dom.transformProperty];
+                    var _style_rotate3d = 'rotate3d(' + x + ',' + y + ',' + z + ',' + angle + 'deg)';
+                    if (_style_transform.indexOf('rotate3d') < 0) {
+                        square.el.style[Ne.dom.transformProperty] = _style_transform + _style_rotate3d;
+                    } else {
+                        square.el.style[Ne.dom.transformProperty] = _style_transform.replace(
+                            /rotate3d\(+[0-9pxdeg,\-\s]+\)/ig, _style_rotate3d);
+                    }
+                }
+
+                function _run(t) {
+                    t = t || 0;
+                    t++;
+                    if (t <= option.duration) {
+                        _rotate(
+                            option.X,
+                            option.Y,
+                            option.Z,
+                            Math.ceil(option.tweenFn(t, option.angle, -option.angle, option.duration))
+                        );
+                        square.rotate._t = setTimeout(function () {
+                            _run(t);
+                        }, option.timeout);
+                    } else {
+                        option.callback && option.callback();
+                    }
+                }
+                square.rotate.clear = function () {
+                    clearTimeout(square.rotate._t);
+                };
+                if (option.timeout != 0) {
+                    square.el.classList.add('disabled');
+                    _run();
+                } else {
+                    _rotate(option.X, option.Y, option.Z, option.angle);
+                }
+            },
+            scale: function (option) {
+                option = Ne._.extend({
+                    duration: 15,
+                    timeout: 30,
+                    X: 0,
+                    Y: 0,
+                    reverse: false,
+                    tweenFn: timingFunction('Back-easeOut')
+                }, option);
+                option.X = (option.X - 1) * 10;
+                option.Y = (option.Y - 1) * 10;
+
+                function _scale(x, y) {
+                    var _style_transform = square.el.style[Ne.dom.transformProperty];
+                    console.log(x + ',' + y);
+                    var _style_scale = 'scale(' + x + ',' + y + ')';
+                    if (_style_transform.indexOf('scale') < 0) {
+                        square.el.style[Ne.dom.transformProperty] = _style_transform + _style_scale;
+                    } else {
+                        square.el.style[Ne.dom.transformProperty] = _style_transform.replace(
+                            /scale\(+[0-9,.\-\s]+\)/ig, _style_scale);
+                    }
+                }
+
+                function _run(t) {
+                    t = t || 0;
+                    t++;
+                    if (t <= option.duration) {
+                        if (option.reverse) {
+                            _scale(
+                                option.tweenFn(t, option.X, -option.X, option.duration) / 10 + 1,
+                                option.tweenFn(t, option.Y, -option.Y, option.duration) / 10 + 1
+                            );
+                        } else {
+                            _scale(
+                                (option.X - option.tweenFn(t, option.X, -option.X, option.duration)) / 10 +
+                                1,
+                                (option.Y - option.tweenFn(t, option.Y, -option.Y, option.duration)) / 10 +
+                                1
+                            );
+                        }
+                        square.scale._t = setTimeout(function () {
+                            _run(t);
+                        }, option.timeout);
+
+                    } else {
+                        option.callback && option.callback();
+                    }
+                }
+                square.scale.clear = function () {
+                    clearTimeout(square.scale._t);
+                };
+                if (option.timeout != 0) {
+                    square.el.classList.add('disabled');
+                    _run();
+                } else {
+                    _scale(option.X, option.Y);
+                }
+            },
+            smile: function () {
+                var el_smileface = Ne.dom.render('<span class="fade ne-animate-in">' +
+                    '<span style=" display: inline-block;-webkit-transform:rotate(90deg);">：）</span>' +
+                    '<span style=" display: inline-block;position:absolute;-webkit-transform:rotate(0deg);margin-left:-2px;margin-top:-1px;">\'</span>' +
+                    '</span>');
+                square.el.appendChild(el_smileface);
+                square.el.classList.add('disabled');
+                square.move({
+                    duration: 400,
+                    y: -10,
+                    timingFunction: 'Bounce-easeOut',
+                    callback: function () {
+                        square.reset();
+                    }
+                });
+            },
+            wonder: function () {
+                var el_wonderface = Ne.dom.render('<span class="fade ne-animate-in">' +
+                    '<span style=" display: inline-block;-webkit-transform:rotate(90deg);">：O</span>' +
+                    '<span style=" display: inline-block;position:absolute;-webkit-transform:rotate(20deg);margin-left:-3px;margin-top:-5px;">?</span>' +
+                    '</span>');
+                square.el.appendChild(el_wonderface);
+                square.el.classList.add('disabled');
+                square.rotate({
+                    duration: 20,
+                    timeout: 30,
+                    X: 0,
+                    Y: 0,
+                    Z: 10,
+                    angle: 25,
+                    tweenFn: timingFunction('Elastic-easeOut'),
+                    callback: function () {
+                        square.reset();
+                    }
+                });
+            },
+            nervous: function () {
+                var el_nervousface = Ne.dom.render('<span class="fade ne-animate-in">' +
+                    '<span style=" display: inline-block;-webkit-transform:rotate(0deg);">>_<</span>' +
+                    '<span style=" display: inline-block;position:absolute;-webkit-transform:rotate(0deg);margin-left:-7px;margin-top:0px;font-size:9px;opacity: .8;">|||</span>' +
+                    '</span>');
+                square.el.appendChild(el_nervousface);
+                square.el.classList.add('disabled');
+                square.move({
+                    keyframeSpan: 20,
+                    x: 15,
+                    callback: function () {
+                        square.reset();
+                    }
+                });
+            },
+            laugh: function () {
+                var el_nervousface = Ne.dom.render('<span class="fade ne-animate-in">' +
+                    '<span style=" display: inline-block;-webkit-transform:rotate(0deg);margin-top:-5px;">>  <</span>' +
+                    '<span style=" display: inline-block;position:absolute;-webkit-transform:rotate(90deg);margin-left:-17px;margin-top:5px;">D</span>' +
+                    '</span>');
+                square.el.appendChild(el_nervousface);
+            },
+            bigger: function () {
+                square.scale({
+                    X: 2,
+                    Y: 2,
+                    callback: function () {
+                        square.el.classList.remove('disabled');
+                    }
+                });
+                square.rotate({
+                    duration: 20,
+                    timeout: 20,
+                    X: 0,
+                    Y: 0,
+                    Z: 10,
+                    angle: 20,
+                    tweenFn: timingFunction('Quint-easeOut'),
+                    callback: function () {
+                        square.el.classList.remove('disabled');
+                    }
+                });
+            },
+            swipe: {
+                left: function () {
+                    square.move({
+                        duration: 200,
+                        x: -100,
+                        y: -30,
+                        reverse: false,
+                        timingFunction: 'Cubic-easeOut',
+                        callback: function () {
+                            square.move({
+                                duration: 200,
+                                x: -100,
+                                y: 0,
+                                timingFunction: 'Cubic-easeOut',
+                                callback: function () {
+                                    square.reset();
+                                }
+                            });
+                        }
+                    });
+                    square.rotate({
+                        duration: 20,
+                        timeout: 30,
+                        X: 0,
+                        Y: 0,
+                        Z: 10,
+                        angle: 25,
+                        tweenFn: timingFunction('Back-easeOut'),
+                        callback: function () {
+                            square.reset();
+                        }
+                    });
+                },
+                right: function () {
+                    square.move({
+                        duration: 200,
+                        x: 100,
+                        y: -30,
+                        reverse: false,
+                        timingFunction: 'Cubic-easeOut',
+                        callback: function () {
+                            square.move({
+                                duration: 200,
+                                x: 0,
+                                y: 0,
+                                timingFunction: 'Cubic-easeOut',
+                                callback: function () {
+                                    square.reset();
+                                }
+                            });
+                        }
+                    });
+                    square.rotate({
+                        duration: 20,
+                        timeout: 30,
+                        X: 0,
+                        Y: 0,
+                        Z: 10,
+                        angle: -25,
+                        tweenFn: timingFunction('Back-easeOut'),
+                        callback: function () {
+                            square.reset();
+                        }
+                    });
+                },
+                up: function () {
+                    square.move({
+                        duration: 200,
+                        x: 0,
+                        y: -60,
+                        timingFunction: 'Cubic-easeOut',
+                        callback: function () {
+                            square.move({
+                                duration: 200,
+                                x: 0,
+                                y: 0,
+                                timingFunction: 'Cubic-easeOut',
+                                callback: function () {
+                                    square.reset();
+                                }
+                            });
+                        }
+                    });
+                    square.rotate({
+                        duration: 20,
+                        timeout: 20,
+                        X: 0,
+                        Y: 0,
+                        Z: 10,
+                        angle: 360,
+                        tweenFn: timingFunction('Quint-easeOut'),
+                        callback: function () {
+                            square.reset();
+                        }
+                    });
+                },
+                down: function () {
+                    square.move({
+                        duration: 200,
+                        x: 0,
+                        y: 60,
+                        timingFunction: 'Cubic-easeOut',
+                        callback: function () {
+                            square.move({
+                                duration: 200,
+                                x: 0,
+                                y: 0,
+                                timingFunction: 'Cubic-easeOut',
+                                callback: function () {
+                                    square.reset();
+                                }
+                            });
+                        }
+                    });
+                    square.rotate({
+                        duration: 20,
+                        timeout: 20,
+                        X: 0,
+                        Y: 0,
+                        Z: 10,
+                        angle: 20,
+                        tweenFn: timingFunction('Quint-easeOut'),
+                        callback: function () {
+                            square.reset();
+                        }
+                    });
+                }
+            }
+        }
+        var consoleField = {
+            el: document.querySelector('#console'),
+            log: function (msg) {
+                var el_msg = Ne.dom.render(
+                    '<div class="ne-animate-slideup ne-animate-in" style="font-size: .7em;color: #3FA7A2;padding: 2px 5px;">' +
+                    msg + '</div>');
+                console.log(msg);
+                consoleField.el.appendChild(el_msg);
+                consoleField.el.scrollTop = consoleField.el.scrollHeight;
+                setTimeout(function () {
+                    el_msg.classList.remove('ne-animate-in');
+                    el_msg.classList.add('ne-animate-out');
+                    setTimeout(function () {
+                        el_msg.parentElement.removeChild(el_msg);
+                    }, 100);
+                }, 1500);
+            }
+        }
+        var descPanel = {
+            el: document.querySelector('#descPanel'),
+            toggle: function (eventType) {
+                var _showed = descPanel.el.querySelector('.ne-animate-in');
+                var target = descPanel.el.querySelector('.desc-' + eventType);
+                if (_showed) {
+                    _showed.classList.remove('ne-animate-in');
+                    _showed.classList.add('ne-animate-out');
+                    setTimeout(function () {
+                        _showed.classList.add('none');
+                    }, 200);
+                }
+                setTimeout(function () {
+                    target.classList.remove('none');
+                    target.classList.remove('ne-animate-out');
+                    target.classList.add('ne-animate-in');
+                }, 200);
+            }
+        }
+        ////////////////////////////////////////////////////////
+        var selectedEventCallback = [];
+
+        function timingFunction(name) {
+            name = name.split('-');
+            if (name.length == 2) {
+                return Ne.motion.timingFunction[name[0]][name[1]];
+            } else {
+                return Ne.motion.timingFunction[name[0]];
+            }
+        }
+
+        function handleEvent(eventType, event) {
+            var eventHandler = {
+                tap: function (event) {
+                    square.smile();
+                },
+                doubletap: function (event) {
+                    square.wonder();
+                },
+                hold: function (event) {
+                    square.nervous();
+                },
+                //drag
+                dragstart: function (event) {
+                    square.laugh();
+                },
+                drag: function (event) {
+                    consoleField.log('x:' + event.x + ', y:' + event.y);
+                    square.move({
+                        duration: 0,
+                        x: event.distanceX,
+                        y: event.distanceY
+                    });
+                },
+                dragend: function (event) {
+                    square.move({
+                        x: 0,
+                        y: 0,
+                        callback: function () {
+                            square.reset();
+                        }
+                    });
+                },
+                //swipe
+                swipestart: function (event) {
+                    //square.laugh();
+                },
+                swiping: function (event) {},
+                swipeend: function (event) {},
+                swipeleft: function (event) {
+                    square.swipe.left();
+                },
+                swiperight: function (event) {
+                    square.swipe.right();
+                },
+                swipeup: function (event) {
+                    square.swipe.up();
+                },
+                swipedown: function (event) {
+                    square.swipe.down();
+                },
+                swipe: function (event) {},
+                //rotate
+                rotateleft: function (event) {
+                    square.rotate({
+                        timeout: 0,
+                        X: 0,
+                        Y: 0,
+                        Z: 10,
+                        angle: event.angle
+                    });
+                    consoleField.log('angle:' + event.rotation);
+                },
+                rotateright: function (event) {
+                    square.rotate({
+                        timeout: 0,
+                        X: 0,
+                        Y: 0,
+                        Z: 10,
+                        angle: event.angle
+                    });
+                    consoleField.log('angle:' + event.rotation);
+                },
+                rotate: function (event) {},
+                //pinch
+                pinchstart: function (event) {},
+                pinchend: function (event) {},
+                pinch: function (event) {},
+                pinchin: function (event) {
+                    square.scale({
+                        X: 1,
+                        Y: 1,
+                        reverse: true,
+                        callback: function () {
+                            square.el.classList.remove('disabled');
+                        }
+                    });
+                    square.rotate({
+                        duration: 20,
+                        timeout: 20,
+                        X: 0,
+                        Y: 0,
+                        Z: 10,
+                        angle: 20,
+                        tweenFn: timingFunction('Quint-easeOut'),
+                        callback: function () {
+                            square.el.classList.remove('disabled');
+                        }
+                    });
+                },
+                pinchout: function (event) {
+                    square.scale({
+                        X: 4,
+                        Y: 4,
+                        callback: function () {
+                            square.el.classList.remove('disabled');
+                        }
+                    });
+                    square.rotate({
+                        duration: 20,
+                        timeout: 20,
+                        X: 0,
+                        Y: 0,
+                        Z: 10,
+                        angle: 20,
+                        tweenFn: timingFunction('Quint-easeOut'),
+                        callback: function () {
+                            square.el.classList.remove('disabled');
+                        }
+                    });
+                }
+            }
+
+            consoleField.log(eventType);
+            eventHandler[eventType](event);
+        }
+
+        function run() {
+            var eventType = document.querySelector('input[name="eventType"]:checked').value;
+            var addListener = function (eventType) {
+                var _callback = function (event) {
+                    handleEvent(eventType, event);
+                }
+                selectedEventCallback.push({
+                    eventType: eventType,
+                    callback: _callback
+                });
+                Ne.touch.on(square.el, eventType, _callback);
+            };
+
+            while (selectedEventCallback.length > 0) {
+                var _item = selectedEventCallback.pop();
+                Ne.touch.off(square.el, _item.eventType, _item.callback);
+            }
+            switch (eventType) {
+                case 'drag':
+                    addListener('dragstart');
+                    addListener('drag');
+                    addListener('dragend');
+                    break;
+                case 'swipe':
+                    addListener('swipestart');
+                    addListener('swiping');
+                    addListener('swipeend');
+                    addListener('swipeleft');
+                    addListener('swiperight');
+                    addListener('swipeup');
+                    addListener('swipedown');
+                    addListener('swipe');
+                    break;
+                case 'rotate':
+                    square.bigger();
+                    addListener('rotateleft');
+                    addListener('rotateright');
+                    addListener('rotate');
+                    break;
+                case 'pinch':
+                    square.bigger();
+                    addListener('pinchstart');
+                    addListener('pinchend');
+                    addListener('pinch');
+                    addListener('pinchin');
+                    addListener('pinchout');
+                    break;
+                default:
+                    addListener(eventType);
+            }
+            descPanel.toggle(eventType);
+        }
+
+        document.addEventListener('change', function (event) {
+            var target = event.target || event.touches[0];
+            if (target.tagName.toLowerCase() == 'input' && target.name == 'eventType') {
+                run();
+            }
+        });
+        run();
+    </script>
+</body>
+
+</html>

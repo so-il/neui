@@ -1,0 +1,100 @@
+﻿<h1>Render 模版渲染支持</h1>
+<p>用于绑定数据或渲染组件生成html。</p>
+<hr />
+<section>
+    <h2>渲染模版</h2>
+    <pre><code class="html">
+        Ne.render(tpl, data, container);
+        </code></pre>
+    <h4>功能描述</h4>
+    <p>通过传入模版和数据进行解析生成html。</p>
+    <h4>参数说明</h4>
+    <table>
+        <tbody>
+            <tr>
+                <th>参数</th>
+                <th>类型</th>
+                <th>描述</th>
+            </tr>
+            <tr>
+                <td>tpl</td>
+                <td>string</td>
+                <td>模版内容</td>
+            </tr>
+            <tr>
+                <td>data</td>
+                <td>object</td>
+                <td>用于绑定模版用的数据。</td>
+            </tr>
+            <tr>
+                <td>container</td>
+                <td>element或string</td>
+                <td>渲染生成html后将要插入到的父级元素对象或选择器，可缺省。</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>举例说明</h4>
+    <pre><code class="javascript">
+ var ne_dialog = Ne.render('&lt;dialog>'
+                                +'&lt;div class="ne-dialog-{type}"&gt;'
+                                    +'&lt;div class="ne-dialog-header"&gt;'
+                                        +'&lt;strong>{title}&lt;/strong&gt;'
+                                    +'&lt;/div&gt;'
+                                    +'&lt;div class="ne-dialog-body">{content}&lt;/div&gt;'
+                                    +'&lt;div class="ne-dialog-footer"&gt;'
+                                    '{each actions as item i}'
+                                        +'&lt;div class="ne-action" onclick="{item.handler}">{item.text}&lt;/div&gt;'
+                                    '{/each}'
+                                    +'&lt;/div&gt;'
+                                +'&lt;/div&gt;'
+                           +'&lt;/dialog&gt;'
+                 ,{
+                     type: 'alert',
+                     title: '标题',
+                     content: '弹窗内容，告知当前页面信息等',
+                     actions: [{
+                            text: '确定',
+                            handler: function (event) {}
+                     }]
+                 }, document.body);
+        </code></pre>
+</section>
+<section>
+    <h2>更新数据</h2>
+    <pre><code class="html">
+        var vdomElement=Ne.render(tpl, data, container);
+        vdomElement.setData(newdata);
+        </code></pre>
+    <h4>功能描述</h4>
+    <p>Ne.render返回的是virtual-dom对象，通过setData即可无刷新更新数据。</p>
+    <h4>举例说明</h4>
+    <pre><code class="javascript">
+ var ne_dialog = Ne.render('&lt;dialog>'
+                                +'&lt;div class="ne-dialog-{type}"&gt;'
+                                    +'&lt;div class="ne-dialog-header"&gt;'
+                                        +'&lt;strong>{title}&lt;/strong&gt;'
+                                    +'&lt;/div&gt;'
+                                    +'&lt;div class="ne-dialog-body">{content}&lt;/div&gt;'
+                                    +'&lt;div class="ne-dialog-footer"&gt;'
+                                    +'{each actions as item i}'
+                                        +'&lt;div class="ne-action" onclick="{item.handler}">{item.text}&lt;/div&gt;'
+                                    +{/each}
+                                    +'&lt;/div&gt;'
+                                +'&lt;/div&gt;'
+                           +'&lt;/dialog&gt;'
+                 ,{
+                     type: 'alert',
+                     title: '标题',
+                     content: '弹窗内容，告知当前页面信息等',
+                     actions: [{
+                            text: '确定',
+                            handler: function (event) {}
+                     }]
+                 }, document.body);
+
+    ne_dialog.setData({
+                 title: '标题2',
+                 content: '更新弹窗内容'
+    });
+        </code></pre>
+</section>

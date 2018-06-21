@@ -1,0 +1,112 @@
+﻿
+.question {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+    padding-top:120px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    display: none;
+    z-index: 0;
+    background: #9aa1ab url(../images/ui-bg.png) no-repeat;
+    background-size: 100%;
+}
+    .question.active {
+        display: block;
+        z-index: 1;
+    }
+      
+.question .ne-btn {
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.question-pagination {
+    position: fixed;
+    box-sizing: border-box;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.5em;
+    color: #efefef;
+}
+.question-desc {
+    padding: 1em 1em 1.5em;
+    font-size: 1.3em;
+    color: #000;
+}
+    .question-desc h2 {
+        font-size: 28px;
+        text-align: center;
+        font-weight: normal;
+    }
+
+    .question-option {
+        display: block;
+        padding: .4em 1em;
+        box-sizing: border-box;
+    }
+
+.question-option-text {
+    display: block;
+    box-sizing: border-box;
+    margin-left: 25px;
+    padding: 20px 15px 20px 35px;
+    border-radius: 4px;
+    box-shadow: 3px 4px rgba(0, 0, 0, 0.14);
+    background-color: #fff9ed;
+    font-size: 1.1em;
+    color: #17130a;
+}
+.question-option:active > .question-option-text {
+    background-color: #ece6d9;
+}
+.question-option-radio {
+        display: inline-block;
+        box-sizing: border-box;
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        border-radius: 50%;
+        margin-top: 6px;
+        background-color: #ffc501;
+        text-align: center;
+        font-size: 20px;
+        color: #fff;
+    }
+
+    .question-option-radio > input[type="radio"]:checked + span {
+        color: transparent;
+    }
+
+        .question-option-radio > input[type="radio"]:checked + span::before {
+            font-family: 'neui';
+            content: "\F045";
+            color: #fff;
+            margin-right: -10px;
+            font-size: 27px;
+        }
+
+.question-options > .question-option:nth-of-type(2n+1) > .question-option-radio {
+        background-color: #ffc501;
+    }
+
+.question-options > .question-option:nth-of-type(2n+2) > .question-option-radio {
+    background-color: #ff9600;
+}
+
+.question-options > .question-option:nth-of-type(2n+3) > .question-option-radio {
+    background-color: #647ca8;
+}
+
+.question-options > .question-option:nth-of-type(2n+4) > .question-option-radio {
+    background-color: #414c60;
+}

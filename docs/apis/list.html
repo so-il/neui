@@ -1,0 +1,119 @@
+﻿<h1>List View 列表</h1>
+<p>适用于显示同类的长列表数据类型，对渲染性能有一定的优化效果。 ListView经常和 RefreshControl 搭配使用。</p>
+<hr />
+<section>
+    <h2>结构与样式</h2>
+    <div class="flexbox">
+        <pre><code class="html">
+&lt;!--
+1、list只提供了一个简单的分行结构，每行的内容往往需要结合其他的布局组件，最常用的是.ne-cell；
+2、listitem声明 ne-swipeable="true"即可实现侧滑显示操作按钮的交互；
+3、listitem-actions默认靠右侧，添加.keepleft即靠左，listitem能否左滑或右滑取决于是否存在靠左或靠右的actions；
+4、listitem内声明ne-tap="regain:li"的元素点击可使listitem恢复原状，隐藏显示的actions；                 
+5、listitem内声明ne-tap="remove:li"的元素点击即删除当前listitem；
+---&gt;
+
+&lt;!--list的基本结构--&gt;
+&lt;ul class="ne-list"&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!--listitem带actions时的结构--&gt;
+&lt;li ne-swipeable="true"&gt;
+    &lt;div class="ne-cell"&gt;&lt;/div&gt;
+    &lt;div class="ne-listitem-actions"&gt;
+        &lt;button class="ne-btn" ne-tap="regain:li"&gt;标记&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="ne-listitem-actions"&gt;
+        &lt;button class="ne-btn" ne-tap="regain:li"&gt;回复&lt;/button&gt;
+        &lt;button class="ne-btn" ne-tap="remove:li"&gt;删除&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/li&gt; 
+
+&lt;!--用于布局listitem内容的ne-cell的结构--&gt;
+&lt;div class="ne-cell"&gt;
+    &lt;div class="ne-cell-left"&gt;
+        &lt;img src="icon.png"&gt;
+    &lt;/div&gt;
+    &lt;div class="ne-cell-center"&gt;
+        &lt;strong&gt;标题文字&lt;/strong&gt;
+    &lt;/div&gt;
+    &lt;div class="ne-cell-right"&gt;
+        &lt;span&gt;辅助说明&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                            </code></pre>
+        <div class="preview">
+            <div class="preview-browser">
+                <div class="preview-browser-header">
+                    <div class="preview-browser-statbar">
+                        <img src="assets/images/ui-statbar.png">
+                    </div>
+                    <div class="preview-browser-url-box">http://neui.nelabs.cn/examples/components/list.html</div>
+                </div>
+                <div class="preview-browser-body">
+                    <iframe src="../examples/components/list.html"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>交互与功能</h2>
+    <h4>范式说明</h4>
+    <p>大部分时候只需要通过html声明即可完成所有组件所有交互行为，但也会有需要通过js触发交互行为方法的情况，关于如何触发组件交互行为方法的详细介绍请查阅-<a href="#component" target="_blank">《Component 组件封装支持》</a></p>
+    <pre><code class="javascript">
+        //通过Js触发组件行为功能的范式：
+        Ne.acts(selector).propsName(args[]);
+        </code></pre> 
+    <h4>list-item支持的交互功能</h4>
+    <table>
+        <tbody>
+            <tr>
+                <td>方法名</td>
+                <td>说明</td>
+            </tr>
+            <tr>
+                <td class="nowrap">.onswipe(object event)</td>
+                <td>提供给手势操作的方法，声明了ne-swipeable的组件即会触发onswipe方法。</td>
+            </tr>
+            <tr>
+                <td class="nowrap">.actions(string direction)</td>
+                <td>侧滑显示隐藏按钮，其中参数direction用于指明将要显示哪一侧的按钮，可缺省默认值为‘right’，显示左侧按钮传入'left',显示右侧按钮不传或传入‘right’。</td>
+            </tr>
+            <tr>
+                <td class="nowrap">.regain()</td>
+                <td>侧滑显示按钮后，完成操作时需要隐藏按钮，恢复原状。</td>
+            </tr>
+            <tr>
+                <td class="nowrap">.remove()</td>
+                <td>删除listitem。</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>举例说明</h4>
+    <pre><code class="html">
+        &lt;!--假设现在有如下listitem：--&gt;
+        &lt;li id="j-li" ne-swipeable=“true” &gt;             
+             &lt;div class="ne-cell"&gt;...&lt;/div&gt;
+             &lt;div class="ne-listitem-actions keepleft"&gt;
+                &lt;button class="ne-btn"&gt;Mark&lt;/button&gt;
+             &lt;/div&gt;
+             &lt;div class="ne-listitem-actions"&gt;
+                &lt;button class="ne-btn"&gt;Replay&lt;/button&gt;
+                &lt;button class="ne-btn"&gt;Delete&lt;/button&gt;
+             &lt;/div&gt;
+        &lt;/li&gt;
+    </code><code class="javascript">
+        //显示左侧隐藏按钮（带有.keepleft的actions）：
+        Ne.acts('#j-li').actions('left');
+        //显示右侧隐藏按钮：
+        Ne.acts('#j-li').actions('right');
+        //恢复原状，隐藏按钮：
+        Ne.acts('#j-li').regain();
+        //删除：
+        Ne.acts('#j-li').remove();
+    </code></pre>
+</section>

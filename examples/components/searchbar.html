@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>searchbar</title>
+
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../dist/neui.css" />
+</head>
+<body>
+    <section class="ne-page active" ne-role="page">
+        <div class="ne-page-body">
+            <div class="ne-cell"><div class="hr-meta"><span>Dark Background</span></div></div>
+            <form class="ne-searchbar" onsubmit="flit(event);" ne-role="searchbar">
+                <div class="ne-searchbar-inputfield">
+                    <div class="ne-searchbar-placeholder" ne-tap="intype:searchbar">
+                        <i class="ne-icon-magnifier"></i>
+                        <span>搜索</span>
+                    </div>
+                    <input class="ne-input" type="search" placeholder="搜索" ne-clearable="true" />
+                </div>
+                <div class="ne-searchbar-action" ne-tap="outtype:searchbar">取消</div>
+            </form>
+            <hr class="hr-blank"/>
+            <form class="ne-searchbar typeing" onsubmit="flit(event);" ne-role="searchbar">
+                <div class="ne-searchbar-inputfield ne-input_withicon_right">
+                    <div class="ne-searchbar-placeholder" ne-tap="intype:searchbar">
+                        <i class="ne-icon-magnifier"></i>
+                        <span>搜索</span>
+                    </div>
+                    <input class="ne-input" type="search" placeholder="搜索" value="one piece" ne-clearable="true"><i class="ne-icon-delete-f grey ne-input-icon" style="display: block;"></i>
+                </div>
+                <div class="ne-searchbar-action" ne-tap="outtype:searchbar">取消</div>
+            </form>
+            <hr class="hr-blank" />
+            <form class="ne-searchbar typeing" onsubmit="flit(event);" ne-role="searchbar">
+                <div class="ne-searchbar-inputfield">
+                    <div class="ne-searchbar-placeholder">
+                        <i class="ne-icon-magnifier"></i>
+                    </div>
+                    <input class="ne-input" type="search" placeholder="搜索" ne-clearable="true" />
+                </div>
+                <div class="ne-searchbar-action">搜索</div>
+            </form>
+            <div class="ne-cell"><div class="hr-meta"><span>Light Background</span></div></div>
+            <form class="ne-searchbar bg-white" onsubmit="flit(event);" ne-role="searchbar">
+                <div class="ne-searchbar-inputfield">
+                    <div class="ne-searchbar-placeholder bg-lightgrey" ne-tap="intype:searchbar">
+                        <i class="ne-icon-magnifier"></i>
+                        <span>搜索</span>
+                    </div>
+                    <input class="ne-input bg-lightgrey" type="search" placeholder="搜索" ne-clearable="true" />
+                </div>
+                <div class="ne-searchbar-action" ne-tap="outtype:searchbar">取消</div>
+            </form>
+            <hr class="hr-blank" />
+            <form class="ne-searchbar bg-white typeing" onsubmit="flit(event);" ne-role="searchbar">
+                <div class="ne-searchbar-inputfield ne-input_withicon_right">
+                    <div class="ne-searchbar-placeholder bg-lightgrey" ne-tap="intype:searchbar">
+                        <i class="ne-icon-magnifier"></i>
+                        <span>搜索</span>
+                    </div>
+                    <input class="ne-input bg-lightgrey" type="search" placeholder="搜索" value="one piece" ne-clearable="true"><i class="ne-icon-delete-f grey ne-input-icon" style="display: block;"></i>
+                </div>
+                <div class="ne-searchbar-action" ne-tap="outtype:searchbar">取消</div>
+            </form>
+            <hr class="hr-blank" />
+            <form class="ne-searchbar bg-white typeing" onsubmit="flit(event);" ne-role="searchbar">
+                <div class="ne-searchbar-inputfield">
+                    <div class="ne-searchbar-placeholder bg-lightgrey">
+                        <i class="ne-icon-magnifier"></i>
+                    </div>
+                    <input class="ne-input bg-lightgrey" type="search" placeholder="搜索" ne-clearable="true" />
+                </div>
+                <div class="ne-searchbar-action">搜索</div>
+            </form>
+        </div>
+    </section>
+
+    <!--load scripts-->
+    <script src="../../dist/neui.js"></script>
+</body>
+</html>

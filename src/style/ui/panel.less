@@ -1,0 +1,100 @@
+﻿
+/** 
+ * @panel.css
+**/
+
+.ne-panel {
+    background-color: white;
+    box-sizing: border-box;
+}
+
+.ne-panel-header, .ne-panel-footer {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: .75em @wingblank-width;
+}
+
+.ne-panel-footer {
+    text-align: center;
+    border-top: 1px solid @border-color;
+}
+
+    .ne-panel-footer a {
+        display: inline-block;
+    }
+
+    .ne-panel-footer.maskcover {
+        border-top: none;
+        padding: 2em 1em .5em;
+        margin-top: -33px;
+    }
+
+a.ne-panel-header:active, 
+a.ne-panel-footer:active {
+    background-color: @actived-bgcolor;
+}
+a.ne-panel-footer.maskcover:active {
+    background-color:initial;
+}
+
+.ne-panel-header {
+    border-bottom: 1px solid @border-color;
+}
+
+    .ne-panel-header .header-icon,
+    .ne-panel-header .header-title,
+    .ne-panel-header .header-actions {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .ne-panel-header .header-icon {
+        width: 1%;
+        text-align: left;
+        white-space: nowrap;
+        padding-right: .5em;
+    }
+
+    .ne-panel-header .header-title {
+        width: 100%;
+    }
+
+    .ne-panel-header .header-actions {
+        width: 1%;
+        text-align: right;
+        white-space: nowrap;
+    }
+
+        .ne-panel-header .header-actions a {
+            display: inline-block;
+        }
+
+
+/*panel collapse*/
+.ne-panel-switch {
+    -webkit-transition: all 300ms ease;
+    -webkit-transform: rotateZ(0deg);
+    transition: all 300ms ease;
+    transform: rotateZ(0deg);
+}
+
+.ne-panel-body {
+    max-height:auto;
+    overflow: hidden;
+    -webkit-transition: all 300ms ease;
+    transition: all 300ms ease;
+}
+
+.ne-panel.collapse  .ne-panel-switch {
+    -webkit-transform: rotateZ(-180deg);
+    transform: rotateZ(-180deg);
+}
+
+.ne-panel.collapse > .ne-panel-body {
+    max-height: 0;
+    /* -webkit-mask-image: linear-gradient(black,transparent);
+    -webkit-mask-size: 100% 100%;
+    mask-image: linear-gradient(black,transparent);
+    mask-size: 100% 100%; */
+}

@@ -1,0 +1,93 @@
+﻿
+/** 
+ * @table.css 
+**/
+
+.ne-table {
+    background-color: white;
+    margin: 0 !important;
+    position: relative;
+}
+
+table.ne-table {
+    width: 100% !important;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.ne-table.fixedheader {
+    height: 100%;
+}
+
+.ne-table-thead {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    display: block;
+}
+
+.ne-table-tbody {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+    .ne-table-tbody::before {
+        content: '\3000';
+        display: block;
+        width: 100%;
+        height: 37px;
+    }
+
+.ne-table-tr {
+    display: table;
+    width: 100%;
+}
+
+.ne-table-td,
+.ne-table-th,
+.ne-table td,
+.ne-table th {
+    position: relative;
+    text-align: left;
+    border-color: @border-color;
+    border-style: solid;
+    border-width:0;
+    border-bottom-width: 1px;
+    padding: .57em;
+}
+
+.ne-table-td,
+.ne-table-th {
+    display: table-cell;
+}
+
+.ne-table-tbody > .ne-table-tr:last-child > .ne-table-td,
+.ne-table tbody > tr:last-child > td {
+    border-bottom: 0;
+}
+
+.ne-table-tbody > .ne-table-tr > .ne-table-td:nth-last-of-type(1),
+.ne-table-thead > .ne-table-tr > .ne-table-th:nth-last-of-type(1),
+.ne-table tbody > tr > td:nth-last-of-type(1),
+.ne-table thead > tr > th:nth-last-of-type(1) {
+    border-right: 0;
+}
+
+.ne-table.bordered .ne-table-td,
+.ne-table.bordered .ne-table-th,
+.ne-table.headbordered .ne-table-th,
+.ne-table.bordered td,
+.ne-table.bordered th {
+    border-right-width: 1px;
+}
+
+.ne-table.striped .ne-table-tbody .ne-table-tr:nth-of-type(even),
+.ne-table.striped tbody tr:nth-of-type(even) {
+    background-color: @grey-2;
+}
+
+.ne-table-th {
+    background-color: @grey-3;
+}

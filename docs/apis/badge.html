@@ -1,0 +1,43 @@
+﻿<h1>Badge 角标</h1>
+<p>图标右上角的红点、数字或者文字。用于告知用户，该区域的状态变化或者待处理任务的数量。</p>
+<hr />
+<section>
+    <h2>结构与样式</h2>
+    <div class="flexbox">
+        <pre><code class="html">
+&lt;!--
+1、角标默认样式为.ne-badge，并加.black设置数字颜色为黑色，以从灰色背景中凸显出来
+--&gt;
+&lt;span class="ne-badge black"&gt;12&lt;/span&gt;
+
+&lt;!--
+2、角标默认样式为.ne-badge，并通过设置不同的背景色样式改变颜色，如红色：.bg-red
+--&gt;
+&lt;span class="ne-badge bg-red"&gt;12&lt;/span&gt;
+
+&lt;!--
+3、角标元素不填写数字的话则会显示为一个红点
+--&gt;
+&lt;span class="ne-badge bg-red"&gt;&lt;/span&gt;
+
+&lt;!--
+4、使用在图标或图片角落可使用.position-sup,或使用&lt;sup&gt;标签加ne-badge
+--&gt;
+&lt;sup class="ne-badge bg-red"&gt;&lt;/sup&gt;
+&lt;span class="ne-badge bg-red position-sup"&gt;&lt;/span&gt;
+            </code></pre>
+        <div class="preview">
+            <div class="preview-browser">
+                <div class="preview-browser-header">
+                    <div class="preview-browser-statbar">
+                        <img src="assets/images/ui-statbar.png">
+                    </div>
+                    <div class="preview-browser-url-box">http://neui.nelabs.cn/examples/components/badge.html</div>
+                </div>
+                <div class="preview-browser-body">
+                    <iframe src="../examples/components/badge.html"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

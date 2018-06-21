@@ -1,0 +1,42 @@
+﻿<h1>Steps 步骤条</h1>
+<p>显示一个任务的进度；或者引导用户完成某个复杂任务。</p>
+<hr />
+<section>
+    <h2>结构与样式</h2>
+    <div class="flexbox">
+        <pre><code class="html">
+&lt;!--
+1、step添加.finished设置为已完成状态；
+2、step添加.processing设置为进行中状态；
+3、stepbar默认为横向，添加.ne-steps-vertical设置为竖向；
+--&gt;
+&lt;div class="ne-steps"&gt;
+    &lt;div class="ne-step finished"&gt;
+        &lt;div class="ne-step-icon"&gt;1&lt;/div&gt;
+        &lt;div class="ne-step-desc"&gt;已完成&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="ne-step processing"&gt;
+        &lt;div class="ne-step-icon"&gt;2&lt;/div&gt;
+        &lt;div class="ne-step-desc"&gt;进行中&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="ne-step"&gt;
+        &lt;div class="ne-step-icon"&gt;3&lt;/div&gt;
+        &lt;div class="ne-step-desc"&gt;未开始&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                            </code></pre>
+        <div class="preview">
+            <div class="preview-browser">
+                <div class="preview-browser-header">
+                    <div class="preview-browser-statbar">
+                        <img src="assets/images/ui-statbar.png">
+                    </div>
+                    <div class="preview-browser-url-box">http://neui.nelabs.cn/examples/components/stepline.html</div>
+                </div>
+                <div class="preview-browser-body">
+                    <iframe src="../examples/components/stepline.html"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

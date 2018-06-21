@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>carousel</title>
+
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../dist/neui.css" />
+</head>
+
+<body>
+    <section class="ne-page active" ne-role="page">
+        <div class="ne-page-body">
+            <h4 class="hr-title">不自动播放</h4>
+            <div class="ne-carousel bg-white" ne-role="carousel" ne-swipeable="true">
+                <div class="ne-carousel-container">
+                    <div class="ne-carousel-item bg-blue active" ne-role="carouselitem">
+                        <span class="block align-center white size-xx-large weight-light" style="margin-top:18%;">BLUE</span>
+                    </div>
+                    <div class="ne-carousel-item bg-yellow" ne-role="carouselitem">
+                        <span class="block align-center white size-xx-large weight-bold" style="margin-top:18%;">YELLOW</span>
+                    </div>
+                    <div class="ne-carousel-item bg-green" ne-role="carouselitem">
+                        <span class="block align-center white size-xx-large weight-bolder" style="margin-top:18%;">GREEN</span>
+                    </div>
+                </div>
+                <div class="ne-carousel-controller" ne-role="carouselcontroller">
+                    <span class="ne-carousel-control active" ne-role="carouselcontrol"></span>
+                    <span class="ne-carousel-control" ne-role="carouselcontrol"></span>
+                    <span class="ne-carousel-control" ne-role="carouselcontrol"></span>
+                </div>
+            </div>
+            <h4 class="hr-title">自动播放</h4>
+            <div class="ne-carousel bg-white" ne-role="carousel" ne-swipeable="true" data-interval="3000" data-autoplay="true">
+                <div class="ne-carousel-container">
+                    <div class="ne-carousel-item bg-blue active" ne-role="carouselitem">
+                        <span class="block align-center white size-xx-large weight-light" style="margin-top:18%;">BLUE</span>
+                    </div>
+                    <div class="ne-carousel-item bg-yellow" ne-role="carouselitem">
+                        <span class="block align-center white size-xx-large weight-bold" style="margin-top:18%;">YELLOW</span>
+                    </div>
+                    <div class="ne-carousel-item bg-green" ne-role="carouselitem">
+                        <span class="block align-center white size-xx-large weight-bolder" style="margin-top:18%;">GREEN</span>
+                    </div>
+                </div>
+                <div class="ne-carousel-controller" ne-role="carouselcontroller">
+                    <span class="ne-carousel-control active" ne-role="carouselcontrol"></span>
+                    <span class="ne-carousel-control" ne-role="carouselcontrol"></span>
+                    <span class="ne-carousel-control" ne-role="carouselcontrol"></span>
+                </div>
+            </div>
+            <h4 class="hr-title">左右按钮</h4>
+            <div class="ne-carousel bg-white" ne-role="carousel" ne-swipeable="true" data-interval="3000" data-autoplay="true">
+                <div class="ne-carousel-container">
+                    <div class="ne-carousel-item bg-blue active" ne-role="carouselitem">
+                        <span class="block align-center white size-xx-large weight-light" style="margin-top:18%;">BLUE</span>
+                    </div>
+                    <div class="ne-carousel-item bg-yellow" ne-role="carouselitem">
+                        <span class="block align-center white size-xx-large weight-bold" style="margin-top:18%;">YELLOW</span>
+                    </div>
+                    <div class="ne-carousel-item bg-green" ne-role="carouselitem">
+                        <span class="block align-center white size-xx-large weight-bolder" style="margin-top:18%;">GREEN</span>
+                    </div>
+                </div>
+                <div class="ne-carousel-controller" ne-role="carouselcontroller">
+                    <span class="ne-carousel-control active" ne-role="carouselcontrol"></span>
+                    <span class="ne-carousel-control" ne-role="carouselcontrol"></span>
+                    <span class="ne-carousel-control" ne-role="carouselcontrol"></span>
+                </div>
+                <a href="javascript:;" class="ne-carousel-prevbtn" ne-tap="prev:carousel">
+                    <i class="ne-icon-arrow-left"></i>
+                </a>
+                <a href="javascript:;" class="ne-carousel-nextbtn" ne-tap="next:carousel">
+                    <i class="ne-icon-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!--load scripts-->
+    <script src="../../dist/neui.js"></script>
+</body>
+
+</html>

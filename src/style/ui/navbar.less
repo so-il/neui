@@ -1,0 +1,70 @@
+﻿
+/**
+ * @navbar.css
+**/
+
+
+.ne-navbar {
+    display: table;
+    table-layout:fixed;
+    box-sizing: border-box;
+    background-color: @layer-bgcolor;
+    position: relative;
+    padding: .42857em;
+    width: 100%;
+}
+
+    /*left-center-right structure*/
+    .ne-navbar > .ne-navbar-left,
+    .ne-navbar > .ne-navbar-center,
+    .ne-navbar > .ne-navbar-right {
+        display: table-cell;
+        vertical-align: middle;
+        white-space: nowrap;
+        width: 1%;
+    }
+
+    .ne-navbar > .ne-navbar-left {
+        text-align: left;
+    }
+
+    .ne-navbar > .ne-navbar-center {
+        text-align: center;
+    }
+
+    .ne-navbar > .ne-navbar-right {
+        text-align: right;
+    }
+
+
+/*style init*/
+
+.ne-navbar-left > a, .ne-navbar-right > a {
+    display: inline-block;
+    text-align: center;
+    border-radius:@round-radius;
+    box-sizing: border-box;
+    padding: .357em;
+}
+
+    .ne-navbar-left > a.active, .ne-navbar-right > a.active {
+        background-color: @blue-6;
+        color: white;
+    }
+
+.ne-navbar-center h1 {
+    font-size: 1.142857em;
+    font-weight: 500;
+    line-height:1;
+    margin: 0;
+    padding:0;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ne-navbar-left > a > .ne-icon-arrow-left {
+    font-size: 2.142857em;
+    line-height: .7;
+}

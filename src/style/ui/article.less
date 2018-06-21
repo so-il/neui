@@ -1,0 +1,194 @@
+﻿
+/**
+ * @article.css
+**/
+
+/*article*/
+.ne-article{
+    padding-left: 1.2em;
+    padding-right: 1.2em;
+}
+
+/*header*/
+.ne-article header{
+    text-align: center;
+    margin-bottom: .7em;
+}
+
+.ne-article header small {
+    font-size: .857em;
+    color: @meta-color;
+}
+.ne-article header small span+span{
+    margin-left: 15px;
+}
+
+/*headtitle*/
+.ne-article h1,
+.ne-article h2,
+.ne-article h3,
+.ne-article h4,
+.ne-article h5,
+.ne-article h6 {
+    font-weight: normal;
+    color: @title-color;
+}
+
+.ne-article h1, .ne-article h2, .ne-article h3 {
+    margin-top: 1.4em;
+    margin-bottom: .758em;
+}
+
+.ne-article h1 {
+    font-size: 1.857em;
+}
+
+.ne-article h2 {
+    font-size: 1.42857em;
+    margin-bottom: .3em;
+}
+
+.ne-article h3 {
+    font-size: 1.2em;
+}
+
+/*section*/
+.ne-article section {
+    display: block;
+    margin-bottom: 1.5em;
+}
+
+/*part*/
+.ne-article p {
+    font-size: 1em;
+    line-height: 1.65em;
+    margin-bottom: .5em;
+    word-break: break-word;
+}
+
+/*link*/
+.ne-article a{
+    color: @link-color;
+    text-decoration: underline;
+}
+    .ne-article a:active{
+        color: @linkactived-color;
+    }
+    .ne-article a[is="action-link"]{
+        text-decoration: none;
+    }
+
+/*list*/
+.ne-article ul, .ne-article ol {
+    display: block;
+    -webkit-padding-start: 1.3em;
+}
+
+.ne-article li {
+    margin-bottom: .357em;
+}
+/*orderedlist*/
+.ne-article ol {
+    list-style-type: decimal;
+}
+.ne-article ol ol {
+  list-style-type: decimal-leading-zero;
+}
+
+/*unOrderedlist*/
+.ne-article ul {
+    list-style-type: initial;
+}
+
+    .ne-article ul ul, .ne-article ol ul {
+        margin-top: .357em;
+        list-style-type: circle;
+    }
+
+
+/*definelist*/
+.ne-article dt {
+    font-weight: 700;
+}
+
+.ne-article dd + dt {
+    margin-top: .5em;
+}
+
+/*blockquote*/
+.ne-article blockquote {
+    padding: 0 .758em;
+    margin: 0;
+    border-left: .357em solid @border-color;
+}
+
+    .ne-article blockquote cite {
+        font-size: .857em;
+    }
+
+        .ne-article blockquote cite::before {
+            content: '\2014 \00A0';
+        }
+
+/*blockmark*/
+.ne-article mark>div,.ne-article mark.block {
+    padding: 20px;
+    background-color: @yellow-2;
+    margin-bottom: 20px;
+}
+
+/*image*/
+.ne-article img {
+    max-width: 100% !important;
+}
+
+/*table*/
+.ne-article table {
+    width: 100% !important;
+    margin: 0 !important;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+    .ne-article table td, .ne-article table th {
+        border-left: 0;
+        border: 1px solid @grey-6;
+        padding: 8px;
+    }
+
+    .ne-article table caption {
+        font-size: 1.142857em;
+        margin-bottom: 5px;
+    }
+
+/*fieldset*/
+.ne-article fieldset{
+    border-color:@grey-6;
+    border-width: 1px;
+    border-style: solid;
+}
+.ne-article fieldset>legend{
+    padding-left: 1em;
+    padding-right: 1em;
+    background-color: white;
+}
+.ne-article fieldset>div {
+    width: 100%;
+    box-sizing: border-box;
+    padding: .357em 1em;
+    position: relative;
+  }
+
+.ne-article fieldset label,
+.ne-article fieldset label + p,
+.ne-article fieldset label + div {
+    display: table-cell;
+    vertical-align: baseline;
+  }
+
+.ne-article fieldset label {
+    padding-right: 1em;
+    width: 1%;
+    white-space: nowrap;
+    text-align: right;
+  }

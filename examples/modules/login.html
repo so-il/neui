@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>登录</title>
+
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../dist/neui.css" />
+    <style>
+    canvas.bg-login {
+        position: absolute;
+        left: 0;
+        right:0;
+        bottom:0;
+        width:100%;
+        height:60%;
+        z-index: 0;
+        pointer-events: none;
+    }
+    </style>
+</head>
+
+<body>
+
+    <section class="ne-page bg-white active" ne-role="page">
+
+        <header class="ne-page-header">
+            <nav class="ne-navbar border-none">
+                <div class="ne-navbar-left"></div>
+                <div class="ne-navbar-center"><h1>登录</h1></div>
+                <div class="ne-navbar-right">
+                    <a class="action-link" onclick="history.back();"><i class="ne-icon-delete size-xx-large"></i></a>
+                </div>
+            </nav>
+        </header>
+
+        <div class="ne-page-body">
+            <form id="form-login_with_vertifycode" style="padding:30px" onsubmit="form_vc_onsubmit(event);">
+                <div class="ne-cell border-bottom margin-bottom-15">
+                    <div class="ne-cell-left padding-right-15">
+                        <label class="ne-label"><i class="ne-icon-smartphone size-xx-large"></i></label>
+                    </div>
+                    <div class="ne-cell-center">
+                        <input type="tel" class="ne-input border-none w100" name="phonenum" placeholder="请输入手机号" required>
+                    </div>
+                </div>
+                <div class="ne-cell border-bottom  margin-bottom-15">
+                    <div class="ne-cell-left padding-right-15">
+                        <label class="ne-label"><i class="ne-icon-key size-xx-large"></i></label>
+                    </div>
+                    <div class="ne-cell-center">
+                        <input type="number" class="ne-input border-none w100" name="vertifycode" placeholder="短信验证码" autocomplete="off" required>
+                    </div>
+                    <div class="ne-cell-right">
+                        <button type="button" class="ne-btn ne-btn-small btn-sendVertifyCode" onclick="btn_sendVertifyCode_click(this);" style="margin: -5px 0;">获取验证码</button>
+                    </div>
+                </div>
+                <button type="submit" class="ne-btn ne-btn-primary block" style="background:linear-gradient(to right,#157efb 0,#89b6ea 100%);border:0;margin-top:35px;padding:.7em;">登录</button>
+            </form>
+        </div>
+        <canvas class="bg-login"></canvas>
+    </section>
+
+    <!--load scripts-->
+    <script src="../../dist/neui.js"></script>
+    
+    <script>
+        /*draw canvas*/
+        function drawcanvas(canvas,path){
+            var canvas_context = canvas.getContext('2d');
+            var r = 0;
+            var draw=function (i,j,k){
+                canvas_context.beginPath();
+                canvas_context.moveTo(i.x, i.y);
+                canvas_context.lineTo(j.x, j.y);
+                canvas_context.lineTo(k.x, k.y);
+                canvas_context.closePath();
+                var v = Math.cos,u = Math.PI*2;
+                r-=u/-30;
+                canvas_context.fillStyle = '#'+(v(r)*127+128<<16 | v(r+u/3)*127+128<<8 | v(r+u/3*2)*127+128).toString(16);
+                canvas_context.fill();
+            }
+
+            canvas.width =canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            canvas_context.clearRect(0,0,canvas.width,canvas.height);
+            canvas_context.globalAlpha = 0.1;
+            for(var i=0;i<path.length-3;i++){
+                draw(path[i],path[i+1],path[i+2])
+            }
+        }
+
+        /*send Vertify Code for btn*/
+        function sendVertifyCode(el,count) {
+            el = { el: el };
+            el.countdown = function (count) {
+                Ne.acts(el.el).disabled();
+                if (count >= 0) {
+                    el.el.innerHTML = count + '秒后重新发送';
+                    count--;
+                    el._t_countdown = setTimeout(function () {
+                        el.countdown(count);
+                    }, 1000);
+                } else {
+                    el.stopCountdown();
+                }
+            }
+            el.stopCountdown = function () {
+                Ne.acts(el.el).enable();
+                el.el.innerText = '获取验证码';
+                clearTimeout(el._t_countdown);
+            };
+            el.countdown(count);
+            return el;
+        }
+
+        /********************************/
+
+        //发送短信验证码
+        function btn_sendVertifyCode_click(target) {
+            var el_input_phoneNum = document.querySelector('input[name="phonenum"]');
+            if (el_input_phoneNum.value != '') {
+                //倒计时
+                sendVertifyCode(target,10);
+                //请求发送验证码
+                Ne.toast.showSuccess('短信发成功');
+            } else {
+                Ne.toast.showError("手机号码不能为空", 500);
+            }
+        }
+
+        function form_vc_onsubmit(event) {
+            var form = event.target;
+            var el_input_phoneNum = form.querySelector('input[name="phonenum"]');
+            var el_input_vertifyCode = form.querySelector('input[name="vertifycode"]');
+            var el_btn_submit = form.querySelector('button[type="submit"]');
+            event.preventDefault();
+            //valify
+            if (el_input_phoneNum.value != '' && el_input_vertifyCode.value != '') {
+                //showloading
+                Ne.acts(el_btn_submit).showloading();
+                setTimeout(function () {
+                    Ne.acts(el_btn_submit).hideloading();
+                    Ne.dialog.alert('提示', '执行登录成功后的操作');
+                }, 1000);
+            }
+        }
+
+        drawcanvas(document.querySelector('canvas.bg-login'),[
+            {x: 0, y: 250},
+            {x: 0, y: 10},
+            {x: 52, y: 303},
+            {x: 120, y: 371},
+            {x: 130, y: 236},
+            {x: 175, y: 96},
+            {x: 217, y: 190},
+            {x: 366, y: 160},
+            {x: 452, y: 25},
+            {x: 477, y: 137}
+        ]);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,418 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>活动预约</title>
+
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../dist/neui.css" />
+</head>
+<body>
+
+    <section class="ne-page active" ne-role="page">
+        <div class="ne-page-body">
+            <div>
+                <select id="areapicker" aria-label="区域筛选" data-isgroup="true" class="none">
+                    <optgroup value="0" label="全部">
+                        <option value="0">全部</option>
+                    </optgroup>
+                    <optgroup value="1516" label="济宁市">
+                        <option value="151602">任城区</option>
+                        <option value="151601">市中区</option>
+                    </optgroup>
+                    <optgroup value="606" label="深圳市">
+                        <option value="60601">福田区</option>
+                        <option value="60602">罗湖区</option>
+                    </optgroup>
+                </select>
+            </div>
+            <hr class="hr-blank" />
+            <ul class="ne-list">
+                <li class="acthouse-item open">
+                    <div class="ne-cell">
+                        <div class="ne-cell-left">
+                            <img class="iconsize-small border-circle" src="Content/Images/icon-house.png" />
+                        </div>
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>健康小屋名称</strong>
+                            <p>地址：福田区侨香路红星花园</p>
+                            <p>电话：0755-88888888</p>
+                        </div>
+                        <div class="ne-cell-right align-top">
+                            <div class="text-meta" href="javascript:;" onclick="ui_houseList.toggleActtimetable(this);">
+                                <div><i class="ne-icon-arrow-down btn-switch"></i></div>
+                                <div>100m</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="acttimetable ne-tabs-wrapper" ne-role="tabview">
+                        <div class="ne-tabs ne-tabs-ellipsis" ne-role="tablist">
+                            <div class="ne-tab" ne-tap="toggle:#house1_1" ne-role="tab">
+                                <strong>10/5</strong>
+                            </div>
+                            <div class="ne-tab active" ne-tap="toggle:#house1_2" ne-role="tab">
+                                <strong>10/6</strong>
+                            </div>
+                            <div class="ne-tab" ne-tap="toggle:#house1_3" ne-role="tab">
+                                <strong>10/10</strong>
+                            </div>
+                            <div class="ne-tab" ne-tap="toggle:#house1_4" ne-role="tab">
+                                <strong>10/11</strong>
+                            </div>
+                            <div class="ne-tab" ne-tap="toggle:#house1_5" ne-role="tab">
+                                <strong>10/15</strong>
+                            </div>
+                        </div>
+                        <div class="ne-tabs-content">
+                            <div id="house1_1" class="ne-tabpanel" ne-role="tabpanel">
+                                <div class="acttimetable-times">
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="house1_2" class="ne-tabpanel active" ne-role="tabpanel">
+                                <div class="acttimetable-times">
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="house1_3" class="ne-tabpanel" ne-role="tabpanel">
+                                <div class="acttimetable-times">
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="house1_4" class="ne-tabpanel" ne-role="tabpanel">
+                                <div class="acttimetable-times">
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="house1_5" class="ne-tabpanel" ne-role="tabpanel">
+                                <div class="acttimetable-times">
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="acthouse-item">
+                    <div class="ne-cell">
+                        <div class="ne-cell-left">
+                            <img class="iconsize-small border-circle" src="Content/Images/icon-house.png" />
+                        </div>
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>健康小屋名称</strong>
+                            <p>地址：福田区侨香路红星花园</p>
+                            <p>电话：0755-88888888</p>
+                        </div>
+                        <div class="ne-cell-right align-top">
+                            <div class="text-meta" href="javascript:;" onclick="ui_houseList.toggleActtimetable(this);">
+                                <div><i class="ne-icon-arrow-down btn-switch"></i></div>
+                                <div>100m</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="acttimetable ne-tabs-wrapper" ne-role="tabview">
+                        <div class="ne-tabs ne-tabs-ellipsis" ne-role="tablist">
+                            <div class="ne-tab" ne-tap="toggle:#house2_1" ne-role="tab">
+                                <strong>10/5</strong>
+                            </div>
+                            <div class="ne-tab active" ne-tap="toggle:#house2_2" ne-role="tab">
+                                <strong>10/6</strong>
+                            </div>
+                            <div class="ne-tab" ne-tap="toggle:#house2_3" ne-role="tab">
+                                <strong>10/10</strong>
+                            </div>
+                        </div>
+                        <div class="ne-tabs-content">
+                            <div id="house2_1" class="ne-tabpanel" ne-role="tabpanel">
+                                <div class="acttimetable-times">
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="house2_2" class="ne-tabpanel active" ne-role="tabpanel">
+                                <div class="acttimetable-times">
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="house2_3" class="ne-tabpanel" ne-role="tabpanel">
+                                <div class="acttimetable-times">
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="acthouse-item">
+                    <div class="ne-cell">
+                        <div class="ne-cell-left">
+                            <img class="iconsize-small border-circle" src="Content/Images/icon-house.png" />
+                        </div>
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>健康小屋名称</strong>
+                            <p>地址：福田区侨香路红星花园</p>
+                            <p>电话：0755-88888888</p>
+                        </div>
+                        <div class="ne-cell-right align-top">
+                            <div class="text-meta" href="javascript:;" onclick="ui_houseList.toggleActtimetable(this);">
+                                <div><i class="ne-icon-arrow-down btn-switch"></i></div>
+                                <div>100m</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="acttimetable ne-tabs-wrapper" ne-role="tabview">
+                        <div class="ne-tabs ne-tabs-ellipsis" ne-role="tablist">
+                            <div class="ne-tab" ne-tap="toggle:#house3_1" ne-role="tab">
+                                <strong>10/5</strong>
+                            </div>
+                            <div class="ne-tab active" ne-tap="toggle:#house3_2" ne-role="tab">
+                                <strong>10/6</strong>
+                            </div>
+                            <div class="ne-tab" ne-tap="toggle:#house3_3" ne-role="tab">
+                                <strong>10/10</strong>
+                            </div>
+                        </div>
+                        <div class="ne-tabs-content">
+                            <div id="house3_1" class="ne-tabpanel" ne-role="tabpanel">
+                                <div class="acttimetable-times">
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="house3_2" class="ne-tabpanel active" ne-role="tabpanel">
+                                <div class="acttimetable-times">
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="house3_3" class="ne-tabpanel" ne-role="tabpanel">
+                                <div class="acttimetable-times">
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                    <a href="预约成功.html" class="acttimetable-time" data-status="enable">
+                                        <div class="acttimetable-time-text-excerpt">
+                                            <p>上午（9:00-12:00）</p>
+                                            <strong>可预约</strong>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!--load scripts-->
+    <script src="../../dist/neui.js"></script>
+    <script>
+        /***
+        ui object
+        ***/
+        var ui_houseList = function (ui) {
+            var com_areapicker = function (com) {
+                var createAreaPicker = function (elm_select) {
+                    var el_tabs = '';
+                    var el_tabcontents = '';
+                    Array.prototype.slice.call(elm_select.children).forEach(function (node, index) {
+                        var tabid = elm_select.id + index;
+                        var isactive = index == 0 ? 'active' : '';
+                        el_tabs += '<div class="ne-tab ' + isactive + '" ne-tap="toggle:#' + tabid + '" ne-role="tab"><strong>' + node.getAttribute('label') + '</strong></div>'
+                        var tabcontent = '';
+                        Array.prototype.slice.call(node.children).forEach(function (nodechild, index) {
+                            tabcontent += '<div class="tabitem" data-fartherlabel="' + node.getAttribute('label') + '" data-value="' + nodechild.value + '" onclick="ui_houseList.areapick(this);">' + nodechild.innerText + '</div>';
+                        });
+                        el_tabcontents += '<div id="' + tabid + '" class="ne-tabpanel ' + isactive + '" ne-role="tabpanel">' + tabcontent + '</div>';
+                    });
+                    el_tabs = '<div class="ne-tabs" ne-role="tablist">' + el_tabs + '</div>';
+                    el_tabcontents = '<div class="ne-tabs-content">' + el_tabcontents + '</div>';
+                    var el_dummy = Ne.dom.render('<div id="' + elm_select.id + '_dummy" class="align-center" style="padding:7px 15px;background:#fff;">'
+                                  + '<span id="' + elm_select.id + '_dummy_text">附近小屋</span><i class="ne-icon-arrow-down" style="margin-left:10px;margin-right:-10px;"></i>'
+                                + '</div>');
+                    var el_tabswrap = Ne.dom.render('<div class="ne-tabs-wrapper ne-tabs-left none" ne-role="tabview">' + el_tabs + el_tabcontents + '</div>');
+                    el_dummy.onclick = function () {
+                        el_tabswrap.classList.remove('none');
+                    }
+                    elm_select.parentElement.appendChild(el_dummy);
+                    elm_select.parentElement.appendChild(el_tabswrap);
+                }
+                com.init = function () {
+                    createAreaPicker(document.querySelector('#areapicker'));
+                }
+                return com;
+            }({});
+            ui.toggleActtimetable = function (target) {
+                var el_acthouse = Ne.dom(target).parents('.acthouse-item')[0];
+                if (el_acthouse.classList.contains('open')) {
+                    el_acthouse.classList.remove('open');
+                } else {
+                    el_acthouse.classList.add('open');
+                }
+            };
+            ui.areapick = function (target) {
+                Ne.dom(target).parents('.ne-tabs-wrapper')[0].classList.add('none');
+                var text = target.getAttribute('data-fartherlabel') + ' ' + target.innerText + ' 小屋';
+                var value = target.getAttribute('data-value');
+                var picker = document.querySelector('#areapicker');
+                document.querySelector('#' + picker.id + '_dummy_text').innerText = text;
+                picker.value = value;
+                console.log(value);
+                Ne.dom(picker).trigger('change');
+            };
+            ui.tabsEllipsis = function (item) {
+                if (item.childElementCount > 3) {
+                    var el_more = Ne.dom.render('<div class="ne-tabs-ellipsis-more"><i class="ne-icon-calender"></i></div>');
+                    el_more.onclick = function () {
+                        var el_timesclone = Ne.dom(item).clone()[0];
+                        el_timesclone.addEventListener('click', function (event) {
+                            var ___target = event.target || event.touches[0];
+                            Ne.dom(___target).parents('.ne-dialog')[0].hide();
+                            var el_realtab = document.querySelector('.ne-tab[href="' + ___target.parentElement.getAttribute('href') + '"]');
+                            if (el_realtab.nextElementSibling.classList.contains('ne-tab')) {
+                                el_realtab.nextElementSibling.scrollIntoView();
+                            } else {
+                                el_realtab.parentElement.scrollLeft = el_realtab.parentElement.scrollWidth;
+                            }
+                        });
+                        Ne.dialog.confirm('更多日期选择', el_timesclone);
+                    };
+                    item.appendChild(el_more);
+                }
+            };
+            ui.init = function () {
+                Array.prototype.slice.call(document.querySelectorAll('.ne-tabs-ellipsis')).forEach(function (item, index) {
+                    ui.tabsEllipsis(item);
+                });
+                com_areapicker.init();
+            }
+            ui.areapicker = com_areapicker;
+            ui.init();
+            return ui;
+        }({});
+    </script>
+</body>
+</html>

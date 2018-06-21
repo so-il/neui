@@ -1,0 +1,95 @@
+﻿
+/**
+ * @searchbar.css
+**/
+
+.ne-searchbar {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    box-sizing: border-box;
+    padding: .75em 1em;
+    background-color: @grey-5;
+}
+
+
+.ne-searchbar-inputfield {
+    position: relative;
+    -webkit-box-flex: 1;
+    box-flex: 1;
+    flex: 1;
+}
+
+    .ne-searchbar-inputfield input {
+        position: absolute;
+        z-index: 0;
+        height: 2em;
+        top: 0;
+        width: 100%;
+        padding:.37514857em 1.57142857em;
+        border-color: transparent;
+    }
+
+        .ne-searchbar-inputfield input:hover, .ne-searchbar-inputfield input:focus {
+            border-color: transparent;
+        }
+
+        .ne-searchbar-inputfield input[type=search]::-webkit-search-cancel-button {
+           display: none;
+        }
+
+    .ne-searchbar-inputfield .ne-input-icon {
+        font-size: 1.3em;
+    }
+
+
+.ne-searchbar-placeholder {
+    position: absolute;
+    z-index: 1;
+    height: 2em;
+    line-height: 2em;
+    top: 0;
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: @grey-6;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0 5px;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: @card-radius;
+    -webkit-transition: width 300ms;
+    transition: width 300ms;
+}
+
+    .ne-searchbar-placeholder i {
+        font-size: 1em;
+        margin-top:-2px;
+    }
+
+
+.ne-searchbar-action {
+    -webkit-box-flex: 0;
+    box-flex: 0;
+    flex: none;
+    margin-left: .8em;
+    line-height: 2em;
+    margin-right: -3em;
+    opacity: 0;
+    color: @blue-6;
+    -webkit-transition: margin-right 300ms,opacity 300ms;
+    -webkit-transition-delay: 100ms;
+    transition: margin-right 300ms,opacity 300ms;
+    transition-delay: 100ms;
+}
+
+/*animate*/
+.ne-searchbar.typeing .ne-searchbar-placeholder {
+    width:1.57142857em;
+}
+
+.ne-searchbar.typeing .ne-searchbar-action {
+    margin-right: 0;
+    opacity: 1;
+}

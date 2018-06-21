@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title></title>
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../../dist/neui.css" />
+    <link rel="stylesheet" href="assets/styles/app.css" />
+</head>
+
+<body>
+    <section id="page-profile" class="ne-page active" ne-role="page">
+            <header class="ne-page-header">
+                    <nav class="ne-navbar">
+                        <div class="ne-navbar-left">
+                            <a class="action-link" href="javascript:history.back();">
+                                <i class="ne-icon-arrow-left green-9"></i>
+                            </a>
+                        </div>
+                        <div class="ne-navbar-center">
+                            <h1>我的信息</h1>
+                        </div>
+                        <div class="ne-navbar-right">
+                        </div>
+                    </nav>
+                </header>
+        <div class="ne-page-body">
+            <hr class="hr-blank"/>
+            <ul class="ne-list">
+                <li>
+                    <div class="ne-cell">
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>头像</strong>
+                        </div>
+                        <div class="ne-cell-right">
+                            <img class="iconsize-normal border-circle bg-grey align-middle" src="assets/images/icon-user.svg"/>
+                            <i class="ne-icon-arrow-right"></i>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a class="ne-cell" ne-tap="toggle:#page-editname">
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>姓名</strong>
+                        </div>
+                        <div class="ne-cell-right">
+                            <span>张晓明</span>
+                            <i class="ne-icon-arrow-right"></i>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="ne-cell" href="editinfo.html">
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>手机号</strong>
+                        </div>
+                        <div class="ne-cell-right">
+                            <span>18718773909</span>
+                            <i class="ne-icon-arrow-right"></i>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="ne-cell" href="editinfo.html">
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>性别</strong>
+                        </div>
+                        <div class="ne-cell-right">
+                            <span>男</span>
+                            <i class="ne-icon-arrow-right"></i>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="ne-cell" href="editinfo.html">
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>身份证</strong>
+                        </div>
+                        <div class="ne-cell-right">
+                            <span>440598677557489890</span>
+                            <i class="ne-icon-arrow-right"></i>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="ne-cell" href="editinfo.html">
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>出生日期</strong>
+                        </div>
+                        <div class="ne-cell-right">
+                            <span>1985-7-22</span>
+                            <i class="ne-icon-arrow-right"></i>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="page-editname" class="ne-page" ne-role="page">
+            <header class="ne-page-header">
+                    <nav class="ne-navbar">
+                        <div class="ne-navbar-left">
+                            <a class="action-link" ne-tap="toggle:#page-profile">
+                                <i class="ne-icon-arrow-left green-9"></i>
+                            </a>
+                        </div>
+                        <div class="ne-navbar-center">
+                            <h1>修改姓名</h1>
+                        </div>
+                        <div class="ne-navbar-right">
+                        </div>
+                    </nav>
+                </header>
+        <div class="ne-page-body">
+            <hr class="hr-blank" />
+            <div class="ne-cell bg-white">
+                <div class="ne-cell-left">
+                    <label class="ne-label w5">姓名：</label>
+                </div>
+                <div class="ne-cell-center">
+                    <input class="ne-input border-none" type="text" ne-clearable="true" placeholder="请输入您的姓名">
+                </div>
+            </div>
+            <hr class="hr-blank" />
+            <div class="ne-cell">
+                <button class="ne-btn ne-btn-success block">确定</button>
+            </div>
+        </div>
+    </section>
+
+    <!--load scripts-->
+    <script src="../../../dist/neui.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+﻿
+/**
+ * @uploader.css
+**/
+
+.ne-uploader-hd {
+    padding-top: 0;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.ne-uploader-bd {
+    overflow: hidden;
+    margin: -.357142857em;
+}
+
+.ne-uploader-files {
+    list-style: none;
+    padding: 0;
+}
+
+.ne-uploader-file {
+    float: left;
+    margin: .357142857em;
+    width: 5.7142857em;
+    height: 5.7142857em;
+    background: no-repeat center center;
+    background-size: cover;
+}
+
+.ne-uploader-status {
+    position: relative;
+}
+
+    .ne-uploader-status::before {
+        content: " ";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: @mask-bgcolor;
+    }
+
+    .ne-uploader-status .ne-uploader-status-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        color: white;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    .ne-uploader-status .ne-icon-warn {
+        display: block;
+    }
+
+.ne-uploader-input-wrp {
+    float: left;
+    position: relative;
+    margin: .357142857em;
+    width: 5.7142857em;
+    height: 5.7142857em;
+    border: 1px solid @grey-5;
+    box-sizing: border-box;
+}
+
+    .ne-uploader-input-wrp::before,
+    .ne-uploader-input-wrp::after {
+        content: " ";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background-color: @grey-5;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    .ne-uploader-input-wrp::before {
+        width: 2px;
+        height: 39.5px;
+    }
+
+    .ne-uploader-input-wrp::after {
+        width: 39.5px;
+        height: 2px;
+    }
+
+    .ne-uploader-input-wrp:active {
+        border-color: @grey-6;
+    }
+
+        .ne-uploader-input-wrp:active::before,
+        .ne-uploader-input-wrp:active::after {
+            background-color: @grey-6;
+        }
+
+.ne-uploader-input {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    opacity: 0;
+}

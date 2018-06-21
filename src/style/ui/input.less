@@ -1,0 +1,139 @@
+﻿
+/** 
+ * @input.css
+**/
+
+input.ne-input, .ne-input > input, .ne-select {
+    box-sizing: border-box;
+    padding: .5em .6em;
+    border: 1px solid @inputborder-color;
+    border-radius: @round-radius;
+    background-color: white;
+    font-size: 1em;
+    font-family: inherit;
+    outline: none !important;
+    -webkit-transition: border-color 150ms, background-color 150ms;
+    transition: border-color 150ms, background-color 150ms;
+    box-shadow: none;
+    -webkit-appearance: none;
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.ne-select {
+    background-color: transparent;
+    position: relative;
+    z-index: 1;
+}
+
+.ne-select:focus,
+.ne-input:focus,
+.ne-input > input:focus {
+    border-color: @blue-6;
+}
+
+
+span.ne-input {
+    display: inline-block;
+}
+
+div.ne-input > input {
+    width: 100%;
+    height: 2.5em;
+    box-sizing: border-box;
+}
+
+/* width icon */
+.ne-input-icon {
+    position: absolute;
+    width:2em;
+    top: 0;
+    bottom: 0;
+}
+.ne-input-icon::before {
+    position: absolute;
+    left: 50%;
+    margin-left: -7px;
+    top: 50%;
+    margin-top: -9px;
+    height: 20px;
+    width: 14px;
+}
+
+.ne-select:focus + .ne-input-icon,
+.ne-input:focus + .ne-input-icon {
+    color: @blue-6;
+}
+
+.ne-select+.ne-input-icon {
+    z-index: 0;
+}
+
+.ne-select+.ne-input-icon {
+    z-index: 0;
+}
+
+
+.ne-input_withicon_left, .ne-input_withicon_right {
+    position: relative;
+}
+
+    .ne-input_withicon_left .ne-input {
+        padding-left: 2.3em !important;
+    }
+
+    .ne-input_withicon_left .ne-input-icon {
+        left: 0;
+    }
+
+    .ne-input_withicon_right .ne-input {
+        padding-right: 2.3em !important;
+    }
+
+    .ne-input_withicon_right .ne-input-icon {
+        right: 0;
+    }
+
+
+/*input style*/
+.ne-halfborder {
+    display: inline-block;
+}
+
+    .ne-halfborder::after {
+        content: "";
+        display: block;
+        width: 99%;
+        height: 5px;
+        border: 1px solid @inputborder-color;
+        border-top: none;
+        margin-top: -6px;
+    }
+
+
+    .ne-halfborder:focus::after, .ne-halfborder:hover::after {
+        border-color: @blue-6;
+    }
+
+    .ne-halfborder .ne-input, .ne-halfborder .ne-select {
+        border-color: transparent;
+        display: block;
+        width:100%;
+    }
+
+        .ne-halfborder .ne-input:hover, .ne-halfborder .ne-input:focus {
+            border-color: transparent;
+        }
+
+
+
+.ne-cell .ne-input.border-none,
+.ne-cell .ne-select.border-none {
+    width: 100%;
+    border: 0;
+    background-color: transparent;
+}
+
+.ne-cell-center.ne-input_withicon_right .ne-input-icon {
+    text-align: right;
+}

@@ -1,0 +1,167 @@
+﻿<h1>Toast 轻提示</h1>
+<p>一种轻量级反馈/提示，可以用来显示不会打断用户操作的内容，适合用于页面转场、数据交互的等场景中。</p>
+<hr />
+<section>
+    <h2>结构与样式</h2>
+    <div class="flexbox">
+        <pre><code class="html">
+&lt;!--
+1、toast需要声明ne-role="toast";
+2、默认不可见，通过添加.ne-animate-show展示；
+3、container内容按需添加，参考下方toast-msg结构； 
+--&gt;
+&lt;div class="ne-toast ne-animate-show" ne-role="toast"&gt;
+    &lt;div class="ne-mask transparent"&gt;&lt;/div&gt;
+    &lt;div class="ne-toast-container"&gt;
+        &lt;div class="ne-toast-msg"&gt;
+            &lt;div class="ne-toast-icon"&gt;
+                &lt;i class="ne-preloader white size-double"&gt;&lt;/i&gt;
+            &lt;/div&gt;
+            &lt;div class="ne-toast-text"&gt;xx&lt;/divgt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!--spinner--&gt;
+&lt;i class="ne-spinner primary"&gt;&lt;/i&gt;
+&lt;i class="ne-preloader"&gt;&lt;/i&gt;
+
+&lt;!--spinner加文字--&gt;
+&lt;i class="ne-spinner primary"&gt;&lt;/i&gt;&lt;span class="text-tagged"&gt;Loading&lt;/span&gt;
+&lt;i class="ne-preloader"&gt;&lt;/i&gt;&lt;span class="text-tagged"&gt;Loading&lt;/span&gt;
+
+&lt;!--仅带图标的toast-msg--&gt;
+&lt;div class="ne-toast-msg"&gt;
+    &lt;div class="ne-toast-icon"&gt;
+        &lt;i class="ne-preloader white size-double"&gt;&lt;/i&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!--仅带文字的toast-msg--&gt;
+&lt;div class="ne-toast-msg "&gt;
+    &lt;div class="ne-toast-text"&gt;错误提示&lt;/div&gt;
+&lt;/div&gt; 
+
+&lt;!--带图标和文字的toast-msg--&gt;
+&lt;div class="ne-toast-msg"&gt;
+    &lt;div class="ne-toast-icon"&gt;
+        &lt;i class="ne-preloader white size-double"&gt;&lt;/i&gt;
+    &lt;/div&gt;
+    &lt;div class="ne-toast-text"&gt;加载中&lt;/div&gt;
+&lt;/div&gt
+                            </code></pre>
+        <div class="preview">
+            <div class="preview-browser">
+                <div class="preview-browser-header">
+                    <div class="preview-browser-statbar">
+                        <img src="assets/images/ui-statbar.png">
+                    </div>
+                    <div class="preview-browser-url-box">http://neui.nelabs.cn/examples/components/toast.html</div>
+                </div>
+                <div class="preview-browser-body">
+                    <iframe src="../examples/components/toast.html"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>交互与功能</h2>
+    <h4>范式说明</h4>
+    <p>大部分时候只需要通过html声明即可完成所有组件所有交互行为，但也会有需要通过js触发交互行为方法的情况，关于如何触发组件交互行为方法的详细介绍请查阅-<a href="#component" target="_blank">《Component 组件封装支持》</a></p>
+    <pre><code class="javascript">
+        //通过Js触发组件行为功能的范式：
+        Ne.acts(selector).propsName(args[]);
+        </code></pre>
+    <h4>toast支持的交互功能</h4>
+    <table>
+        <tbody>
+            <tr>
+                <td>方法名</td>
+                <td>说明</td>
+            </tr>
+            <tr>
+                <td>.show()</td>
+                <td>展示toast。</td>
+            </tr>
+            <tr>
+                <td>.hide()</td>
+                <td>隐藏toast。</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>举例说明</h4>
+    <pre><code class="html">
+        &lt;!--假设现在有如下toast：--&gt;
+        &lt;div id="j-toast" class="ne-toast" ne-role="toast"&gt;
+            &lt;div class="ne-mask transparent"&gt;&lt;/div&gt;
+            &lt;div class="ne-toast-container"&gt;
+                &lt;div class="ne-toast-msg"&gt;
+                    &lt;div class="ne-toast-icon"&gt;&lt;i class="ne-preloader white size-double"&gt;&lt;/i&gt;&lt;/div&gt;
+                    &lt;div class="ne-toast-text "&gt;xxx&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    </code><code class="javascript">
+        //展示toast：
+        Ne.acts('#j-toast').show();
+        //隐藏toast：
+        Ne.acts('#j-toast').hide();
+    </code></pre>
+</section>
+<section>
+    <h2>创建组件</h2>
+    <pre><code class="javascript">
+        Ne.toast.showLoading(text,timeout,callback);
+        Ne.toast.showSuccess(text,timeout,callback);
+        Ne.toast.showError(text,timeout,callback);
+        </code></pre>
+    <h4>功能描述</h4>
+    <p>通过js创建toast并自动调用toast的show方法，弹出提示窗。</p>
+    <h4>参数说明</h4>
+    <table>
+        <tbody>
+            <tr>
+                <th>参数</th>
+                <th>类型</th>
+                <th>描述</th>
+            </tr>
+            <tr>
+                <td>text</td>
+                <td>string</td>
+                <td>tost文字信息。</td>
+            </tr>
+            <tr>
+                <td>timespan</td>
+                <td>number</td>
+                <td>单位毫秒，显示时长，超时后会自动关闭，可缺省，默认为2000，其中showLoading比较特殊，当timeout不填写的时候，loading将永远不会终止，必须自己手动关闭。。</td>
+            </tr>
+            <tr>
+                <td>callback</td>
+                <td>function</td>
+                <td>超时后的回调函数，可缺省。</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>举例说明</h4>
+    <pre><code class="javascript">
+        Ne.toast.showSuccess(“操作成功”,2000,function(){
+            //TODO:go back
+        });
+        Ne.toast.showError("错误提示！");
+
+        var neToast=Ne.toast.showLoading('Loading');
+        setTimeout(function(){
+            neToast.hide();
+        },5000);
+        </code></pre>
+</section>
+<section>
+    <h2>关闭Toast</h2>
+    <pre><code class="javascript">
+        Ne.toast.hide();
+        </code></pre>
+    <h4>功能描述</h4>
+    <p>Ne.toast.hide()将关闭所有的toast。</p>
+        </code></pre>
+</section>

@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>dialog</title>
+
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../dist/neui.css" />
+</head>
+<body>
+    <section class="ne-page active" ne-role="page">
+        <div class="ne-page-body">
+            <div class="ne-panel">
+                <div class="ne-panel-header">
+                    <div class="header-title">告知信息提示窗</div>
+                    <div class="header-actions"> <button class="ne-btn ne-btn-small ne-btn-primary" onclick="Ne.dialog.alert('提示窗标题','弹窗内容，告知当前页面信息等', function () {console.log('callback')})">Alert</button></div>
+                </div>
+                <div class="ne-panel-body bg-lightgrey padding-top-20 padding-bottom-20">
+                    <div class="ne-dialog-alert">
+                        <div class="ne-dialog-header"><strong>提示窗标题</strong></div>
+                        <div class="ne-dialog-body">弹窗内容，告知当前页面信息等</div>
+                        <div class="ne-dialog-footer">
+                            <div class="ne-action">确定</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ne-panel">
+                <div class="ne-panel-header">
+                    <div class="header-title">告知需要确认的信息提示窗</div>
+                    <div class="header-actions"><button class="ne-btn ne-btn-small ne-btn-primary" onclick="Ne.dialog.confirm('提示窗标题', '自定义弹窗内容，居左对齐显示，告知需要确认的信息等', function (flag) { console.log(flag) })">Confirm</button></div>
+                </div>
+                <div class="ne-panel-body bg-lightgrey padding-top-20 padding-bottom-20">
+                    <div class="ne-dialog-confirm">
+                        <div class="ne-dialog-header"><strong>提示窗标题</strong></div>
+                        <div class="ne-dialog-body">自定义弹窗内容，居左对齐显示，告知需要确认的信息等</div>
+                        <div class="ne-dialog-footer">
+                            <div class="ne-action">取消</div>
+                            <div class="ne-action weight-bold">确定</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ne-panel">
+                <div class="ne-panel-header">
+                    <div class="header-title">自定义可选操作的信息提示窗</div>
+                    <div class="header-actions"><button class="ne-btn ne-btn-small ne-btn-primary" onclick="Ne.dialog({ type: 'actions', title: '提示窗标题', content: '自定义弹窗内容，告知信息并提供多个可选择的操作', actions: [{ text: '执行操作A', handler: function () { console.log('执行操作A'); } }, { text: '执行操作B', handler: function () { console.log('执行操作B'); } },{ text: '放弃',focused:true,color:'red', handler: function () { console.log('放弃'); } }] })">Actions</button></div>
+                </div>
+                <div class="ne-panel-body bg-lightgrey padding-top-20 padding-bottom-20">
+                    <div class="ne-dialog-actions">
+                        <div class="ne-dialog-header"><strong>提示窗标题</strong></div>
+                        <div class="ne-dialog-body">自定义弹窗内容，告知信息并提供多个可选择的操作</div>
+                        <div class="ne-dialog-footer">
+                            <div class="ne-action">执行操作A</div>
+                            <div class="ne-action">执行操作B</div>
+                            <div class="ne-action weight-bold red">放弃</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ne-panel">
+                <div class="ne-panel-header">
+                    <div class="header-title">自定义弹出窗</div>
+                </div>
+                <div class="ne-panel-body bg-lightgrey">
+                    <div class="ne-cell">
+                        <button ne-tap="show:#dialog-default" class="ne-btn ne-btn-primary block margin-bottom-10">Custom Dialog</button>
+                        <button ne-tap="show:#dialog-fullscreen" class="ne-btn ne-btn-primary block">FullScreen Dialog</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="ne-dialog" id="dialog-default" ne-role="dialog">
+                <div class="ne-mask"></div>
+                <div class="ne-dialog-container">
+                    <div class="ne-panel ne-card border-none" ne-role="panel">
+                        <div class="ne-panel-header">
+                            <div class="header-icon">
+                                <i class="ne-icon-success-f green"></i>
+                            </div>
+                            <div class="header-title">
+                                <span>标题文字</span>
+                            </div>
+                            <div class="header-actions">
+                                <a href="javascript:;" ne-tap="hide:dialog">
+                                    <span class="ne-panel-switch inline-block"><i class="ne-icon-delete"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ne-panel-body">
+                            <div class="bg-lightgrey" style="height: 100px;"></div><div style="margin-top: -38px;" class="ne-cell border-bottom">
+                                <div class="bg-red border-circle inline-block align-top" style="height: 50px;width: 50px;border: 1px solid #fff;"></div>
+                                <div class="darkgrey align-bottom inline-block weight-light padding-left-10">Updated a sec ago</div>
+                            </div><div class="ne-cell text-excerpt">
+                                <strong>Food is there in a few!</strong><p>Stay strong.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ne-dialog" id="dialog-fullscreen" ne-role="dialog">
+                <div class="ne-mask"></div>
+                <div class="ne-dialog-container align-top bg-white">
+                    <div class="ne-panel" ne-role="panel">
+                        <div class="ne-panel-header">
+                            <div class="header-icon">
+                                <i class="ne-icon-success-f green"></i>
+                            </div>
+                            <div class="header-title">
+                                <span>标题文字</span>
+                            </div>
+                            <div class="header-actions">
+                                <a class="action-link" href="javascript:;" ne-tap="hide:dialog">关闭</a>
+                            </div>
+                        </div>
+                        <div class="ne-panel-body">
+                            <div class="ne-article ne-cell">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                                    ea commodo consequat.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--load scripts-->
+    <script src="../../dist/neui.js"></script>
+</body>
+
+</html>

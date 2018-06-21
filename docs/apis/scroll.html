@@ -1,0 +1,114 @@
+﻿<h1>Scroll View 下拉刷新</h1>
+<p>Scroll View是一个可滚动容器，但上下方带有refreshControl，通过触发，可以完成触底加载更多和下拉刷新的交互。</p>
+<hr />
+<section>
+    <h2>结构与样式</h2>
+    <div class="flexbox">
+        <pre><code class="html">
+&lt;!-- 
+1、scrollview需声明ne-role="scroll"；
+2、通过声明绑定scrollview的onscrolltop和onscrollbottom处理函数可实现对scrollview的scrollview的上下两个refreshControl；
+3、不声明onscrolltop和onscrollbottom的话它也可作为一个普通的可滚动容器使用；                 
+4、通过添加.ne-scroll-parallax，scrollview能完成视差滚动效果;
+--&gt;
+&lt;div id="j-scroll" class="ne-scroll" ne-role="scroll" onscrolltop="functionname" onscrollbottom="functionname"&gt;&lt;/div&gt;
+                 
+                            </code></pre>
+        <div class="preview">
+            <div class="preview-browser">
+                <div class="preview-browser-header">
+                    <div class="preview-browser-statbar">
+                        <img src="assets/images/ui-statbar.png">
+                    </div>
+                    <div class="preview-browser-url-box">http://neui.nelabs.cn/examples/components/scroll.html</div>
+                </div>
+                <div class="preview-browser-body">
+                    <iframe src="../examples/components/scroll.html"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>交互与功能</h2>
+    <h4>范式说明</h4>
+    <p>大部分时候只需要通过html声明即可完成所有组件所有交互行为，但也会有需要通过js触发交互行为方法的情况，关于如何触发组件交互行为方法的详细介绍请查阅-<a href="#component" target="_blank">《Component 组件封装支持》</a></p>
+    <pre><code class="javascript">
+        //通过Js触发组件行为功能的范式：
+        Ne.acts(selector).propsName(args[]);
+        </code></pre>
+    <h4>scroll view支持的交互功能</h4>
+    <table>
+        <tbody>
+            <tr>
+                <td>方法名</td>
+                <td>说明</td>
+            </tr>
+            <tr>
+                <td class="nowrap">.init(object event)</td>
+                <td>初始化scroll view，一般情况下，scroll会在页面加载完成时静默自动初始化，但当scroll是在页面加载完成后通过ajax载入页面的片段的话，则需要手动初始化，初始化中。使用Ne.component.init传入的是声明了ne-role=“scroll”的element。</td>
+            </tr>
+            <tr>
+                <td class="nowrap">.reset()</td>
+                <td>重置scroll view的状态，当scroll view已经被设置为没有更多了之后不会再触发onscrollbottom，这时如果有需要重新恢复触发，需要reset该scrollview。</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>举例说明-下拉刷新</h4>
+    <pre><code class="html">
+        &lt;!--假设现在有如下scroll,声明了onscrolltop="refreshList"：--&gt;
+        &lt;div id="j-scroll" class="ne-scroll" ne-role="scroll" onscrolltop="refreshList"&gt;
+             &lt;ul class="ne-list">
+                 &lt;li&gt;&lt;/li&gt;
+                 &lt;li&gt;&lt;/li&gt;
+                        ...
+                 &lt;li&gt;&lt;/li&gt;
+             &lt;/ul&gt;
+        &lt;/div&gt;
+        </code><code class="javascript">
+        //触发onscrolltop的方式是拖拽scroll view，下拉位移超过50px后放手即可；
+        //onscrolltop声明的函数必须接收一个callback函数作为参数，并在异步操作完成后回调该函数，否则refreshcontrol无法退出；
+        function refreshList(callback){
+            ajax({
+                complete:function(){
+                    //TODO SOMETHING
+                    callback();
+                }
+            });
+        }
+
+        //不在html中声明onscrolltop,也可以通过js直接绑定在element上：
+        document.querySelector('#j-scroll').onScrollTop=refreshList;
+    </code></pre>
+    <h4>举例说明-自动加载更多</h4>
+    <pre><code class="html">
+        &lt;!--假设现在有如下scroll,声明了onscrollbottom="loadmore"：--&gt;
+        &lt;div id="j-scroll" class="ne-scroll" ne-role="scroll" onscrollbottom="loadmore"&gt;
+             &lt;ul class="ne-list">
+                 &lt;li&gt;&lt;/li&gt;
+                 &lt;li&gt;&lt;/li&gt;
+                        ...
+                 &lt;li&gt;&lt;/li&gt;
+             &lt;/ul&gt;
+        &lt;/div&gt;
+        </code><code class="javascript">
+        //触发onscrollbottom的方式是滑动scroll view，接近底部50px时就会自动触发；
+        //onscrollbottom声明的函数必须接收一个callback函数作为参数，并在异步操作完成后回调该函数，否则refreshcontrol无法退出；
+        //同时必须注意的是callback函数接收一个bool参数，用于指明是否再次已经到了分页最后一页了，默认为false，传入true后底部的refreshcontrol将显示为“没有更多了”；
+        function loadmore(callback){
+            ajax({
+                complete:function(){
+                    //TODO SOMETHING
+                    //如果加载已经没有更多了：
+                    callback(true);
+                }
+            });
+        }
+
+        //不在html中声明onscrollbottom,也可以通过js直接绑定在element上：
+        document.querySelector('#j-scroll').onScrollBottom=loadmore;
+
+        //分页到了最后一页之后，如果需要重置scroll view状态：
+        Ne.acts('#j-scroll').reset();
+    </code></pre>
+</section>

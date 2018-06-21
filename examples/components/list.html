@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>list</title>
+
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../dist/neui.css" />
+</head>
+<body>
+    <section class="ne-page active" ne-role="page">
+        <div class="ne-page-body">
+            <h4 class="hr-title">带说明的列表项</h4>
+            <ul class="ne-list">
+                <li>
+                    <div class="ne-cell">
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>标题文字</strong>
+                        </div>
+                        <div class="ne-cell-right">
+                            <span>辅助说明</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <h4 class="hr-title">带图标、说明的列表项</h4>
+            <ul class="ne-list">
+                <li>
+                    <div class="ne-cell">
+                        <div class="ne-cell-left">
+                            <img class="iconsize-small bg-grey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                         </div>
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>标题文字</strong>
+                        </div>
+                        <div class="ne-cell-right">
+                            <span>辅助说明</span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ne-cell">
+                        <div class="ne-cell-left">
+                            <img class="iconsize-small bg-grey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                         </div>
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>标题文字</strong>
+                        </div>
+                        <div class="ne-cell-right">
+                            <span>辅助说明</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <h4 class="hr-title">带跳转的列表项</h4>
+            <ul class="ne-list">
+                <li>
+                    <a class="ne-cell" href="javascript:;">
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>标题文字</strong>
+                        </div>
+                        <div class="ne-cell-right">
+                            <i class="ne-icon-arrow-right"></i>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="ne-cell" href="javascript:;">
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>标题文字</strong>
+                        </div>
+                        <div class="ne-cell-right">
+                            <i class="ne-icon-arrow-right"></i>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <h4 class="hr-title">带说明、跳转的列表项</h4>
+            <ul class="ne-list">
+                <li>
+                    <a class="ne-cell" href="javascript:;">
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>标题文字</strong>
+                        </div>
+                        <div class="ne-cell-right">
+                            <span>辅助说明</span><i class="ne-icon-arrow-right"></i>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="ne-cell" href="javascript:;">
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>标题文字</strong>
+                        </div>
+                        <div class="ne-cell-right">
+                            <span>辅助说明</span><i class="ne-icon-arrow-right"></i>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <h4 class="hr-title">带图标、说明、跳转的列表项</h4>
+            <ul class="ne-list">
+                <li>
+                    <a class="ne-cell" href="javascript:;">
+                        <div class="ne-cell-left">
+                            <img class="iconsize-small bg-grey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                        </div>
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>标题文字</strong>
+                        </div>
+                        <div class="ne-cell-right">
+                            <span>辅助说明</span><i class="ne-icon-arrow-right"></i>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="ne-cell" href="javascript:;">
+                        <div class="ne-cell-left">
+                            <img class="iconsize-small bg-grey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                         </div>
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>标题文字</strong>
+                        </div>
+                        <div class="ne-cell-right">
+                            <span>辅助说明</span><i class="ne-icon-arrow-right"></i>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <h4 class="hr-title">带图标、摘要的列表项</h4>
+            <ul class="ne-list">
+                <li>
+                    <a href="javascript:;" class="ne-cell">
+                        <div class="ne-cell-left">
+                            <img class="iconsize-normal bg-grey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" />
+                         </div>
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>标题文字</strong>
+                            <p>截断的辅助说明、摘要...</p>
+                        </div>
+                        <div class="ne-cell-right align-top">
+                            <div class="text-meta">10:00</div>
+
+                        </div>
+                    </a>
+                </li>
+                <li class="signal-notice">
+                    <a href="javascript:;" class="ne-cell">
+                        <div class="ne-cell-left">
+                            <img class="iconsize-normal bg-grey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" />
+                         </div>
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>标题文字</strong>
+                            <p>截断的辅助说明、摘要...</p>
+                        </div>
+                        <div class="ne-cell-right align-top">
+                            <span class="text-meta">10:00</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <h4 class="hr-title">带actions的列表项（左滑显示actions）</h4>
+            <ul class="ne-list">
+                <li ne-swipeable="true">
+                    <a href="javascript:;" class="ne-cell">
+                        <div class="ne-cell-left">
+                            <img class="iconsize-normal bg-grey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" />
+                        </div>
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>标题文字</strong>
+                            <p>截断的辅助说明、摘要...</p>
+                        </div>
+                        <div class="ne-cell-right align-top">
+                            <div class="text-meta">10:00</div>
+                        </div>
+                    </a>
+                    <div class="ne-listitem-actions keepleft">
+                        <button class="ne-btn ne-btn-success"><i class="ne-icon-star-f"></i></button>
+                    </div>
+                    <div class="ne-listitem-actions">
+                        <button class="ne-btn ne-btn-warning" ne-tap="regain:li"><i class="ne-icon-paperplane"></i><span class="text-tagged">Replay</span></button>
+                        <button class="ne-btn ne-btn-danger" ne-tap="remove:li"><i class="ne-icon-trash"></i><span class="text-tagged">Delete</span></button>
+                    </div>
+                </li>
+                <li ne-swipeable="true">
+                    <a href="javascript:;" class="ne-cell">
+                        <div class="ne-cell-left">
+                            <img class="iconsize-normal bg-grey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" />
+                        </div>
+                        <div class="ne-cell-center text-excerpt">
+                            <strong>标题文字</strong>
+                            <p>截断的辅助说明、摘要...</p>
+                        </div>
+                        <div class="ne-cell-right align-top">
+                            <span class="text-meta">10:00</span>
+                        </div>
+                    </a>
+                    <div class="ne-listitem-actions keepleft">
+                        <button class="ne-btn ne-btn-success"><i class="ne-icon-star-f"></i></button>
+                    </div>
+                    <div class="ne-listitem-actions">
+                        <button class="ne-btn ne-btn-warning" ne-tap="regain:li"><i class="ne-icon-paperplane"></i><span class="text-tagged">Replay</span></button>
+                        <button class="ne-btn ne-btn-danger" ne-tap="remove:li"><i class="ne-icon-trash"></i><span class="text-tagged">Delete</span></button>
+                    </div>
+                </li>
+            </ul>
+            <div class="hr-remark">Select wisely, because changing your selection is like... hmm quite hard. <span class="primary">Read more there</span></div>
+        </div>
+    </section>
+    <script src="../../dist/neui.js"></script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>actionsheet</title>
+
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../dist/neui.css" />
+</head>
+<body>
+    <section class="ne-page active" ne-role="page">
+        <div class="ne-page-body">
+            <div class="ne-panel">
+                <div class="ne-panel-header">
+                    <div class="header-title">Actionsheet</div>
+                    <div class="header-actions"> <button class="ne-btn ne-btn-small ne-btn-primary" ne-tap="show:#j-actionsheet-list">Action</button></div>
+                </div>
+                <div class="ne-panel-body bg-lightgrey padding-top-20 padding-bottom-20">
+                    <div class="ne-card border-none">
+                        <div class="padding-15 text-meta align-center">辅助说明信息，告知当前操作意义，或对选项进行相关说明，居中对齐。</div>
+                        <div class="ne-action" ne-tap="hide:actionsheet">选项1</div>
+                        <div class="ne-action weight-bold red" ne-tap="hide:actionsheet">危险选项红色加粗</div>
+                        <div class="ne-action" ne-tap="hide:actionsheet">选项3</div>
+                    </div>
+                    <div class="ne-card border-none margin-top-10 margin-bottom-10">
+                        <div class="ne-action weight-bold" ne-tap="hide:actionsheet">取消</div>
+                    </div>
+                </div>
+            </div>
+            <div class="ne-panel">
+                <div class="ne-panel-header">
+                    <div class="header-title">Activity Views</div>
+                    <div class="header-actions"> <button class="ne-btn ne-btn-small ne-btn-primary" ne-tap="show:#j-actionsheet-sharepanel">Action</button></div>
+                </div>
+                <div class="ne-panel-body bg-lightgrey padding-top-20 padding-bottom-20">
+                    <div class="ne-card border-none">
+                        <div class="ne-cell">
+                            <div class="ne-cell-left">
+                                <img class="iconsize-large bg-lightgrey border-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                            </div>
+                            <div class="ne-cell-center">
+                                <p>AirDrop. Share instantly with people nearby. Just tap to share.</p>
+                            </div>
+                        </div>
+                        <div class="ne-grids border-top col4">
+                            <div class="ne-grid" ne-tap="hide:actionsheet">
+                                <div class="ne-grid-icon">
+                                    <img class="iconsize-normal bg-lightgrey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                                </div>
+                                <div class="ne-grid-label text-meta">label</div>
+                            </div>
+                            <div class="ne-grid" ne-tap="hide:actionsheet">
+                                <div class="ne-grid-icon">
+                                    <img class="iconsize-normal bg-lightgrey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                                </div>
+                                <div class="ne-grid-label text-meta">label</div>
+                            </div>
+                            <div class="ne-grid" ne-tap="hide:actionsheet">
+                                <div class="ne-grid-icon">
+                                    <img class="iconsize-normal bg-lightgrey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                                </div>
+                                <div class="ne-grid-label text-meta">label</div>
+                            </div>
+                            <div class="ne-grid" ne-tap="hide:actionsheet">
+                                <div class="ne-grid-icon">
+                                    <img class="iconsize-normal bg-lightgrey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                                </div>
+                                <div class="ne-grid-label text-meta">label</div>
+                            </div>
+                        </div>
+                        <div class="ne-grids border-top col4">
+                            <div class="ne-grid" ne-tap="hide:actionsheet">
+                                <div class="ne-grid-icon">
+                                    <img class="iconsize-normal bg-lightgrey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                                </div>
+                                <div class="ne-grid-label text-meta">label</div>
+                            </div>
+                            <div class="ne-grid" ne-tap="hide:actionsheet">
+                                <div class="ne-grid-icon">
+                                    <img class="iconsize-normal bg-lightgrey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                                </div>
+                                <div class="ne-grid-label text-meta">label</div>
+                            </div>
+                            <div class="ne-grid" ne-tap="hide:actionsheet">
+                                <div class="ne-grid-icon">
+                                    <img class="iconsize-normal bg-lightgrey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                                </div>
+                                <div class="ne-grid-label text-meta">label</div>
+                            </div>
+                            <div class="ne-grid" ne-tap="hide:actionsheet">
+                                <div class="ne-grid-icon">
+                                    <img class="iconsize-normal bg-lightgrey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                                </div>
+                                <div class="ne-grid-label text-meta">label</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ne-card border-none margin-top-10 margin-bottom-10">
+                        <div class="ne-action weight-bold" ne-tap="hide:actionsheet">Cancel</div>
+                    </div>
+                </div>
+            </div>
+            <div class="ne-panel">
+                <div class="ne-panel-header">
+                    <div class="header-title">Activity Page</div>
+                </div>
+                <div class="ne-panel-body bg-lightgrey">
+                    <div class="ne-cell">
+                        <button ne-tap="show:#j-actionsheet-page" class="ne-btn ne-btn-primary block margin-bottom-10">Show Activity Page</button>
+                    </div>
+                </div>
+            </div>
+
+            <!--BEGIN actionSheet-->
+            <div class="ne-actionsheet" id="j-actionsheet-list" ne-role="actionsheet">
+                <div class="ne-mask" ne-tap="hide:actionsheet"></div>
+                <div class="ne-actionsheet-container">
+                    <div class="ne-card border-none">
+                        <div class="padding-15 text-meta align-center">辅助说明信息，告知当前操作意义，或对选项进行相关说明，居中对齐。</div>
+                        <div class="ne-action" ne-tap="hide:actionsheet">选项1</div>
+                        <div class="ne-action weight-bold red" ne-tap="hide:actionsheet">危险选项红色加粗</div>
+                        <div class="ne-action" ne-tap="hide:actionsheet">选项3</div>
+                    </div>
+                    <div class="ne-card border-none margin-top-10 margin-bottom-10">
+                        <div class="ne-action weight-bold" ne-tap="hide:actionsheet">取消</div>
+                    </div>
+                </div>
+            </div>
+            <div class="ne-actionsheet" id="j-actionsheet-sharepanel" ne-role="actionsheet">
+                <div class="ne-mask" ne-tap="hide:actionsheet"></div>
+                <div class="ne-actionsheet-container">
+                    <div class="ne-card border-none">
+                        <div class="ne-cell">
+                            <div class="ne-cell-left">
+                                <img class="iconsize-large bg-lightgrey border-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                            </div>
+                            <div class="ne-cell-center">
+                                <p>AirDrop. Share instantly with people nearby. Just tap to share.</p>
+                            </div>
+                        </div>
+                        <div class="ne-grids border-top col4">
+                            <div class="ne-grid" ne-tap="hide:actionsheet">
+                                <div class="ne-grid-icon">
+                                    <img class="iconsize-normal bg-lightgrey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                                </div>
+                                <div class="ne-grid-label text-meta">label</div>
+                            </div>
+                            <div class="ne-grid" ne-tap="hide:actionsheet">
+                                <div class="ne-grid-icon">
+                                    <img class="iconsize-normal bg-lightgrey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                                </div>
+                                <div class="ne-grid-label text-meta">label</div>
+                            </div>
+                            <div class="ne-grid" ne-tap="hide:actionsheet">
+                                <div class="ne-grid-icon">
+                                    <img class="iconsize-normal bg-lightgrey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                                </div>
+                                <div class="ne-grid-label text-meta">label</div>
+                            </div>
+                            <div class="ne-grid" ne-tap="hide:actionsheet">
+                                <div class="ne-grid-icon">
+                                    <img class="iconsize-normal bg-lightgrey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                                </div>
+                                <div class="ne-grid-label text-meta">label</div>
+                            </div>
+                        </div>
+                        <div class="ne-grids border-top col4">
+                            <div class="ne-grid" ne-tap="hide:actionsheet">
+                                <div class="ne-grid-icon">
+                                    <img class="iconsize-normal bg-lightgrey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                                </div>
+                                <div class="ne-grid-label text-meta">label</div>
+                            </div>
+                            <div class="ne-grid" ne-tap="hide:actionsheet">
+                                <div class="ne-grid-icon">
+                                    <img class="iconsize-normal bg-lightgrey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                                </div>
+                                <div class="ne-grid-label text-meta">label</div>
+                            </div>
+                            <div class="ne-grid" ne-tap="hide:actionsheet">
+                                <div class="ne-grid-icon">
+                                    <img class="iconsize-normal bg-lightgrey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                                </div>
+                                <div class="ne-grid-label text-meta">label</div>
+                            </div>
+                            <div class="ne-grid" ne-tap="hide:actionsheet">
+                                <div class="ne-grid-icon">
+                                    <img class="iconsize-normal bg-lightgrey border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                                </div>
+                                <div class="ne-grid-label text-meta">label</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ne-card border-none margin-top-10 margin-bottom-10">
+                        <div class="ne-action weight-bold" ne-tap="hide:actionsheet">Cancel</div>
+                    </div>
+                </div>
+            </div>
+            <div class="ne-actionsheet" id="j-actionsheet-page" ne-role="actionsheet">
+                <div class="ne-mask transparent" ne-tap="hide:actionsheet"></div>
+                <div class="ne-actionsheet-container" style="height:100%;">
+                    <div class="ne-panel" ne-role="panel" style="height:100%;">
+                        <div class="ne-panel-header">
+                            <div class="header-icon">
+                                <i class="ne-icon-success-f green"></i>
+                            </div>
+                            <div class="header-title">
+                                <span>标题文字</span>
+                            </div>
+                            <div class="header-actions">
+                                <a class="action-link" href="javascript:;" ne-tap="hide:actionsheet">关闭</a>
+                            </div>
+                        </div>
+                        <div class="ne-panel-body">
+                            <div class="ne-article ne-cell">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                                    ea commodo consequat.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--END actionSheet-->
+        </div>
+    </section>
+
+    <!--load scripts-->
+    <script src="../../dist/neui.js"></script>
+</body>
+</html>

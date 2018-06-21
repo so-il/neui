@@ -1,0 +1,110 @@
+﻿
+/** 
+ * @steps.css 
+**/
+
+.ne-steps {
+    display: table;
+    width: 100%;
+    box-sizing: border-box;
+    table-layout: fixed;
+}
+
+.ne-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+
+    .ne-step:not(:first-child)::before {
+        content: '';
+        position: absolute;
+        top: 15px;
+        left: -50%;
+        width: 100%;
+        height: 0;
+        display: inline-block;
+        border-width: 1px 0 0 0;
+        border-style: solid;
+        border-color: @inputborder-color;
+    }
+
+.ne-step-icon {
+    display: inline-block;
+    width: 2.3em;
+    height: 2.3em;
+    border-radius: 50%;
+    border: 1px solid;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    padding: .35em;
+    color: @text-color;
+    background-color: white;
+    border-color: @inputborder-color;
+}
+
+.ne-step-desc {
+    margin: 5px 3px 0;
+    color: @meta-color;
+}
+
+/*status finish*/
+.ne-step.finished::before {
+    border-color: @blue-4;
+}
+
+.ne-step.finished .ne-step-icon {
+    color: white;
+    background-color: @blue-4;
+    border-color:@blue-4;
+}
+
+.ne-step.finished .ne-step-desc {
+    color: @text-color;
+}
+
+
+
+/*status processing*/
+.ne-step.processing::before {
+    border-color: @blue-6;
+}
+
+.ne-step.processing .ne-step-icon {
+    color: white;
+    background-color: @blue-6;
+    border-color:@blue-6;
+}
+
+.ne-step.processing .ne-step-desc {
+    color: @title-color;
+}
+
+ 
+
+/*direction：vertical*/
+.ne-steps-vertical .ne-step {
+    display: block;
+    text-align: left;
+    padding-bottom: 10px;
+}
+
+    .ne-steps-vertical .ne-step:not(:first-child)::before {
+        width: 0;
+        height: 100%;
+        left: 0%;
+        top: -50%;
+        margin-left: 15px;
+        border-width: 0 1px 0 0;
+    }
+
+.ne-steps-vertical .ne-step-icon {
+    vertical-align: top;
+}
+
+.ne-steps-vertical .ne-step-desc {
+    display: inline-block;
+    margin: 5px 3px;
+}

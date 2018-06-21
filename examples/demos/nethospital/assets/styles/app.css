@@ -1,0 +1,372 @@
+/**/
+.ne-cell,.ne-field {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.ne-btn-success, .ne-btn-success.active {
+    background-color: #5bc583;
+    border-color: #5bc583;
+    background: linear-gradient(to right, #20a6a5 0, #5bc583 100%);
+    border: 0;
+}
+
+.ne-btn.block {
+    padding: .7em;
+}
+
+.ne-carousel-control.active {
+    background-color: #5bc583;
+}
+
+.ne-carousel-control {
+    background-color: #e0e0e0;
+}
+
+canvas.bg-digit {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 60%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/*profile*/
+.profile {
+    display: block;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    color: #fff;
+    background-color: #20a6a5;
+    background: linear-gradient(10deg, #5bc583 0, #20a6a5 80%);
+}
+
+.profile-avatar.squarebox {
+    width: 70px;
+    border-radius: 50%;
+}
+
+.profile-info-name {
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.profile-info-dept {
+    display: block;
+    margin-top: 6px;
+    font-size: 13px;
+}
+
+
+
+/*squarebox*/
+
+.squarebox {
+    position: relative;
+    width: 100%;
+    vertical-align: top;
+    padding-bottom: 100%;
+    height: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.08) inset;
+}
+
+    .squarebox > img {
+        display: inline-block;
+        position: absolute;
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+    }
+
+        .squarebox > img.default-icon {
+            opacity: .8;
+        }
+
+    .squarebox > .wordface {
+        display: block;
+        padding: 9px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bolder;
+        color: #fff;
+        background-color: #2a978a;
+    }
+
+/*预约*/
+
+.table-yuyue .ne-table-tbody {
+    overflow: hidden;
+}
+
+    .table-yuyue .ne-table-tbody::before {
+        display: none;
+    }
+
+.table-yuyue {
+    border-color: #e9e9e9;
+    border-style: solid;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left: 0;
+    border-right: 0;
+}
+
+    .table-yuyue .ne-table-tbody .ne-table-tr:nth-of-type(even) {
+        background-color: #fff;
+    }
+
+    .table-yuyue .ne-table-thead {
+        position: relative;
+        background-color: #eee;
+    }
+
+    .table-yuyue .ne-table-td, .table-yuyue .ne-table-th {
+        vertical-align: middle;
+        border-right: 1px dashed #ddd;
+        border-bottom: 1px dashed #eee;
+    }
+
+
+    .table-yuyue .ne-table-td {
+        padding: 0;
+    }
+
+.table-yuyue-disable, .table-yuyue-enable, .table-yuyue-empty {
+    display: block;
+    width: 2.3em;
+    padding: 6px;
+    height: 2.3em;
+    line-height: 1.18;
+    border-radius: 9px;
+    overflow: hidden;
+    font-size: .857em;
+    margin: 7px auto;
+}
+
+.table-yuyue-disable {
+    background-color: #e0e0e0;
+    color: #999;
+    line-height: 2.3;
+}
+
+.table-yuyue-enable {
+    background: linear-gradient(to bottom, #20a6a5 40%, #5bc583 100%);
+    color: #fff;
+}
+
+
+.table-yuyue-w, .table-yuyue-d {
+    display: block;
+    line-height: 1.2;
+}
+
+.table-yuyue-d {
+    font-size: .857em;
+    opacity: .8;
+    margin-top: 5px;
+}
+
+/*私人管家*/
+
+.butler {
+    display: inline-block;
+    padding: 5px 10px;
+    text-align: center;
+    background: #f9f9f9;
+    margin: .7em;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: 0px 0px 10px 0px #eaeaea;
+}
+
+    .butler::before {
+        content: '';
+        position: absolute;
+        z-index: 0;
+        pointer-events: none;
+        display: inline-block;
+        visibility: hidden;
+        width: 20px;
+        height: 20px;
+        left: 50%;
+        margin-left: -10px;
+        bottom: -5px;
+        border-bottom-right-radius: 3px;
+        background-color: #20a6a5;
+        transform: rotate(44deg);
+        -webkit-transform: rotate(44deg);
+    }
+
+    .butler + .butler {
+        margin-left: 0;
+    }
+
+.butler-img {
+    width: 5em;
+    height: 5em;
+    border-radius: 50%;
+    background-color: #e2e0e0;
+    overflow: hidden;
+    box-shadow: 0px 0px 7px 0px #cacaca inset;
+    margin-bottom: 3px;
+}
+
+    .butler-img > img {
+        width: 100%;
+        margin-top: 7px;
+    }
+
+.butler-name,
+.butler-title {
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+
+.butler-name {
+    font-size: 1em;
+}
+
+.butler-title {
+    font-size: .857em;
+    opacity: .8;
+}
+
+.butler.active {
+    color: #fff;
+    background-color: #20a6a5;
+    background: linear-gradient(10deg, #20a6a5 0, #5bc583 100%);
+}
+
+    .butler.active::before {
+        visibility: visible;
+    }
+
+    .butler.active .butler-img {
+        background-color: #efefef;
+    }
+
+.butlerlist {
+    overflow-x: auto;
+    white-space: nowrap;
+    display: block;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+    .butlerlist::-webkit-scrollbar {
+        display: none;
+    }
+
+.butler-content {
+    top: 9.5em;
+}
+
+.butler-wrap .ne-tabpanel {
+    padding: 1em;
+}
+
+.butler-infopanel {
+    width: 100%;
+    min-height: 65%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0px 0px 15px 0px #e0e0e0;
+}
+
+
+/* check report*/
+.checkreport {
+    text-align: left;
+    width: 100%;
+    vertical-align: top;
+    padding-bottom: 100%;
+    overflow: hidden;
+    height: 0;
+    position: relative;
+    cursor: pointer;
+    display:block;
+}
+
+
+.checkreport-content {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 1.5em;
+    margin: .7em;
+    background: #ffffff;
+    border-radius: 30px;
+    box-shadow: 0px 0px 14px 0px #eae8e8;
+}
+
+.checkreport:active > .checkreport-content, .checkreport:hover > .checkreport-content {
+    background: #20a6a5;
+    color: #fff;
+}
+
+    .checkreport:active > .checkreport-content > .checkreport-icon-h, .checkreport:hover > .checkreport-content > .checkreport-icon-h {
+        display: block;
+    }
+
+    .checkreport:active > .checkreport-content > .checkreport-icon, .checkreport:hover > .checkreport-content > .checkreport-icon {
+        display: none;
+    }
+
+.checkreport-icon, .checkreport-icon-h {
+    width: 3em;
+}
+
+.checkreport-icon-h {
+    display: none;
+}
+
+.checkreport-date {
+    font-size: 1.2em;
+    position: absolute;
+    bottom: 1.2em;
+    right: 1.2em;
+    left: 1.5em;
+}
+
+
+/*steps-yuyue*/
+.iconnum {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 2.7em;
+    height: 2.7em;
+    text-align: center;
+    line-height: 2.6em;
+    border: 1px solid;
+    border-radius: 50%;
+    margin-left: 8px;
+    margin-right: 9px;
+    color: #ffffff;
+    position: relative;
+    background-color: #5cc583;
+    font-weight: bolder;
+    font-size: 16px;
+    vertical-align: middle;
+}
+.iconnum:after {
+    content: '';
+    width: 1px;
+    height: 100%;
+    background: #5cc583;
+    position: absolute;
+    left: 50%;
+    bottom: -100%;
+    z-index: 0;
+}
+

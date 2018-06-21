@@ -1,0 +1,32 @@
+﻿
+/** 
+ * @mask.css
+**/
+.ne-mask {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: @mask-bgcolor;
+}
+
+.ne-mask {
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-duration: 500ms;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    animation-duration: 500ms;
+}
+
+.ne-animate-show > .ne-mask{
+    -webkit-animation-name: fadein;
+    animation-name: fadein;
+}
+
+.ne-animate-hide > .ne-mask{
+    -webkit-animation-name: fadeout;
+    animation-name: fadeout;
+}

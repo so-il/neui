@@ -1,0 +1,900 @@
+
+
+/****************************************************************** 
+ * @ animate
+ * Description:  
+*******************************************************************/
+/**************
+    animate single
+ **************/
+.ne-animate-spinright,.ne-animate-spinleft{
+    -webkit-animation-duration: 1000ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.ne-animate-spinright {
+    -webkit-animation-name: spinright;
+    animation-name: spinright;
+}
+
+.ne-animate-spinleft {
+     -webkit-animation-name: spinleft;
+    animation-name: spinleft;
+}
+
+
+/**************
+    animate base
+ **************/
+
+.ne-animate-in, .ne-animate-out {
+    display: block !important;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+.ne-animate-in {
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-duration: 350ms;
+    animation-timing-function: ease;
+    animation-duration: 350ms;
+}
+
+.ne-animate-out {
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-duration: 225ms;
+    animation-timing-function: ease;
+    animation-duration: 225ms;
+}
+
+/**************
+    fade
+ **************/
+
+.ne-animate-fade.ne-animate-out {
+    opacity: 0;
+    -webkit-animation-duration: 125ms;
+    -webkit-animation-name: fadeout;
+    animation-duration: 125ms;
+    animation-name: fadeout;
+}
+
+.ne-animate-fade.ne-animate-in {
+    opacity: 1;
+    -webkit-animation-duration: 225ms;
+    -webkit-animation-name: fadein;
+    animation-duration: 225ms;
+    animation-name: fadein;
+}
+
+/**************
+    pop
+ **************/
+.ne-animate-pop {
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+}
+
+    .ne-animate-pop.ne-animate-in {
+        -webkit-transform: scale(1);
+        -webkit-animation-name: popin;
+        -webkit-animation-duration: 350ms;
+        transform: scale(1);
+        animation-name: popin;
+        animation-duration: 350ms;
+        opacity: 1;
+    }
+
+    .ne-animate-pop.ne-animate-out {
+        -webkit-animation-name: fadeout;
+        -webkit-animation-duration: 100ms;
+        animation-name: fadeout;
+        animation-duration: 100ms;
+        opacity: 0;
+    }
+
+    .ne-animate-pop.ne-animate-in.ne-animate-reverse {
+        -webkit-animation-name: fadein;
+        animation-name: fadein;
+    }
+
+    .ne-animate-pop.ne-animate-out.ne-animate-reverse {
+        -webkit-transform: scale(.8);
+        -webkit-animation-name: popout;
+        transform: scale(.8);
+        animation-name: popout;
+    }
+
+/**************
+    slide
+ **************/
+.ne-animate-slide {
+    -webkit-animation-timing-function: ease-out;
+    -webkit-animation-duration: 350ms;
+    animation-timing-function: ease-out;
+    animation-duration: 350ms;
+}
+
+    .ne-animate-slide.ne-animate-out {
+        -webkit-animation-name: slideouttoleft;
+        animation-name: slideouttoleft;
+    }
+
+    .ne-animate-slide.ne-animate-in {
+        -webkit-animation-name: slideinfromright;
+        animation-name: slideinfromright;
+    }
+
+    .ne-animate-slide.ne-animate-out.ne-animate-reverse {
+        -webkit-animation-name: slideouttoright;
+        animation-name: slideouttoright;
+    }
+
+    .ne-animate-slide.ne-animate-in.ne-animate-reverse {
+        -webkit-animation-name: slideinfromleft;
+        animation-name: slideinfromleft;
+    }
+
+
+/**************
+   slidecover
+ **************/
+.ne-animate-slidecover {
+    -webkit-animation-timing-function: ease-out;
+    -webkit-animation-duration: 350ms;
+    animation-timing-function: ease-out;
+    animation-duration: 350ms;
+}
+
+    .ne-animate-slidecover.ne-animate-out {
+        -webkit-animation-name: slideouttoleft_forcover;
+        animation-name: slideouttoleft_forcover;
+    }
+
+    .ne-animate-slidecover.ne-animate-in {
+        -webkit-animation-name: slideinfromright_forcover;
+        animation-name: slideinfromright_forcover;
+        z-index: 2;
+    }
+
+    .ne-animate-slidecover.ne-animate-out.ne-animate-reverse {
+        -webkit-animation-name: slideouttoright_forcover;
+        animation-name: slideouttoright_forcover;
+        z-index: 2;
+    }
+
+    .ne-animate-slidecover.ne-animate-in.ne-animate-reverse {
+        -webkit-animation-name: slideinfromleft_forcover;
+        animation-name: slideinfromleft_forcover;
+    }
+
+/**************
+   slidedown
+ **************/
+
+.ne-animate-slidedown.ne-animate-out {
+    -webkit-animation-name: fadeout;
+    -webkit-animation-duration: 100ms;
+    animation-name: fadeout;
+    animation-duration: 100ms;
+}
+
+.ne-animate-slidedown.ne-animate-in {
+    -webkit-transform: translateY(0);
+    -webkit-animation-name: slideinfromtop;
+    -webkit-animation-duration: 250ms;
+    transform: translateY(0);
+    animation-name: slideinfromtop;
+    animation-duration: 250ms;
+}
+
+.ne-animate-slidedown.ne-animate-in.ne-animate-reverse {
+    -webkit-animation-name: fadein;
+    -webkit-animation-duration: 150ms;
+    animation-name: fadein;
+    animation-duration: 150ms;
+}
+
+.ne-animate-slidedown.ne-animate-out.ne-animate-reverse {
+    -webkit-transform: translateY(-100%);
+    -webkit-animation-name: slideouttotop;
+    -webkit-animation-duration: 200ms;
+    transform: translateY(-100%);
+    animation-name: slideouttotop;
+    animation-duration: 200ms;
+}
+
+
+/**************
+   slide up
+ **************/
+.ne-animate-slideup.ne-animate-out {
+    -webkit-animation-name: fadeout;
+    -webkit-animation-duration: 100ms;
+    animation-name: fadeout;
+    animation-duration: 100ms;
+}
+
+.ne-animate-slideup.ne-animate-in {
+    -webkit-transform: translateY(0);
+    -webkit-animation-name: slideinfrombottom;
+    -webkit-animation-duration: 250ms;
+    transform: translateY(0);
+    animation-name: slideinfrombottom;
+    animation-duration: 250ms;
+}
+
+    .ne-animate-slideup.ne-animate-in.ne-animate-reverse {
+        -webkit-animation-name: fadein;
+        -webkit-animation-duration: 150ms;
+        animation-name: fadein;
+        animation-duration: 150ms;
+    }
+
+.ne-animate-slideup.ne-animate-out.ne-animate-reverse {
+    -webkit-transform: translateY(100%);
+    -webkit-animation-name: slideouttobottom;
+    -webkit-animation-duration: 200ms;
+    transform: translateY(100%);
+    animation-name: slideouttobottom;
+    animation-duration: 200ms;
+}
+
+/**************
+   flip
+ **************/
+.ne-animate-flip {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+    .ne-animate-flip.ne-animate-out {
+        -webkit-transform: rotateY(-90deg) scale(.9);
+        -webkit-animation-name: flipouttoleft;
+        -webkit-animation-duration: 225ms;
+        transform: rotateY(-90deg) scale(.9);
+        animation-name: flipouttoleft;
+        animation-duration: 225ms;
+    }
+
+    .ne-animate-flip.ne-animate-in {
+        -webkit-animation-name: flipintoright;
+        -webkit-animation-duration: 375ms;
+        -webkit-animation-delay:225ms;
+        animation-name: flipintoright;
+        animation-duration: 375ms;
+        animation-delay:225ms;
+        visibility:hidden;
+    }
+
+    .ne-animate-flip.ne-animate-out.ne-animate-reverse {
+        -webkit-transform: rotateY(90deg) scale(.9);
+        -webkit-animation-name: flipouttoright;
+        transform: rotateY(90deg) scale(.9);
+        animation-name: flipouttoright;
+    }
+
+    .ne-animate-flip.ne-animate-in.ne-animate-reverse {
+        -webkit-animation-name: flipintoleft;
+        animation-name: flipintoleft;
+    }
+
+
+
+/**************************************animate keyframes**************************************/
+ 
+/**************
+    spin
+ **************/
+@-webkit-keyframes spinright {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+
+@keyframes spinright {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spinleft {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(-360deg);
+    }
+}
+
+@keyframes spinleft {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+/**************
+    bounce
+ **************/
+@-webkit-keyframes bouncein {
+    0% {
+        -webkit-transform: scale(0);
+    }
+
+    75% {
+        -webkit-transform: scale(1.1);
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes bouncein {
+    0% {
+        transform: scale(0);
+    }
+
+    75% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+@-webkit-keyframes bounceout {
+    0% {
+        -webkit-transform: scale(1);
+    }
+
+    75% {
+        -webkit-transform: scale(1.1);
+    }
+
+    100% {
+        -webkit-transform: scale(0);
+    }
+}
+
+@keyframes bounceout {
+    0% {
+        transform: scale(1);
+    }
+
+    75% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(0);
+    }
+}
+
+/**************
+    fade
+ **************/
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+
+/**************
+    pop
+ **************/
+@-webkit-keyframes popin {
+    from {
+        -webkit-transform: scale(.8);
+        opacity: 0;
+    }
+
+    to {
+        -webkit-transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes popin {
+    from {
+        transform: scale(.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes popout {
+    from {
+        -webkit-transform: scale(1);
+        opacity: 1;
+    }
+
+    to {
+        -webkit-transform: scale(.8);
+        opacity: 0;
+    }
+}
+
+@keyframes popout {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    to {
+        transform: scale(.8);
+        opacity: 0;
+    }
+}
+
+
+/**************
+    lower
+ **************/
+@-webkit-keyframes lowerin {
+    from {
+        opacity: 0;
+        -webkit-transform: scale(1.1);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes lowerin {
+    from {
+        opacity: 0;
+        transform: scale(1.1);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes lowerout {
+    from {
+        opacity: 1;
+        -webkit-transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        -webkit-transform: scale(1.1);
+    }
+}
+
+@keyframes lowerout {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(1.1);
+    }
+}
+
+
+
+
+/**************
+   slide
+ **************/
+
+
+@-webkit-keyframes slideinfromright {
+    from {
+        -webkit-transform: translate3d(100%,0,0);
+    }
+
+    to {
+        -webkit-transform: translate3d(0,0,0);
+    }
+}
+
+@keyframes slideinfromright {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@-webkit-keyframes slideinfromleft {
+    from {
+        -webkit-transform: translate3d(-100%,0,0);
+    }
+
+    to {
+        -webkit-transform: translate3d(0,0,0);
+    }
+}
+
+@keyframes slideinfromleft {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+
+@-webkit-keyframes slideouttoleft {
+    from {
+        -webkit-transform: translate3d(0,0,0);
+    }
+
+    to {
+        -webkit-transform: translate3d(-100%,0,0);
+    }
+}
+
+@keyframes slideouttoleft {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@-webkit-keyframes slideouttoright {
+    from {
+        -webkit-transform: translate3d(0,0,0);
+    }
+
+    to {
+        -webkit-transform: translate3d(100%,0,0);
+    }
+}
+
+@keyframes slideouttoright {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+
+/**************
+    slidecover
+ **************/
+
+@-webkit-keyframes slideouttoleft_forcover {
+    from {
+        -webkit-transform: translate3d(0,0,0);
+         opacity:1;
+    }
+
+    to {
+        -webkit-transform: translate3d(-20%,0,0);
+         opacity:.9;
+    }
+}
+
+@keyframes slideouttoleft_forcover {
+    from {
+        transform: translateX(0);
+         opacity:1;
+    }
+
+    to {
+        transform: translateX(-20%);
+        opacity:.9;
+    }
+}
+
+@-webkit-keyframes slideinfromright_forcover {
+    from {
+        -webkit-transform: translate3d(100%,0,0);
+    }
+
+    to {
+        -webkit-transform: translate3d(0,0,0);
+    }
+}
+
+@keyframes slideinfromright_forcover {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@-webkit-keyframes slideouttoright_forcover {
+    from {
+        -webkit-transform: translate3d(0,0,0);
+    }
+
+    to {
+        -webkit-transform: translate3d(100%,0,0);
+    }
+}
+
+@keyframes slideouttoright_forcover {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+@-webkit-keyframes slideinfromleft_forcover {
+    from {
+        -webkit-transform: translate3d(-20%,0,0);
+        opacity:.9;
+    }
+
+    to {
+        -webkit-transform: translate3d(0,0,0);
+        opacity:1;
+    }
+}
+
+@keyframes slideinfromleft_forcover {
+    from {
+        transform: translateX(-20%);
+         opacity:.9;
+    }
+
+    to {
+        transform: translateX(0);
+         opacity:1;
+    }
+}
+
+/**************
+    slide from top
+ **************/
+
+@-webkit-keyframes slideinfromtop {
+    from {
+        -webkit-transform: translateY(-100%);
+    }
+
+    to {
+        -webkit-transform: translateY(0);
+    }
+}
+
+@keyframes slideinfromtop {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@-webkit-keyframes slideouttotop {
+    from {
+        -webkit-transform: translateY(0);
+    }
+
+    to {
+        -webkit-transform: translateY(-100%);
+    }
+}
+
+@keyframes slideouttotop {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+/**************
+    slide from bottom
+ **************/
+
+@-webkit-keyframes slideinfrombottom {
+    from {
+        -webkit-transform: translateY(100%);
+    }
+
+    to {
+        -webkit-transform: translateY(0);
+    }
+}
+
+@keyframes slideinfrombottom {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@-webkit-keyframes slideouttobottom {
+    from {
+        -webkit-transform: translateY(0);
+    }
+
+    to {
+        -webkit-transform: translateY(100%);
+    }
+}
+
+@keyframes slideouttobottom {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(100%);
+    }
+}
+
+/**************
+    flip
+ **************/
+
+
+@-webkit-keyframes flipouttoleft {
+    from {
+        -webkit-transform:perspective(700px) rotateY(0);
+    }
+
+    to {
+        -webkit-transform:perspective(700px) rotateY(-90deg) scale(.9);
+    }
+}
+
+@keyframes flipouttoleft {
+    from {
+        transform:perspective(700px) rotateY(0);
+    }
+
+    to {
+        transform:perspective(700px) rotateY(-90deg) scale(.9);
+    }
+}
+
+@-webkit-keyframes flipouttoright {
+    from {
+        -webkit-transform:perspective(700px) rotateY(0);
+    }
+
+    to {
+        -webkit-transform:perspective(700px) rotateY(90deg) scale(.9);
+    }
+}
+
+@keyframes flipouttoright {
+    from {
+        transform:perspective(700px) rotateY(0);
+    }
+
+    to {
+        transform:perspective(700px) rotateY(90deg) scale(.9);
+    }
+}
+
+@-webkit-keyframes flipintoleft {
+    from {
+        visibility:visible;
+        -webkit-transform:perspective(700px) rotateY(-90deg) scale(.9);
+    }
+
+    to {
+        visibility:visible;
+        -webkit-transform:perspective(700px) rotateY(0);
+    }
+}
+
+@keyframes flipintoleft {
+    from {
+        visibility:visible;
+        transform:perspective(700px) rotateY(-90deg) scale(.9);
+    }
+
+    to {
+        visibility:visible;
+        transform:perspective(700px) rotateY(0);
+    }
+}
+
+@-webkit-keyframes flipintoright {
+    from {
+        visibility:visible;
+        -webkit-transform:perspective(700px) rotateY(90deg) scale(.9);
+    }
+
+    to {
+        visibility:visible;
+        -webkit-transform:perspective(700px) rotateY(0);
+    }
+}
+
+@keyframes flipintoright {
+    from {
+        visibility:visible;
+        transform:perspective(700px) rotateY(90deg) scale(.9);
+    }
+
+    to {
+        visibility:visible;
+        transform:perspective(700px) rotateY(0);
+    }
+}

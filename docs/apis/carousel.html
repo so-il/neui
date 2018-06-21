@@ -1,0 +1,88 @@
+﻿<h1>Carousel 走马灯</h1>
+<p>走马灯，轮播图。</p>
+<hr />
+<section>
+    <h2>结构与样式</h2>
+    <div class="flexbox">
+        <pre><code class="html">
+&lt;!-- 
+1、carousel以及carouselitem和carouselcontroller都需声明ne-role；
+2、默认不自动播放，通过声明data-autoplay="true" 设置自动播放；data-interval="3000"设置播放的速度； 
+3、通过设置carousel的padding-bottom百分比来改变carousel宽高比；
+4、carousel声明ne-swipeable="true"可使之支持手势滑动切换； 
+5、carouselitem添加.active设置为当前显示项;
+6、carouselitem的内容按需添加;
+7、carouselcontrol与carouselitem将一一对应；
+--&gt;
+&lt;div class="ne-carousel" ne-role="carousel" data-interval="3000" data-autoplay="true" ne-swipeable="true" style="padding-bottom:50%;"&gt;
+    &lt;div class="ne-carousel-container"&gt;
+        &lt;div class="ne-carousel-item active" ne-role="carouselitem"&gt;&lt;/div&gt;
+        &lt;div class="ne-carousel-item" ne-role="carouselitem"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="ne-carousel-controller" ne-role="carouselcontroller"&gt;
+        &lt;span class="ne-carousel-control active" ne-role="carouselcontrol"&gt;&lt;/span&gt;
+        &lt;span class="ne-carousel-control" ne-role="carouselcontrol"&gt;&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                            </code></pre>
+        <div class="preview">
+            <div class="preview-browser">
+                <div class="preview-browser-header">
+                    <div class="preview-browser-statbar">
+                        <img src="assets/images/ui-statbar.png">
+                    </div>
+                    <div class="preview-browser-url-box">http://neui.nelabs.cn/examples/components/carousel.html</div>
+                </div>
+                <div class="preview-browser-body">
+                    <iframe src="../examples/components/carousel.html"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>交互与功能</h2>
+    <h4>范式说明</h4>
+    <p>大部分时候只需要通过html声明即可完成所有组件所有交互行为，但也会有需要通过js触发交互行为方法的情况，关于如何触发组件交互行为方法的详细介绍请查阅-<a href="#component" target="_blank">《Component 组件封装支持》</a></p>
+    <pre><code class="javascript">
+        //通过Js触发组件行为功能的范式：
+        Ne.acts(selector).propsName(args[]);
+        </code></pre>
+    <h4>carousel支持的交互功能</h4>
+    <table>
+        <tbody>
+            <tr>
+                <td>方法名</td>
+                <td>说明</td>
+            </tr>
+            <tr>
+                <td class="nowrap">.init()</td>
+                <td>一般情况下，carousel会在页面加载完成时静默自动初始化，但当carousel是在页面加载完成后通过ajax载入页面的片段的话，则需要手动初始化，初始化函数中启动carousel的autoplay功能。使用Ne.component.init传入的是声明了ne-role=“carousel”的element。</td>
+            </tr>
+            <tr>
+                <td class="nowrap">.onswipe()</td>
+                <td>提供给手势操作的方法，声明了ne-swipeable的组件即会触发onswipe方法。</td>
+            </tr>
+            <tr>
+                <td class="nowrap">.autoplay()</td>
+                <td>自动播放。</td>
+            </tr>
+            <tr>
+                <td class="nowrap">.prev()</td>
+                <td>切换到上一张。</td>
+            </tr>
+            <tr>
+                <td class="nowrap">.prev()</td>
+                <td>切换到下一张。</td>
+            </tr>
+        </tbody>
+    </table> 
+    <h4>举例说明</h4>
+    <pre><code class="html">
+        &lt;!--假设现在有如下carousel：--&gt;
+        &lt;div class="ne-carousel" id="j-carousel" ne-role="carousel"&gt;&lt;/div&gt;
+    </code><code class="javascript">
+        //自动播放carousel：
+        Ne.acts('#j-carousel').autoplay();
+    </code></pre>
+</section>

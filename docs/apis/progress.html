@@ -1,0 +1,43 @@
+﻿<h1>Progress 进度条</h1>
+<p>表明某个任务的当前进度。</p>
+<hr />
+<section>
+    <h2>结构与样式</h2>
+    <div class="flexbox">
+        <pre><code class="html">
+&lt;!--
+1、进度条设置max声明最大值；
+2、通过改变value来实现进度的变化；
+--&gt;
+&lt;progress class="ne-progress" max="100" value="50"&gt;&lt;/progress&gt;
+
+&lt;!--
+3、不要用进度条代替尺度条，尺度条与进度条的区别在于尺度条通常用于描述相对静态的程度信息，比如硬盘的已用容量；
+4、meter的有min、low、high、optium、max的水平域值设置，不同域会显示出不同颜色以代表程度的变化；
+--&gt;
+&lt;meter class="ne-meter" min="0" max="100" low="10" high="50" optimum="100" value="55"&gt;&lt;/meter&gt;
+                      
+&lt;!--
+5、virtual progress,通过div模拟的progress结构；
+--&gt;
+&lt;div class="ne-progress"&gt;
+    &lt;div class="ne-progress-bar"&gt;
+        &lt;div class="ne-progress-innerbar" style="width: 50%;"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;  
+                            </code></pre>
+        <div class="preview">
+            <div class="preview-browser">
+                <div class="preview-browser-header">
+                    <div class="preview-browser-statbar">
+                        <img src="assets/images/ui-statbar.png">
+                    </div>
+                    <div class="preview-browser-url-box">http://neui.nelabs.cn/examples/components/progress.html</div>
+                </div>
+                <div class="preview-browser-body">
+                    <iframe src="../examples/components/progress.html"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

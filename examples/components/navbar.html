@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>navbar</title>
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../dist/neui.css" />
+</head>
+<body>
+    <section class="ne-page active" ne-role="page">
+        <div class="ne-page-body">
+            <div class="ne-cell"><div class="hr-meta"><span>Light Background</span></div></div>
+            <nav class="ne-navbar">
+                <div class="ne-navbar-left">
+                    <a class="action-link"><i class="ne-icon-pointer"></i></a>
+                </div>
+                <div class="ne-navbar-center"><h1>Title</h1></div>
+                <div class="ne-navbar-right">
+                    <a class="action-link"><i class="ne-icon-ellipsis_horizontal"></i></a>
+                </div>
+            </nav>
+            <hr class="hr-blank"/>
+            <nav class="ne-navbar">
+                <div class="ne-navbar-left">
+                    <a class="action-link" href="javascript:history.back();"><i class="ne-icon-arrow-left"></i><span class="text-tagged">Aug 2016</span></a>
+                </div> 
+                <div class="ne-navbar-right">
+                    <a class="action-link active"><i class="ne-icon-calender"></i></a>
+                    <a class="action-link"><i class="ne-icon-magnifier"></i></a>
+                    <a class="action-link"><i class="ne-icon-plus"></i></a>
+                </div>
+            </nav>
+            <hr class="hr-blank" />
+            <nav class="ne-navbar">
+                <div class="ne-navbar-left">
+                    <a class="action-link"><i class="ne-icon-user"></i></a>
+                </div>
+                <div class="ne-navbar-center">
+                    <div class="ne-btn-group align-middle" ne-role="tablist">
+                        <a class="ne-btn ne-btn-primary ne-btn-circle ne-btn-small ne-btn-outline w5 active" ne-tap="toggle:tab" ne-role="tab">
+                            Tab1
+                        </a>
+                        <a class="ne-btn ne-btn-primary ne-btn-circle ne-btn-small ne-btn-outline w5" ne-tap="toggle:tab" ne-role="tab">
+                            Tab2
+                        </a> 
+                    </div>
+                </div>
+                <div class="ne-navbar-right">  
+                    <a class="action-link"><i class="ne-icon-message"></i></a>
+                </div>
+            </nav>
+            <hr class="hr-blank" />
+            <nav class="ne-navbar">
+                <div class="ne-navbar-left">
+                    <a class="action-link">Cancel</a>
+                </div>
+                <div class="ne-navbar-center">
+                     <h1>SomeWhere Dark</h1>
+                </div>
+                <div class="ne-navbar-right">
+                    <a class="action-link">Done</a>
+                </div>
+            </nav>
+            <hr class="hr-blank" />
+            <nav class="ne-navbar block">
+                <div class="ne-navbar-center w100 padding-right-5">
+                    <div class="ne-searchbar-placeholder bg-light align-left border-round padding-left-10" style="position:relative;">
+                        <i class="ne-icon-magnifier"></i>
+                        <span>Try To Search Now</span>
+                        <i class="ne-icon-microphone" style="position: absolute;right: 9px;top: 9px;"></i>
+                    </div>
+                </div>
+                <div class="ne-navbar-right">
+                   <a class="action-link"><i class="ne-icon-scan"></i></a>
+                </div>
+            </nav> 
+            <div class="ne-cell"><div class="hr-meta"><span>Dark Background</span></div></div>
+            <nav class="ne-navbar block bg-blue">
+                <div class="ne-navbar-left">
+                    <a class="action-link white"><span>深圳</span><i class="ne-icon-arrow-down padding-left-5"></i></a>
+                </div>
+                <div class="ne-navbar-center w100 padding-right-5">
+                    <div class="ne-searchbar-placeholder grey-8 align-left padding-left-10" style="position:relative;border-radius:20px;">
+                        <i class="ne-icon-magnifier"></i>
+                        <span>搜索</span>
+                        <i class="ne-icon-microphone" style="position: absolute;right: 9px;top: 9px;"></i>
+                    </div>
+                </div>
+                <div class="ne-navbar-right">
+                    <a class="action-link white"><i class="ne-icon-scan"></i><span class="text-tagged">扫码</span></a>
+                </div>
+            </nav>
+            <hr class="hr-blank"/>
+            <nav class="ne-navbar bg-blue">
+                <div class="ne-navbar-left">
+                    <a class="action-link white"><i class="ne-icon-arrow-left"></i><span class="text-tagged">返回</span></a>
+                </div>
+                <div class="ne-navbar-center">
+                  <h1 class="white">标题</h1>
+                </div>
+                <div class="ne-navbar-right">
+                    <div class="ne-navbar-right">
+                        <a class="action-link active"><i class="ne-icon-calender"></i></a>
+                        <a class="action-link white"><i class="ne-icon-magnifier"></i></a>
+                        <a class="action-link white"><i class="ne-icon-plus"></i></a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </section>
+
+    <!--load scripts-->
+    <script src="../../dist/neui.js"></script>
+</body>
+</html>

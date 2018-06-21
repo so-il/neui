@@ -1,0 +1,79 @@
+﻿<h1>Search Bar 搜索栏</h1>
+<p>一般可位于 NavBar 下方，通过『取消按钮』退出激活状态。</p>
+<hr />
+<section>
+    <h2>结构与样式</h2>
+    <div class="flexbox">
+        <pre><code class="html">
+&lt;!--
+1、searchbar需声明ne-role="searchbar"；
+2、searchbar中的输入框需声明type=“serach”；
+3、searchbar无搜索按钮，通过虚拟键盘中的搜索按钮触发form的onsubmit事件来触发搜索提交，但注意输入框type类型须为search；
+4、添加.typeing使searchbar保持输入状态；
+5、placeholder声明ne-tap="intype:searchbar"使之受点击时searchbar切换到输入状态；
+6、取消按钮声明ne-tap="outtype:searchbar"使之受点击时searchbar切换到普通状态；
+--&gt;
+&lt;form class="ne-searchbar" onsubmit="flit(event);" ne-role="searchbar"&gt;
+    &lt;div class="ne-searchbar-inputfield"&gt;
+        &lt;div class="ne-searchbar-placeholder" ne-tap="intype:searchbar"&gt;&lt;i class="ne-icon-magnifier"&gt;&lt;/i&gt;&lt;span&gt;搜索&lt;/span&gt;&lt;/div&gt;
+        &lt;input class="ne-input" type="search" placeholder="搜索" ne-clearable="true"&gt;
+    &lt;/div&gt;
+    &lt;div class="ne-searchbar-action" ne-tap="outtype:searchbar"&gt;取消&lt;/div&gt;
+&lt;/form&gt;
+                            </code></pre>
+        <div class="preview">
+            <div class="preview-browser">
+                <div class="preview-browser-header">
+                    <div class="preview-browser-statbar">
+                        <img src="assets/images/ui-statbar.png">
+                    </div>
+                    <div class="preview-browser-url-box">http://neui.nelabs.cn/examples/components/searchbar.html</div>
+                </div>
+                <div class="preview-browser-body">
+                    <iframe src="../examples/components/searchbar.html"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>交互与功能</h2>
+    <h4>范式说明</h4>
+    <p>大部分时候只需要通过html声明即可完成所有组件所有交互行为，但也会有需要通过js触发交互行为方法的情况，关于如何触发组件交互行为方法的详细介绍请查阅-<a href="#component" target="_blank">《Component 组件封装支持》</a></p>
+    <pre><code class="javascript">
+        //通过Js触发组件行为功能的范式：
+        Ne.acts(selector).propsName(args[]);
+        </code></pre>
+    <h4>searchbar支持的交互功能</h4>
+    <table>
+        <tbody>
+            <tr>
+                <td>方法名</td>
+                <td>说明</td>
+            </tr>
+            <tr>
+                <td class="nowrap">.intype()</td>
+                <td>使searchbar进入输入状态。</td>
+            </tr>
+            <tr>
+                <td class="nowrap">.outtype()</td>
+                <td>使searchbar退出输入状态。</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>举例说明</h4>
+    <pre><code class="html">
+        &lt;form id="j-searchbar" class="ne-searchbar" onsubmit="flit(event);" ne-role="searchbar"&gt;
+            &lt;div class="ne-searchbar-inputfield"&gt;
+                &lt;div class="ne-searchbar-placeholder" ne-tap="intype:searchbar"&gt;&lt;i class="ne-icon-magnifier"&gt;&lt;/i&gt;&lt;span&gt;搜索&lt;/span&gt;&lt;/div&gt;
+                &lt;input class="ne-input" type="search" placeholder="搜索" ne-clearable="true"&gt;
+            &lt;/div&gt;
+            &lt;div class="ne-searchbar-action" ne-tap="outtype:searchbar"&gt;取消&lt;/div&gt;
+        &lt;/form&gt;
+    </code><code class="javascript">
+        //使searchbar进入输入状态：
+        Ne.acts('#j-searchbar').intype();
+        //使searchbar退出输入状态：
+        Ne.acts('#j-searchbar').outtype();
+    </code></pre>
+</section>

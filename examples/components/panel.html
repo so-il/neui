@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>panel</title>
+
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../dist/neui.css" />
+</head>
+<body>
+    <section class="ne-page active" ne-role="page">
+        <div class="ne-page-body">
+            <div class="ne-panel" ne-role="panel">
+                <div class="ne-panel-header">
+                    <div class="header-icon">
+                        <i class="ne-icon-info-f blue"></i>
+                    </div>
+                    <div class="header-title">
+                        <span>标题文字</span>
+                    </div>
+                    <div class="header-actions">
+                        <span class="text-meta margin-right-5 inline-block">辅助说明</span>
+                    </div>
+                </div>
+                <div class="ne-panel-body">
+                    <div class="ne-article ne-cell">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat.
+                        </p>
+                    </div>
+                </div>
+                <div class="ne-panel-footer">
+                    <a class="action-link">立即查看</a>
+                </div>
+            </div>
+            <hr class="hr-blank" />
+            <div class="ne-panel" ne-role="panel">
+                <div onclick="javascript:;" class="ne-panel-header" ne-tap="toggle:panel">
+                    <div class="header-icon">
+                        <i class="ne-icon-success-f green"></i>
+                    </div>
+                    <div class="header-title">
+                        <span>点击头部可收起 / 展开</span>
+                    </div>
+                    <div class="header-actions">
+                        <span class="ne-panel-switch inline-block"><i class="ne-icon-arrow-up-o"></i></span>
+                    </div>
+                </div>
+                <div class="ne-panel-body">
+                    <div class="ne-article ne-cell">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <hr class="hr-blank" />
+            <div class="ne-panel collapse" ne-role="panel">
+                <div onclick="javascript:;" class="ne-panel-header" ne-tap="toggle:panel">
+                    <div class="header-icon">
+                        <i class="ne-icon-success-f green"></i>
+                    </div>
+                    <div class="header-title">
+                        <span>点击头部可收起 / 展开</span>
+                    </div>
+                    <div class="header-actions">
+                        <span class="ne-panel-switch inline-block"><i class="ne-icon-arrow-up-o"></i></span>
+                    </div>
+                </div>
+                <div class="ne-panel-body">
+                    <div class="ne-article ne-cell">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <hr class="hr-blank" />
+            <div class="ne-panel collapse" ne-role="panel">
+                <div class="ne-panel-header">
+                    <div class="header-icon">
+                        <i class="ne-icon-question-f primary"></i>
+                    </div>
+                    <div class="header-title">
+                        <span>点击底部可收起 / 展开</span>
+                    </div>
+                </div>
+                <div class="ne-panel-body" style="max-height:90px;">
+                    <div class="ne-article ne-cell">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat.
+                        </p>
+                    </div>
+                </div>
+                <div class="ne-panel-footer maskcover" ne-tap="toggle:panel">
+                    <i class="ne-icon-arrow-up ne-panel-switch"></i>
+                </div>
+            </div>
+            <hr class="hr-blank" />
+            <div class="ne-panel ne-card" ne-role="panel">
+                <a href="javascript:;" class="ne-panel-header">
+                    <div class="header-icon">
+                        <img class="iconsize-normal bg-blue border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="> </div>
+                    <div class="header-title text-excerpt">
+                        <strong>标题文字</strong>
+                        <p>截断的辅助说明、摘要...</p>
+                    </div>
+                    <div class="header-actions">
+                        <span class="ne-panel-switch inline-block"><i class="ne-icon-arrow-right"></i></span>
+                    </div>
+                </a>
+                <div class="ne-panel-body">
+                    <div class="ne-article ne-cell">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. 
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <hr class="hr-blank" />
+        </div>
+    </section>
+    <script src="../../dist/neui.js"></script>
+</body>
+</html>

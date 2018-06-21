@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>countdown</title>
+    <!-- mandatory styles --> 
+    <style>
+        /*cutdown*/ 
+        .ne-countdown-Days-label::before {
+            content: "天";
+        }
+
+        .ne-countdown-Hours-label::before {
+            content: "时";
+        }
+
+        .ne-countdown-Minutes-label::before {
+            content: "分";
+        }
+
+        .ne-countdown-Seconds-label::before {
+            content: "秒";
+        }
+    </style>
+</head>
+<body>
+
+    <section class="ne-page active" ne-role="page">
+        <div class="ne-page-body">
+            <section id="j-countdown" ne-role="countdown"></section>
+        </div>
+    </section>
+
+    <!--load scripts-->
+    <script src="../../dist/neui.js"></script>
+
+    <!-- JavaScript includes -->
+    <script src="countdown.js"></script>
+    <script>
+        Ne.dom.onReady(function () {
+            Ne.countdown({
+                el: document.querySelector('#j-countdown'),
+                timestamp: (new Date()).getTime() +10 * 1000,
+                onStart: function () {
+                    console.log('开始');
+                },
+                onEnd: function () {
+                    console.log('结束');
+                },
+                callback: function (days, hours, minutes, seconds) {
+                    console.log(days +" :" +hours +": " +minutes +": " +seconds);
+                }
+            }); 
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+﻿
+/** 
+ * @scroll.css
+**/
+
+.ne-scroll {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transition-timing-function: ease-out;
+    -webkit-transition-duration: 250ms;
+    -webkit-transform: translate3d(0,0,0);
+    transition-timing-function: ease-out;
+    transition-duration: 250ms;
+    transform: translate3d(0,0,0);
+}
+
+.ne-scroll-ondrag {
+    overflow-y: hidden;
+}
+
+.ne-scroll-refreshing {
+    -webkit-transform: translate3d(0,50px,0);
+    transform: translate3d(0,50px,0);
+    overflow-y: hidden;
+    pointer-events: none;
+}
+
+.ne-scroll-loadmoreing {
+    -webkit-transform: translate3d(0,-50px,0);
+    transform: translate3d(0,-50px,0);
+    pointer-events: none;
+}
+
+.ne-scroll-refreshcontrol, .ne-scroll-loadingcontrol {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.ne-scroll-refreshcontrol {
+    position: absolute;
+}
+
+.ne-scroll-loadingcontrol {
+}

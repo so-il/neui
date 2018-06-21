@@ -1,0 +1,52 @@
+﻿
+/** 
+ * @progress.css
+**/
+
+progress.ne-progress {
+    width: 100%;
+    height: 3px;
+    border:none;  
+    background-color:@grey-4;
+    color: @green-7;
+}
+
+progress.ne-progress::-webkit-progress-bar {
+     background-color: @grey-4; 
+}
+progress.ne-progress::-webkit-progress-value  { 
+    background-color:@green-7;
+}
+
+div.ne-progress {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    box-align: center;
+    align-items: center;
+}
+
+.ne-progress-bar {
+    background-color: @grey-4;
+    height: 3px;
+    -webkit-box-flex: 1;
+    box-flex: 1;
+    flex: 1;
+}
+
+.ne-progress-innerbar {
+    width: 0;
+    height: 100%;
+    background-color:@green-7;
+}
+
+.ne-progress-opr {
+    display: block;
+    margin-left: 15px;
+}
+
+.ne-meter {
+    width: 100%;
+    height: 5px;
+}

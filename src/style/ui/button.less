@@ -1,0 +1,272 @@
+﻿
+/** 
+ * @button.css
+**/
+
+.ne-btn {
+    display: inline-block;
+    padding: .6857em 1em;
+    text-align: center;
+    box-sizing: border-box;
+    outline: 0 none;
+    overflow: visible;
+    line-height: 1;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1em;
+    border-width: 1px;
+    border-radius:@round-radius;
+    border-style: solid;
+    border-color:transparent;
+    background-color:transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-transition: border-color 150ms, background-color 150ms;
+    transition: border-color 150ms, background-color 150ms;
+    -webkit-tap-highlight-color:transparent;
+}
+
+/* size */
+.ne-btn-large {
+    width: 65%;
+    font-size: 1.142857em;
+}
+
+.ne-btn.block {
+    display: block;
+    width: 100%;
+    font-size: 1.142857em;
+}
+
+a.ne-btn.block {
+    display: block;
+    width: auto;
+}
+
+.ne-btn-small {
+    padding:.5em 1em;
+    font-size: .857em;
+}
+
+
+/*icon only*/
+.ne-btn-icononly {
+    padding: .357em;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+/*button loading*/
+.ne-btn-loading {
+    cursor: default;
+    pointer-events: none;
+    position: relative;
+    color: transparent !important;
+}
+
+    .ne-btn-loading::before {
+        content: '';
+        display: inline-block;
+        vertical-align: top;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 1em;
+        height: 1em;
+        margin-top: -.5em;
+        margin-left: -.5em;
+        border: 2px solid;
+        border-top-color: white;
+        border-right-color: white;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        border-radius: 50%;
+        box-sizing: border-box;
+        -webkit-animation-name: spinright;
+        -webkit-animation-duration: 700ms;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+        animation-name: spinright;
+        animation-duration: 700ms;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+
+/* circle button */
+.ne-btn-circle {
+    border-radius: 2em !important;
+}
+
+    .ne-btn-circle.ne-btn-icononly {
+        border-radius: 50% !important;
+    }
+
+
+/* status */
+.ne-btn-primary,
+.ne-btn-success,
+.ne-btn-info,
+.ne-btn-danger,
+.ne-btn-warning{
+    color:white;
+}
+
+/*btn-default*/
+.ne-btn-default {
+    background-color: @grey-1;
+    border-color:@grey-5;
+}
+     
+    .ne-btn-default:active, .ne-btn-default.active {
+        background-color: @grey-2;
+        border-color:  @grey-6;
+    }
+
+/*btn-primary*/
+.ne-btn-primary,.ne-btn-primary.active {
+    background-color: @blue-6;
+    border-color:@blue-6;
+}
+
+    .ne-btn-primary:active {
+        background-color: @blue-7;
+        border-color: @blue-7;
+    }
+
+    .ne-btn-primary.ne-btn-outline:not(:active):not(.active) {
+        color: @blue-6;
+    }
+
+/*btn-success*/
+.ne-btn-success,.ne-btn-success.active {
+    background-color: @green-6;
+    border-color:@green-6;
+}
+
+    .ne-btn-success:active {
+        background-color: @green-7;
+        border-color:  @green-7;
+    }
+
+    .ne-btn-success.ne-btn-outline:not(:active):not(.active) {
+        color: @green-6;
+    }
+
+/*btn-info*/
+.ne-btn-info,.ne-btn-info.active  {
+    background-color:@blue-5;
+    border-color:@blue-5;
+}
+
+    .ne-btn-info:active{
+        background-color:@blue-6;
+        border-color: @blue-6;
+    }
+
+    .ne-btn-info.ne-btn-outline:not(:active):not(.active) {
+        color: @blue-5;
+    }
+
+/*btn-danger*/
+.ne-btn-danger,.ne-btn-danger.active {
+    background-color:@red-6;
+    border-color:@red-6;
+}
+
+    .ne-btn-danger:active {
+        background-color: @red-7;
+        border-color: @red-7;
+    }
+
+    .ne-btn-danger.ne-btn-outline:not(:active):not(.active) {
+        color: @red-6;
+    }
+
+/*btn-warning*/
+.ne-btn-warning, .ne-btn-warning.active  {
+    background-color:@yellow-6;
+    border-color:@yellow-6;
+}
+
+    .ne-btn-warning:active{
+        background-color: @yellow-7;
+        border-color:@yellow-7;
+    }
+
+    .ne-btn-warning.ne-btn-outline:not(:active):not(.active) {
+        color: @yellow-6;
+    }
+
+
+/* outline */
+.ne-btn-outline {
+    background-color:white;
+}
+        .ne-btn-default.ne-btn-loading::before,
+        .ne-btn-outline.ne-btn-loading::before{
+            border-top-color: inherit;
+            border-right-color: inherit;
+        }
+
+
+/* btngroup */
+.ne-btn-group {
+    display: inline-block;
+}
+
+    .ne-btn-group > .ne-btn {
+        display: table-cell;
+        position: relative;
+        margin-left: -4px;
+        font-size: 1em;
+        white-space: nowrap;
+    }
+
+        .ne-btn-group > .ne-btn:not(:first-child) {
+            border-left: none !important;
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+        }
+
+        .ne-btn-group > .ne-btn:not(:last-child) {
+            border-right: none !important;
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+        }
+
+        .ne-btn-group > .ne-btn:not(:first-child)::before {
+            content: "";
+            position: absolute;
+            top: 30%;
+            left: -1px;
+            width: 0;
+            height: 40%;
+            border-left: 1px solid;
+            opacity: .4;
+        }
+
+        .ne-btn-group > .ne-btn.ne-btn-outline:not(:first-child)::before {
+            top: 0;
+            height: 100%;
+            opacity: 1;
+        }
+
+        .ne-btn-group > .ne-btn.active:not(:first-child)::before {
+            border-color: transparent;
+        }
+        
+/*btngroup fixed*/
+    .ne-btn-group.fixed,.ne-btn-group.block {
+        width: 100%;
+        display: table;
+        table-layout: fixed;
+        border-collapse: separate;
+        vertical-align: middle;
+    }
+
+.ne-btn-group.fixed > .ne-btn,.ne-btn-group.block > .ne-btn  {
+    width: 1%;
+    padding-left: 0;
+    padding-right: 0;
+}

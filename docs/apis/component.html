@@ -1,0 +1,124 @@
+﻿<h1>Component 组件封装支持</h1>
+<p>封装组件的交互行为，并对外提供简便的调用和触发方式。</p>
+<hr />
+<section>
+    <h2>定义Component</h2>
+    <pre><code class="javascript">
+        Ne.component(role,config);
+        </code></pre>
+    <h4>功能描述</h4>
+    <p>组件定义方法，定义组件的模板和属性包括行为。</p>
+    <h4>参数说明</h4>
+    <table>
+        <tbody>
+            <tr>
+                <th>参数</th>
+                <th>类型</th>
+                <th>描述</th>
+            </tr>
+            <tr>
+                <td>role</td>
+                <td>string</td>
+                <td>组件类名称</td>
+            </tr>
+            <tr>
+                <td>config</td>
+                <td>object</td>
+                <td>组件定义，配置项参考配置说明表。</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>config配置说明</h4>
+    <table>
+        <tbody>
+            <tr>
+                <th>项目</th>
+                <th>类型</th>
+                <th>描述</th>
+            </tr>
+            <tr>
+                <td>template</td>
+                <td>string</td>
+                <td>组件模版，模版语法参考render说明。</td>
+            </tr>
+            <tr>
+                <td>props</td>
+                <td>object</td>
+                <td>组件自定义属性及行为方法。</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>举例说明</h4>
+    <pre><code class="javascript">
+        //封装按钮组件
+        Ne.component('button', {
+            template'&lt;button class="ne-btn"&gt;{title}&lt;/button&gt;',
+            props: {
+                disabled: function () {
+                    this.classList.add('disabled');
+                },
+                enable: function () {
+                    this.classList.remove('disabled');
+                }
+            }
+        });
+        </code></pre>
+</section>
+<section>
+    <h2>调用Component方法</h2>
+    <pre><code class="javascript">
+        Ne.component.acts(selector).propsName(); 
+        //或使用
+        Ne.acts(selector).propsName();
+        </code></pre>
+    <h4>功能描述</h4>
+    <p>调用Component定义的方法，neui通过htmlElement的标签名或ne-role属性值来分辨element所属的组件类别。</p>
+    <h4>参数说明</h4>
+    <table>
+        <tbody>
+            <tr>
+                <th>参数</th>
+                <th>类型</th>
+                <th>描述</th>
+            </tr>
+            <tr>
+                <td>selector</td>
+                <td>element或string</td>
+                <td>元素对象或选择器</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>举例说明</h4>
+    <pre><code class="html">
+        &lt;!--假设现在有如下按钮：--&gt;
+        &lt;button id="btn1" class="ne-btn"&gt;按钮&lt;/button&gt;
+        &lt;a id="btn2" class="ne-btn" ne-role="button"&gt;按钮&lt;/a&gt;
+    </code><code class="javascript">
+        //使按钮转为不可点击状态：
+        Ne.acts('#btn1').disabled();
+        Ne.acts('#btn2').disabled();
+    </code></pre>
+</section>
+<section>
+    <h2>初始化Component</h2>
+    <pre><code class="javascript">
+        Ne.component.init(element);
+        </code></pre>
+    <h4>功能描述</h4>
+    <p>初始化component，如果component的props中定义有init方法的话会被调用执行。</p>
+    <h4>参数说明</h4>
+    <table>
+        <tbody>
+            <tr>
+                <th>参数</th>
+                <th>类型</th>
+                <th>描述</th>
+            </tr>
+            <tr>
+                <td>element</td>
+                <td>element</td>
+                <td>元素对象</td>
+            </tr>
+        </tbody>
+    </table>
+</section>

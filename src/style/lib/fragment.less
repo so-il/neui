@@ -1,0 +1,351 @@
+﻿
+/****************************************************************** 
+ * @ fragment
+ * Description:some common style fragments
+*******************************************************************/
+
+/*text style*/
+.text-excerpt strong, .text-title {
+    font-size: 1.142857em;
+    font-weight: 400;
+    color: @grey-10;
+    word-break: break-word;
+}
+.text-excerpt strong{
+    display:block;
+}
+
+.text-excerpt p, .text-meta {
+    font-size: .857em;
+    color: @meta-color;
+}
+
+.text-excerpt strong + p {
+    margin-top: .25em;
+}
+
+.text-meta i + span {
+    vertical-align: text-top;
+    margin-left: 3px;
+}
+
+.text-meta + .text-meta {
+    margin-left: 1em;
+}
+
+.text-tagged {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: .2857em;
+}
+
+
+/*font-weight*/
+.weight-lighter {
+    font-weight: 200 !important;
+}
+
+.weight-light {
+    font-weight: 300 !important;
+}
+
+.weight-normal {
+    font-weight: 400 !important;
+}
+
+.weight-bold {
+    font-weight: 500 !important;
+}
+
+.weight-bolder {
+    font-weight: 600 !important;
+}
+
+
+.wingblank {
+    padding-left: @wingblank-width !important;
+    padding-right: @wingblank-width !important;
+    box-sizing: border-box;
+}
+
+.wingblank-none {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/*iconsize*/
+.iconsize-small {
+    height: 2em;
+    width: 2em;
+    background-size: 2em auto;
+}
+
+.iconsize-normal {
+    height: 3em;
+    width: 3em;
+    background-size: 3em auto;
+}
+
+.iconsize-large {
+    height: 4em;
+    width: 4em;
+    background-size: 4em auto;
+}
+
+.pic-responsive {
+    width: 100%;
+    height: auto;
+}
+
+
+
+/*line-clamp*/
+.line-clamp-1, .line-clamp-2, .line-clamp-3, .line-clamp-4 {
+    overflow: hidden;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical;
+    box-orient:vertical;
+}
+
+.line-clamp-1 {
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+}
+
+.line-clamp-2 {
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+}
+
+.line-clamp-3 {
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+}
+
+.line-clamp-4 {
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+}
+
+.overflow-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*border*/
+.border-top, .border-bottom, .border-left, .border-right {
+    border-color:@border-color;
+    border-style: solid;
+    border-width: 0;
+}
+
+.border-top {
+    border-top-width: 1px;
+}
+
+.border-bottom {
+    border-bottom-width: 1px;
+}
+
+.border-left {
+    border-left-width: 1px;
+}
+
+.border-right {
+    border-right-width: 1px;
+}
+
+.border-none {
+    border: none !important;
+}
+
+.border-circle {
+    border-radius: 50% !important;
+    overflow: hidden;
+}
+
+.border-round {
+    border-radius:@round-radius !important;
+    overflow: hidden;
+}
+
+.border-square {
+    border-radius: 0 !important;
+}
+
+/*font size*/
+.size-normal {
+    font-size: 1em !important;
+}
+
+.size-double {
+    font-size: 2em !important;
+}
+
+.size-small {
+    font-size: .857em !important;
+}
+
+.size-smaller {
+    font-size: .7142857em !important;
+}
+
+.size-x-small {
+    font-size: .642857em !important;
+}
+
+.size-xx-small {
+    font-size: .57142857em !important;
+}
+
+.size-large {
+    font-size: 1.142857em !important;
+}
+
+.size-larger {
+    font-size: 1.2857em !important;
+}
+
+.size-x-large {
+    font-size: 1.42857em !important;
+}
+
+.size-xx-large {
+    font-size: 1.7142857em !important;
+}
+
+/*disabled & readonly*/
+.readonly,[readonly],.disabled, [disabled]{
+    pointer-events: none;
+    cursor: default;
+}
+.disabled, [disabled] {
+    opacity: .4;  
+}
+
+
+/*hide scrollbar*/
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/*horizontal scrolling*/
+.horizontal-scrolling {
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+    .horizontal-scrolling::-webkit-scrollbar {
+        display: none;
+    }
+
+/*clickable*/
+.clickable,[ne-tap],a ,.ne-action,.link,.action-link{
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+/**/
+.position-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+/*********** simple UI **************/
+
+/*link*/
+.link, .action-link {
+    color: @blue-6;
+}
+    .link:active, .action-link:active {
+        color: @blue-7;
+    }
+
+.link {
+    text-decoration: underline;
+}
+
+.action-link {
+    text-decoration: none;
+}
+
+/*label*/
+.ne-label {
+    display: inline-block;
+    vertical-align: top;
+    text-align:right;
+    color:@label-color;
+}
+
+/*blank*/
+.hr-line, .hr-blank, .hr-title, .hr-remark,.hr-meta  {
+    display: block;
+    margin: 0;
+    padding: 0 @wingblank-width;
+    border: none;
+    font-size: .92857em;
+    font-weight: normal;
+    color: @meta-color;
+    background-color: @page-bgcolor;
+}
+
+.hr-line {
+    height: 1px;
+    background-color:currentColor;
+}
+
+.hr-blank {
+    height: 2.142857em;
+}
+
+.hr-title {
+    color: @grey-8;
+    padding-top: 2.142857em;
+    padding-bottom:.357em;
+}
+
+.hr-remark {
+    padding-top:.4em;
+    padding-bottom: 2.142857em;
+}
+
+.hr-meta {
+    display: block;
+    position: relative;
+    padding: 1em 0;
+    text-align: center;
+}
+
+    .hr-meta span {
+        display: inline-block;
+        vertical-align: middle;
+        background-color: inherit;
+        padding: 0 1.5em;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hr-meta::before, .hr-meta::after {
+        content: '';
+        border-top: 1px solid;
+        opacity: .5;
+        display: inline-block;
+        width: 50%;
+        height: 0;
+        position: absolute;
+        top: 50%;
+        z-index: 0;
+    }
+
+    .hr-meta::before {
+        left: 0;
+    }
+
+    .hr-meta::after {
+        right: 0;
+    }
+    

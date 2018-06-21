@@ -1,0 +1,43 @@
+﻿
+/****************************************************************** 
+ * @ reset
+*******************************************************************/
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -ms-touch-action: none;
+    touch-action: none;
+    user-select: none;
+}
+
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 2dppx) {
+    /* For Retina */
+    body {
+        -webkit-font-smoothing: subpixel-antialiased;
+    }
+}
+
+body, form, ul, ol, dl, dd, p {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+
+img {
+    vertical-align: top;
+    -webkit-touch-callout: none;
+}
+
+body {
+    font: 14px/1.42858 -apple-system, BlinkMacSystemFont, "Segoe UI", 'Helvetica Neue', Helvetica, 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',arial,sans-serif;
+}
+
+body, a {
+    color: @text-color;
+}

@@ -1,0 +1,245 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NeUI Docs</title>
+    <meta name="keywords" content="neui" />
+    <meta name="description" content="neui" />
+    <link rel="stylesheet" href="assets/styles/api.css" />
+    <link rel="stylesheet" href="assets/tools/highlight/highlight.vs.css" />
+    <link rel="shortcut icon" href="assets/images/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/images/touchicon.png" />
+</head>
+<body>
+    <main class="page-main">
+        <nav class="page-navbar">
+            <a class="page-navbar-toggler" onclick="toggleSidebar();">
+                <img src="assets/images/ui-toggler.png"/>
+            </a>
+            <h1 class="page-navbar-title">NeUI说明文档</h1>
+        </nav>
+        <aside class="page-sidebar">
+            <div class="header">
+                <h1>NeUI说明文档<small>v0.1</small></h1>
+            </div>
+            <ul class="feed-list">
+                <li class="feed-list-item">
+                    <a href="//github.com/so-il/neui" target="_blank" class="feed-name"><img src="assets/images/icon-cards.png" /><span>应用实例</span></a>
+                </li>
+                <li class="feed-list-item">
+                    <a href="//github.com/so-il/neui" target="_blank" class="feed-name"><img src="assets/images/icon-github.png" /><span>GitHub Sources</span></a>
+                </li>
+            </ul>
+            <ul id="j-category-list" class="category-list">
+                <li class="category-item">
+                    <a href="#start" class="category-name">Start</a>
+                </li>
+                <li class="category-item" data-haschild="true">
+                    <span class="category-name">UI Base <img class="icon-arrow" src="assets/images/icon-arrow.svg"></span>
+                    <ul class="category-list">
+                        <li class="category-item">
+                            <a href="#font" class="category-name">Font 字体</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#color" class="category-name">Color 颜色</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#typegraphy" class="category-name">Typegraphy 排版</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#layout" class="category-name">Layout 布局</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="category-item" data-haschild="true">
+                    <span class="category-name"> UI Controls <img class="icon-arrow" src="assets/images/icon-arrow.svg"></span>
+                    <ul class="category-list">
+                        <li class="category-item">
+                            <a href="#icon" class="category-name">Icon 图标 </a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#badge" class="category-name">Badge 徽标</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#button" class="category-name">Button 按钮</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#input" class="category-name">input 输入</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#navbar" class="category-name">Nav Bar 导航栏</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#searchbar" class="category-name">Search Bar 搜索栏</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#tabbar" class="category-name">Tab Bar 标签栏</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#progress" class="category-name">Progress 进度条</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#stepline" class="category-name">Step Line 步骤条</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#carousel" class="category-name">Carousel 走马灯</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="category-item" data-haschild="true">
+                    <span class="category-name"> UI Views <img class="icon-arrow" src="assets/images/icon-arrow.svg"></span>
+                    <ul class="category-list">
+                        <li class="category-item">
+                            <a href="#list" class="category-name">List View 列表</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#grid" class="category-name">Grid View 网格</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#table" class="category-name">Table View 表格</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#panel" class="category-name">Panel View 面板</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#activityview" class="category-name">activity View 活动面板</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#drawer" class="category-name">Drawer View 抽屉面板</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#dialog" class="category-name">Dialog 对话框</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#popover" class="category-name">Popover 气泡框</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#toast" class="category-name">Toast 轻提示</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#scroll" class="category-name">Scroll View 滑动容器</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#message" class="category-name">Result 结果页</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="category-item" data-haschild="true">
+                    <span class="category-name"> JS Library <img class="icon-arrow" src="assets/images/icon-arrow.svg"></span>
+                    <ul class="category-list">
+                        <li class="category-item">
+                            <a href="#touch" class="category-name">Touch 手势识别支持</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#animate" class="category-name">Animate 动效支持</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#component" class="category-name">Component 组件封装支持</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#render" class="category-name">Render 模板渲染支持</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="ad-banner" onclick="showContactInfo();">
+                <img src="assets/images/icon-moneybox.png" />
+                <span>CONTACT INFO</span>
+            </div>
+        </aside>
+        <div class="page-content">
+            <div id="contentpanel" class="contentpanel"></div>
+        </div>
+    </main>
+
+    <!--load scripts-->
+    <script src="assets/tools/highlight/highlight.pack.js"></script>
+    <script>
+        var ajax=function(){function t(t,e){var n=e.context;return e.beforeSend.call(n,t,e)===!1?!1:void 0}function e(t,e,n){var a=n.context,o="success";n.success.call(a,t,o,e),r(o,e,n)}function n(t,e,n,a){var o=a.context;a.error.call(o,n,e,t),r(e,n,a)}function r(t,e,n){var r=n.context;n.complete.call(r,e,t)}function a(){}function o(t){return t&&(t==y?"html":t==m?"json":f.test(t)?"script":x.test(t)&&"xml")||"text"}function i(t,e){return(t+"&"+e).replace(/[&?]{1,2}/,"?")}function s(t){var e="";for(var n in t)e+=n+"="+t[n]+"&";return e.substring(0,e.length-1)}function c(t,e,n){for(var r in e)n&&($.isPlainObject(e[r])||$.isArray(e[r]))?(($.isPlainObject(e[r])&&!$.isPlainObject(t[r])||$.isArray(e[r])&&!$.isArray(t[r]))&&(t[r]={}),c(t[r],e[r],n)):void 0!==e[r]&&(t[r]=e[r])}function l(t){var e,n=Array.prototype.slice.call(arguments,1);return"boolean"==typeof t&&(e=t,t=n.shift()),t=t||{},n.forEach(function(n){c(t,n,e)}),t}function u(t){"object"==typeof t.data&&(t.data=s(t.data)),!t.data||t.type&&"GET"!=t.type.toUpperCase()||(t.url=i(t.url,t.data))}var p,d,f=/^(?:text|application)\/javascript/i,x=/^(?:text|application)\/xml/i,m="application/json",y="text/html",v=/^\s*$/,h={type:"GET",beforeSend:a,success:a,error:a,complete:a,context:null,global:!1,xhr:function(){return new window.XMLHttpRequest},accepts:{script:"text/javascript, application/javascript",json:m,xml:"application/xml, text/xml",html:y,text:"text/plain"},crossDomain:!1,timeout:0};return function(r){var i=l({},r||{});for(p in h)void 0===i[p]&&(i[p]=h[p]);i.crossDomain||(i.crossDomain=/^([\w-]+:)?\/\/([^\/]+)/.test(i.url)&&RegExp.$2!=window.location.host);{var s=i.dataType;/=\?/.test(i.url)}i.url||(i.url=window.location.toString()),u(i);var c,f=i.accepts[s],x={},m=/^([\w-]+:)\/\//.test(i.url)?RegExp.$1:window.location.protocol,y=h.xhr();i.crossDomain||(x["X-Requested-With"]="XMLHttpRequest"),f&&(x.Accept=f,f.indexOf(",")>-1&&(f=f.split(",",2)[0]),y.overrideMimeType&&y.overrideMimeType(f)),(i.contentType||i.data&&"GET"!=i.type.toUpperCase())&&(x["Content-Type"]=i.contentType||"application/x-www-form-urlencoded"),i.headers=l(x,i.headers||{}),y.onreadystatechange=function(){if(4==y.readyState){clearTimeout(c);var t,r=!1;if(y.status>=200&&y.status<300||304==y.status||0==y.status&&"file:"==m){s=s||o(y.getResponseHeader("content-type")),t=y.responseText;try{"script"==s?(1,eval)(t):"xml"==s?t=y.responseXML:"json"==s&&(t=v.test(t)?null:JSON.parse(t))}catch(a){r=a}r?n(r,"parsererror",y,i):e(t,y,i)}else n(null,"error",y,i)}};var w="async"in i?i.async:!0;y.open(i.type,i.url,w);for(d in i.headers)y.setRequestHeader(d,i.headers[d]);return t(y,i)===!1?(y.abort(),!1):(i.timeout>0&&(c=setTimeout(function(){y.onreadystatechange=a,y.abort(),n(null,"timeout",y,i)},i.timeout)),y.send(i.data?i.data:null),y)}}();
+        var el_contentpanel=document.querySelector('#contentpanel'),
+            el_categorylist=document.querySelector('#j-category-list'),
+            el_sidebar=document.querySelector('.page-sidebar'),
+            el_content=document.querySelector('.page-content'),
+            hash=location.hash?location.hash.substring(1):'start';
+
+        function loadPage(hash){
+            ajax({
+                dataType:'html',
+                url:'apis/'+hash+'.html',
+                success:function(html){
+                    el_contentpanel.innerHTML=html;
+                    Array.prototype.slice.call(el_contentpanel.querySelectorAll('code')).forEach(function(item) {
+                        hljs.highlightBlock(item);
+                    });
+                }
+            });
+        }
+
+        function selectCategory(target){
+            if(typeof (target) == 'string'){
+                var target_supparent;
+                target=el_categorylist.querySelector('.category-name[href="#'+target+'"]').parentElement;
+                target_supparent=target.parentElement.parentElement;
+                target_supparent.classList.contains('category-item') && target_supparent.classList.add('expand');
+                target.classList.add('active');
+                target.scrollIntoView();
+            }else{
+                if(target.getAttribute('data-haschild')=='true'){
+                    target.classList[target.classList.contains('expand')?'remove':'add']('expand');
+            }else{
+                    el_categorylist.querySelector('.category-item.active').classList.remove('active');
+                    target.classList.add('active');
+                    el_sidebar.classList.contains('show') && toggleSidebar();
+                }
+            }
+        }
+
+        function showContactInfo(){
+            loadPage('contact');
+            location.hash='contact';
+            el_sidebar.classList.contains('show') && toggleSidebar();
+        }
+
+        function toggleSidebar(){
+            if(toggleSidebar._t){
+                clearTimeout(toggleSidebar._t);
+            }
+            if( el_sidebar.classList.contains('show')){
+                 el_sidebar.classList.remove('show');
+                 el_sidebar.classList.add('close');
+                 toggleSidebar._t=setTimeout(function(){
+                    el_sidebar.classList.remove('close');
+                 },300);
+                 el_content.onclick=null;
+            }else{
+                el_sidebar.classList.remove('close');
+                el_sidebar.classList.add('show');
+                el_content.onclick=toggleSidebar;
+            }
+        }
+
+        el_categorylist.style.maxHeight=window.innerHeight-250+'px';
+        el_categorylist.addEventListener('click',function(event){
+            var bubble=function(el){
+                  return el && el.tagName.toLowerCase()!='ul'?(el.classList.contains('category-item')? el:bubble(el.parentElement)):null;
+            }
+            var target=bubble(event.target || event.touches[0]);
+            if(target){
+                event.preventDefault();
+                event.stopPropagation();
+                if(target.getAttribute('data-haschild')!='true'){
+                    var hash=target.querySelector('.category-name').hash.substring(1);
+                    loadPage(hash);
+                    location.hash=hash;
+                }
+                selectCategory(target);
+            }
+        });
+
+        loadPage(hash);
+        selectCategory(hash);
+    </script>
+</body>
+</html>

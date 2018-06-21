@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>drawer</title>
+
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../dist/neui.css" />
+</head>
+<body>
+    <section class="ne-page active" ne-role="page">
+        <div class="ne-page-body">
+            <div class="ne-cell"><div class="hr-meta"><span>浮动展开</span></div></div>
+            <div class="ne-cell">
+                <button ne-tap="show:#j-drawer-fromeleft" class="ne-btn ne-btn-primary block">Show Left Drawer</button>
+            </div>
+            <div class="ne-cell">
+                <button ne-tap="show:#j-drawer-fromright" class="ne-btn ne-btn-primary block">Show Right Drawer</button>
+            </div>
+            <div class="ne-cell"><div class="hr-meta"><span>移动页面展开</span></div></div>
+            <div class="ne-cell">
+                <button ne-tap="open:#j-drawer-fromeleft" class="ne-btn ne-btn-primary block">Open Left Drawer</button>
+            </div>
+            <div class="ne-cell">
+                <button ne-tap="open:#j-drawer-fromright" class="ne-btn ne-btn-primary block">Open Right Drawer</button>
+            </div>
+        </div>
+    </section>
+    <div class="ne-drawer" id="j-drawer-fromeleft" ne-role="drawer">
+        <div class="ne-mask" ne-tap="hide:drawer"></div>
+        <div class="ne-drawer-container">
+            <ul class="ne-list">
+                <li><a href="javascript:;" class="ne-cell align-center primary" ne-tap="hide:drawer">示例菜单</a></li>
+                <li><a href="javascript:;" class="ne-cell align-center primary" ne-tap="hide:drawer">示例菜单</a></li>
+                <li><a href="javascript:;" class="ne-cell align-center primary" ne-tap="hide:drawer">示例菜单</a></li>
+                <li><a href="javascript:;" class="ne-cell align-center primary" ne-tap="hide:drawer">close drawer</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="ne-drawer ne-drawer-fromright" id="j-drawer-fromright" ne-role="drawer">
+        <div class="ne-mask" ne-tap="hide:drawer"></div>
+        <div class="ne-drawer-container">
+            <ul class="ne-list">
+                <li><div class="ne-cell align-center primary" ne-tap="hide:drawer">示例菜单</div></li>
+                <li><div class="ne-cell align-center primary" ne-tap="hide:drawer">示例菜单</div></li>
+                <li><div class="ne-cell align-center primary" ne-tap="hide:drawer">示例菜单</div></li>
+                <li><div class="ne-cell align-center primary" ne-tap="hide:drawer">close drawer</div></li>
+            </ul>
+        </div>
+    </div>
+    <script src="../../dist/neui.js"></script>
+</body>
+</html>

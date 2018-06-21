@@ -1,0 +1,113 @@
+﻿
+/** 
+ * @list.css
+**/
+
+.ne-list {
+    list-style: none;
+    padding: 0;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-color:@border-color;
+}
+
+    .ne-list > li {
+        position: relative;
+        background-color: white;
+    }
+
+        .ne-list > li:not(:first-child)::before {
+            content: '';
+            border-top: 1px solid @border-color;
+            display: inline-block;
+            position: absolute;
+            left: 0;
+            right: 0;
+            z-index: 2;
+        }
+
+/*animate*/
+.ne-list > li.ne-animate-remove {
+    opacity: 0;
+    height: 0 !important;
+    overflow:hidden;
+    -webkit-transition: all 250ms ease;
+    transition: all 250ms ease;
+}
+
+.ne-list > li[ne-swipeable="true"] > .ne-cell {
+    background-color: white;
+    position: relative;
+    z-index: 1;
+    transition-timing-function: ease;
+    -webkit-transition-timing-function: ease;
+}
+
+
+
+/*listitem-actions*/
+.ne-list > li .ne-listitem-actions {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    right: 0;
+    display: flex;
+}
+.ne-list > li .ne-listitem-actions.keepleft {
+    left:0;
+    right: unset;
+}
+
+    .ne-list > li .ne-listitem-actions button {
+        border-radius: 0;
+        margin: 0;
+        border: 0;
+        height: 100%;
+    }
+
+/*list-index*/
+.ne-listindex {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    display: table;
+    height: 100%;
+    background-color: transparent;
+}
+
+.ne-listindex-container {
+    display: table-cell;
+    vertical-align: top;
+    padding-top: 20px;
+}
+
+.ne-listindex-item {
+    display: block;
+    padding: 0 10px;
+}
+
+
+/*style init*/
+a.ne-cell:active, label.ne-cell:active {
+    background-color:@actived-bgcolor;
+}
+
+.ne-list .ne-cell-right {
+    color: @meta-color;
+}
+
+    .ne-list .ne-cell-right > span {
+        vertical-align: middle;
+    }
+
+    .ne-list .ne-cell-right > .ne-icon-arrow-right {
+        text-align: right;
+        margin-left: .5em;
+        opacity: .6;
+    }
+
+        .ne-list .ne-cell-right > .ne-icon-arrow-right::before {
+            font-size: 1.2857em;
+        }

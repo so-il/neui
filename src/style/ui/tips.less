@@ -1,0 +1,51 @@
+
+/** 
+ * @tips.css 
+**/
+
+.ne-tips[data-tips] {
+    position: relative;
+    overflow: visible;
+}
+
+    .ne-tips[data-tips]::before,
+    .ne-tips[data-tips]::after {
+        position: absolute;
+        left: 50%;
+        visibility: hidden;
+        pointer-events: none;
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+    }
+
+    .ne-tips[data-tips]::before {
+        content: attr(data-tips);
+        top: -42px;
+        max-width: 18em;
+        padding: 6px 10px;
+        line-height: 18px;
+        border-radius:@round-radius;
+        background-color: rgba(0, 0, 0, .5);
+        text-align: left;
+        color: white;
+        font-size: .857em;
+        font-style: normal;
+        white-space: nowrap;
+    }
+
+    .ne-tips[data-tips]::after {
+        content: '';
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        border: 6px solid transparent;
+        border-top-color:rgba(0, 0, 0, 0.5);
+        top: -12px;
+    }
+
+    .ne-tips[data-tips]:hover::before,
+    .ne-tips[data-tips]:hover::after {
+        visibility: visible;
+        -webkit-transition: visibility .1s .1s;
+        transition: visibility .1s .1s;
+    }

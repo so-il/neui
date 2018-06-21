@@ -1,0 +1,132 @@
+﻿<h1>Tab Bar 标签栏</h1>
+<p>用于让用户在不同的视图中进行切换。</p>
+<hr />
+<section>
+    <h2>结构与样式</h2>
+    <div class="flexbox">
+        <pre><code class="html">
+&lt;!--
+1、tabview、tablist、tab、tabpanel都需要声明ne-role；
+2、tab通常结合tabpanel使用；
+3、tab通过声明ne-tap="toggle:tabPanelId"与id相应的tabpanel关联；
+4、使用.active设置默认选中的tab和tabpanel；
+5、tabpanel设置属性ne-swipeable="true"可使之支持手势操作切换；
+--&gt;
+
+                             
+&lt;!--tabview的基本结构--&gt;
+&lt;div class="ne-tabs-wrapper" ne-role="tabview"&gt;
+    &lt;div class="ne-tabs ne-tabs-top" ne-role="tablist"&gt;
+        &lt;div class="ne-tab active" ne-tap="toggle:#tab_1" ne-role="tab"&gt;&lt;span&gt;Tab1&lt;/span&gt;&lt;/div&gt;
+        &lt;div class="ne-tab" ne-tap="toggle:#tab_2" ne-role="tab"&gt;&lt;span&gt;Tab2&lt;/span&gt;&lt;/div&gt;
+        &lt;div class="ne-tab" ne-tap="toggle:#tab_3" ne-role="tab"&gt;&lt;span&gt;Tab3&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="ne-tabs-content"&gt;
+        &lt;div id="tab_1" class="ne-tabpanel active" ne-swipeable="true" ne-role="tabpanel"&gt;&lt;/div&gt;
+        &lt;div id="tab_2" class="ne-tabpanel" ne-swipeable="true" ne-role="tabpanel"&gt;&lt;/div&gt;
+        &lt;div id="tab_3" class="ne-tabpanel" ne-swipeable="true" ne-role="tabpanel"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!--
+6、tablist默认自适应占满屏幕全宽，当tabbar的tab数量过多时可使用.ne-tabs-top-fixed使之可滑动显示更多tab
+--&gt;
+&lt;div class="ne-tabs ne-tabs-top ne-tabs-top-fixed" ne-role="tablist"&gt;...&lt;/div&gt;
+
+&lt;!--
+7、带图标的tabbar通常被使用在页面底部，使用.ne-tabs-withicon
+--&gt;
+&lt;div class="ne-tabs ne-tabs-withicon" ne-role="tablist"&gt;&lt;/div&gt;
+
+&lt;!--
+8、添加.ne-tabs-top使tabar置于上方tabpanel在下方
+--&gt;
+&lt;div class="ne-tabs ne-tabs-left" ne-role="tablist"&gt;&lt;/div&gt;
+                 
+&lt;!--
+9、添加.ne-tabs-left使tabar置于左侧tabpanel在右侧
+--&gt;
+&lt;div class="ne-tabs ne-tabs-left" ne-role="tablist"&gt;&lt;/div&gt;   
+
+&lt;!--
+10、也可以使用buttongroup代替tabbar
+--&gt;
+&lt;div class="ne-btn-group ne-btn-group-justified" ne-role="tablist"&gt;  
+    &lt;a class="ne-btn" ne-tap="toggle:tab" ne-role="tab"&gt;&lt;/a&gt;
+    &lt;a class="ne-btn" ne-tap="toggle:tab" ne-role="tab"&gt;&lt;/a&gt;
+    &lt;a class="ne-btn" ne-tap="toggle:tab" ne-role="tab"&gt;&lt;/a&gt;
+&lt;/div&gt;
+                            </code></pre>
+        <div class="preview">
+            <div class="preview-browser">
+                <div class="preview-browser-header">
+                    <div class="preview-browser-statbar">
+                        <img src="assets/images/ui-statbar.png">
+                    </div>
+                    <div class="preview-browser-url-box">http://neui.nelabs.cn/examples/components/tabbar.html</div>
+                </div>
+                <div class="preview-browser-body">
+                    <iframe src="../examples/components/tabbar.html"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>交互与功能</h2>
+    <h4>范式说明</h4>
+    <p>大部分时候只需要通过html声明即可完成所有组件所有交互行为，但也会有需要通过js触发交互行为方法的情况，关于如何触发组件交互行为方法的详细介绍请查阅-<a href="#component" target="_blank">《Component 组件封装支持》</a></p>
+    <pre><code class="javascript">
+        //通过Js触发组件行为功能的范式：
+        Ne.acts(selector).propsName(args[]);
+        </code></pre>
+    <h4>tab支持的交互功能</h4>
+    <table>
+        <tbody>
+            <tr>
+                <td>方法名</td>
+                <td>说明</td>
+            </tr>
+            <tr>
+                <td class="nowrap">.toggle()</td>
+                <td>切换到当前tab，与tab相关联的tabpanel自然也会切换过来。</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>tabpanel支持的交互功能</h4>
+    <table>
+        <tbody>
+            <tr>
+                <td>方法名</td>
+                <td>说明</td>
+            </tr>
+            <tr>
+                <td class="nowrap">.onswipe()</td>
+                <td>提供给手势操作的方法，声明了ne-swipeable的组件即会触发onswipe方法。</td>
+            </tr>
+            <tr>
+                <td class="nowrap">.toggle()</td>
+                <td>切换到当前tabpanel，与tabpanel相关联的tab自然也会切换过来。</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>举例说明</h4>
+    <pre><code class="html">
+        &lt;!--假设现在有如下tabs control：--&gt;
+        &lt;div class="ne-tabs-wrapper" ne-role="tabview"&gt;
+            &lt;div class="ne-tabs ne-tabs-top" ne-role="tablist"&gt;
+                &lt;div class="ne-tab active" ne-tap="toggle:#tab_1" ne-role="tab"&gt;&lt;span&gt;Tab1&lt;/span&gt;&lt;/div&gt;
+                &lt;div class="ne-tab" ne-tap="toggle:#tab_2" ne-role="tab"&gt;&lt;span&gt;Tab2&lt;/span&gt;&lt;/div&gt;
+                &lt;div class="ne-tab" ne-tap="toggle:#tab_3" ne-role="tab"&gt;&lt;span&gt;Tab3&lt;/span&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="ne-tabs-content"&gt;
+                &lt;div id="tab_1" class="ne-tabpanel active" ne-swipeable="true" ne-role="tabpanel"&gt;&lt;/div&gt;
+                &lt;div id="tab_2" class="ne-tabpanel" ne-swipeable="true" ne-role="tabpanel"&gt;&lt;/div&gt;
+                &lt;div id="tab_3" class="ne-tabpanel" ne-swipeable="true" ne-role="tabpanel"&gt;&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    </code><code class="javascript">
+        //切换到tab_3：
+        Ne.acts('#tab_3').toggle();
+    </code></pre>
+</section>

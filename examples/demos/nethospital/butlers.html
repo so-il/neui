@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title></title>
+    <!-- mandatory styles -->
+    <link rel="stylesheet" href="../../../dist/neui.css" />
+    <link rel="stylesheet" href="assets/styles/app.css" />
+</head>
+
+<body>
+    <section class="ne-page active" ne-role="page" style="background-color:#a4fff7;">
+        <div class="ne-page-body">
+            <div class="ne-tabs-wrapper butler-wrap" ne-role="tabview">
+                <div class="butlerlist" ne-role="tablist">
+                    <div class="butler active" ne-tap="toggle:#butler_1" ne-role="tab">
+                        <div class="butler-img">
+                            <img src="/Content/images/icon-doctor.svg">
+                        </div>
+                        <span class="butler-name">流川枫</span>
+                        <span class="butler-title">营养师</span>
+                    </div>
+                    <div class="butler" ne-tap="toggle:#butler_2" ne-role="tab">
+                        <div class="butler-img">
+                            <img src="/Content/images/icon-doctor.svg">
+                        </div>
+                        <span class="butler-name">李欢欢</span>
+                        <span class="butler-title">主治专家</span>
+                    </div>
+                    <div class="butler" ne-tap="toggle:#butler_3" ne-role="tab">
+                        <div class="butler-img">
+                            <img src="/Content/images/icon-doctor.svg">
+                        </div>
+                        <span class="butler-name">陈智劼</span>
+                        <span class="butler-title">运动专家</span>
+                    </div>
+                    <div class="butler" ne-tap="toggle:#butler_3" ne-role="tab">
+                        <div class="butler-img">
+                            <img src="/Content/images/icon-doctor.svg">
+                        </div>
+                        <span class="butler-name">陈智劼</span>
+                        <span class="butler-title">运动专家</span>
+                    </div>
+                    <div class="butler" ne-tap="toggle:#butler_3" ne-role="tab">
+                        <div class="butler-img">
+                            <img src="/Content/images/icon-doctor.svg">
+                        </div>
+                        <span class="butler-name">陈智劼</span>
+                        <span class="butler-title">运动专家</span>
+                    </div>
+                    <div class="butler" ne-tap="toggle:#butler_3" ne-role="tab">
+                        <div class="butler-img">
+                            <img src="/Content/images/icon-doctor.svg">
+                        </div>
+                        <span class="butler-name">陈智劼</span>
+                        <span class="butler-title">运动专家</span>
+                    </div>
+                </div>
+                <div class="ne-tabs-content butler-content">
+                    <div id="butler_1" class="ne-tabpanel active" ne-animate="fade" ne-swipeable="true" ne-role="tabpanel">
+                        <div class="butler-infopanel ne-cell">
+                            <div class="ne-cell-center">
+                               <p style="margin:10px 0;font-weight:bold;font-size:1.2em;color:#22a6a5;">尊敬的李华先生，您好！</p>
+                               <p style="margin: 10px 0;">您当前的营养方案建议如下：</p>
+                                    <fieldset class="ne-fieldset padding-top-20 margin-top-20 border-top">
+                                            <div class="ne-field">
+                                                <label>早餐：</label>
+                                                <p>馒头和草莓酱、牛奶或豆奶、煮荷包蛋1个、酱黄瓜。</p>
+                                            </div>
+                                            <div class="ne-field">
+                                                <label>水果：</label>
+                                                <p>夏橙或白萝卜1个。</p>
+                                            </div>
+                                            <div class="ne-field">
+                                                <label>中餐：</label>
+                                                <p>荞麦大米饭、香菇彩信、糖醋带鱼、豆腐血旺丝瓜汤。</p>
+                                            </div>
+                                            <div class="ne-field">
+                                                <label>晚餐：</label>
+                                                <p>绿豆粥、白菜猪肉包子、虾皮冬瓜。</p>
+                                            </div>
+                                        </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="butler_2" class="ne-tabpanel" ne-animate="fade" ne-swipeable="true" ne-role="tabpanel">
+                            <div class="butler-infopanel"></div>
+                    </div>
+                    <div id="butler_3" class="ne-tabpanel" ne-animate="fade" ne-swipeable="true" ne-role="tabpanel">
+                            <div class="butler-infopanel"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="ne-page-footer" style="background-color:#21a6a5;">
+            <div class="ne-cell padding-20  align-center white">
+                    <div>如有任何问题，您可以随时联系您的专属私人客服</div>
+                    <div class="size-double weight-bold margin-top-5"><i class="ne-icon-phone align-middle"></i><span class="text-tagged">13112345678</span></div>
+            </div>
+        </footer>
+        <canvas class="bg-digit"></canvas>
+    </section>
+
+    <!--load scripts-->
+    <script src="../../../dist/neui.js"></script>
+    <script>
+    /*draw canvas*/
+    function drawcanvas(canvas,path){
+        var canvas_context = canvas.getContext('2d');
+        var r = 0;
+        var draw=function (i,j,k){
+            canvas_context.beginPath();
+            canvas_context.moveTo(i.x, i.y);
+            canvas_context.lineTo(j.x, j.y);
+            canvas_context.lineTo(k.x, k.y);
+            canvas_context.closePath();
+            var v = Math.cos,u = Math.PI*2;
+            r-=u/-30;
+            canvas_context.fillStyle = '#'+(v(r)*127+128<<16 | v(r+u/3)*127+128<<8 | v(r+u/3*2)*127+128).toString(24);
+            canvas_context.fill();
+        }
+
+        canvas.width =canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        canvas_context.clearRect(0,0,canvas.width,canvas.height);
+        canvas_context.globalAlpha = 0.1;
+        for(var i=0;i<path.length-3;i++){
+            draw(path[i],path[i+1],path[i+2])
+        }
+    }
+    drawcanvas(document.querySelector('canvas.bg-digit'),[
+        {x: 0, y: 250},
+        {x: 0, y: 10},
+        {x: 52, y: 303},
+        {x: 120, y: 371},
+        {x: 130, y: 236},
+        {x: 175, y: 96},
+        {x: 217, y: 190},
+        {x: 366, y: 160},
+        {x: 452, y: 25},
+        {x: 477, y: 137}
+    ]);
+    </script>
+</body>
+
+</html>

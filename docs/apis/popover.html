@@ -1,0 +1,95 @@
+﻿<h1>Popover 气泡框</h1>
+<p>在点击控件或者某个区域后，浮出一个气泡菜单来做更多的操作。 如果设置了遮罩层，建议通过点击遮罩层的任一位置，进行退出。</p>
+<hr />
+<section>
+    <h2>结构与样式</h2>
+    <div class="flexbox">
+        <pre><code class="html">
+&lt;!-- 
+1、popover需声明ne-role="popover"； 
+2、默认不可见，通过添加.ne-animate-show展示； 
+3、popover的内容载体是气泡框bubble，bubble的content按需添加,通常结合ne-actions结构使用； 
+4、声明ne-tap="show:#elementId"的元素点击可展示id对应的popover；                  
+4、popover内声明ne-tap="hide:popover"的元素点击可关闭popover;                   
+5、除了4，声明ne-tap="hide:#elementId"的元素点击也可关闭popover; 
+6、popover上下左右可分9个方位展开，一般展开的方向将由程序根据即将展开的区域自动判断；
+--&gt;                 
+
+&lt;!--popover的基本结构--&gt;
+&lt;div id="j-popover" class="ne-popover ne-animate-show" ne-role="popover"&gt;
+    &lt;div class="ne-mask" ne-tap="hide:popover"&gt;&lt;/div&gt;
+    &lt;div class="ne-bubble"&gt;
+        &lt;div class="ne-bubble-content"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!--点击即可展示popover的按钮--&gt;
+&lt;button ne-tap="show:#j-popover"&gt;show popover&lt;/button&gt;
+
+&lt;!--使用ne-actions填充bubble--&gt;
+&lt;div class="ne-bubble"&gt;
+    &lt;div class="ne-bubble-content ne-actions"&gt;
+        &lt;div class="ne-action" ne-tap="hide:popover"&gt;选项1&lt;/div&gt;
+        &lt;div class="ne-action weight-bold red" ne-tap="hide:popover"&gt;危险选项红色加粗&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+                            </code></pre>
+        <div class="preview">
+            <div class="preview-browser">
+                <div class="preview-browser-header">
+                    <div class="preview-browser-statbar">
+                        <img src="assets/images/ui-statbar.png">
+                    </div>
+                    <div class="preview-browser-url-box">http://neui.nelabs.cn/examples/components/popover.html</div>
+                </div>
+                <div class="preview-browser-body">
+                    <iframe src="../examples/components/popover.html"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>交互与功能</h2>
+    <h4>范式说明</h4>
+    <p>大部分时候只需要通过html声明即可完成所有组件所有交互行为，但也会有需要通过js触发交互行为方法的情况，关于如何触发组件交互行为方法的详细介绍请查阅-<a href="#component" target="_blank">《Component 组件封装支持》</a></p>
+    <pre><code class="javascript">
+        //通过Js触发组件行为功能的范式：
+        Ne.acts(selector).propsName(args[]);
+        </code></pre>
+    <h4>popover支持的交互功能</h4>
+    <table>
+        <tbody>
+            <tr>
+                <td>方法名</td>
+                <td>说明</td>
+            </tr>
+            <tr>
+                <td class="nowrap">.show(object event)</td>
+                <td>展示popover，由于popover是无固定展示位置的，所以如果要通过js控制弹出，需要传入event object，event必须包含有currentTarget指向某个element。</td>
+            </tr>
+            <tr>
+                <td class="nowrap">.hide()</td>
+                <td>隐藏popover。</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>举例说明</h4>
+    <pre><code class="html">
+        &lt;!--假设现在有如下popover：--&gt;
+        &lt;div id="j-popover" class="ne-popover" ne-role="popover"&gt;
+            &lt;div class="ne-mask" ne-tap="hide:popover"&gt;&lt;/div&gt;
+            &lt;div class="ne-bubble"&gt;
+                &lt;div class="ne-bubble-content"&gt;&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    </code><code class="javascript">
+        //展示popover：
+        Ne.acts('#j-popover').show({
+            currentTarget:document.querySelector('#someoneId')
+        });
+        //隐藏popover：
+        Ne.acts('#j-popover').hide();
+    </code></pre>
+</section>
