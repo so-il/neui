@@ -1,7 +1,6 @@
-﻿
-/****************************************************************** 
+﻿/****************************************************************** 
  * @range
-*******************************************************************/
+ *******************************************************************/
 
 (function (Ne) {
     //fn 
@@ -10,15 +9,15 @@
             __max = target.getAttribute('max') || 100,
             __value = target.getAttribute('value') || 0;
 
-        var el_range = Ne.dom.render('<div class="ne-range">'
-                                        +'<div class="ne-range-track"><span></span></div>'
-                                        +'<div class="ne-range-thumb">'
-                                            +'<div class="ne-range-tips"><span></span></div>'
-                                        +'</div>'
-                                    +'</div>'),
-        el_range_track = el_range.querySelector('.ne-range-track'),
-        el_range_thumb = el_range.querySelector('.ne-range-thumb'),
-        el_range_tips = el_range_thumb.querySelector('.ne-range-tips');
+        var el_range = Ne.dom.render('<div class="ne-range">' +
+                '<div class="ne-range-track"><span></span></div>' +
+                '<div class="ne-range-thumb">' +
+                '<div class="ne-range-tips"><span></span></div>' +
+                '</div>' +
+                '</div>'),
+            el_range_track = el_range.querySelector('.ne-range-track'),
+            el_range_thumb = el_range.querySelector('.ne-range-thumb'),
+            el_range_tips = el_range_thumb.querySelector('.ne-range-tips');
         target.parentElement.appendChild(el_range);
         var __maxWidth = el_range_track.offsetWidth;
         var __thumbLeft = __value * __maxWidth / __max;
@@ -64,17 +63,27 @@
             Ne.dom(el_tips).insertBefore(target);
         }
         el_tips.querySelector('span').innerText = target.value;
+        var curval = target.value;
+        var maxval = target.getAttribute('max') || 100;
+        var move_x = curval * target.offsetWidth / maxval;
+        if (curval > maxval / 2) {
+            var move_x_offset = Ne.motion.timingFunction.Linear(curval - maxval / 2, 0, 1, maxval / 2) * 12;
+            move_x -= move_x_offset;
+        } else if (curval < maxval / 2) {
+            var move_x_offset =12 - Ne.motion.timingFunction.Linear(curval, 0, 1, maxval / 2) * 12;;
+            move_x += move_x_offset;
+        }
         Ne.motion.move({
             el: el_tips,
-            x: target.value * target.offsetWidth / (target.getAttribute('max') || 100),
+            x: move_x,
             y: 0,
             duration: 0
         });
         el_tips.classList.add('visible');
-        el_tips._timing && clearTimeout(el_tips._timing);
-        el_tips._timing = setTimeout(function () {
-            el_tips.classList.remove('visible');
-        }, 1000);
+        //el_tips._timing && clearTimeout(el_tips._timing);
+        //el_tips._timing = setTimeout(function () {
+        //el_tips.classList.remove('visible');
+        //}, 1000);
     }
 
     //define

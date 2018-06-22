@@ -178,8 +178,8 @@
             </div>
             <h4 class="hr-title">范围选择</h4>
             <div class="ne-cell bg-white">
-                <input id="j-range" type="range" class="ne-range none" min="10" max="200" value="150" ne-role="range" />
                 <input type="range" class="ne-range" min="0" max="200" value="50" ne-role="range" />
+                <input type="range" class="ne-range" min="0" max="200" value="150" ne-role="range" />
             </div>
 
             <h4 class="hr-title">文件上传</h4>
@@ -642,18 +642,6 @@
 
     <!--load scripts-->
     <script src="../../dist/neui.js"></script>
-    <script>
-        Ne.acts('#j-range').createVirtualRange();
-        /*
-        var instance = mobiscroll.treelist('#demo', {
-            theme: 'ios',                             // Specify theme like: theme: 'ios' or omit setting to use default
-            lang: 'zh',                               // Specify language like: lang: 'pl' or omit setting to use default
-            display: 'bottom',                        // Specify display mode like: display: 'bottom' or omit setting to use default
-            width: [76, 116, 116],                    // More info about width: https://docs.mobiscroll.com/3-2-0/javascript/list#!opt-width
-            placeholder: 'Please Select ...',         // More info about placeholder: https://docs.mobiscroll.com/3-2-0/javascript/list#!opt-placeholder
-            labels: ['Region', 'Supervisor', 'Tech']  // More info about labels: https://docs.mobiscroll.com/3-2-0/javascript/list#!opt-labels
-        });*/
-    </script>
 </body>
 
 </html>

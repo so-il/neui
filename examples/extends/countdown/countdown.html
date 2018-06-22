@@ -39,7 +39,7 @@
     <!-- JavaScript includes -->
     <script src="countdown.js"></script>
     <script>
-        Ne.dom.onReady(function () {
+        Ne.dom(function () {
             Ne.countdown({
                 el: document.querySelector('#j-countdown'),
                 timestamp: (new Date()).getTime() +10 * 1000,
