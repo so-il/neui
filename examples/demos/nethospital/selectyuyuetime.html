@@ -13,17 +13,22 @@
 
 <body>
     <section class="ne-page active" ne-role="page">
+        <header class="ne-page-header">
+            <nav class="ne-navbar">
+                <div class="ne-navbar-left">
+                    <a class="action-link" href="javascript:history.back();">
+                        <i class="ne-icon-arrow-left green-9"></i>
+                    </a>
+                </div>
+                <div class="ne-navbar-center">
+                    <h1>选择预约时间</h1>
+                </div>
+                <div class="ne-navbar-right">
+                </div>
+            </nav>
+        </header>
         <div class="ne-page-body">
             <div class="ne-panel">
-                <div class="ne-cell">
-                    <div class="ne-cell-left clickable" ne-tap="prev:#yuyuetable">
-                        <i class="ne-icon-arrow-left size-double" style="color:#20a6a5;"></i>
-                    </div>
-                    <div class="ne-cell-center align-center text-title">选择预约时间</div>
-                    <div class="ne-cell-right clickable" ne-tap="next:#yuyuetable">
-                        <i class="ne-icon-arrow-right size-double" style="color:#20a6a5;"></i>
-                    </div>
-                </div>
                 <div id="yuyuetable" class="ne-carousel bg-white" ne-role="carousel" style="padding-bottom:14em;margin-bottom:10px;">
                     <div class="ne-carousel-container">
                         <div class="ne-carousel-item active" ne-swipeable="true" ne-role="carouselitem">
@@ -311,13 +316,22 @@
                         <span class="ne-carousel-control" ne-role="carouselcontrol"></span>
                         <span class="ne-carousel-control" ne-role="carouselcontrol"></span>
                     </div>
+                    <div class="ne-cell" style="position: absolute;bottom: -16px;z-index:1000;">
+                            <div class="ne-cell-left clickable" ne-tap="prev:#yuyuetable">
+                                <i class="ne-icon-arrow-left size-double" style="color:#20a6a5;"></i>
+                            </div>
+                            <div class="ne-cell-center align-center text-title transparent">选择预约时间</div>
+                            <div class="ne-cell-right clickable" ne-tap="next:#yuyuetable">
+                                <i class="ne-icon-arrow-right size-double" style="color:#20a6a5;"></i>
+                            </div>
+                        </div>
                 </div>
             </div>
             <hr class="hr-blank" />
             <div class="ne-panel">
                 <div class="ne-cell">
                     <div class="ne-cell-left">
-                        <img class="iconsize-large" src="/Content/images/icon-smile.svg" style="opacity:.9" />
+                        <img class="iconsize-large" src="assets//images/icon-smile.svg" style="opacity:.9" />
                     </div>
                     <div class="ne-cell-center">
                         <span class="grey-7">如果没有号源或没有理想预约时间，请填写预期时间，我们的工作人员会尽快与医生沟通并安排。</span>
@@ -326,15 +340,20 @@
                 <div class="ne-cell" style="padding-top:0;padding-bottom:0;">
                     <div class="ne-cell border-bottom margin-bottom-5" style="border-top: 1px dashed #e9e9e9;">
                         <div class="ne-cell-left" style="padding-left:4px;padding-right:15px;">
-                            <label class="ne-label"><i class="ne-icon-calender size-xx-large"></i></label>
+                            <label class="ne-label">
+                                <i class="ne-icon-calender size-xx-large"></i>
+                            </label>
                         </div>
                         <div class="ne-cell-center">
-                            <input type="text" data-type="datetime" class="ne-input border-none w100" name="" placeholder="请选择预约时间" required="" ne-role="picker" ne-tap="show:picker" data-format="yyyy-mm-dd HH:ii">
+                            <input type="text" data-type="datetime" class="ne-input border-none w100" name="" placeholder="请选择预约时间" required="" ne-role="picker"
+                                ne-tap="show:picker" data-format="yyyy-mm-dd HH:ii">
                         </div>
                     </div>
                     <div class="ne-cell border-bottom margin-bottom-20">
                         <div class="ne-cell-left" style="padding-left:4px;padding-right:15px;">
-                            <label class="ne-label"><i class="ne-icon-creditcard size-xx-large" style="margin-top:4px;"></i></label>
+                            <label class="ne-label">
+                                <i class="ne-icon-creditcard size-xx-large" style="margin-top:4px;"></i>
+                            </label>
                         </div>
                         <div class="ne-cell-center">
                             <input type="number" class="ne-input border-none w100" name="" placeholder="请输入会员卡号" required="">
@@ -346,15 +365,24 @@
             <div class="ne-panel">
                 <div class="ne-cell align-center text-title weight-bold">预约流程</div>
                 <div class="ne-cell">
-                    <div class="ne-cell-left"><span class="iconnum">1</span></div>
+                    <div class="ne-cell-left">
+                        <span class="iconnum">1</span>
+                    </div>
                     <div class="ne-cell-center">提交申请</div>
                 </div>
                 <div class="ne-cell">
-                    <div class="ne-cell-left"><span class="iconnum">2</span></div>
-                    <div class="ne-cell-center">工作人员收集您的病情资料并确认时间<br /> <span class="red">30分钟内会与您联系（20:00以前）</span></div>
+                    <div class="ne-cell-left">
+                        <span class="iconnum">2</span>
+                    </div>
+                    <div class="ne-cell-center">工作人员收集您的病情资料并确认时间
+                        <br />
+                        <span class="red">30分钟内会与您联系（20:00以前）</span>
+                    </div>
                 </div>
                 <div class="ne-cell">
-                    <div class="ne-cell-left"><span class="iconnum">3</span></div>
+                    <div class="ne-cell-left">
+                        <span class="iconnum">3</span>
+                    </div>
                     <div class="ne-cell-center">医生与您按约定时间在新元素国际医疗中心看诊</div>
                 </div>
                 <div style="height:80px;"></div>
@@ -371,28 +399,46 @@
                 <div class="ne-card border-none">
                     <div class="padding-15 text-meta align-center">11月一日，周三，请选择要预约的时间段：</div>
                     <div class="ne-cell border-top">
-                        <div class="ne-cell-center"><span class="text-title">8:00~9:00</span></div>
-                        <div class="ne-cell-right">剩余号源<span class="red">4</span>个</div>
+                        <div class="ne-cell-center">
+                            <span class="text-title">8:00~9:00</span>
+                        </div>
+                        <div class="ne-cell-right">剩余号源
+                            <span class="red">4</span>个</div>
                     </div>
                     <div class="ne-cell border-top">
-                        <div class="ne-cell-center"><span class="text-title">8:00~9:00</span></div>
-                        <div class="ne-cell-right">剩余号源<span class="red">4</span>个</div>
+                        <div class="ne-cell-center">
+                            <span class="text-title">8:00~9:00</span>
+                        </div>
+                        <div class="ne-cell-right">剩余号源
+                            <span class="red">4</span>个</div>
                     </div>
                     <div class="ne-cell border-top">
-                        <div class="ne-cell-center"><span class="text-title">8:00~9:00</span></div>
-                        <div class="ne-cell-right">剩余号源<span class="red">4</span>个</div>
+                        <div class="ne-cell-center">
+                            <span class="text-title">8:00~9:00</span>
+                        </div>
+                        <div class="ne-cell-right">剩余号源
+                            <span class="red">4</span>个</div>
                     </div>
                     <div class="ne-cell border-top">
-                        <div class="ne-cell-center"><span class="text-title">8:00~9:00</span></div>
-                        <div class="ne-cell-right">剩余号源<span class="red">4</span>个</div>
+                        <div class="ne-cell-center">
+                            <span class="text-title">8:00~9:00</span>
+                        </div>
+                        <div class="ne-cell-right">剩余号源
+                            <span class="red">4</span>个</div>
                     </div>
                     <div class="ne-cell border-top">
-                        <div class="ne-cell-center"><span class="text-title">8:00~9:00</span></div>
-                        <div class="ne-cell-right">剩余号源<span class="red">4</span>个</div>
+                        <div class="ne-cell-center">
+                            <span class="text-title">8:00~9:00</span>
+                        </div>
+                        <div class="ne-cell-right">剩余号源
+                            <span class="red">4</span>个</div>
                     </div>
                     <div class="ne-cell border-top">
-                        <div class="ne-cell-center"><span class="text-title">8:00~9:00</span></div>
-                        <div class="ne-cell-right">剩余号源<span class="red">4</span>个</div>
+                        <div class="ne-cell-center">
+                            <span class="text-title">8:00~9:00</span>
+                        </div>
+                        <div class="ne-cell-right">剩余号源
+                            <span class="red">4</span>个</div>
                     </div>
                 </div>
                 <div class="ne-card border-none margin-top-10 margin-bottom-10">

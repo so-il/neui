@@ -3,8 +3,8 @@ var Ne=window.Ne;
 Ne.touch=require('../../../NeTouch');
 Ne.render=require('../../../NeRender');
 Ne.motion=require('../../../NeMotion');
+Ne.dom=require('../../../NeDom');
 Ne._=require('./lib/type');
-Ne.dom=require('./lib/dom');
 Ne.component = require('./lib/component');
 Ne.acts = Ne.component.acts;
 

@@ -1,5 +1,5 @@
 /*!
- * neui v1.0.0 (https://github.com/so-il/neui.git)
+ * neui v1.0.0 (https://neui.nelabs.cn/)
  * Copyright 2018 ethan.gor
  * Licensed under the MIT license
  */
@@ -7,2546 +7,12 @@
 "use strict";(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 
 /****************************************************************** 
- * @motion
- * Description:动效辅助
- *******************************************************************/
-var timingFunction=require('./lib/timing-function');
-var timeline = require('./lib/timeline');
-var transform=require('./lib/transform');
-
-module.exports=transform;
-module.exports.timingFunction=timingFunction;
-module.exports.timeline=timeline;
-},{"./lib/timeline":2,"./lib/timing-function":3,"./lib/transform":4}],2:[function(require,module,exports){
-
-var __TIMING_FUNCTION=require('./timing-function');
-
-function timingFunction(name) {
-    name = name.split('-');
-    if (name.length == 2) {
-        return __TIMING_FUNCTION[name[0]][name[1]];
-    } else {
-        return __TIMING_FUNCTION[name[0]];
-    }
-}
-
-function Timeline(option) {
-    //向量起点
-    this.origin = option.origin;
-    //向量终点
-    this.transition = option.transition;
-    //规定动画完成一个周期所花费的秒或毫秒。默认是 1000。
-    this.duration = option.duration || 1000;
-    //规定动画何时开始。默认是 0。
-    this.delay = option.delay || 0;
-    //规定动画被播放的次数。默认是 1。
-    this.iterationCount = option.iterationCount || 1;
-    //规定动画是否在下一周期逆向地播放。默认是 "normal"。
-    this.direction = 'normal';
-    //规定动画的速度曲线。默认是 "Linear"。
-    this.timingFunction = timingFunction(option.timingFunction ? option.timingFunction : 'Linear');
-    //关键帧数(默认每秒24帧)
-    this.keyframesLength = option.keyframesLength || Math.ceil(this.duration / 40);
-    //关键帧时长
-    this.keyframeSpan = Math.ceil(this.duration / this.keyframesLength);
-    //关键帧回调
-    this.keyframeFunction = option.keyframeFunction;
-    //结束回调
-    this.complete = option.complete;
-}
-
-Timeline.prototype.run = function (keyframeIndex) {
-    var _this = this,
-        transitionRes = [];
-    keyframeIndex = keyframeIndex || 0;
-    if (keyframeIndex >= _this.keyframesLength) {
-        transitionRes = _this.transition;
-    } else {
-        _this.transition.forEach(function (item, index) {
-            var _res = _this.timingFunction(keyframeIndex, 0, item - _this.origin[index], _this.keyframesLength);
-            _res += _this.origin[index];
-            transitionRes.push(Math.ceil(_res));
-        });
-    }
-    transitionRes.push(keyframeIndex);
-    _this.keyframeFunction.apply(_this, transitionRes);
-    if (keyframeIndex < _this.keyframesLength) {
-        keyframeIndex++;
-        _this.timing = setTimeout(function () {
-            _this.run.apply(_this, [keyframeIndex]);
-        }, _this.keyframeSpan);
-    } else {
-        _this.complete && _this.complete();
-    }
-}
-
-Timeline.prototype.stop = function () {
-    clearTimeout(this.timing);
-}
-
-//exports
-module.exports = Timeline;
-},{"./timing-function":3}],3:[function(require,module,exports){
-
-//时序函数 timing function
-/*
- * t: current time（当前时间）；
- * b: beginning value（初始值）；
- * c: change in value（变化量）；
- * d: duration（持续时间）。
- */
-var __TIMING_FUNCTION = {
-    Linear: function (t, b, c, d) {
-        return c * t / d + b;
-    },
-    Quad: {
-        easeIn: function (t, b, c, d) {
-            return c * (t /= d) * t + b;
-        },
-        easeOut: function (t, b, c, d) {
-            return -c * (t /= d) * (t - 2) + b;
-        },
-        easeInOut: function (t, b, c, d) {
-            if ((t /= d / 2) < 1) return c / 2 * t * t + b;
-            return -c / 2 * ((--t) * (t - 2) - 1) + b;
-        }
-    },
-    Cubic: {
-        easeIn: function (t, b, c, d) {
-            return c * (t /= d) * t * t + b;
-        },
-        easeOut: function (t, b, c, d) {
-            return c * ((t = t / d - 1) * t * t + 1) + b;
-        },
-        easeInOut: function (t, b, c, d) {
-            if ((t /= d / 2) < 1) return c / 2 * t * t * t + b;
-            return c / 2 * ((t -= 2) * t * t + 2) + b;
-        }
-    },
-    Quart: {
-        easeIn: function (t, b, c, d) {
-            return c * (t /= d) * t * t * t + b;
-        },
-        easeOut: function (t, b, c, d) {
-            return -c * ((t = t / d - 1) * t * t * t - 1) + b;
-        },
-        easeInOut: function (t, b, c, d) {
-            if ((t /= d / 2) < 1) return c / 2 * t * t * t * t + b;
-            return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
-        }
-    },
-    Quint: {
-        easeIn: function (t, b, c, d) {
-            return c * (t /= d) * t * t * t * t + b;
-        },
-        easeOut: function (t, b, c, d) {
-            return c * ((t = t / d - 1) * t * t * t * t + 1) + b;
-        },
-        easeInOut: function (t, b, c, d) {
-            if ((t /= d / 2) < 1) return c / 2 * t * t * t * t * t + b;
-            return c / 2 * ((t -= 2) * t * t * t * t + 2) + b;
-        }
-    },
-    Sine: {
-        easeIn: function (t, b, c, d) {
-            return -c * Math.cos(t / d * (Math.PI / 2)) + c + b;
-        },
-        easeOut: function (t, b, c, d) {
-            return c * Math.sin(t / d * (Math.PI / 2)) + b;
-        },
-        easeInOut: function (t, b, c, d) {
-            return -c / 2 * (Math.cos(Math.PI * t / d) - 1) + b;
-        }
-    },
-    Expo: {
-        easeIn: function (t, b, c, d) {
-            return (t == 0) ? b : c * Math.pow(2, 10 * (t / d - 1)) + b;
-        },
-        easeOut: function (t, b, c, d) {
-            return (t == d) ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b;
-        },
-        easeInOut: function (t, b, c, d) {
-            if (t == 0) return b;
-            if (t == d) return b + c;
-            if ((t /= d / 2) < 1) return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
-            return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
-        }
-    },
-    Circ: {
-        easeIn: function (t, b, c, d) {
-            return -c * (Math.sqrt(1 - (t /= d) * t) - 1) + b;
-        },
-        easeOut: function (t, b, c, d) {
-            return c * Math.sqrt(1 - (t = t / d - 1) * t) + b;
-        },
-        easeInOut: function (t, b, c, d) {
-            if ((t /= d / 2) < 1) return -c / 2 * (Math.sqrt(1 - t * t) - 1) + b;
-            return c / 2 * (Math.sqrt(1 - (t -= 2) * t) + 1) + b;
-        }
-    },
-    Elastic: {
-        easeIn: function (t, b, c, d, a, p) {
-            var s;
-            if (t == 0) return b;
-            if ((t /= d) == 1) return b + c;
-            if (typeof p == "undefined") p = d * .3;
-            if (!a || a < Math.abs(c)) {
-                s = p / 4;
-                a = c;
-            } else {
-                s = p / (2 * Math.PI) * Math.asin(c / a);
-            }
-            return -(a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
-        },
-        easeOut: function (t, b, c, d, a, p) {
-            var s;
-            if (t == 0) return b;
-            if ((t /= d) == 1) return b + c;
-            if (typeof p == "undefined") p = d * .3;
-            if (!a || a < Math.abs(c)) {
-                a = c;
-                s = p / 4;
-            } else {
-                s = p / (2 * Math.PI) * Math.asin(c / a);
-            }
-            return (a * Math.pow(2, -10 * t) * Math.sin((t * d - s) * (2 * Math.PI) / p) + c + b);
-        },
-        easeInOut: function (t, b, c, d, a, p) {
-            var s;
-            if (t == 0) return b;
-            if ((t /= d / 2) == 2) return b + c;
-            if (typeof p == "undefined") p = d * (.3 * 1.5);
-            if (!a || a < Math.abs(c)) {
-                a = c;
-                s = p / 4;
-            } else {
-                s = p / (2 * Math.PI) * Math.asin(c / a);
-            }
-            if (t < 1) return -.5 * (a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
-            return a * Math.pow(2, -10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p) * .5 + c + b;
-        }
-    },
-    Back: {
-        easeIn: function (t, b, c, d, s) {
-            if (typeof s == "undefined") s = 1.70158;
-            return c * (t /= d) * t * ((s + 1) * t - s) + b;
-        },
-        easeOut: function (t, b, c, d, s) {
-            if (typeof s == "undefined") s = 1.70158;
-            return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
-        },
-        easeInOut: function (t, b, c, d, s) {
-            if (typeof s == "undefined") s = 1.70158;
-            if ((t /= d / 2) < 1) return c / 2 * (t * t * (((s *= (1.525)) + 1) * t - s)) + b;
-            return c / 2 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2) + b;
-        }
-    },
-    Bounce: {
-        easeIn: function (t, b, c, d) {
-            return c - __TIMING_FUNCTION.Bounce.easeOut(d - t, 0, c, d) + b;
-        },
-        easeOut: function (t, b, c, d) {
-            if ((t /= d) < (1 / 2.75)) {
-                return c * (7.5625 * t * t) + b;
-            } else if (t < (2 / 2.75)) {
-                return c * (7.5625 * (t -= (1.5 / 2.75)) * t + .75) + b;
-            } else if (t < (2.5 / 2.75)) {
-                return c * (7.5625 * (t -= (2.25 / 2.75)) * t + .9375) + b;
-            } else {
-                return c * (7.5625 * (t -= (2.625 / 2.75)) * t + .984375) + b;
-            }
-        },
-        easeInOut: function (t, b, c, d) {
-            if (t < d / 2) {
-                return __TIMING_FUNCTION.Bounce.easeIn(t * 2, 0, c, d) * .5 + b;
-            } else {
-                return __TIMING_FUNCTION.Bounce.easeOut(t * 2 - d, 0, c, d) * .5 + c * .5 + b;
-            }
-        }
-    }
-}
-
-module.exports=__TIMING_FUNCTION;
-},{}],4:[function(require,module,exports){
-
-var Timeline=require('./timeline');
-//transformProperty
-var TRANSFORM_PROPERTY = 'webkitTransform' in document.body.style ?
-    'webkitTransform' :
-    'mozTransform' in document.body.style ? 'mozTransform' : 'msTransform' in document.body.style ? 'msTransform' : 'transform';
-   
-//移动
-function move(option) {
-    var keyframeFunction = function (x, y, z) {
-        var _style_transform = option.el.style[TRANSFORM_PROPERTY];
-        var _style_translate3d = 'translate3d(' + x + 'px,' + y + 'px,' + z + 'px)';
-        if (_style_transform.indexOf('translate3d') < 0) {
-            _style_transform += _style_translate3d;
-        } else {
-            _style_transform = _style_transform.replace(/translate3d\(+[,px\d\.\-\s]+\)/ig, _style_translate3d);
-        }
-        option.el.style[TRANSFORM_PROPERTY] = _style_transform;
-    }
-    if (option.duration != 0) {
-        var defineobj = {
-            duration: option.duration,
-            origin: [0, 0, 0],
-            transition: [option.x || 0, option.y || 0, option.z || 0],
-            timingFunction: option.timingFunction,
-            keyframeSpan: option.keyframeSpan,
-            complete: function () {
-                option.callback && option.callback();
-            }
-        };
-        var _style_transform = option.el.style[TRANSFORM_PROPERTY];
-        if (_style_transform.indexOf('translate3d') >= 0) {
-            _style_transform.match(/translate3d\(+[,px\d\.\-\s]+\)/g)[0].match(/([\-\d\.]+px)/g).forEach(function (n, i) {
-                defineobj.origin[i] = parseInt(n.substring(0, n.length - 2));
-            });
-        }
-        defineobj.keyframeFunction = keyframeFunction;
-        var _timeline = new Timeline(defineobj);
-        _timeline.run();
-        return _timeline;
-    } else {
-        keyframeFunction(option.x || 0, option.y || 0, option.z || 0);
-        option.callback && option.callback();
-        return true;
-    }
-}
-
-//exports
-module.exports = {
-    move: move
-}
-},{"./timeline":2}],5:[function(require,module,exports){
-/****************************************************************** 
- * @render
- * Description: living dom 模板渲染引擎
- *******************************************************************/
-var render = require('./lib/render');
-var vtpl = require('./lib/vtpl');
-
-module.exports = render.render;
-module.exports.compile = render.compile;
-module.exports.vtpl = vtpl;
-},{"./lib/render":8,"./lib/vtpl":17}],6:[function(require,module,exports){
-
-//compiler:AST=>Render
-
-var _ = require('./util');
-
-function compileAttrs(attrs, container) {
-    var code = '';
-    code += 'var ' + container + '=[];';
-    attrs.forEach(function (attr, i) {
-        var name = attr.name;
-        var value = '';
-        if (attr.value.tag == 'expression') {
-            value = attr.value.metas;
-        } else {
-            value = '"' + attr.value + '"';
-        }
-        code += container + '.push({name:"' + name + '",value:' + value + '});';
-    });
-    return code;
-}
-
-function compileNode(node, container, index) {
-    var code = '';
-    var attrsContainer = container + '_' + index + '_attrs';
-    var childrenContainer = container + '_' + index + '_children';
-    code += compileAttrs(node.attrs, attrsContainer);
-    code += compileNodes(node.children, childrenContainer, true);
-    code += container + '.push({tag:"' + node.tag + '",attrs:' + attrsContainer + ',children:' +
-        childrenContainer +
-        '});';
-    return code;
-}
-
-function compileNodes(nodes, container, flag) {
-    var code = '';
-    if (flag) {
-        code += 'var ' + container + ' = [];';
-    }
-    nodes.forEach(function (node, i) {
-        if (node.type == 'js') {
-            if (node.tag == 'each') {
-                code += ' for (var ' + node.metas.index + ' in ' + node.metas.collection + ') {'
-                code += 'var ' + node.metas.item + '=' + node.metas.collection + '[' + node.metas.index + '];';
-                code += compileNodes(node.children, container);
-                code += '};';
-            } else if (node.tag == 'if' || (node.tag == 'else' && node.metas.expression)) {
-                code += 'if (' + node.metas.expression + ') {';
-                code += compileNodes(node.children, container);
-                code += '}';
-                if (node.alternate) {
-                    code += 'else{';
-                    code += compileNodes(node.alternate, container);
-                    code += '}';
-                }
-            } else if (node.tag == 'else') {
-                code += compileNodes(node.children, container);
-            } else {
-                code += container + '.push(' + node.metas + ');';
-            }
-        } else if (node.type == 'element') {
-            code += compileNode(node, container, i);
-        } else {
-            code += container + '.push("' + node + '");';
-        }
-    });
-    return code;
-}
-
-function compiler(AST) {
-    AST = _.isArray(AST) ? AST : [AST];
-    var code = '';
-    code += compileNodes(AST, 'ns');
-    code = 'var ns=[];with(__data){' + code + '}return ns;';
-    code = new Function('__data', code);
-    return code;
-}
-
-//exports
-module.exports = compiler;
-},{"./util":10}],7:[function(require,module,exports){
-
-//parser:Tpl=>AST
-
-var _ = require('./util');
-
-function isSelfClosingTAG(tag) {
-    var selfClosingTAGs = ['br', 'hr', 'img', 'input', 'link', 'meta', 'base', 'param', 'area', 'col',
-        'command', 'embed', 'keygen', 'source', 'track', 'wbr'
-    ];
-    var flag=selfClosingTAGs.indexOf(tag) >= 0;
-    return flag;
-}
-
-function parseJST(line) {
-    var node = {
-        type: 'js',
-        tag: '',
-        metas: {},
-        children: []
-    };
-    var reg = /([^="\s\/]+)\s?(.+)?/g;
-    var reg_each = /(.+)\sas\s(.+)\s(.+)$/g;
-    var reg_if = /([^="\s\/]+)\s?(.+)?/g;
-    var match = reg.exec(line);
-    if (match && ['each', 'if', 'else'].indexOf(match[1]) != -1) {
-        node.tag = match[1];
-        switch (node.tag) {
-            case 'if':
-                node.metas.expression = match[2];
-                break;
-            case 'each':
-                match = reg_each.exec(match[2]);
-                node.metas.collection = match[1];
-                node.metas.item = match[2];
-                node.metas.index = match[3];
-                break;
-            case 'else':
-                if (match[2] && match[2].length > 0) {
-                    match = reg_if.exec(match[2]);
-                    node.metas.expression = match[2];
-                }
-                break;
-        }
-    } else {
-        node.tag = 'expression';
-        node.metas = line;
-    }
-    return node;
-}
-
-function parseTAG(line) {
-    var node = {
-        type: 'element',
-        tag: '',
-        attrs: [],
-        children: []
-    };
-    var firstBlankIndex = line.indexOf(' ');
-    if (firstBlankIndex != -1) {
-        node.tag = line.slice(0, firstBlankIndex).trim();
-        line = line.slice(firstBlankIndex).trim();
-        node.attrs = parseAttributes(line);
-    } else {
-        node.tag = line;
-    }
-    return node;
-}
-
-function parseAttrValue(text) {
-    var reg_jst = /{([^}]+)}/g;
-    var cursor_jst = 0;
-    var match_jst;
-    var res;
-    while (match_jst = reg_jst.exec(text)) {
-        var t = text.slice(cursor_jst, match_jst.index);
-        var line_jst = match_jst[1];
-        var node = parseJST(line_jst);
-        var metas = node.metas;
-        if (!res) {
-            res = node;
-            res.metas = '';
-        }
-        res.metas += res.metas.length > 0 ? '+' : '';
-        res.metas += t.length > 0 ? "'" + t + "'" : '';
-        res.metas += res.metas.length > 0 ? '+' : '';
-        res.metas += metas;
-        cursor_jst = match_jst.index + match_jst[0].length;
-    }
-    text = text.slice(cursor_jst);
-    if (text.length > 0) {
-        if (!res) {
-            res = text;
-        } else {
-            res.metas += "+'" + text + "'";
-        }
-    }
-    return res;
-}
-
-function parseAttributes(line) {
-    var attrs = [];
-    var reg = /([^="\s\/]+)((="([^"]+)")|(='([^']+)'))?/g;
-    var match;
-    while (match = reg.exec(line)) {
-        var value = match[4] || match[6] || match[1];
-        value = parseAttrValue(value);
-        var attr = {
-            type: 'attribute',
-            name: match[1],
-            value: value
-        };
-        attrs.push(attr);
-    }
-    return attrs;
-}
-
-function parseTpl(tpl) {
-    var AST = [];
-    var stack = [];
-    stack.push(AST);
-
-    var reg_tag = /<([^>]+)>/g;
-    var cursor = 0;
-    var match_tag = null;
-    //parseTAG
-    while (match_tag = reg_tag.exec(tpl)) {
-        //parseJST
-        var text = tpl.slice(cursor, match_tag.index).trim();
-        if (text.length > 0) {
-            var reg_jst = /{([^}]+)}/g;
-            var cursor_jst = 0;
-            var match_jst;
-            while (match_jst = reg_jst.exec(text)) {
-                var t = text.slice(cursor_jst, match_jst.index).trim();
-                if (t.length > 0) {
-                    var root = stack[stack.length - 1].children || stack[stack.length - 1];
-                    root.push(t);
-                }
-                var line_jst = match_jst[1];
-                if (line_jst.slice(0, 1) != "/") {
-                    var node = parseJST(line_jst);
-                    if (node.tag == 'else') {
-                        var root = stack[stack.length - 1];
-                        root.alternate = root.alternate || [];
-                        root.alternate.push(node);
-                    } else {
-                        var root = stack[stack.length - 1].children || stack[stack.length - 1];
-                        root.push(node);
-                    }
-                    if (node.tag != 'expression') {
-                        stack.push(node);
-                    }
-                } else {
-                    var root = stack.pop();
-                    if (line_jst.slice(1) == 'if') {
-                        while (root.tag != 'if') {
-                            root = stack.pop();
-                        }
-                    }
-                }
-                cursor_jst = match_jst.index + match_jst[0].length;
-            }
-            text = text.slice(cursor_jst);
-            if (text.length > 0) {
-                var root = stack[stack.length - 1].children || stack[stack.length - 1];
-                root.push(text);
-            }
-        }
-        //
-        var root = stack[stack.length - 1].children || stack[stack.length - 1];
-        var line_tag = match_tag[1];
-        if (line_tag.slice(0, 1) != "/") {
-            var node = parseTAG(line_tag);
-            root.push(node);
-            if (!isSelfClosingTAG(node.tag)) {
-                stack.push(node);
-            }
-        } else {
-            stack.pop();
-        }
-        cursor = match_tag.index + match_tag[0].length;
-    }
-    return AST;
-}
-
-function parser(tpl) {
-    var AST = parseTpl(tpl);
-    AST = AST.length == 1 ? AST[0] : AST;
-    return AST;
-}
-
-//exports
-module.exports = parser;
-},{"./util":10}],8:[function(require,module,exports){
-var parser = require('./parser'),
-    compiler = require('./compiler'),
-    toDom = require('./todom');
-
-function compile(tpl) {
-    var AST = parser(tpl);
-    var _render = compiler(AST);
-    return function (data) {
-        return toDom(_render(data));
-    }
-}
-
-function render(tpl, data, container) {
-    var el = compile(tpl)(data);
-    container && container.appendChild(el);
-    return el;
-}
-
-//exports
-module.exports.compile = compile;
-module.exports.render=render;
-},{"./compiler":6,"./parser":7,"./todom":9}],9:[function(require,module,exports){
-var _ = require('./util');
-
-//Covert
-//covert:node => DOM Element
-function toElement(node) {
-    var el = document.createElement(node.tag);
-    node.attrs.forEach(function (attr) {
-        if (_.isFunction(attr.value)) {
-            el[attr.name] = attr.value;
-        } else {
-            attr.value && el.setAttribute(attr.name, attr.value);
-        }
-    });
-    node.children.forEach(function (child) {
-        if(child){
-            if (!child.tag) {
-                child = document.createTextNode(child);
-            } else {
-                child = toElement(child);
-            }
-            el.appendChild(child);
-        }
-    });
-    return el;
-}
-
-//covert:nodelist => DOM Fragment
-function toElements(nodelist) {
-    var fragment = document.createDocumentFragment();
-    nodelist.forEach(function (node) {
-        fragment.appendChild(toElement(node));
-    });
-    return fragment;
-}
-
-function toDom(node) {
-    node = _.isArray(node) && node.length == 1 ? node[0] : node;
-    var dom = _.isArray(node) ? toElements(node) : toElement(node);
-    return dom;
-}
-
-//exports
-module.exports=toDom;
-},{"./util":10}],10:[function(require,module,exports){
-(function (process){
-var _ = {}
-
-//Util
-_.type = function (obj) {
-  return Object.prototype.toString.call(obj).replace(/\[object\s|\]/g, '')
-}
-
-_.isString = function isString (list) {
-  return _.type(list) === 'String'
-}
-
-_.isArray = function (obj) {
-    return Object.prototype.toString.call(obj) === '[object Array]';
-}
-
-_.isObject = function (obj) {
-    var type = typeof obj;
-    return type === 'function' || type === 'object' && !!obj;
-}
-
-_.isFunction = function (obj) {
-    return typeof obj == 'function' || false;
-}
-
-_.each = function each (array, fn) {
-  for (var i = 0, len = array.length; i < len; i++) {
-    fn(array[i], i)
-  }
-}
-
-_.toArray = function toArray (listLike) {
-  if (!listLike) {
-    return []
-  }
-
-  var list = []
-
-  for (var i = 0, len = listLike.length; i < len; i++) {
-    list.push(listLike[i])
-  }
-
-  return list
-}
-
-_.setAttr = function setAttr (node, key, value) {
-  switch (key) {
-    case 'style':
-      node.style.cssText = value
-      break
-    case 'value':
-      var tagName = node.tagName || ''
-      tagName = tagName.toLowerCase()
-      if (
-        tagName === 'input' || tagName === 'textarea'
-      ) {
-        node.value = value
-      } else {
-        // if it is not a input or textarea, use `setAttribute` to set
-        node.setAttribute(key, value)
-      }
-      break
-    default:
-      node.setAttribute(key, value)
-      break
-  }
-}
-
-_.extend = function (dest, src) {
-    for (var key in src) {
-      if (src.hasOwnProperty(key)) {
-        dest[key] = src[key]
-      }
-    }
-    return dest
-  }
-  
-  if (process.env.NODE_ENV) {
-    _.nextTick = process.nextTick
-  } else {
-    var nextTick = window.requestAnimationFrame ||
-      window.webkitRequestAnimationFrame ||
-      window.mozRequestAnimationFrame ||
-      window.oRequestAnimationFrame ||
-      window.msRequestAnimationFrame
-  
-    if (nextTick) {
-      _.nextTick = function () {
-        nextTick.apply(window, arguments)
-      }
-    } else {
-      _.nextTick = function (func) {
-        // for IE, setTimeout is a cool object instead of function
-        // so you cannot simply use nextTick.apply
-        setTimeout(func)
-      }
-    }
-  }  
-
-//exports
-module.exports = _;
-}).call(this,require('_process'))
-},{"_process":20}],11:[function(require,module,exports){
-var _ = require('../util')
-var patch = require('./patch')
-var listDiff = require('./listDiff').diff
-
-function diff (oldTree, newTree) {
-  var index = 0
-  var patches = {}
-  dfsWalk(oldTree, newTree, index, patches)
-  return patches
-}
-
-function dfsWalk (oldNode, newNode, index, patches) {
-  var currentPatch = []
-
-  // Node is removed.
-  if (newNode === null) {
-    // Real DOM node will be removed when perform reordering, so has no needs to do anthings in here
-  // TextNode content replacing
-  } else if (_.isString(oldNode) && _.isString(newNode)) {
-    if (newNode !== oldNode) {
-      currentPatch.push({ type: patch.TEXT, content: newNode })
-    }
-  // Nodes are the same, diff old node's props and children
-  } else if (
-      oldNode.tagName === newNode.tagName &&
-      oldNode.key === newNode.key
-    ) {
-    // Diff props
-    var propsPatches = diffProps(oldNode, newNode)
-    if (propsPatches) {
-      currentPatch.push({ type: patch.PROPS, props: propsPatches })
-    }
-    // Diff children. If the node has a `ignore` property, do not diff children
-    if (!isIgnoreChildren(newNode)) {
-      diffChildren(
-        oldNode.children,
-        newNode.children,
-        index,
-        patches,
-        currentPatch
-      )
-    }
-  // Nodes are not the same, replace the old node with new node
-  } else {
-    currentPatch.push({ type: patch.REPLACE, node: newNode })
-  }
-
-  if (currentPatch.length) {
-    patches[index] = currentPatch
-  }
-}
-
-function diffChildren (oldChildren, newChildren, index, patches, currentPatch) {
-  var diffs = listDiff(oldChildren, newChildren, 'key')
-  newChildren = diffs.children
-
-  if (diffs.moves.length) {
-    var reorderPatch = { type: patch.REORDER, moves: diffs.moves }
-    currentPatch.push(reorderPatch)
-  }
-
-  var leftNode = null
-  var currentNodeIndex = index
-  _.each(oldChildren, function (child, i) {
-    var newChild = newChildren[i]
-    currentNodeIndex = (leftNode && leftNode.count)
-      ? currentNodeIndex + leftNode.count + 1
-      : currentNodeIndex + 1
-    dfsWalk(child, newChild, currentNodeIndex, patches)
-    leftNode = child
-  })
-}
-
-function diffProps (oldNode, newNode) {
-  var count = 0
-  var oldProps = oldNode.props
-  var newProps = newNode.props
-
-  var key, value
-  var propsPatches = {}
-
-  // Find out different properties
-  for (key in oldProps) {
-    value = oldProps[key]
-    if (newProps[key] !== value) {
-      count++
-      propsPatches[key] = newProps[key]
-    }
-  }
-
-  // Find out new property
-  for (key in newProps) {
-    value = newProps[key]
-    if (!oldProps.hasOwnProperty(key)) {
-      count++
-      propsPatches[key] = newProps[key]
-    }
-  }
-
-  // If properties all are identical
-  if (count === 0) {
-    return null
-  }
-
-  return propsPatches
-}
-
-function isIgnoreChildren (node) {
-  return (node.props && node.props.hasOwnProperty('ignore'))
-}
-
-module.exports = diff
-},{"../util":10,"./listDiff":13,"./patch":14}],12:[function(require,module,exports){
-var _ = require('../util')
-
-/**
- * Virtual-dom Element.
- * @param {String} tagName
- * @param {Object} props - Element's properties,
- *                       - using object to store key-value pair
- * @param {Array<Element|String>} - This element's children elements.
- *                                - Can be Element instance or just a piece plain text.
- */
-function Element (tagName, props, children) {
-  if (!(this instanceof Element)) {
-    return new Element(tagName, props, children)
-  }
-
-  if (_.isArray(props)) {
-    children = props
-    props = {}
-  }
-
-  this.tagName = tagName
-  this.props = props || {}
-  this.children = children || []
-  this.key = props
-    ? props.key
-    : void 666
-
-  var count = 0
-
-  _.each(this.children, function (child, i) {
-    if (child instanceof Element) {
-      count += child.count
-    } else {
-      children[i] = '' + child
-    }
-    count++
-  })
-
-  this.count = count
-}
-
-/**
- * Render the hold element tree.
- */
-Element.prototype.render = function () {
-  var el = document.createElement(this.tagName)
-  var props = this.props
-
-  for (var propName in props) {
-    var propValue = props[propName]
-    _.setAttr(el, propName, propValue)
-  }
-
-  _.each(this.children, function (child) {
-    var childEl = (child instanceof Element)
-      ? child.render()
-      : document.createTextNode(child)
-    el.appendChild(childEl)
-  })
-
-  return el
-}
-
-module.exports = Element
-},{"../util":10}],13:[function(require,module,exports){
-/**
- * Diff two list in O(N).
- * @param {Array} oldList - Original List
- * @param {Array} newList - List After certain insertions, removes, or moves
- * @return {Object} - {moves: <Array>}
- *                  - moves is a list of actions that telling how to remove and insert
- */
-function diff (oldList, newList, key) {
-  var oldMap = makeKeyIndexAndFree(oldList, key)
-  var newMap = makeKeyIndexAndFree(newList, key)
-
-  var newFree = newMap.free
-
-  var oldKeyIndex = oldMap.keyIndex
-  var newKeyIndex = newMap.keyIndex
-
-  var moves = []
-
-  // a simulate list to manipulate
-  var children = []
-  var i = 0
-  var item
-  var itemKey
-  var freeIndex = 0
-
-  // fist pass to check item in old list: if it's removed or not
-  while (i < oldList.length) {
-    item = oldList[i]
-    itemKey = getItemKey(item, key)
-    if (itemKey) {
-      if (!newKeyIndex.hasOwnProperty(itemKey)) {
-        children.push(null)
-      } else {
-        var newItemIndex = newKeyIndex[itemKey]
-        children.push(newList[newItemIndex])
-      }
-    } else {
-      var freeItem = newFree[freeIndex++]
-      children.push(freeItem || null)
-    }
-    i++
-  }
-
-  var simulateList = children.slice(0)
-
-  // remove items no longer exist
-  i = 0
-  while (i < simulateList.length) {
-    if (simulateList[i] === null) {
-      remove(i)
-      removeSimulate(i)
-    } else {
-      i++
-    }
-  }
-
-  // i is cursor pointing to a item in new list
-  // j is cursor pointing to a item in simulateList
-  var j = i = 0
-  while (i < newList.length) {
-    item = newList[i]
-    itemKey = getItemKey(item, key)
-
-    var simulateItem = simulateList[j]
-    var simulateItemKey = getItemKey(simulateItem, key)
-
-    if (simulateItem) {
-      if (itemKey === simulateItemKey) {
-        j++
-      } else {
-        // new item, just inesrt it
-        if (!oldKeyIndex.hasOwnProperty(itemKey)) {
-          insert(i, item)
-        } else {
-          // if remove current simulateItem make item in right place
-          // then just remove it
-          var nextItemKey = getItemKey(simulateList[j + 1], key)
-          if (nextItemKey === itemKey) {
-            remove(i)
-            removeSimulate(j)
-            j++ // after removing, current j is right, just jump to next one
-          } else {
-            // else insert item
-            insert(i, item)
-          }
-        }
-      }
-    } else {
-      insert(i, item)
-    }
-
-    i++
-  }
-
-  function remove (index) {
-    var move = {index: index, type: 0}
-    moves.push(move)
-  }
-
-  function insert (index, item) {
-    var move = {index: index, item: item, type: 1}
-    moves.push(move)
-  }
-
-  function removeSimulate (index) {
-    simulateList.splice(index, 1)
-  }
-
-  return {
-    moves: moves,
-    children: children
-  }
-}
-
-/**
- * Convert list to key-item keyIndex object.
- * @param {Array} list
- * @param {String|Function} key
- */
-function makeKeyIndexAndFree (list, key) {
-  var keyIndex = {}
-  var free = []
-  for (var i = 0, len = list.length; i < len; i++) {
-    var item = list[i]
-    var itemKey = getItemKey(item, key)
-    if (itemKey) {
-      keyIndex[itemKey] = i
-    } else {
-      free.push(item)
-    }
-  }
-  return {
-    keyIndex: keyIndex,
-    free: free
-  }
-}
-
-function getItemKey (item, key) {
-  if (!item || !key) return void 666
-  return typeof key === 'string'
-    ? item[key]
-    : key(item)
-}
-
-exports.makeKeyIndexAndFree = makeKeyIndexAndFree // exports for test
-exports.diff = diff
-},{}],14:[function(require,module,exports){
-
-var _ = require('../util')
-
-var REPLACE = 0
-var REORDER = 1
-var PROPS = 2
-var TEXT = 3
-
-function patch (node, patches) {
-  var walker = {index: 0}
-  dfsWalk(node, walker, patches)
-}
-
-function dfsWalk (node, walker, patches) {
-  var currentPatches = patches[walker.index]
-
-  var len = node.childNodes
-    ? node.childNodes.length
-    : 0
-  for (var i = 0; i < len; i++) {
-    var child = node.childNodes[i]
-    walker.index++
-    dfsWalk(child, walker, patches)
-  }
-
-  if (currentPatches) {
-    applyPatches(node, currentPatches)
-  }
-}
-
-function applyPatches (node, currentPatches) {
-  _.each(currentPatches, function (currentPatch) {
-    switch (currentPatch.type) {
-      case REPLACE:
-        var newNode = (typeof currentPatch.node === 'string')
-          ? document.createTextNode(currentPatch.node)
-          : currentPatch.node.render()
-        node.parentNode.replaceChild(newNode, node)
-        break
-      case REORDER:
-        reorderChildren(node, currentPatch.moves)
-        break
-      case PROPS:
-        setProps(node, currentPatch.props)
-        break
-      case TEXT:
-        if (node.textContent) {
-          node.textContent = currentPatch.content
-        } else {
-          // fuck ie
-          node.nodeValue = currentPatch.content
-        }
-        break
-      default:
-        throw new Error('Unknown patch type ' + currentPatch.type)
-    }
-  })
-}
-
-function setProps (node, props) {
-  for (var key in props) {
-    if (props[key] === void 666) {
-      node.removeAttribute(key)
-    } else {
-      var value = props[key]
-      _.setAttr(node, key, value)
-    }
-  }
-}
-
-function reorderChildren (node, moves) {
-  var staticNodeList = _.toArray(node.childNodes)
-  var maps = {}
-
-  _.each(staticNodeList, function (node) {
-    if (node.nodeType === 1) {
-      var key = node.getAttribute('key')
-      if (key) {
-        maps[key] = node
-      }
-    }
-  })
-
-  _.each(moves, function (move) {
-    var index = move.index
-    if (move.type === 0) { // remove item
-      if (staticNodeList[index] === node.childNodes[index]) { // maybe have been removed for inserting
-        node.removeChild(node.childNodes[index])
-      }
-      staticNodeList.splice(index, 1)
-    } else if (move.type === 1) { // insert item
-      var insertNode = maps[move.item.key]
-        ? maps[move.item.key] // reuse old item
-        : (typeof move.item === 'object')
-            ? move.item.render()
-            : document.createTextNode(move.item)
-      staticNodeList.splice(index, 0, insertNode)
-      node.insertBefore(insertNode, node.childNodes[index] || null)
-    }
-  })
-}
-
-patch.REPLACE = REPLACE
-patch.REORDER = REORDER
-patch.PROPS = PROPS
-patch.TEXT = TEXT
-
-module.exports = patch
-},{"../util":10}],15:[function(require,module,exports){
-module.exports.el = require('./element')
-module.exports.diff = require('./diff')
-module.exports.patch = require('./patch')
-},{"./diff":11,"./element":12,"./patch":14}],16:[function(require,module,exports){
-
-var _ = require('./util');
-var svd = require('./virtual-dom/virtual-dom');
-var toDom = require('./todom');
-var diff = svd.diff;
-var patch = svd.patch;
-
-
-function makeTemplateClass (compileFn) {
-  function VirtualTemplate (data) {
-    this.data = data;
-    var domAndVdom = this.makeVirtualDOM();
-    this.vdom = domAndVdom.vdom;
-    this.dom = domAndVdom.dom;
-    this.isDirty = false;
-    this.flushCallbacks = [];
-  }
-
-  _.extend(VirtualTemplate.prototype, {
-    compileFn: compileFn,
-    setData: setData,
-    makeVirtualDOM: makeVirtualDOM,
-    flush: flush
-  });
-
-  return VirtualTemplate;
-}
-
-function setData(data, isSync) {
-  _.extend(this.data, data);
-  if (typeof isSync === 'boolean' && isSync) {
-    this.flush();
-  } else if (!this.isDirty) {
-    this.isDirty = true;
-    var self = this;
-    // cache all data change, and only refresh dom before browser's repainting
-    _.nextTick(function () {
-      self.flush();
-    });
-  }
-  if (typeof isSync === 'function') {
-    var callback = isSync;
-    this.flushCallbacks.push(callback);
-  }
-}
-
-function flush() {
-  // run virtual-dom algorithm
-  var newVdom = this.makeVirtualDOM().vdom;
-  var patches = diff(this.vdom, newVdom);
-  patch(this.dom, patches);
-  this.vdom = newVdom;
-  this.isDirty = false;
-  var callbacks = this.flushCallbacks;
-  for (var i = 0, len = callbacks.length; i < len; i++) {
-    if (callbacks[i]) {
-      callbacks[i]();
-    }
-  }
-  this.flushCallbacks = [];
-}
-
-function makeVirtualDOM() {
-  var node = this.compileFn(this.data);
-  if(_.isArray(node)){
-    node={
-      tag:'div',
-      attrs:[],
-      children:node
-    }
-  }
-  return {
-    dom:toDom(node),
-    vdom:toVirtualDOM(node)
-  }
-}
-
-function toVirtualDOM(node) {
-  var tagName = node.tag.toLowerCase();
-  var props ={};
-  var children = [];
-  node.attrs.forEach(function(a,i){
-    if(a.value){
-      props[a.name]=a.value;
-    }
-  });
-  node.children.forEach(function (c, i) {
-    if(c){
-      if(c.tag){
-        children.push(toVirtualDOM(c));
-      }else{
-        children.push(c);
-      }
-    }
-  });
-  return svd.el(tagName, props, children);
-}
-
-module.exports = function (compileFn) {
-  return  makeTemplateClass(compileFn);
-}
-},{"./todom":9,"./util":10,"./virtual-dom/virtual-dom":15}],17:[function(require,module,exports){
-var parser = require('./parser'),
-    compiler = require('./compiler'),
-    vTemplate=require('./virtual-template');
-
-function vtpl(tpl){
-    var AST = parser(tpl);
-    var _render = compiler(AST);
-    return vTemplate(_render);
-}
-
-//exports
-module.exports=vtpl;
-},{"./compiler":6,"./parser":7,"./virtual-template":16}],18:[function(require,module,exports){
-
-
-/****************************************************************** 
- * @touch
- * Description:移动端手势识别辅助
- *******************************************************************/
-var touch = require('./lib/touch');
-module.exports=touch;
-},{"./lib/touch":19}],19:[function(require,module,exports){
-
-var utils = {};
-
-utils.PCevts = {
-    'touchstart': 'mousedown',
-    'touchmove': 'mousemove',
-    'touchend': 'mouseup',
-    'touchcancel': 'mouseout'
-};
-
-utils.hasTouch = ('ontouchstart' in window);
-
-utils.getType = function (obj) {
-    return Object.prototype.toString.call(obj).match(/\s([a-z|A-Z]+)/)[1].toLowerCase();
-};
-
-utils.getSelector = function (el) {
-    if (el.id) {
-        return "#" + el.id;
-    }
-    if (el.className) {
-        var cns = el.className.split(/\s+/);
-        return "." + cns.join(".");
-    } else if (el === document) {
-        return "body";
-    } else {
-        return el.tagName.toLowerCase();
-    }
-};
-
-utils.matchSelector = function (target, selector) {
-    return target.webkitMatchesSelector(selector);
-};
-
-utils.getEventListeners = function (el) {
-    return el.listeners;
-};
-
-utils.getPCevts = function (evt) {
-    return this.PCevts[evt] || evt;
-};
-
-utils.forceReflow = function () {
-    var tempDivID = "reflowDivBlock";
-    var domTreeOpDiv = document.getElementById(tempDivID);
-    if (!domTreeOpDiv) {
-        domTreeOpDiv = document.createElement("div");
-        domTreeOpDiv.id = tempDivID;
-        document.body.appendChild(domTreeOpDiv);
-    }
-    var parentNode = domTreeOpDiv.parentNode;
-    var nextSibling = domTreeOpDiv.nextSibling;
-    parentNode.removeChild(domTreeOpDiv);
-    parentNode.insertBefore(domTreeOpDiv, nextSibling);
-};
-
-utils.simpleClone = function (obj) {
-    return Object.create(obj);
-};
-
-utils.getPosOfEvent = function (ev) {
-    if (this.hasTouch) {
-        var posi = [];
-        var src = null;
-
-        for (var t = 0, len = ev.touches.length; t < len; t++) {
-            src = ev.touches[t];
-            posi.push({
-                x: src.pageX,
-                y: src.pageY
-            });
-        }
-        return posi;
-    } else {
-        return [{
-            x: ev.pageX,
-            y: ev.pageY
-        }];
-    }
-};
-
-utils.getDistance = function (pos1, pos2) {
-    var x = pos2.x - pos1.x,
-        y = pos2.y - pos1.y;
-    return Math.sqrt((x * x) + (y * y));
-};
-
-utils.getFingers = function (ev) {
-    return ev.touches ? ev.touches.length : 1;
-};
-
-utils.calScale = function (pstart, pmove) {
-    if (pstart.length >= 2 && pmove.length >= 2) {
-        var disStart = this.getDistance(pstart[1], pstart[0]);
-        var disEnd = this.getDistance(pmove[1], pmove[0]);
-
-        return disEnd / disStart;
-    }
-    return 1;
-};
-
-utils.getAngle = function (p1, p2) {
-    return Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Math.PI;
-};
-
-utils.getAngle180 = function (p1, p2) {
-    var agl = Math.atan((p2.y - p1.y) * -1 / (p2.x - p1.x)) * (180 / Math.PI);
-    return (agl < 0 ? (agl + 180) : agl);
-};
-
-utils.getDirectionFromAngle = function (agl) {
-    var directions = {
-        up: agl < -45 && agl > -135,
-        down: agl >= 45 && agl < 135,
-        left: agl >= 135 || agl <= -135,
-        right: agl >= -45 && agl <= 45
-    };
-    for (var key in directions) {
-        if (directions[key]) return key;
-    }
-    return null;
-};
-
-utils.getXYByElement = function (el) {
-    var left = 0,
-        top = 0;
-
-    while (el.offsetParent) {
-        left += el.offsetLeft;
-        top += el.offsetTop;
-        el = el.offsetParent;
-    }
-    return {
-        left: left,
-        top: top
-    };
-};
-
-utils.reset = function () {
-    startEvent = moveEvent = endEvent = null;
-    __tapped = __touchStart = startSwiping = startPinch = false;
-    startDrag = false;
-    pos = {};
-    __rotation_single_finger = false;
-};
-
-utils.isTouchMove = function (ev) {
-    return (ev.type === 'touchmove' || ev.type === 'mousemove');
-};
-
-utils.isTouchEnd = function (ev) {
-    return (ev.type === 'touchend' || ev.type === 'mouseup' || ev.type === 'touchcancel');
-};
-
-utils.env = (function () {
-    var os = {},
-        ua = navigator.userAgent,
-        android = ua.match(/(Android)[\s\/]+([\d\.]+)/),
-        ios = ua.match(/(iPad|iPhone|iPod)\s+OS\s([\d_\.]+)/),
-        wp = ua.match(/(Windows\s+Phone)\s([\d\.]+)/),
-        isWebkit = /WebKit\/[\d.]+/i.test(ua),
-        isSafari = ios ? (navigator.standalone ? isWebkit : (/Safari/i.test(ua) && !/CriOS/i.test(ua) && !/MQQBrowser/i.test(ua))) : false;
-    if (android) {
-        os.android = true;
-        os.version = android[2];
-    }
-    if (ios) {
-        os.ios = true;
-        os.version = ios[2].replace(/_/g, '.');
-        os.ios7 = /^7/.test(os.version);
-        if (ios[1] === 'iPad') {
-            os.ipad = true;
-        } else if (ios[1] === 'iPhone') {
-            os.iphone = true;
-            os.iphone5 = screen.height == 568;
-        } else if (ios[1] === 'iPod') {
-            os.ipod = true;
-        }
-    }
-    if (wp) {
-        os.wp = true;
-        os.version = wp[2];
-        os.wp8 = /^8/.test(os.version);
-    }
-    if (isWebkit) {
-        os.webkit = true;
-    }
-    if (isSafari) {
-        os.safari = true;
-    }
-    return os;
-})();
-
-/** 底层事件绑定/代理支持  */
-var engine = {
-    proxyid: 0,
-    proxies: [],
-    trigger: function (el, evt, detail) {
-
-        detail = detail || {};
-        var e, opt = {
-            bubbles: true,
-            cancelable: true,
-            detail: detail
-        };
-
-        try {
-            if (typeof CustomEvent !== 'undefined') {
-                e = new CustomEvent(evt, opt);
-                if (el) {
-                    el.dispatchEvent(e);
-                }
-            } else {
-                e = document.createEvent("CustomEvent");
-                e.initCustomEvent(evt, true, true, detail);
-                if (el) {
-                    el.dispatchEvent(e);
-                }
-            }
-        } catch (ex) {
-            console.warn("Touch.js is not supported by environment.");
-        }
-    },
-    bind: function (el, evt, handler) {
-        el.listeners = el.listeners || {};
-        if (!el.listeners[evt]) {
-            el.listeners[evt] = [handler];
-        } else {
-            el.listeners[evt].push(handler);
-        }
-        var proxy = function (e) {
-            if (utils.env.ios7) {
-                utils.forceReflow();
-            }
-            e.originEvent = e;
-            for (var p in e.detail) {
-                if (p !== 'type') {
-                    e[p] = e.detail[p];
-                }
-            }
-            e.startRotate = function () {
-                __rotation_single_finger = true;
-            };
-            var returnValue = handler.call(e.target, e);
-            if (typeof returnValue !== "undefined" && !returnValue) {
-                e.stopPropagation();
-                e.preventDefault();
-            }
-        };
-        handler.proxy = handler.proxy || {};
-        if (!handler.proxy[evt]) {
-            handler.proxy[evt] = [this.proxyid++];
-        } else {
-            handler.proxy[evt].push(this.proxyid++);
-        }
-        this.proxies.push(proxy);
-        if (el.addEventListener) {
-            el.addEventListener(evt, proxy, false);
-        }
-    },
-    unbind: function (el, evt, handler) {
-        if (!handler) {
-            var handlers = el.listeners[evt];
-            if (handlers && handlers.length) {
-                handlers.forEach(function (handler) {
-                    el.removeEventListener(evt, handler, false);
-                });
-            }
-        } else {
-            var proxyids = handler.proxy[evt];
-            if (proxyids && proxyids.length) {
-                proxyids.forEach(function (proxyid) {
-                    if (el.removeEventListener) {
-                        el.removeEventListener(evt, engine.proxies[proxyid], false);
-                    }
-                });
-            }
-        }
-    },
-    delegate: function (el, evt, sel, handler) {
-        var proxy = function (e) {
-            var target, returnValue;
-            e.originEvent = e;
-            for (var p in e.detail) {
-                if (p !== 'type') {
-                    e[p] = e.detail[p];
-                }
-            }
-            e.startRotate = function () {
-                __rotation_single_finger = true;
-            };
-            var integrateSelector = utils.getSelector(el) + " " + sel;
-            var match = utils.matchSelector(e.target, integrateSelector);
-            var ischild = utils.matchSelector(e.target, integrateSelector + " " + e.target.nodeName);
-            if (!match && ischild) {
-                if (utils.env.ios7) {
-                    utils.forceReflow();
-                }
-                target = e.target;
-                while (!utils.matchSelector(target, integrateSelector)) {
-                    target = target.parentNode;
-                }
-                returnValue = handler.call(e.target, e);
-                if (typeof returnValue !== "undefined" && !returnValue) {
-                    e.stopPropagation();
-                    e.preventDefault();
-                }
-            } else {
-                if (utils.env.ios7) {
-                    utils.forceReflow();
-                }
-                if (match || ischild) {
-                    returnValue = handler.call(e.target, e);
-                    if (typeof returnValue !== "undefined" && !returnValue) {
-                        e.stopPropagation();
-                        e.preventDefault();
-                    }
-                }
-            }
-        };
-        handler.proxy = handler.proxy || {};
-        if (!handler.proxy[evt]) {
-            handler.proxy[evt] = [this.proxyid++];
-        } else {
-            handler.proxy[evt].push(this.proxyid++);
-        }
-        this.proxies.push(proxy);
-        el.listeners = el.listeners || {};
-        if (!el.listeners[evt]) {
-            el.listeners[evt] = [proxy];
-        } else {
-            el.listeners[evt].push(proxy);
-        }
-        if (el.addEventListener) {
-            el.addEventListener(evt, proxy, false);
-        }
-    },
-    undelegate: function (el, evt, sel, handler) {
-        if (!handler) {
-            var listeners = el.listeners[evt];
-            listeners.forEach(function (proxy) {
-                el.removeEventListener(evt, proxy, false);
-            });
-        } else {
-            var proxyids = handler.proxy[evt];
-            if (proxyids.length) {
-                proxyids.forEach(function (proxyid) {
-                    if (el.removeEventListener) {
-                        el.removeEventListener(evt, engine.proxies[proxyid], false);
-                    }
-                });
-            }
-        }
-    }
-};
-
-var config = {
-    tap: true,
-    doubleTap: true,
-    tapMaxDistance: 10,
-    hold: true,
-    tapTime: 200,
-    holdTime: 650,
-    maxDoubleTapInterval: 300,
-    swipe: true,
-    swipeTime: 300,
-    swipeMinDistance: 18,
-    swipeFactor: 5,
-    drag: true,
-    pinch: true,
-    minScaleRate: 0,
-    minRotationAngle: 0
-};
-
-var smrEventList = {
-    TOUCH_START: 'touchstart',
-    TOUCH_MOVE: 'touchmove',
-    TOUCH_END: 'touchend',
-    TOUCH_CANCEL: 'touchcancel',
-    MOUSE_DOWN: 'mousedown',
-    MOUSE_MOVE: 'mousemove',
-    MOUSE_UP: 'mouseup',
-    CLICK: 'click',
-    PINCH_START: 'pinchstart',
-    PINCH_END: 'pinchend',
-    PINCH: 'pinch',
-    PINCH_IN: 'pinchin',
-    PINCH_OUT: 'pinchout',
-    ROTATION_LEFT: 'rotateleft',
-    ROTATION_RIGHT: 'rotateright',
-    ROTATION: 'rotate',
-    SWIPE_START: 'swipestart',
-    SWIPING: 'swiping',
-    SWIPE_END: 'swipeend',
-    SWIPE_LEFT: 'swipeleft',
-    SWIPE_RIGHT: 'swiperight',
-    SWIPE_UP: 'swipeup',
-    SWIPE_DOWN: 'swipedown',
-    SWIPE: 'swipe',
-    DRAG: 'drag',
-    DRAGSTART: 'dragstart',
-    DRAGEND: 'dragend',
-    HOLD: 'hold',
-    TAP: 'tap',
-    DOUBLE_TAP: 'doubletap'
-};
-
-/** 手势识别 */
-var pos = {
-    start: null,
-    move: null,
-    end: null
-};
-
-var startTime = 0;
-var fingers = 0;
-var startEvent = null;
-var moveEvent = null;
-var endEvent = null;
-var startSwiping = false;
-var startPinch = false;
-var startDrag = false;
-
-var __offset = {};
-var __touchStart = false;
-var __holdTimer = null;
-var __tapped = false;
-var __lastTapEndTime = null;
-var __tapTimer = null;
-
-var __scale_last_rate = 1;
-var __rotation_single_finger = false;
-var __rotation_single_start = [];
-var __initial_angle = 0;
-var __rotation = 0;
-
-var __prev_tapped_end_time = 0;
-var __prev_tapped_pos = null;
-
-var gestures = {
-    getAngleDiff: function (currentPos) {
-        var diff = parseInt(__initial_angle - utils.getAngle180(currentPos[0], currentPos[1]), 10);
-        var count = 0;
-
-        while (Math.abs(diff - __rotation) > 90 && count++ < 50) {
-            if (__rotation < 0) {
-                diff -= 180;
-            } else {
-                diff += 180;
-            }
-        }
-        __rotation = parseInt(diff, 10);
-        return __rotation;
-    },
-    pinch: function (ev) {
-        var el = ev.target;
-        if (config.pinch) {
-            if (!__touchStart) return;
-            if (utils.getFingers(ev) < 2) {
-                if (!utils.isTouchEnd(ev)) return;
-            }
-            var scale = utils.calScale(pos.start, pos.move);
-            var rotation = this.getAngleDiff(pos.move);
-            var eventObj = {
-                type: '',
-                originEvent: ev,
-                scale: scale,
-                rotation: rotation,
-                direction: (rotation > 0 ? 'right' : 'left'),
-                fingersCount: utils.getFingers(ev)
-            };
-            if (!startPinch) {
-                startPinch = true;
-                eventObj.fingerStatus = "start";
-                engine.trigger(el, smrEventList.PINCH_START, eventObj);
-            } else if (utils.isTouchMove(ev)) {
-                eventObj.fingerStatus = "move";
-                engine.trigger(el, smrEventList.PINCH, eventObj);
-            } else if (utils.isTouchEnd(ev)) {
-                eventObj.fingerStatus = "end";
-                engine.trigger(el, smrEventList.PINCH_END, eventObj);
-                utils.reset();
-            }
-
-            if (Math.abs(1 - scale) > config.minScaleRate) {
-                var scaleEv = utils.simpleClone(eventObj);
-
-                //手势放大, 触发pinchout事件
-                var scale_diff = 0.00000000001; //防止touchend的scale与__scale_last_rate相等，不触发事件的情况。
-                if (scale > __scale_last_rate) {
-                    __scale_last_rate = scale - scale_diff;
-                    engine.trigger(el, smrEventList.PINCH_OUT, scaleEv, false);
-                } //手势缩小,触发pinchin事件
-                else if (scale < __scale_last_rate) {
-                    __scale_last_rate = scale + scale_diff;
-                    engine.trigger(el, smrEventList.PINCH_IN, scaleEv, false);
-                }
-
-                if (utils.isTouchEnd(ev)) {
-                    __scale_last_rate = 1;
-                }
-            }
-
-            if (Math.abs(rotation) > config.minRotationAngle) {
-                var rotationEv = utils.simpleClone(eventObj),
-                    eventType;
-
-                eventType = rotation > 0 ? smrEventList.ROTATION_RIGHT : smrEventList.ROTATION_LEFT;
-                engine.trigger(el, eventType, rotationEv, false);
-                engine.trigger(el, smrEventList.ROTATION, eventObj);
-            }
-
-        }
-    },
-    rotateSingleFinger: function (ev) {
-        var el = ev.target;
-        if (__rotation_single_finger && utils.getFingers(ev) < 2) {
-            if (!pos.move) return;
-            if (__rotation_single_start.length < 2) {
-                var docOff = utils.getXYByElement(el);
-
-                __rotation_single_start = [{
-                        x: docOff.left + el.offsetWidth / 2,
-                        y: docOff.top + el.offsetHeight / 2
-                    },
-                    pos.move[0]
-                ];
-                __initial_angle = parseInt(utils.getAngle180(__rotation_single_start[0], __rotation_single_start[1]), 10);
-            }
-            var move = [__rotation_single_start[0], pos.move[0]];
-            var rotation = this.getAngleDiff(move);
-            var eventObj = {
-                type: '',
-                originEvent: ev,
-                rotation: rotation,
-                direction: (rotation > 0 ? 'right' : 'left'),
-                fingersCount: utils.getFingers(ev)
-            };
-            if (utils.isTouchMove(ev)) {
-                eventObj.fingerStatus = "move";
-            } else if (utils.isTouchEnd(ev) || ev.type === 'mouseout') {
-                eventObj.fingerStatus = "end";
-                engine.trigger(el, smrEventList.PINCH_END, eventObj);
-                utils.reset();
-            }
-            var eventType = rotation > 0 ? smrEventList.ROTATION_RIGHT : smrEventList.ROTATION_LEFT;
-            engine.trigger(el, eventType, eventObj);
-            engine.trigger(el, smrEventList.ROTATION, eventObj);
-        }
-    },
-    swipe: function (ev) {
-        var el = ev.target;
-        if (!__touchStart || !pos.move || utils.getFingers(ev) > 1) {
-            return;
-        }
-
-        var now = Date.now();
-        var touchTime = now - startTime;
-        var distance = utils.getDistance(pos.start[0], pos.move[0]);
-        var position = {
-            x: pos.move[0].x - __offset.left,
-            y: pos.move[0].y - __offset.top
-        };
-        var angle = utils.getAngle(pos.start[0], pos.move[0]);
-        var direction = utils.getDirectionFromAngle(angle);
-        var touchSecond = touchTime / 1000;
-        var factor = ((10 - config.swipeFactor) * 10 * touchSecond * touchSecond);
-        var eventObj = {
-            type: smrEventList.SWIPE,
-            originEvent: ev,
-            position: position,
-            direction: direction,
-            distance: distance,
-            distanceX: pos.move[0].x - pos.start[0].x,
-            distanceY: pos.move[0].y - pos.start[0].y,
-            x: pos.move[0].x - pos.start[0].x,
-            y: pos.move[0].y - pos.start[0].y,
-            angle: angle,
-            duration: touchTime,
-            fingersCount: utils.getFingers(ev),
-            factor: factor
-        };
-        if (config.swipe) {
-            var swipeTo = function () {
-                var elt = smrEventList;
-                switch (direction) {
-                    case 'up':
-                        engine.trigger(el, elt.SWIPE_UP, eventObj);
-                        break;
-                    case 'down':
-                        engine.trigger(el, elt.SWIPE_DOWN, eventObj);
-                        break;
-                    case 'left':
-                        engine.trigger(el, elt.SWIPE_LEFT, eventObj);
-                        break;
-                    case 'right':
-                        engine.trigger(el, elt.SWIPE_RIGHT, eventObj);
-                        break;
-                }
-            };
-
-            if (!startSwiping) {
-                eventObj.fingerStatus = eventObj.swipe = 'start';
-                startSwiping = true;
-                engine.trigger(el, smrEventList.SWIPE_START, eventObj);
-            } else if (utils.isTouchMove(ev)) {
-                eventObj.fingerStatus = eventObj.swipe = 'move';
-                engine.trigger(el, smrEventList.SWIPING, eventObj);
-
-                if (touchTime > config.swipeTime && touchTime < config.swipeTime + 50 && distance > config.swipeMinDistance) {
-                    swipeTo();
-                    engine.trigger(el, smrEventList.SWIPE, eventObj, false);
-                }
-            } else if (utils.isTouchEnd(ev) || ev.type === 'mouseout') {
-                eventObj.fingerStatus = eventObj.swipe = 'end';
-                engine.trigger(el, smrEventList.SWIPE_END, eventObj);
-
-                if (config.swipeTime > touchTime && distance > config.swipeMinDistance) {
-                    swipeTo();
-                    engine.trigger(el, smrEventList.SWIPE, eventObj, false);
-                }
-            }
-        }
-
-        if (config.drag) {
-            if (!startDrag) {
-                eventObj.fingerStatus = eventObj.swipe = 'start';
-                startDrag = true;
-                engine.trigger(el, smrEventList.DRAGSTART, eventObj);
-            } else if (utils.isTouchMove(ev)) {
-                eventObj.fingerStatus = eventObj.swipe = 'move';
-                engine.trigger(el, smrEventList.DRAG, eventObj);
-            } else if (utils.isTouchEnd(ev)) {
-                eventObj.fingerStatus = eventObj.swipe = 'end';
-                engine.trigger(el, smrEventList.DRAGEND, eventObj);
-            }
-
-        }
-    },
-    tap: function (ev) {
-        var el = ev.target;
-        if (config.tap) {
-            var now = Date.now();
-            var touchTime = now - startTime;
-            var distance = utils.getDistance(pos.start[0], pos.move ? pos.move[0] : pos.start[0]);
-
-            clearTimeout(__holdTimer);
-            var isDoubleTap = (function () {
-                if (__prev_tapped_pos && config.doubleTap && (startTime - __prev_tapped_end_time) < config.maxDoubleTapInterval) {
-                    var doubleDis = utils.getDistance(__prev_tapped_pos, pos.start[0]);
-                    if (doubleDis < 16) return true;
-                }
-                return false;
-            })();
-
-            if (isDoubleTap) {
-                clearTimeout(__tapTimer);
-                engine.trigger(el, smrEventList.DOUBLE_TAP, {
-                    type: smrEventList.DOUBLE_TAP,
-                    originEvent: ev,
-                    position: pos.start[0]
-                });
-                return;
-            }
-
-            if (config.tapMaxDistance < distance) return;
-
-            if (config.holdTime > touchTime && utils.getFingers(ev) <= 1) {
-                __tapped = true;
-                __prev_tapped_end_time = now;
-                __prev_tapped_pos = pos.start[0];
-                __tapTimer = setTimeout(function () {
-                        engine.trigger(el, smrEventList.TAP, {
-                            type: smrEventList.TAP,
-                            originEvent: ev,
-                            fingersCount: utils.getFingers(ev),
-                            position: __prev_tapped_pos
-                        });
-                    },
-                    config.tapTime);
-            }
-        }
-    },
-    hold: function (ev) {
-        var el = ev.target;
-        if (config.hold) {
-            clearTimeout(__holdTimer);
-
-            __holdTimer = setTimeout(function () {
-                    if (!pos.start) return;
-                    var distance = utils.getDistance(pos.start[0], pos.move ? pos.move[0] : pos.start[0]);
-                    if (config.tapMaxDistance < distance) return;
-
-                    if (!__tapped) {
-                        engine.trigger(el, "hold", {
-                            type: 'hold',
-                            originEvent: ev,
-                            fingersCount: utils.getFingers(ev),
-                            position: pos.start[0]
-                        });
-                    }
-                },
-                config.holdTime);
-        }
-    }
-};
-
-var handlerOriginEvent = function (ev) {
-
-    var el = ev.target;
-    switch (ev.type) {
-        case 'touchstart':
-        case 'mousedown':
-            __rotation_single_start = [];
-            __touchStart = true;
-            if (!pos.start || pos.start.length < 2) {
-                pos.start = utils.getPosOfEvent(ev);
-            }
-            if (utils.getFingers(ev) >= 2) {
-                __initial_angle = parseInt(utils.getAngle180(pos.start[0], pos.start[1]), 10);
-            }
-
-            startTime = Date.now();
-            startEvent = ev;
-            __offset = {};
-
-            var box = el.getBoundingClientRect();
-            var docEl = document.documentElement;
-            __offset = {
-                top: box.top + (window.pageYOffset || docEl.scrollTop) - (docEl.clientTop || 0),
-                left: box.left + (window.pageXOffset || docEl.scrollLeft) - (docEl.clientLeft || 0)
-            };
-
-            gestures.hold(ev);
-            break;
-        case 'touchmove':
-        case 'mousemove':
-            if (!__touchStart || !pos.start) return;
-            pos.move = utils.getPosOfEvent(ev);
-            if (utils.getFingers(ev) >= 2) {
-                gestures.pinch(ev);
-            } else if (__rotation_single_finger) {
-                gestures.rotateSingleFinger(ev);
-            } else {
-                gestures.swipe(ev);
-            }
-            break;
-        case 'touchend':
-        case 'touchcancel':
-        case 'mouseup':
-        case 'mouseout':
-            if (!__touchStart) return;
-            endEvent = ev;
-
-            if (startPinch) {
-                gestures.pinch(ev);
-            } else if (__rotation_single_finger) {
-                gestures.rotateSingleFinger(ev);
-            } else if (startSwiping) {
-                gestures.swipe(ev);
-            } else {
-                gestures.tap(ev);
-            }
-
-            utils.reset();
-            __initial_angle = 0;
-            __rotation = 0;
-            if (ev.touches && ev.touches.length === 1) {
-                __touchStart = true;
-                __rotation_single_finger = true;
-            }
-            break;
-    }
-};
-
-var _on = function () {
-
-    var evts, handler, evtMap, sel, args = arguments;
-    if (args.length < 2 || args > 4) {
-        return console.error("unexpected arguments!");
-    }
-    var els = utils.getType(args[0]) === 'string' ? document.querySelectorAll(args[0]) : args[0];
-    els = els.length ? Array.prototype.slice.call(els) : [els];
-    //事件绑定
-    if (args.length === 3 && utils.getType(args[1]) === 'string') {
-        evts = args[1].split(" ");
-        handler = args[2];
-        evts.forEach(function (evt) {
-            if (!utils.hasTouch) {
-                evt = utils.getPCevts(evt);
-            }
-            els.forEach(function (el) {
-                engine.bind(el, evt, handler);
-            });
-        });
-        return;
-    }
-
-    function evtMapDelegate(evt) {
-        if (!utils.hasTouch) {
-            evt = utils.getPCevts(evt);
-        }
-        els.forEach(function (el) {
-            engine.delegate(el, evt, sel, evtMap[evt]);
-        });
-    }
-    //mapEvent delegate
-    if (args.length === 3 && utils.getType(args[1]) === 'object') {
-        evtMap = args[1];
-        sel = args[2];
-        for (var evt1 in evtMap) {
-            evtMapDelegate(evt1);
-        }
-        return;
-    }
-
-    function evtMapBind(evt) {
-        if (!utils.hasTouch) {
-            evt = utils.getPCevts(evt);
-        }
-        els.forEach(function (el) {
-            engine.bind(el, evt, evtMap[evt]);
-        });
-    }
-
-    //mapEvent bind
-    if (args.length === 2 && utils.getType(args[1]) === 'object') {
-        evtMap = args[1];
-        for (var evt2 in evtMap) {
-            evtMapBind(evt2);
-        }
-        return;
-    }
-
-    //兼容factor config
-    if (args.length === 4 && utils.getType(args[2]) === "object") {
-        evts = args[1].split(" ");
-        handler = args[3];
-        evts.forEach(function (evt) {
-            if (!utils.hasTouch) {
-                evt = utils.getPCevts(evt);
-            }
-            els.forEach(function (el) {
-                engine.bind(el, evt, handler);
-            });
-        });
-        return;
-    }
-
-    //事件代理
-    if (args.length === 4) {
-        var el = els[0];
-        evts = args[1].split(" ");
-        sel = args[2];
-        handler = args[3];
-        evts.forEach(function (evt) {
-            if (!utils.hasTouch) {
-                evt = utils.getPCevts(evt);
-            }
-            engine.delegate(el, evt, sel, handler);
-        });
-        return;
-    }
-};
-
-var _off = function () {
-    var evts, handler;
-    var args = arguments;
-    if (args.length < 1 || args.length > 4) {
-        return console.error("unexpected arguments!");
-    }
-    var els = utils.getType(args[0]) === 'string' ? document.querySelectorAll(args[0]) : args[0];
-    els = els.length ? Array.prototype.slice.call(els) : [els];
-
-    if (args.length === 1 || args.length === 2) {
-        els.forEach(function (el) {
-            evts = args[1] ? args[1].split(" ") : Object.keys(el.listeners);
-            if (evts.length) {
-                evts.forEach(function (evt) {
-                    if (!utils.hasTouch) {
-                        evt = utils.getPCevts(evt);
-                    }
-                    engine.unbind(el, evt);
-                    engine.undelegate(el, evt);
-                });
-            }
-        });
-        return;
-    }
-
-    if (args.length === 3 && utils.getType(args[2]) === 'function') {
-        handler = args[2];
-        els.forEach(function (el) {
-            evts = args[1].split(" ");
-            evts.forEach(function (evt) {
-                if (!utils.hasTouch) {
-                    evt = utils.getPCevts(evt);
-                }
-                engine.unbind(el, evt, handler);
-            });
-        });
-        return;
-    }
-
-    if (args.length === 3 && utils.getType(args[2]) === 'string') {
-        var sel = args[2];
-        els.forEach(function (el) {
-            evts = args[1].split(" ");
-            evts.forEach(function (evt) {
-                if (!utils.hasTouch) {
-                    evt = utils.getPCevts(evt);
-                }
-                engine.undelegate(el, evt, sel);
-            });
-        });
-        return;
-    }
-
-    if (args.length === 4) {
-        handler = args[3];
-        els.forEach(function (el) {
-            evts = args[1].split(" ");
-            evts.forEach(function (evt) {
-                if (!utils.hasTouch) {
-                    evt = utils.getPCevts(evt);
-                }
-                engine.undelegate(el, evt, sel, handler);
-            });
-        });
-        return;
-    }
-};
-
-var _dispatch = function (el, evt, detail) {
-    var args = arguments;
-    if (!utils.hasTouch) {
-        evt = utils.getPCevts(evt);
-    }
-    var els = utils.getType(args[0]) === 'string' ? document.querySelectorAll(args[0]) : args[0];
-    els = els.length ? Array.prototype.call(els) : [els];
-
-    els.forEach(function (el) {
-        engine.trigger(el, evt, detail);
-    });
-};
-
-//init gesture
-function init() {
-
-    var mouseEvents = 'mouseup mousedown mousemove mouseout',
-        touchEvents = 'touchstart touchmove touchend touchcancel';
-    var bindingEvents = utils.hasTouch ? touchEvents : mouseEvents;
-
-    bindingEvents.split(" ").forEach(function (evt) {
-        document.addEventListener(evt, handlerOriginEvent, false);
-    });
-}
-
-init();
-
-//exports 
-module.exports.on = module.exports.bind = module.exports.live = _on;
-module.exports.off = module.exports.unbind = module.exports.die = _off;
-module.exports.config = config;
-module.exports.trigger = _dispatch;
-},{}],20:[function(require,module,exports){
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-},{}],21:[function(require,module,exports){
-/****************************************************************** 
- * @component
- * Description:组件管理
- *******************************************************************/
-var _ = require('./type');
-
-function component(role, define) {
-    define.role = role;
-    if (component._define[role]) {
-        component._define[role] = _.extend(component._define[role], define);
-    } else {
-        component._define[role] = define;
-    }
-}
-
-function getDefine(el) {
-    var _role = el.getAttribute('ne-role') || el.tagName.toLowerCase(),
-        _define = component._define[_role];
-    return _define || {};
-}
-
-component._define = {};
-
-component.acts = function (selector) {
-    function _props(el, props) {
-        var _this = this;
-        for (var i in props) {
-            _this[i] = function (prop, el) {
-                return function () {
-                    return prop.apply(el, arguments);
-                };
-            }(props[i], el);
-        }
-    }
-    selector = typeof selector === 'string' ? document.querySelector(selector) : selector;
-    return new _props(selector, getDefine(selector).props || {});
-}
-
-component.init = function (el) {
-    el = typeof el === 'string' ? document.querySelector(el) : el;
-    var _define = getDefine(el),
-        _props = _define.props || {};
-    if (_props.init && !el.inited) {
-        _props.init.apply(el);
-        el.inited = true;
-    }
-    if (_define.role == 'page') {
-        Array.prototype.slice.call(el.querySelectorAll('[ne-role]')).forEach(function (item) {
-            component.init(item);
-        });
-    }
-}
-
-module.exports = component;
-},{"./type":23}],22:[function(require,module,exports){
-/****************************************************************** 
  * @dom
  * Description:dom操作辅助
  *******************************************************************/
+var dom = require('./lib/dom');
+module.exports=dom;
+},{"./lib/dom":2}],2:[function(require,module,exports){
 
 /********************* define *********************/
 var Dom = function (arr) {
@@ -3849,7 +1315,2545 @@ $.animateHide = function (target) {
 }
 
 module.exports = $;
+},{}],3:[function(require,module,exports){
+
+/****************************************************************** 
+ * @motion
+ * Description:动效辅助
+ *******************************************************************/
+var timingFunction=require('./lib/timing-function');
+var timeline = require('./lib/timeline');
+var transform=require('./lib/transform');
+
+module.exports=transform;
+module.exports.timingFunction=timingFunction;
+module.exports.timeline=timeline;
+},{"./lib/timeline":4,"./lib/timing-function":5,"./lib/transform":6}],4:[function(require,module,exports){
+
+var __TIMING_FUNCTION=require('./timing-function');
+
+function timingFunction(name) {
+    name = name.split('-');
+    if (name.length == 2) {
+        return __TIMING_FUNCTION[name[0]][name[1]];
+    } else {
+        return __TIMING_FUNCTION[name[0]];
+    }
+}
+
+function Timeline(option) {
+    //向量起点
+    this.origin = option.origin;
+    //向量终点
+    this.transition = option.transition;
+    //规定动画完成一个周期所花费的秒或毫秒。默认是 1000。
+    this.duration = option.duration || 1000;
+    //规定动画何时开始。默认是 0。
+    this.delay = option.delay || 0;
+    //规定动画被播放的次数。默认是 1。
+    this.iterationCount = option.iterationCount || 1;
+    //规定动画是否在下一周期逆向地播放。默认是 "normal"。
+    this.direction = 'normal';
+    //规定动画的速度曲线。默认是 "Linear"。
+    this.timingFunction = timingFunction(option.timingFunction ? option.timingFunction : 'Linear');
+    //关键帧数(默认每秒24帧)
+    this.keyframesLength = option.keyframesLength || Math.ceil(this.duration / 40);
+    //关键帧时长
+    this.keyframeSpan = Math.ceil(this.duration / this.keyframesLength);
+    //关键帧回调
+    this.keyframeFunction = option.keyframeFunction;
+    //结束回调
+    this.complete = option.complete;
+}
+
+Timeline.prototype.run = function (keyframeIndex) {
+    var _this = this,
+        transitionRes = [];
+    keyframeIndex = keyframeIndex || 0;
+    if (keyframeIndex >= _this.keyframesLength) {
+        transitionRes = _this.transition;
+    } else {
+        _this.transition.forEach(function (item, index) {
+            var _res = _this.timingFunction(keyframeIndex, 0, item - _this.origin[index], _this.keyframesLength);
+            _res += _this.origin[index];
+            transitionRes.push(Math.ceil(_res));
+        });
+    }
+    transitionRes.push(keyframeIndex);
+    _this.keyframeFunction.apply(_this, transitionRes);
+    if (keyframeIndex < _this.keyframesLength) {
+        keyframeIndex++;
+        _this.timing = setTimeout(function () {
+            _this.run.apply(_this, [keyframeIndex]);
+        }, _this.keyframeSpan);
+    } else {
+        _this.complete && _this.complete();
+    }
+}
+
+Timeline.prototype.stop = function () {
+    clearTimeout(this.timing);
+}
+
+//exports
+module.exports = Timeline;
+},{"./timing-function":5}],5:[function(require,module,exports){
+
+//时序函数 timing function
+/*
+ * t: current time（当前时间）；
+ * b: beginning value（初始值）；
+ * c: change in value（变化量）；
+ * d: duration（持续时间）。
+ */
+var __TIMING_FUNCTION = {
+    Linear: function (t, b, c, d) {
+        return c * t / d + b;
+    },
+    Quad: {
+        easeIn: function (t, b, c, d) {
+            return c * (t /= d) * t + b;
+        },
+        easeOut: function (t, b, c, d) {
+            return -c * (t /= d) * (t - 2) + b;
+        },
+        easeInOut: function (t, b, c, d) {
+            if ((t /= d / 2) < 1) return c / 2 * t * t + b;
+            return -c / 2 * ((--t) * (t - 2) - 1) + b;
+        }
+    },
+    Cubic: {
+        easeIn: function (t, b, c, d) {
+            return c * (t /= d) * t * t + b;
+        },
+        easeOut: function (t, b, c, d) {
+            return c * ((t = t / d - 1) * t * t + 1) + b;
+        },
+        easeInOut: function (t, b, c, d) {
+            if ((t /= d / 2) < 1) return c / 2 * t * t * t + b;
+            return c / 2 * ((t -= 2) * t * t + 2) + b;
+        }
+    },
+    Quart: {
+        easeIn: function (t, b, c, d) {
+            return c * (t /= d) * t * t * t + b;
+        },
+        easeOut: function (t, b, c, d) {
+            return -c * ((t = t / d - 1) * t * t * t - 1) + b;
+        },
+        easeInOut: function (t, b, c, d) {
+            if ((t /= d / 2) < 1) return c / 2 * t * t * t * t + b;
+            return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
+        }
+    },
+    Quint: {
+        easeIn: function (t, b, c, d) {
+            return c * (t /= d) * t * t * t * t + b;
+        },
+        easeOut: function (t, b, c, d) {
+            return c * ((t = t / d - 1) * t * t * t * t + 1) + b;
+        },
+        easeInOut: function (t, b, c, d) {
+            if ((t /= d / 2) < 1) return c / 2 * t * t * t * t * t + b;
+            return c / 2 * ((t -= 2) * t * t * t * t + 2) + b;
+        }
+    },
+    Sine: {
+        easeIn: function (t, b, c, d) {
+            return -c * Math.cos(t / d * (Math.PI / 2)) + c + b;
+        },
+        easeOut: function (t, b, c, d) {
+            return c * Math.sin(t / d * (Math.PI / 2)) + b;
+        },
+        easeInOut: function (t, b, c, d) {
+            return -c / 2 * (Math.cos(Math.PI * t / d) - 1) + b;
+        }
+    },
+    Expo: {
+        easeIn: function (t, b, c, d) {
+            return (t == 0) ? b : c * Math.pow(2, 10 * (t / d - 1)) + b;
+        },
+        easeOut: function (t, b, c, d) {
+            return (t == d) ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b;
+        },
+        easeInOut: function (t, b, c, d) {
+            if (t == 0) return b;
+            if (t == d) return b + c;
+            if ((t /= d / 2) < 1) return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
+            return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
+        }
+    },
+    Circ: {
+        easeIn: function (t, b, c, d) {
+            return -c * (Math.sqrt(1 - (t /= d) * t) - 1) + b;
+        },
+        easeOut: function (t, b, c, d) {
+            return c * Math.sqrt(1 - (t = t / d - 1) * t) + b;
+        },
+        easeInOut: function (t, b, c, d) {
+            if ((t /= d / 2) < 1) return -c / 2 * (Math.sqrt(1 - t * t) - 1) + b;
+            return c / 2 * (Math.sqrt(1 - (t -= 2) * t) + 1) + b;
+        }
+    },
+    Elastic: {
+        easeIn: function (t, b, c, d, a, p) {
+            var s;
+            if (t == 0) return b;
+            if ((t /= d) == 1) return b + c;
+            if (typeof p == "undefined") p = d * .3;
+            if (!a || a < Math.abs(c)) {
+                s = p / 4;
+                a = c;
+            } else {
+                s = p / (2 * Math.PI) * Math.asin(c / a);
+            }
+            return -(a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
+        },
+        easeOut: function (t, b, c, d, a, p) {
+            var s;
+            if (t == 0) return b;
+            if ((t /= d) == 1) return b + c;
+            if (typeof p == "undefined") p = d * .3;
+            if (!a || a < Math.abs(c)) {
+                a = c;
+                s = p / 4;
+            } else {
+                s = p / (2 * Math.PI) * Math.asin(c / a);
+            }
+            return (a * Math.pow(2, -10 * t) * Math.sin((t * d - s) * (2 * Math.PI) / p) + c + b);
+        },
+        easeInOut: function (t, b, c, d, a, p) {
+            var s;
+            if (t == 0) return b;
+            if ((t /= d / 2) == 2) return b + c;
+            if (typeof p == "undefined") p = d * (.3 * 1.5);
+            if (!a || a < Math.abs(c)) {
+                a = c;
+                s = p / 4;
+            } else {
+                s = p / (2 * Math.PI) * Math.asin(c / a);
+            }
+            if (t < 1) return -.5 * (a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
+            return a * Math.pow(2, -10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p) * .5 + c + b;
+        }
+    },
+    Back: {
+        easeIn: function (t, b, c, d, s) {
+            if (typeof s == "undefined") s = 1.70158;
+            return c * (t /= d) * t * ((s + 1) * t - s) + b;
+        },
+        easeOut: function (t, b, c, d, s) {
+            if (typeof s == "undefined") s = 1.70158;
+            return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
+        },
+        easeInOut: function (t, b, c, d, s) {
+            if (typeof s == "undefined") s = 1.70158;
+            if ((t /= d / 2) < 1) return c / 2 * (t * t * (((s *= (1.525)) + 1) * t - s)) + b;
+            return c / 2 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2) + b;
+        }
+    },
+    Bounce: {
+        easeIn: function (t, b, c, d) {
+            return c - __TIMING_FUNCTION.Bounce.easeOut(d - t, 0, c, d) + b;
+        },
+        easeOut: function (t, b, c, d) {
+            if ((t /= d) < (1 / 2.75)) {
+                return c * (7.5625 * t * t) + b;
+            } else if (t < (2 / 2.75)) {
+                return c * (7.5625 * (t -= (1.5 / 2.75)) * t + .75) + b;
+            } else if (t < (2.5 / 2.75)) {
+                return c * (7.5625 * (t -= (2.25 / 2.75)) * t + .9375) + b;
+            } else {
+                return c * (7.5625 * (t -= (2.625 / 2.75)) * t + .984375) + b;
+            }
+        },
+        easeInOut: function (t, b, c, d) {
+            if (t < d / 2) {
+                return __TIMING_FUNCTION.Bounce.easeIn(t * 2, 0, c, d) * .5 + b;
+            } else {
+                return __TIMING_FUNCTION.Bounce.easeOut(t * 2 - d, 0, c, d) * .5 + c * .5 + b;
+            }
+        }
+    }
+}
+
+module.exports=__TIMING_FUNCTION;
+},{}],6:[function(require,module,exports){
+
+var Timeline=require('./timeline');
+//transformProperty
+var TRANSFORM_PROPERTY = 'webkitTransform' in document.body.style ?
+    'webkitTransform' :
+    'mozTransform' in document.body.style ? 'mozTransform' : 'msTransform' in document.body.style ? 'msTransform' : 'transform';
+   
+//移动
+function move(option) {
+    var keyframeFunction = function (x, y, z) {
+        var _style_transform = option.el.style[TRANSFORM_PROPERTY];
+        var _style_translate3d = 'translate3d(' + x + 'px,' + y + 'px,' + z + 'px)';
+        if (_style_transform.indexOf('translate3d') < 0) {
+            _style_transform += _style_translate3d;
+        } else {
+            _style_transform = _style_transform.replace(/translate3d\(+[,px\d\.\-\s]+\)/ig, _style_translate3d);
+        }
+        option.el.style[TRANSFORM_PROPERTY] = _style_transform;
+    }
+    if (option.duration != 0) {
+        var defineobj = {
+            duration: option.duration,
+            origin: [0, 0, 0],
+            transition: [option.x || 0, option.y || 0, option.z || 0],
+            timingFunction: option.timingFunction,
+            keyframeSpan: option.keyframeSpan,
+            complete: function () {
+                option.callback && option.callback();
+            }
+        };
+        var _style_transform = option.el.style[TRANSFORM_PROPERTY];
+        if (_style_transform.indexOf('translate3d') >= 0) {
+            _style_transform.match(/translate3d\(+[,px\d\.\-\s]+\)/g)[0].match(/([\-\d\.]+px)/g).forEach(function (n, i) {
+                defineobj.origin[i] = parseInt(n.substring(0, n.length - 2));
+            });
+        }
+        defineobj.keyframeFunction = keyframeFunction;
+        var _timeline = new Timeline(defineobj);
+        _timeline.run();
+        return _timeline;
+    } else {
+        keyframeFunction(option.x || 0, option.y || 0, option.z || 0);
+        option.callback && option.callback();
+        return true;
+    }
+}
+
+//exports
+module.exports = {
+    move: move
+}
+},{"./timeline":4}],7:[function(require,module,exports){
+/****************************************************************** 
+ * @render
+ * Description: living dom 模板渲染引擎
+ *******************************************************************/
+var render = require('./lib/render');
+var vtpl = require('./lib/vtpl');
+
+module.exports = render.render;
+module.exports.compile = render.compile;
+module.exports.vtpl = vtpl;
+},{"./lib/render":10,"./lib/vtpl":19}],8:[function(require,module,exports){
+
+//compiler:AST=>Render
+
+var _ = require('./util');
+
+function compileAttrs(attrs, container) {
+    var code = '';
+    code += 'var ' + container + '=[];';
+    attrs.forEach(function (attr, i) {
+        var name = attr.name;
+        var value = '';
+        if (attr.value.tag == 'expression') {
+            value = attr.value.metas;
+        } else {
+            value = '"' + attr.value + '"';
+        }
+        code += container + '.push({name:"' + name + '",value:' + value + '});';
+    });
+    return code;
+}
+
+function compileNode(node, container, index) {
+    var code = '';
+    var attrsContainer = container + '_' + index + '_attrs';
+    var childrenContainer = container + '_' + index + '_children';
+    code += compileAttrs(node.attrs, attrsContainer);
+    code += compileNodes(node.children, childrenContainer, true);
+    code += container + '.push({tag:"' + node.tag + '",attrs:' + attrsContainer + ',children:' +
+        childrenContainer +
+        '});';
+    return code;
+}
+
+function compileNodes(nodes, container, flag) {
+    var code = '';
+    if (flag) {
+        code += 'var ' + container + ' = [];';
+    }
+    nodes.forEach(function (node, i) {
+        if (node.type == 'js') {
+            if (node.tag == 'each') {
+                code += ' for (var ' + node.metas.index + ' in ' + node.metas.collection + ') {'
+                code += 'var ' + node.metas.item + '=' + node.metas.collection + '[' + node.metas.index + '];';
+                code += compileNodes(node.children, container);
+                code += '};';
+            } else if (node.tag == 'if' || (node.tag == 'else' && node.metas.expression)) {
+                code += 'if (' + node.metas.expression + ') {';
+                code += compileNodes(node.children, container);
+                code += '}';
+                if (node.alternate) {
+                    code += 'else{';
+                    code += compileNodes(node.alternate, container);
+                    code += '}';
+                }
+            } else if (node.tag == 'else') {
+                code += compileNodes(node.children, container);
+            } else {
+                code += container + '.push(' + node.metas + ');';
+            }
+        } else if (node.type == 'element') {
+            code += compileNode(node, container, i);
+        } else {
+            code += container + '.push("' + node + '");';
+        }
+    });
+    return code;
+}
+
+function compiler(AST) {
+    AST = _.isArray(AST) ? AST : [AST];
+    var code = '';
+    code += compileNodes(AST, 'ns');
+    code = 'var ns=[];with(__data){' + code + '}return ns;';
+    code = new Function('__data', code);
+    return code;
+}
+
+//exports
+module.exports = compiler;
+},{"./util":12}],9:[function(require,module,exports){
+
+//parser:Tpl=>AST
+
+var _ = require('./util');
+
+function isSelfClosingTAG(tag) {
+    var selfClosingTAGs = ['br', 'hr', 'img', 'input', 'link', 'meta', 'base', 'param', 'area', 'col',
+        'command', 'embed', 'keygen', 'source', 'track', 'wbr'
+    ];
+    var flag=selfClosingTAGs.indexOf(tag) >= 0;
+    return flag;
+}
+
+function parseJST(line) {
+    var node = {
+        type: 'js',
+        tag: '',
+        metas: {},
+        children: []
+    };
+    var reg = /([^="\s\/]+)\s?(.+)?/g;
+    var reg_each = /(.+)\sas\s(.+)\s(.+)$/g;
+    var reg_if = /([^="\s\/]+)\s?(.+)?/g;
+    var match = reg.exec(line);
+    if (match && ['each', 'if', 'else'].indexOf(match[1]) != -1) {
+        node.tag = match[1];
+        switch (node.tag) {
+            case 'if':
+                node.metas.expression = match[2];
+                break;
+            case 'each':
+                match = reg_each.exec(match[2]);
+                node.metas.collection = match[1];
+                node.metas.item = match[2];
+                node.metas.index = match[3];
+                break;
+            case 'else':
+                if (match[2] && match[2].length > 0) {
+                    match = reg_if.exec(match[2]);
+                    node.metas.expression = match[2];
+                }
+                break;
+        }
+    } else {
+        node.tag = 'expression';
+        node.metas = line;
+    }
+    return node;
+}
+
+function parseTAG(line) {
+    var node = {
+        type: 'element',
+        tag: '',
+        attrs: [],
+        children: []
+    };
+    var firstBlankIndex = line.indexOf(' ');
+    if (firstBlankIndex != -1) {
+        node.tag = line.slice(0, firstBlankIndex).trim();
+        line = line.slice(firstBlankIndex).trim();
+        node.attrs = parseAttributes(line);
+    } else {
+        node.tag = line;
+    }
+    return node;
+}
+
+function parseAttrValue(text) {
+    var reg_jst = /{([^}]+)}/g;
+    var cursor_jst = 0;
+    var match_jst;
+    var res;
+    while (match_jst = reg_jst.exec(text)) {
+        var t = text.slice(cursor_jst, match_jst.index);
+        var line_jst = match_jst[1];
+        var node = parseJST(line_jst);
+        var metas = node.metas;
+        if (!res) {
+            res = node;
+            res.metas = '';
+        }
+        res.metas += res.metas.length > 0 ? '+' : '';
+        res.metas += t.length > 0 ? "'" + t + "'" : '';
+        res.metas += res.metas.length > 0 ? '+' : '';
+        res.metas += metas;
+        cursor_jst = match_jst.index + match_jst[0].length;
+    }
+    text = text.slice(cursor_jst);
+    if (text.length > 0) {
+        if (!res) {
+            res = text;
+        } else {
+            res.metas += "+'" + text + "'";
+        }
+    }
+    return res;
+}
+
+function parseAttributes(line) {
+    var attrs = [];
+    var reg = /([^="\s\/]+)((="([^"]+)")|(='([^']+)'))?/g;
+    var match;
+    while (match = reg.exec(line)) {
+        var value = match[4] || match[6] || match[1];
+        value = parseAttrValue(value);
+        var attr = {
+            type: 'attribute',
+            name: match[1],
+            value: value
+        };
+        attrs.push(attr);
+    }
+    return attrs;
+}
+
+function parseTpl(tpl) {
+    var AST = [];
+    var stack = [];
+    stack.push(AST);
+
+    var reg_tag = /<([^>]+)>/g;
+    var cursor = 0;
+    var match_tag = null;
+    //parseTAG
+    while (match_tag = reg_tag.exec(tpl)) {
+        //parseJST
+        var text = tpl.slice(cursor, match_tag.index).trim();
+        if (text.length > 0) {
+            var reg_jst = /{([^}]+)}/g;
+            var cursor_jst = 0;
+            var match_jst;
+            while (match_jst = reg_jst.exec(text)) {
+                var t = text.slice(cursor_jst, match_jst.index).trim();
+                if (t.length > 0) {
+                    var root = stack[stack.length - 1].children || stack[stack.length - 1];
+                    root.push(t);
+                }
+                var line_jst = match_jst[1];
+                if (line_jst.slice(0, 1) != "/") {
+                    var node = parseJST(line_jst);
+                    if (node.tag == 'else') {
+                        var root = stack[stack.length - 1];
+                        root.alternate = root.alternate || [];
+                        root.alternate.push(node);
+                    } else {
+                        var root = stack[stack.length - 1].children || stack[stack.length - 1];
+                        root.push(node);
+                    }
+                    if (node.tag != 'expression') {
+                        stack.push(node);
+                    }
+                } else {
+                    var root = stack.pop();
+                    if (line_jst.slice(1) == 'if') {
+                        while (root.tag != 'if') {
+                            root = stack.pop();
+                        }
+                    }
+                }
+                cursor_jst = match_jst.index + match_jst[0].length;
+            }
+            text = text.slice(cursor_jst);
+            if (text.length > 0) {
+                var root = stack[stack.length - 1].children || stack[stack.length - 1];
+                root.push(text);
+            }
+        }
+        //
+        var root = stack[stack.length - 1].children || stack[stack.length - 1];
+        var line_tag = match_tag[1];
+        if (line_tag.slice(0, 1) != "/") {
+            var node = parseTAG(line_tag);
+            root.push(node);
+            if (!isSelfClosingTAG(node.tag)) {
+                stack.push(node);
+            }
+        } else {
+            stack.pop();
+        }
+        cursor = match_tag.index + match_tag[0].length;
+    }
+    return AST;
+}
+
+function parser(tpl) {
+    var AST = parseTpl(tpl);
+    AST = AST.length == 1 ? AST[0] : AST;
+    return AST;
+}
+
+//exports
+module.exports = parser;
+},{"./util":12}],10:[function(require,module,exports){
+var parser = require('./parser'),
+    compiler = require('./compiler'),
+    toDom = require('./todom');
+
+function compile(tpl) {
+    var AST = parser(tpl);
+    var _render = compiler(AST);
+    return function (data) {
+        return toDom(_render(data));
+    }
+}
+
+function render(tpl, data, container) {
+    var el = compile(tpl)(data);
+    container && container.appendChild(el);
+    return el;
+}
+
+//exports
+module.exports.compile = compile;
+module.exports.render=render;
+},{"./compiler":8,"./parser":9,"./todom":11}],11:[function(require,module,exports){
+var _ = require('./util');
+
+//Covert
+//covert:node => DOM Element
+function toElement(node) {
+    var el = document.createElement(node.tag);
+    node.attrs.forEach(function (attr) {
+        if (_.isFunction(attr.value)) {
+            el[attr.name] = attr.value;
+        } else {
+            attr.value && el.setAttribute(attr.name, attr.value);
+        }
+    });
+    node.children.forEach(function (child) {
+        if(child){
+            if (!child.tag) {
+                child = document.createTextNode(child);
+            } else {
+                child = toElement(child);
+            }
+            el.appendChild(child);
+        }
+    });
+    return el;
+}
+
+//covert:nodelist => DOM Fragment
+function toElements(nodelist) {
+    var fragment = document.createDocumentFragment();
+    nodelist.forEach(function (node) {
+        fragment.appendChild(toElement(node));
+    });
+    return fragment;
+}
+
+function toDom(node) {
+    node = _.isArray(node) && node.length == 1 ? node[0] : node;
+    var dom = _.isArray(node) ? toElements(node) : toElement(node);
+    return dom;
+}
+
+//exports
+module.exports=toDom;
+},{"./util":12}],12:[function(require,module,exports){
+(function (process){
+var _ = {}
+
+//Util
+_.type = function (obj) {
+  return Object.prototype.toString.call(obj).replace(/\[object\s|\]/g, '')
+}
+
+_.isString = function isString (list) {
+  return _.type(list) === 'String'
+}
+
+_.isArray = function (obj) {
+    return Object.prototype.toString.call(obj) === '[object Array]';
+}
+
+_.isObject = function (obj) {
+    var type = typeof obj;
+    return type === 'function' || type === 'object' && !!obj;
+}
+
+_.isFunction = function (obj) {
+    return typeof obj == 'function' || false;
+}
+
+_.each = function each (array, fn) {
+  for (var i = 0, len = array.length; i < len; i++) {
+    fn(array[i], i)
+  }
+}
+
+_.toArray = function toArray (listLike) {
+  if (!listLike) {
+    return []
+  }
+
+  var list = []
+
+  for (var i = 0, len = listLike.length; i < len; i++) {
+    list.push(listLike[i])
+  }
+
+  return list
+}
+
+_.setAttr = function setAttr (node, key, value) {
+  switch (key) {
+    case 'style':
+      node.style.cssText = value
+      break
+    case 'value':
+      var tagName = node.tagName || ''
+      tagName = tagName.toLowerCase()
+      if (
+        tagName === 'input' || tagName === 'textarea'
+      ) {
+        node.value = value
+      } else {
+        // if it is not a input or textarea, use `setAttribute` to set
+        node.setAttribute(key, value)
+      }
+      break
+    default:
+      node.setAttribute(key, value)
+      break
+  }
+}
+
+_.extend = function (dest, src) {
+    for (var key in src) {
+      if (src.hasOwnProperty(key)) {
+        dest[key] = src[key]
+      }
+    }
+    return dest
+  }
+  
+  if (process.env.NODE_ENV) {
+    _.nextTick = process.nextTick
+  } else {
+    var nextTick = window.requestAnimationFrame ||
+      window.webkitRequestAnimationFrame ||
+      window.mozRequestAnimationFrame ||
+      window.oRequestAnimationFrame ||
+      window.msRequestAnimationFrame
+  
+    if (nextTick) {
+      _.nextTick = function () {
+        nextTick.apply(window, arguments)
+      }
+    } else {
+      _.nextTick = function (func) {
+        // for IE, setTimeout is a cool object instead of function
+        // so you cannot simply use nextTick.apply
+        setTimeout(func)
+      }
+    }
+  }  
+
+//exports
+module.exports = _;
+}).call(this,require('_process'))
+},{"_process":22}],13:[function(require,module,exports){
+var _ = require('../util')
+var patch = require('./patch')
+var listDiff = require('./listDiff').diff
+
+function diff (oldTree, newTree) {
+  var index = 0
+  var patches = {}
+  dfsWalk(oldTree, newTree, index, patches)
+  return patches
+}
+
+function dfsWalk (oldNode, newNode, index, patches) {
+  var currentPatch = []
+
+  // Node is removed.
+  if (newNode === null) {
+    // Real DOM node will be removed when perform reordering, so has no needs to do anthings in here
+  // TextNode content replacing
+  } else if (_.isString(oldNode) && _.isString(newNode)) {
+    if (newNode !== oldNode) {
+      currentPatch.push({ type: patch.TEXT, content: newNode })
+    }
+  // Nodes are the same, diff old node's props and children
+  } else if (
+      oldNode.tagName === newNode.tagName &&
+      oldNode.key === newNode.key
+    ) {
+    // Diff props
+    var propsPatches = diffProps(oldNode, newNode)
+    if (propsPatches) {
+      currentPatch.push({ type: patch.PROPS, props: propsPatches })
+    }
+    // Diff children. If the node has a `ignore` property, do not diff children
+    if (!isIgnoreChildren(newNode)) {
+      diffChildren(
+        oldNode.children,
+        newNode.children,
+        index,
+        patches,
+        currentPatch
+      )
+    }
+  // Nodes are not the same, replace the old node with new node
+  } else {
+    currentPatch.push({ type: patch.REPLACE, node: newNode })
+  }
+
+  if (currentPatch.length) {
+    patches[index] = currentPatch
+  }
+}
+
+function diffChildren (oldChildren, newChildren, index, patches, currentPatch) {
+  var diffs = listDiff(oldChildren, newChildren, 'key')
+  newChildren = diffs.children
+
+  if (diffs.moves.length) {
+    var reorderPatch = { type: patch.REORDER, moves: diffs.moves }
+    currentPatch.push(reorderPatch)
+  }
+
+  var leftNode = null
+  var currentNodeIndex = index
+  _.each(oldChildren, function (child, i) {
+    var newChild = newChildren[i]
+    currentNodeIndex = (leftNode && leftNode.count)
+      ? currentNodeIndex + leftNode.count + 1
+      : currentNodeIndex + 1
+    dfsWalk(child, newChild, currentNodeIndex, patches)
+    leftNode = child
+  })
+}
+
+function diffProps (oldNode, newNode) {
+  var count = 0
+  var oldProps = oldNode.props
+  var newProps = newNode.props
+
+  var key, value
+  var propsPatches = {}
+
+  // Find out different properties
+  for (key in oldProps) {
+    value = oldProps[key]
+    if (newProps[key] !== value) {
+      count++
+      propsPatches[key] = newProps[key]
+    }
+  }
+
+  // Find out new property
+  for (key in newProps) {
+    value = newProps[key]
+    if (!oldProps.hasOwnProperty(key)) {
+      count++
+      propsPatches[key] = newProps[key]
+    }
+  }
+
+  // If properties all are identical
+  if (count === 0) {
+    return null
+  }
+
+  return propsPatches
+}
+
+function isIgnoreChildren (node) {
+  return (node.props && node.props.hasOwnProperty('ignore'))
+}
+
+module.exports = diff
+},{"../util":12,"./listDiff":15,"./patch":16}],14:[function(require,module,exports){
+var _ = require('../util')
+
+/**
+ * Virtual-dom Element.
+ * @param {String} tagName
+ * @param {Object} props - Element's properties,
+ *                       - using object to store key-value pair
+ * @param {Array<Element|String>} - This element's children elements.
+ *                                - Can be Element instance or just a piece plain text.
+ */
+function Element (tagName, props, children) {
+  if (!(this instanceof Element)) {
+    return new Element(tagName, props, children)
+  }
+
+  if (_.isArray(props)) {
+    children = props
+    props = {}
+  }
+
+  this.tagName = tagName
+  this.props = props || {}
+  this.children = children || []
+  this.key = props
+    ? props.key
+    : void 666
+
+  var count = 0
+
+  _.each(this.children, function (child, i) {
+    if (child instanceof Element) {
+      count += child.count
+    } else {
+      children[i] = '' + child
+    }
+    count++
+  })
+
+  this.count = count
+}
+
+/**
+ * Render the hold element tree.
+ */
+Element.prototype.render = function () {
+  var el = document.createElement(this.tagName)
+  var props = this.props
+
+  for (var propName in props) {
+    var propValue = props[propName]
+    _.setAttr(el, propName, propValue)
+  }
+
+  _.each(this.children, function (child) {
+    var childEl = (child instanceof Element)
+      ? child.render()
+      : document.createTextNode(child)
+    el.appendChild(childEl)
+  })
+
+  return el
+}
+
+module.exports = Element
+},{"../util":12}],15:[function(require,module,exports){
+/**
+ * Diff two list in O(N).
+ * @param {Array} oldList - Original List
+ * @param {Array} newList - List After certain insertions, removes, or moves
+ * @return {Object} - {moves: <Array>}
+ *                  - moves is a list of actions that telling how to remove and insert
+ */
+function diff (oldList, newList, key) {
+  var oldMap = makeKeyIndexAndFree(oldList, key)
+  var newMap = makeKeyIndexAndFree(newList, key)
+
+  var newFree = newMap.free
+
+  var oldKeyIndex = oldMap.keyIndex
+  var newKeyIndex = newMap.keyIndex
+
+  var moves = []
+
+  // a simulate list to manipulate
+  var children = []
+  var i = 0
+  var item
+  var itemKey
+  var freeIndex = 0
+
+  // fist pass to check item in old list: if it's removed or not
+  while (i < oldList.length) {
+    item = oldList[i]
+    itemKey = getItemKey(item, key)
+    if (itemKey) {
+      if (!newKeyIndex.hasOwnProperty(itemKey)) {
+        children.push(null)
+      } else {
+        var newItemIndex = newKeyIndex[itemKey]
+        children.push(newList[newItemIndex])
+      }
+    } else {
+      var freeItem = newFree[freeIndex++]
+      children.push(freeItem || null)
+    }
+    i++
+  }
+
+  var simulateList = children.slice(0)
+
+  // remove items no longer exist
+  i = 0
+  while (i < simulateList.length) {
+    if (simulateList[i] === null) {
+      remove(i)
+      removeSimulate(i)
+    } else {
+      i++
+    }
+  }
+
+  // i is cursor pointing to a item in new list
+  // j is cursor pointing to a item in simulateList
+  var j = i = 0
+  while (i < newList.length) {
+    item = newList[i]
+    itemKey = getItemKey(item, key)
+
+    var simulateItem = simulateList[j]
+    var simulateItemKey = getItemKey(simulateItem, key)
+
+    if (simulateItem) {
+      if (itemKey === simulateItemKey) {
+        j++
+      } else {
+        // new item, just inesrt it
+        if (!oldKeyIndex.hasOwnProperty(itemKey)) {
+          insert(i, item)
+        } else {
+          // if remove current simulateItem make item in right place
+          // then just remove it
+          var nextItemKey = getItemKey(simulateList[j + 1], key)
+          if (nextItemKey === itemKey) {
+            remove(i)
+            removeSimulate(j)
+            j++ // after removing, current j is right, just jump to next one
+          } else {
+            // else insert item
+            insert(i, item)
+          }
+        }
+      }
+    } else {
+      insert(i, item)
+    }
+
+    i++
+  }
+
+  function remove (index) {
+    var move = {index: index, type: 0}
+    moves.push(move)
+  }
+
+  function insert (index, item) {
+    var move = {index: index, item: item, type: 1}
+    moves.push(move)
+  }
+
+  function removeSimulate (index) {
+    simulateList.splice(index, 1)
+  }
+
+  return {
+    moves: moves,
+    children: children
+  }
+}
+
+/**
+ * Convert list to key-item keyIndex object.
+ * @param {Array} list
+ * @param {String|Function} key
+ */
+function makeKeyIndexAndFree (list, key) {
+  var keyIndex = {}
+  var free = []
+  for (var i = 0, len = list.length; i < len; i++) {
+    var item = list[i]
+    var itemKey = getItemKey(item, key)
+    if (itemKey) {
+      keyIndex[itemKey] = i
+    } else {
+      free.push(item)
+    }
+  }
+  return {
+    keyIndex: keyIndex,
+    free: free
+  }
+}
+
+function getItemKey (item, key) {
+  if (!item || !key) return void 666
+  return typeof key === 'string'
+    ? item[key]
+    : key(item)
+}
+
+exports.makeKeyIndexAndFree = makeKeyIndexAndFree // exports for test
+exports.diff = diff
+},{}],16:[function(require,module,exports){
+
+var _ = require('../util')
+
+var REPLACE = 0
+var REORDER = 1
+var PROPS = 2
+var TEXT = 3
+
+function patch (node, patches) {
+  var walker = {index: 0}
+  dfsWalk(node, walker, patches)
+}
+
+function dfsWalk (node, walker, patches) {
+  var currentPatches = patches[walker.index]
+
+  var len = node.childNodes
+    ? node.childNodes.length
+    : 0
+  for (var i = 0; i < len; i++) {
+    var child = node.childNodes[i]
+    walker.index++
+    dfsWalk(child, walker, patches)
+  }
+
+  if (currentPatches) {
+    applyPatches(node, currentPatches)
+  }
+}
+
+function applyPatches (node, currentPatches) {
+  _.each(currentPatches, function (currentPatch) {
+    switch (currentPatch.type) {
+      case REPLACE:
+        var newNode = (typeof currentPatch.node === 'string')
+          ? document.createTextNode(currentPatch.node)
+          : currentPatch.node.render()
+        node.parentNode.replaceChild(newNode, node)
+        break
+      case REORDER:
+        reorderChildren(node, currentPatch.moves)
+        break
+      case PROPS:
+        setProps(node, currentPatch.props)
+        break
+      case TEXT:
+        if (node.textContent) {
+          node.textContent = currentPatch.content
+        } else {
+          // fuck ie
+          node.nodeValue = currentPatch.content
+        }
+        break
+      default:
+        throw new Error('Unknown patch type ' + currentPatch.type)
+    }
+  })
+}
+
+function setProps (node, props) {
+  for (var key in props) {
+    if (props[key] === void 666) {
+      node.removeAttribute(key)
+    } else {
+      var value = props[key]
+      _.setAttr(node, key, value)
+    }
+  }
+}
+
+function reorderChildren (node, moves) {
+  var staticNodeList = _.toArray(node.childNodes)
+  var maps = {}
+
+  _.each(staticNodeList, function (node) {
+    if (node.nodeType === 1) {
+      var key = node.getAttribute('key')
+      if (key) {
+        maps[key] = node
+      }
+    }
+  })
+
+  _.each(moves, function (move) {
+    var index = move.index
+    if (move.type === 0) { // remove item
+      if (staticNodeList[index] === node.childNodes[index]) { // maybe have been removed for inserting
+        node.removeChild(node.childNodes[index])
+      }
+      staticNodeList.splice(index, 1)
+    } else if (move.type === 1) { // insert item
+      var insertNode = maps[move.item.key]
+        ? maps[move.item.key] // reuse old item
+        : (typeof move.item === 'object')
+            ? move.item.render()
+            : document.createTextNode(move.item)
+      staticNodeList.splice(index, 0, insertNode)
+      node.insertBefore(insertNode, node.childNodes[index] || null)
+    }
+  })
+}
+
+patch.REPLACE = REPLACE
+patch.REORDER = REORDER
+patch.PROPS = PROPS
+patch.TEXT = TEXT
+
+module.exports = patch
+},{"../util":12}],17:[function(require,module,exports){
+module.exports.el = require('./element')
+module.exports.diff = require('./diff')
+module.exports.patch = require('./patch')
+},{"./diff":13,"./element":14,"./patch":16}],18:[function(require,module,exports){
+
+var _ = require('./util');
+var svd = require('./virtual-dom/virtual-dom');
+var toDom = require('./todom');
+var diff = svd.diff;
+var patch = svd.patch;
+
+
+function makeTemplateClass (compileFn) {
+  function VirtualTemplate (data) {
+    this.data = data;
+    var domAndVdom = this.makeVirtualDOM();
+    this.vdom = domAndVdom.vdom;
+    this.dom = domAndVdom.dom;
+    this.isDirty = false;
+    this.flushCallbacks = [];
+  }
+
+  _.extend(VirtualTemplate.prototype, {
+    compileFn: compileFn,
+    setData: setData,
+    makeVirtualDOM: makeVirtualDOM,
+    flush: flush
+  });
+
+  return VirtualTemplate;
+}
+
+function setData(data, isSync) {
+  _.extend(this.data, data);
+  if (typeof isSync === 'boolean' && isSync) {
+    this.flush();
+  } else if (!this.isDirty) {
+    this.isDirty = true;
+    var self = this;
+    // cache all data change, and only refresh dom before browser's repainting
+    _.nextTick(function () {
+      self.flush();
+    });
+  }
+  if (typeof isSync === 'function') {
+    var callback = isSync;
+    this.flushCallbacks.push(callback);
+  }
+}
+
+function flush() {
+  // run virtual-dom algorithm
+  var newVdom = this.makeVirtualDOM().vdom;
+  var patches = diff(this.vdom, newVdom);
+  patch(this.dom, patches);
+  this.vdom = newVdom;
+  this.isDirty = false;
+  var callbacks = this.flushCallbacks;
+  for (var i = 0, len = callbacks.length; i < len; i++) {
+    if (callbacks[i]) {
+      callbacks[i]();
+    }
+  }
+  this.flushCallbacks = [];
+}
+
+function makeVirtualDOM() {
+  var node = this.compileFn(this.data);
+  if(_.isArray(node)){
+    node={
+      tag:'div',
+      attrs:[],
+      children:node
+    }
+  }
+  return {
+    dom:toDom(node),
+    vdom:toVirtualDOM(node)
+  }
+}
+
+function toVirtualDOM(node) {
+  var tagName = node.tag.toLowerCase();
+  var props ={};
+  var children = [];
+  node.attrs.forEach(function(a,i){
+    if(a.value){
+      props[a.name]=a.value;
+    }
+  });
+  node.children.forEach(function (c, i) {
+    if(c){
+      if(c.tag){
+        children.push(toVirtualDOM(c));
+      }else{
+        children.push(c);
+      }
+    }
+  });
+  return svd.el(tagName, props, children);
+}
+
+module.exports = function (compileFn) {
+  return  makeTemplateClass(compileFn);
+}
+},{"./todom":11,"./util":12,"./virtual-dom/virtual-dom":17}],19:[function(require,module,exports){
+var parser = require('./parser'),
+    compiler = require('./compiler'),
+    vTemplate=require('./virtual-template');
+
+function vtpl(tpl){
+    var AST = parser(tpl);
+    var _render = compiler(AST);
+    return vTemplate(_render);
+}
+
+//exports
+module.exports=vtpl;
+},{"./compiler":8,"./parser":9,"./virtual-template":18}],20:[function(require,module,exports){
+
+
+/****************************************************************** 
+ * @touch
+ * Description:移动端手势识别辅助
+ *******************************************************************/
+var touch = require('./lib/touch');
+module.exports=touch;
+},{"./lib/touch":21}],21:[function(require,module,exports){
+
+var utils = {};
+
+utils.PCevts = {
+    'touchstart': 'mousedown',
+    'touchmove': 'mousemove',
+    'touchend': 'mouseup',
+    'touchcancel': 'mouseout'
+};
+
+utils.hasTouch = ('ontouchstart' in window);
+
+utils.getType = function (obj) {
+    return Object.prototype.toString.call(obj).match(/\s([a-z|A-Z]+)/)[1].toLowerCase();
+};
+
+utils.getSelector = function (el) {
+    if (el.id) {
+        return "#" + el.id;
+    }
+    if (el.className) {
+        var cns = el.className.split(/\s+/);
+        return "." + cns.join(".");
+    } else if (el === document) {
+        return "body";
+    } else {
+        return el.tagName.toLowerCase();
+    }
+};
+
+utils.matchSelector = function (target, selector) {
+    return target.webkitMatchesSelector(selector);
+};
+
+utils.getEventListeners = function (el) {
+    return el.listeners;
+};
+
+utils.getPCevts = function (evt) {
+    return this.PCevts[evt] || evt;
+};
+
+utils.forceReflow = function () {
+    var tempDivID = "reflowDivBlock";
+    var domTreeOpDiv = document.getElementById(tempDivID);
+    if (!domTreeOpDiv) {
+        domTreeOpDiv = document.createElement("div");
+        domTreeOpDiv.id = tempDivID;
+        document.body.appendChild(domTreeOpDiv);
+    }
+    var parentNode = domTreeOpDiv.parentNode;
+    var nextSibling = domTreeOpDiv.nextSibling;
+    parentNode.removeChild(domTreeOpDiv);
+    parentNode.insertBefore(domTreeOpDiv, nextSibling);
+};
+
+utils.simpleClone = function (obj) {
+    return Object.create(obj);
+};
+
+utils.getPosOfEvent = function (ev) {
+    if (this.hasTouch) {
+        var posi = [];
+        var src = null;
+
+        for (var t = 0, len = ev.touches.length; t < len; t++) {
+            src = ev.touches[t];
+            posi.push({
+                x: src.pageX,
+                y: src.pageY
+            });
+        }
+        return posi;
+    } else {
+        return [{
+            x: ev.pageX,
+            y: ev.pageY
+        }];
+    }
+};
+
+utils.getDistance = function (pos1, pos2) {
+    var x = pos2.x - pos1.x,
+        y = pos2.y - pos1.y;
+    return Math.sqrt((x * x) + (y * y));
+};
+
+utils.getFingers = function (ev) {
+    return ev.touches ? ev.touches.length : 1;
+};
+
+utils.calScale = function (pstart, pmove) {
+    if (pstart.length >= 2 && pmove.length >= 2) {
+        var disStart = this.getDistance(pstart[1], pstart[0]);
+        var disEnd = this.getDistance(pmove[1], pmove[0]);
+
+        return disEnd / disStart;
+    }
+    return 1;
+};
+
+utils.getAngle = function (p1, p2) {
+    return Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Math.PI;
+};
+
+utils.getAngle180 = function (p1, p2) {
+    var agl = Math.atan((p2.y - p1.y) * -1 / (p2.x - p1.x)) * (180 / Math.PI);
+    return (agl < 0 ? (agl + 180) : agl);
+};
+
+utils.getDirectionFromAngle = function (agl) {
+    var directions = {
+        up: agl < -45 && agl > -135,
+        down: agl >= 45 && agl < 135,
+        left: agl >= 135 || agl <= -135,
+        right: agl >= -45 && agl <= 45
+    };
+    for (var key in directions) {
+        if (directions[key]) return key;
+    }
+    return null;
+};
+
+utils.getXYByElement = function (el) {
+    var left = 0,
+        top = 0;
+
+    while (el.offsetParent) {
+        left += el.offsetLeft;
+        top += el.offsetTop;
+        el = el.offsetParent;
+    }
+    return {
+        left: left,
+        top: top
+    };
+};
+
+utils.reset = function () {
+    startEvent = moveEvent = endEvent = null;
+    __tapped = __touchStart = startSwiping = startPinch = false;
+    startDrag = false;
+    pos = {};
+    __rotation_single_finger = false;
+};
+
+utils.isTouchMove = function (ev) {
+    return (ev.type === 'touchmove' || ev.type === 'mousemove');
+};
+
+utils.isTouchEnd = function (ev) {
+    return (ev.type === 'touchend' || ev.type === 'mouseup' || ev.type === 'touchcancel');
+};
+
+utils.env = (function () {
+    var os = {},
+        ua = navigator.userAgent,
+        android = ua.match(/(Android)[\s\/]+([\d\.]+)/),
+        ios = ua.match(/(iPad|iPhone|iPod)\s+OS\s([\d_\.]+)/),
+        wp = ua.match(/(Windows\s+Phone)\s([\d\.]+)/),
+        isWebkit = /WebKit\/[\d.]+/i.test(ua),
+        isSafari = ios ? (navigator.standalone ? isWebkit : (/Safari/i.test(ua) && !/CriOS/i.test(ua) && !/MQQBrowser/i.test(ua))) : false;
+    if (android) {
+        os.android = true;
+        os.version = android[2];
+    }
+    if (ios) {
+        os.ios = true;
+        os.version = ios[2].replace(/_/g, '.');
+        os.ios7 = /^7/.test(os.version);
+        if (ios[1] === 'iPad') {
+            os.ipad = true;
+        } else if (ios[1] === 'iPhone') {
+            os.iphone = true;
+            os.iphone5 = screen.height == 568;
+        } else if (ios[1] === 'iPod') {
+            os.ipod = true;
+        }
+    }
+    if (wp) {
+        os.wp = true;
+        os.version = wp[2];
+        os.wp8 = /^8/.test(os.version);
+    }
+    if (isWebkit) {
+        os.webkit = true;
+    }
+    if (isSafari) {
+        os.safari = true;
+    }
+    return os;
+})();
+
+/** 底层事件绑定/代理支持  */
+var engine = {
+    proxyid: 0,
+    proxies: [],
+    trigger: function (el, evt, detail) {
+
+        detail = detail || {};
+        var e, opt = {
+            bubbles: true,
+            cancelable: true,
+            detail: detail
+        };
+
+        try {
+            if (typeof CustomEvent !== 'undefined') {
+                e = new CustomEvent(evt, opt);
+                if (el) {
+                    el.dispatchEvent(e);
+                }
+            } else {
+                e = document.createEvent("CustomEvent");
+                e.initCustomEvent(evt, true, true, detail);
+                if (el) {
+                    el.dispatchEvent(e);
+                }
+            }
+        } catch (ex) {
+            console.warn("Touch.js is not supported by environment.");
+        }
+    },
+    bind: function (el, evt, handler) {
+        el.listeners = el.listeners || {};
+        if (!el.listeners[evt]) {
+            el.listeners[evt] = [handler];
+        } else {
+            el.listeners[evt].push(handler);
+        }
+        var proxy = function (e) {
+            if (utils.env.ios7) {
+                utils.forceReflow();
+            }
+            e.originEvent = e;
+            for (var p in e.detail) {
+                if (p !== 'type') {
+                    e[p] = e.detail[p];
+                }
+            }
+            e.startRotate = function () {
+                __rotation_single_finger = true;
+            };
+            var returnValue = handler.call(e.target, e);
+            if (typeof returnValue !== "undefined" && !returnValue) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
+        };
+        handler.proxy = handler.proxy || {};
+        if (!handler.proxy[evt]) {
+            handler.proxy[evt] = [this.proxyid++];
+        } else {
+            handler.proxy[evt].push(this.proxyid++);
+        }
+        this.proxies.push(proxy);
+        if (el.addEventListener) {
+            el.addEventListener(evt, proxy, false);
+        }
+    },
+    unbind: function (el, evt, handler) {
+        if (!handler) {
+            var handlers = el.listeners[evt];
+            if (handlers && handlers.length) {
+                handlers.forEach(function (handler) {
+                    el.removeEventListener(evt, handler, false);
+                });
+            }
+        } else {
+            var proxyids = handler.proxy[evt];
+            if (proxyids && proxyids.length) {
+                proxyids.forEach(function (proxyid) {
+                    if (el.removeEventListener) {
+                        el.removeEventListener(evt, engine.proxies[proxyid], false);
+                    }
+                });
+            }
+        }
+    },
+    delegate: function (el, evt, sel, handler) {
+        var proxy = function (e) {
+            var target, returnValue;
+            e.originEvent = e;
+            for (var p in e.detail) {
+                if (p !== 'type') {
+                    e[p] = e.detail[p];
+                }
+            }
+            e.startRotate = function () {
+                __rotation_single_finger = true;
+            };
+            var integrateSelector = utils.getSelector(el) + " " + sel;
+            var match = utils.matchSelector(e.target, integrateSelector);
+            var ischild = utils.matchSelector(e.target, integrateSelector + " " + e.target.nodeName);
+            if (!match && ischild) {
+                if (utils.env.ios7) {
+                    utils.forceReflow();
+                }
+                target = e.target;
+                while (!utils.matchSelector(target, integrateSelector)) {
+                    target = target.parentNode;
+                }
+                returnValue = handler.call(e.target, e);
+                if (typeof returnValue !== "undefined" && !returnValue) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                }
+            } else {
+                if (utils.env.ios7) {
+                    utils.forceReflow();
+                }
+                if (match || ischild) {
+                    returnValue = handler.call(e.target, e);
+                    if (typeof returnValue !== "undefined" && !returnValue) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                    }
+                }
+            }
+        };
+        handler.proxy = handler.proxy || {};
+        if (!handler.proxy[evt]) {
+            handler.proxy[evt] = [this.proxyid++];
+        } else {
+            handler.proxy[evt].push(this.proxyid++);
+        }
+        this.proxies.push(proxy);
+        el.listeners = el.listeners || {};
+        if (!el.listeners[evt]) {
+            el.listeners[evt] = [proxy];
+        } else {
+            el.listeners[evt].push(proxy);
+        }
+        if (el.addEventListener) {
+            el.addEventListener(evt, proxy, false);
+        }
+    },
+    undelegate: function (el, evt, sel, handler) {
+        if (!handler) {
+            var listeners = el.listeners[evt];
+            listeners.forEach(function (proxy) {
+                el.removeEventListener(evt, proxy, false);
+            });
+        } else {
+            var proxyids = handler.proxy[evt];
+            if (proxyids.length) {
+                proxyids.forEach(function (proxyid) {
+                    if (el.removeEventListener) {
+                        el.removeEventListener(evt, engine.proxies[proxyid], false);
+                    }
+                });
+            }
+        }
+    }
+};
+
+var config = {
+    tap: true,
+    doubleTap: true,
+    tapMaxDistance: 10,
+    hold: true,
+    tapTime: 200,
+    holdTime: 650,
+    maxDoubleTapInterval: 300,
+    swipe: true,
+    swipeTime: 300,
+    swipeMinDistance: 18,
+    swipeFactor: 5,
+    drag: true,
+    pinch: true,
+    minScaleRate: 0,
+    minRotationAngle: 0
+};
+
+var smrEventList = {
+    TOUCH_START: 'touchstart',
+    TOUCH_MOVE: 'touchmove',
+    TOUCH_END: 'touchend',
+    TOUCH_CANCEL: 'touchcancel',
+    MOUSE_DOWN: 'mousedown',
+    MOUSE_MOVE: 'mousemove',
+    MOUSE_UP: 'mouseup',
+    CLICK: 'click',
+    PINCH_START: 'pinchstart',
+    PINCH_END: 'pinchend',
+    PINCH: 'pinch',
+    PINCH_IN: 'pinchin',
+    PINCH_OUT: 'pinchout',
+    ROTATION_LEFT: 'rotateleft',
+    ROTATION_RIGHT: 'rotateright',
+    ROTATION: 'rotate',
+    SWIPE_START: 'swipestart',
+    SWIPING: 'swiping',
+    SWIPE_END: 'swipeend',
+    SWIPE_LEFT: 'swipeleft',
+    SWIPE_RIGHT: 'swiperight',
+    SWIPE_UP: 'swipeup',
+    SWIPE_DOWN: 'swipedown',
+    SWIPE: 'swipe',
+    DRAG: 'drag',
+    DRAGSTART: 'dragstart',
+    DRAGEND: 'dragend',
+    HOLD: 'hold',
+    TAP: 'tap',
+    DOUBLE_TAP: 'doubletap'
+};
+
+/** 手势识别 */
+var pos = {
+    start: null,
+    move: null,
+    end: null
+};
+
+var startTime = 0;
+var fingers = 0;
+var startEvent = null;
+var moveEvent = null;
+var endEvent = null;
+var startSwiping = false;
+var startPinch = false;
+var startDrag = false;
+
+var __offset = {};
+var __touchStart = false;
+var __holdTimer = null;
+var __tapped = false;
+var __lastTapEndTime = null;
+var __tapTimer = null;
+
+var __scale_last_rate = 1;
+var __rotation_single_finger = false;
+var __rotation_single_start = [];
+var __initial_angle = 0;
+var __rotation = 0;
+
+var __prev_tapped_end_time = 0;
+var __prev_tapped_pos = null;
+
+var gestures = {
+    getAngleDiff: function (currentPos) {
+        var diff = parseInt(__initial_angle - utils.getAngle180(currentPos[0], currentPos[1]), 10);
+        var count = 0;
+
+        while (Math.abs(diff - __rotation) > 90 && count++ < 50) {
+            if (__rotation < 0) {
+                diff -= 180;
+            } else {
+                diff += 180;
+            }
+        }
+        __rotation = parseInt(diff, 10);
+        return __rotation;
+    },
+    pinch: function (ev) {
+        var el = ev.target;
+        if (config.pinch) {
+            if (!__touchStart) return;
+            if (utils.getFingers(ev) < 2) {
+                if (!utils.isTouchEnd(ev)) return;
+            }
+            var scale = utils.calScale(pos.start, pos.move);
+            var rotation = this.getAngleDiff(pos.move);
+            var eventObj = {
+                type: '',
+                originEvent: ev,
+                scale: scale,
+                rotation: rotation,
+                direction: (rotation > 0 ? 'right' : 'left'),
+                fingersCount: utils.getFingers(ev)
+            };
+            if (!startPinch) {
+                startPinch = true;
+                eventObj.fingerStatus = "start";
+                engine.trigger(el, smrEventList.PINCH_START, eventObj);
+            } else if (utils.isTouchMove(ev)) {
+                eventObj.fingerStatus = "move";
+                engine.trigger(el, smrEventList.PINCH, eventObj);
+            } else if (utils.isTouchEnd(ev)) {
+                eventObj.fingerStatus = "end";
+                engine.trigger(el, smrEventList.PINCH_END, eventObj);
+                utils.reset();
+            }
+
+            if (Math.abs(1 - scale) > config.minScaleRate) {
+                var scaleEv = utils.simpleClone(eventObj);
+
+                //手势放大, 触发pinchout事件
+                var scale_diff = 0.00000000001; //防止touchend的scale与__scale_last_rate相等，不触发事件的情况。
+                if (scale > __scale_last_rate) {
+                    __scale_last_rate = scale - scale_diff;
+                    engine.trigger(el, smrEventList.PINCH_OUT, scaleEv, false);
+                } //手势缩小,触发pinchin事件
+                else if (scale < __scale_last_rate) {
+                    __scale_last_rate = scale + scale_diff;
+                    engine.trigger(el, smrEventList.PINCH_IN, scaleEv, false);
+                }
+
+                if (utils.isTouchEnd(ev)) {
+                    __scale_last_rate = 1;
+                }
+            }
+
+            if (Math.abs(rotation) > config.minRotationAngle) {
+                var rotationEv = utils.simpleClone(eventObj),
+                    eventType;
+
+                eventType = rotation > 0 ? smrEventList.ROTATION_RIGHT : smrEventList.ROTATION_LEFT;
+                engine.trigger(el, eventType, rotationEv, false);
+                engine.trigger(el, smrEventList.ROTATION, eventObj);
+            }
+
+        }
+    },
+    rotateSingleFinger: function (ev) {
+        var el = ev.target;
+        if (__rotation_single_finger && utils.getFingers(ev) < 2) {
+            if (!pos.move) return;
+            if (__rotation_single_start.length < 2) {
+                var docOff = utils.getXYByElement(el);
+
+                __rotation_single_start = [{
+                        x: docOff.left + el.offsetWidth / 2,
+                        y: docOff.top + el.offsetHeight / 2
+                    },
+                    pos.move[0]
+                ];
+                __initial_angle = parseInt(utils.getAngle180(__rotation_single_start[0], __rotation_single_start[1]), 10);
+            }
+            var move = [__rotation_single_start[0], pos.move[0]];
+            var rotation = this.getAngleDiff(move);
+            var eventObj = {
+                type: '',
+                originEvent: ev,
+                rotation: rotation,
+                direction: (rotation > 0 ? 'right' : 'left'),
+                fingersCount: utils.getFingers(ev)
+            };
+            if (utils.isTouchMove(ev)) {
+                eventObj.fingerStatus = "move";
+            } else if (utils.isTouchEnd(ev) || ev.type === 'mouseout') {
+                eventObj.fingerStatus = "end";
+                engine.trigger(el, smrEventList.PINCH_END, eventObj);
+                utils.reset();
+            }
+            var eventType = rotation > 0 ? smrEventList.ROTATION_RIGHT : smrEventList.ROTATION_LEFT;
+            engine.trigger(el, eventType, eventObj);
+            engine.trigger(el, smrEventList.ROTATION, eventObj);
+        }
+    },
+    swipe: function (ev) {
+        var el = ev.target;
+        if (!__touchStart || !pos.move || utils.getFingers(ev) > 1) {
+            return;
+        }
+
+        var now = Date.now();
+        var touchTime = now - startTime;
+        var distance = utils.getDistance(pos.start[0], pos.move[0]);
+        var position = {
+            x: pos.move[0].x - __offset.left,
+            y: pos.move[0].y - __offset.top
+        };
+        var angle = utils.getAngle(pos.start[0], pos.move[0]);
+        var direction = utils.getDirectionFromAngle(angle);
+        var touchSecond = touchTime / 1000;
+        var factor = ((10 - config.swipeFactor) * 10 * touchSecond * touchSecond);
+        var eventObj = {
+            type: smrEventList.SWIPE,
+            originEvent: ev,
+            position: position,
+            direction: direction,
+            distance: distance,
+            distanceX: pos.move[0].x - pos.start[0].x,
+            distanceY: pos.move[0].y - pos.start[0].y,
+            x: pos.move[0].x - pos.start[0].x,
+            y: pos.move[0].y - pos.start[0].y,
+            angle: angle,
+            duration: touchTime,
+            fingersCount: utils.getFingers(ev),
+            factor: factor
+        };
+        if (config.swipe) {
+            var swipeTo = function () {
+                var elt = smrEventList;
+                switch (direction) {
+                    case 'up':
+                        engine.trigger(el, elt.SWIPE_UP, eventObj);
+                        break;
+                    case 'down':
+                        engine.trigger(el, elt.SWIPE_DOWN, eventObj);
+                        break;
+                    case 'left':
+                        engine.trigger(el, elt.SWIPE_LEFT, eventObj);
+                        break;
+                    case 'right':
+                        engine.trigger(el, elt.SWIPE_RIGHT, eventObj);
+                        break;
+                }
+            };
+
+            if (!startSwiping) {
+                eventObj.fingerStatus = eventObj.swipe = 'start';
+                startSwiping = true;
+                engine.trigger(el, smrEventList.SWIPE_START, eventObj);
+            } else if (utils.isTouchMove(ev)) {
+                eventObj.fingerStatus = eventObj.swipe = 'move';
+                engine.trigger(el, smrEventList.SWIPING, eventObj);
+
+                if (touchTime > config.swipeTime && touchTime < config.swipeTime + 50 && distance > config.swipeMinDistance) {
+                    swipeTo();
+                    engine.trigger(el, smrEventList.SWIPE, eventObj, false);
+                }
+            } else if (utils.isTouchEnd(ev) || ev.type === 'mouseout') {
+                eventObj.fingerStatus = eventObj.swipe = 'end';
+                engine.trigger(el, smrEventList.SWIPE_END, eventObj);
+
+                if (config.swipeTime > touchTime && distance > config.swipeMinDistance) {
+                    swipeTo();
+                    engine.trigger(el, smrEventList.SWIPE, eventObj, false);
+                }
+            }
+        }
+
+        if (config.drag) {
+            if (!startDrag) {
+                eventObj.fingerStatus = eventObj.swipe = 'start';
+                startDrag = true;
+                engine.trigger(el, smrEventList.DRAGSTART, eventObj);
+            } else if (utils.isTouchMove(ev)) {
+                eventObj.fingerStatus = eventObj.swipe = 'move';
+                engine.trigger(el, smrEventList.DRAG, eventObj);
+            } else if (utils.isTouchEnd(ev)) {
+                eventObj.fingerStatus = eventObj.swipe = 'end';
+                engine.trigger(el, smrEventList.DRAGEND, eventObj);
+            }
+
+        }
+    },
+    tap: function (ev) {
+        var el = ev.target;
+        if (config.tap) {
+            var now = Date.now();
+            var touchTime = now - startTime;
+            var distance = utils.getDistance(pos.start[0], pos.move ? pos.move[0] : pos.start[0]);
+
+            clearTimeout(__holdTimer);
+            var isDoubleTap = (function () {
+                if (__prev_tapped_pos && config.doubleTap && (startTime - __prev_tapped_end_time) < config.maxDoubleTapInterval) {
+                    var doubleDis = utils.getDistance(__prev_tapped_pos, pos.start[0]);
+                    if (doubleDis < 16) return true;
+                }
+                return false;
+            })();
+
+            if (isDoubleTap) {
+                clearTimeout(__tapTimer);
+                engine.trigger(el, smrEventList.DOUBLE_TAP, {
+                    type: smrEventList.DOUBLE_TAP,
+                    originEvent: ev,
+                    position: pos.start[0]
+                });
+                return;
+            }
+
+            if (config.tapMaxDistance < distance) return;
+
+            if (config.holdTime > touchTime && utils.getFingers(ev) <= 1) {
+                __tapped = true;
+                __prev_tapped_end_time = now;
+                __prev_tapped_pos = pos.start[0];
+                __tapTimer = setTimeout(function () {
+                        engine.trigger(el, smrEventList.TAP, {
+                            type: smrEventList.TAP,
+                            originEvent: ev,
+                            fingersCount: utils.getFingers(ev),
+                            position: __prev_tapped_pos
+                        });
+                    },
+                    config.tapTime);
+            }
+        }
+    },
+    hold: function (ev) {
+        var el = ev.target;
+        if (config.hold) {
+            clearTimeout(__holdTimer);
+
+            __holdTimer = setTimeout(function () {
+                    if (!pos.start) return;
+                    var distance = utils.getDistance(pos.start[0], pos.move ? pos.move[0] : pos.start[0]);
+                    if (config.tapMaxDistance < distance) return;
+
+                    if (!__tapped) {
+                        engine.trigger(el, "hold", {
+                            type: 'hold',
+                            originEvent: ev,
+                            fingersCount: utils.getFingers(ev),
+                            position: pos.start[0]
+                        });
+                    }
+                },
+                config.holdTime);
+        }
+    }
+};
+
+var handlerOriginEvent = function (ev) {
+
+    var el = ev.target;
+    switch (ev.type) {
+        case 'touchstart':
+        case 'mousedown':
+            __rotation_single_start = [];
+            __touchStart = true;
+            if (!pos.start || pos.start.length < 2) {
+                pos.start = utils.getPosOfEvent(ev);
+            }
+            if (utils.getFingers(ev) >= 2) {
+                __initial_angle = parseInt(utils.getAngle180(pos.start[0], pos.start[1]), 10);
+            }
+
+            startTime = Date.now();
+            startEvent = ev;
+            __offset = {};
+
+            var box = el.getBoundingClientRect();
+            var docEl = document.documentElement;
+            __offset = {
+                top: box.top + (window.pageYOffset || docEl.scrollTop) - (docEl.clientTop || 0),
+                left: box.left + (window.pageXOffset || docEl.scrollLeft) - (docEl.clientLeft || 0)
+            };
+
+            gestures.hold(ev);
+            break;
+        case 'touchmove':
+        case 'mousemove':
+            if (!__touchStart || !pos.start) return;
+            pos.move = utils.getPosOfEvent(ev);
+            if (utils.getFingers(ev) >= 2) {
+                gestures.pinch(ev);
+            } else if (__rotation_single_finger) {
+                gestures.rotateSingleFinger(ev);
+            } else {
+                gestures.swipe(ev);
+            }
+            break;
+        case 'touchend':
+        case 'touchcancel':
+        case 'mouseup':
+        case 'mouseout':
+            if (!__touchStart) return;
+            endEvent = ev;
+
+            if (startPinch) {
+                gestures.pinch(ev);
+            } else if (__rotation_single_finger) {
+                gestures.rotateSingleFinger(ev);
+            } else if (startSwiping) {
+                gestures.swipe(ev);
+            } else {
+                gestures.tap(ev);
+            }
+
+            utils.reset();
+            __initial_angle = 0;
+            __rotation = 0;
+            if (ev.touches && ev.touches.length === 1) {
+                __touchStart = true;
+                __rotation_single_finger = true;
+            }
+            break;
+    }
+};
+
+var _on = function () {
+
+    var evts, handler, evtMap, sel, args = arguments;
+    if (args.length < 2 || args > 4) {
+        return console.error("unexpected arguments!");
+    }
+    var els = utils.getType(args[0]) === 'string' ? document.querySelectorAll(args[0]) : args[0];
+    els = els.length ? Array.prototype.slice.call(els) : [els];
+    //事件绑定
+    if (args.length === 3 && utils.getType(args[1]) === 'string') {
+        evts = args[1].split(" ");
+        handler = args[2];
+        evts.forEach(function (evt) {
+            if (!utils.hasTouch) {
+                evt = utils.getPCevts(evt);
+            }
+            els.forEach(function (el) {
+                engine.bind(el, evt, handler);
+            });
+        });
+        return;
+    }
+
+    function evtMapDelegate(evt) {
+        if (!utils.hasTouch) {
+            evt = utils.getPCevts(evt);
+        }
+        els.forEach(function (el) {
+            engine.delegate(el, evt, sel, evtMap[evt]);
+        });
+    }
+    //mapEvent delegate
+    if (args.length === 3 && utils.getType(args[1]) === 'object') {
+        evtMap = args[1];
+        sel = args[2];
+        for (var evt1 in evtMap) {
+            evtMapDelegate(evt1);
+        }
+        return;
+    }
+
+    function evtMapBind(evt) {
+        if (!utils.hasTouch) {
+            evt = utils.getPCevts(evt);
+        }
+        els.forEach(function (el) {
+            engine.bind(el, evt, evtMap[evt]);
+        });
+    }
+
+    //mapEvent bind
+    if (args.length === 2 && utils.getType(args[1]) === 'object') {
+        evtMap = args[1];
+        for (var evt2 in evtMap) {
+            evtMapBind(evt2);
+        }
+        return;
+    }
+
+    //兼容factor config
+    if (args.length === 4 && utils.getType(args[2]) === "object") {
+        evts = args[1].split(" ");
+        handler = args[3];
+        evts.forEach(function (evt) {
+            if (!utils.hasTouch) {
+                evt = utils.getPCevts(evt);
+            }
+            els.forEach(function (el) {
+                engine.bind(el, evt, handler);
+            });
+        });
+        return;
+    }
+
+    //事件代理
+    if (args.length === 4) {
+        var el = els[0];
+        evts = args[1].split(" ");
+        sel = args[2];
+        handler = args[3];
+        evts.forEach(function (evt) {
+            if (!utils.hasTouch) {
+                evt = utils.getPCevts(evt);
+            }
+            engine.delegate(el, evt, sel, handler);
+        });
+        return;
+    }
+};
+
+var _off = function () {
+    var evts, handler;
+    var args = arguments;
+    if (args.length < 1 || args.length > 4) {
+        return console.error("unexpected arguments!");
+    }
+    var els = utils.getType(args[0]) === 'string' ? document.querySelectorAll(args[0]) : args[0];
+    els = els.length ? Array.prototype.slice.call(els) : [els];
+
+    if (args.length === 1 || args.length === 2) {
+        els.forEach(function (el) {
+            evts = args[1] ? args[1].split(" ") : Object.keys(el.listeners);
+            if (evts.length) {
+                evts.forEach(function (evt) {
+                    if (!utils.hasTouch) {
+                        evt = utils.getPCevts(evt);
+                    }
+                    engine.unbind(el, evt);
+                    engine.undelegate(el, evt);
+                });
+            }
+        });
+        return;
+    }
+
+    if (args.length === 3 && utils.getType(args[2]) === 'function') {
+        handler = args[2];
+        els.forEach(function (el) {
+            evts = args[1].split(" ");
+            evts.forEach(function (evt) {
+                if (!utils.hasTouch) {
+                    evt = utils.getPCevts(evt);
+                }
+                engine.unbind(el, evt, handler);
+            });
+        });
+        return;
+    }
+
+    if (args.length === 3 && utils.getType(args[2]) === 'string') {
+        var sel = args[2];
+        els.forEach(function (el) {
+            evts = args[1].split(" ");
+            evts.forEach(function (evt) {
+                if (!utils.hasTouch) {
+                    evt = utils.getPCevts(evt);
+                }
+                engine.undelegate(el, evt, sel);
+            });
+        });
+        return;
+    }
+
+    if (args.length === 4) {
+        handler = args[3];
+        els.forEach(function (el) {
+            evts = args[1].split(" ");
+            evts.forEach(function (evt) {
+                if (!utils.hasTouch) {
+                    evt = utils.getPCevts(evt);
+                }
+                engine.undelegate(el, evt, sel, handler);
+            });
+        });
+        return;
+    }
+};
+
+var _dispatch = function (el, evt, detail) {
+    var args = arguments;
+    if (!utils.hasTouch) {
+        evt = utils.getPCevts(evt);
+    }
+    var els = utils.getType(args[0]) === 'string' ? document.querySelectorAll(args[0]) : args[0];
+    els = els.length ? Array.prototype.call(els) : [els];
+
+    els.forEach(function (el) {
+        engine.trigger(el, evt, detail);
+    });
+};
+
+//init gesture
+function init() {
+
+    var mouseEvents = 'mouseup mousedown mousemove mouseout',
+        touchEvents = 'touchstart touchmove touchend touchcancel';
+    var bindingEvents = utils.hasTouch ? touchEvents : mouseEvents;
+
+    bindingEvents.split(" ").forEach(function (evt) {
+        document.addEventListener(evt, handlerOriginEvent, false);
+    });
+}
+
+init();
+
+//exports 
+module.exports.on = module.exports.bind = module.exports.live = _on;
+module.exports.off = module.exports.unbind = module.exports.die = _off;
+module.exports.config = config;
+module.exports.trigger = _dispatch;
+},{}],22:[function(require,module,exports){
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
 },{}],23:[function(require,module,exports){
+/****************************************************************** 
+ * @component
+ * Description:组件管理
+ *******************************************************************/
+var _ = require('./type');
+
+function component(role, define) {
+    define.role = role;
+    if (component._define[role]) {
+        component._define[role] = _.extend(component._define[role], define);
+    } else {
+        component._define[role] = define;
+    }
+}
+
+function getDefine(el) {
+    var _role = el.getAttribute('ne-role') || el.tagName.toLowerCase(),
+        _define = component._define[_role];
+    return _define || {};
+}
+
+component._define = {};
+
+component.acts = function (selector) {
+    function _props(el, props) {
+        var _this = this;
+        for (var i in props) {
+            _this[i] = function (prop, el) {
+                return function () {
+                    return prop.apply(el, arguments);
+                };
+            }(props[i], el);
+        }
+    }
+    selector = typeof selector === 'string' ? document.querySelector(selector) : selector;
+    return new _props(selector, getDefine(selector).props || {});
+}
+
+component.init = function (el) {
+    el = typeof el === 'string' ? document.querySelector(el) : el;
+    var _define = getDefine(el),
+        _props = _define.props || {};
+    if (_props.init && !el.inited) {
+        _props.init.apply(el);
+        el.inited = true;
+    }
+    if (_define.role == 'page') {
+        Array.prototype.slice.call(el.querySelectorAll('[ne-role]')).forEach(function (item) {
+            component.init(item);
+        });
+    }
+}
+
+module.exports = component;
+},{"./type":24}],24:[function(require,module,exports){
 
 /****************************************************************** 
  * @type
@@ -4074,14 +4078,14 @@ var _ = {
 }
 
 module.exports= _;
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 window.Ne = window.Ne || {};
 var Ne=window.Ne;
 Ne.touch=require('../../../NeTouch');
 Ne.render=require('../../../NeRender');
 Ne.motion=require('../../../NeMotion');
+Ne.dom=require('../../../NeDom');
 Ne._=require('./lib/type');
-Ne.dom=require('./lib/dom');
 Ne.component = require('./lib/component');
 Ne.acts = Ne.component.acts;
 
@@ -4151,7 +4155,7 @@ Ne.dom(function(){
     initUI();
 })
 
-},{"../../../NeMotion":1,"../../../NeRender":5,"../../../NeTouch":18,"./lib/component":21,"./lib/dom":22,"./lib/type":23}]},{},[24]);
+},{"../../../NeDom":1,"../../../NeMotion":3,"../../../NeRender":7,"../../../NeTouch":20,"./lib/component":23,"./lib/type":24}]},{},[25]);
 
 
 /****************************************************************** 

@@ -18,7 +18,7 @@
     "type": "git",
     "url": "https://github.com/so-il/neui.git"
   },
-  "homepage": "https://github.com/so-il/neui.git",
+  "homepage": "https://neui.nelabs.cn/",
   "license": "MIT",
   "devDependencies": {
     "browser-sync": "^2.18.12",

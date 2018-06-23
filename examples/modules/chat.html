@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="../../dist/neui.css" />
     <style>
         /**
- * @chat.css
-**/
+        * @chat.css
+        **/
 
         .ne-chat-msglist {
             list-style: none;
@@ -44,9 +44,8 @@
             margin: 0 10px;
             vertical-align: top;
             text-align: left;
-            border-radius: 7px;
-            border: 1px solid #e9e9e9;
-            background-color: white;
+            border-radius: 20px;
+            background-color: #e6e5eb;
             word-break: break-word;
         }
 
@@ -56,7 +55,6 @@
             height: 2.857em;
             vertical-align: top;
             overflow: hidden;
-            box-shadow: 0 0 1px 0 rgba(255, 0, 0, 0.2);
             border-radius: 4px;
         }
 
@@ -76,42 +74,30 @@
 
         .ne-chat-msg>.msg::before {
             content: '';
-            display: inline-block;
             position: absolute;
-            top: 12px;
-            border: 6px solid transparent;
-        }
-
-        .ne-chat-msg>.msg::after {
-            content: '';
+            z-index: 0;
+            pointer-events: none;
             display: inline-block;
-            position: absolute;
-            top: 12px;
-            border: 6px solid transparent;
-        }
-
-        .ne-chat-msg.align-right>.msg {
-            background-color: #7ce18d;
+            width: 14px;
+            height: 14px;
+            background-color: inherit;
         }
 
         .ne-chat-msg.align-left>.msg::before {
-            left: -12px;
-            border-right-color: #e9e9e9;
-        }
-
-        .ne-chat-msg.align-left>.msg::after {
-            left: -10px;
-            border-right-color: white;
+            transform: rotate(30deg) skewX(-20deg);
+            left: -1px;
+            top: 8px;
         }
 
         .ne-chat-msg.align-right>.msg::before {
-            right: -12px;
-            border-left-color: #e9e9e9;
+            transform: rotate(-30deg) skewX(20deg);
+            right: -1px;
+            top: 8px;
         }
 
-        .ne-chat-msg.align-right>.msg::after {
-            right: -10px;
-            border-left-color: #7ce18d;
+        .ne-chat-msg.align-right>.msg {
+            background-color: #4c7ffc;
+            color: #fff;
         }
 
         .ne-chat-inputbar {
@@ -181,7 +167,7 @@
             </nav>
         </header>
         <div class="ne-page-body">
-            <div class="ne-chat">
+            <div class="ne-chat bg-white">
                 <ul class="ne-chat-msglist">
                     <li class="ne-chat-tips">
                         <span>14:53</span>
@@ -202,7 +188,7 @@
                         </div>
                         <div class="photo">
                             <a>
-                                <img class="bg-green border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                                <img class="bg-blue border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
                             </a>
                         </div>
                     </li>
@@ -233,26 +219,13 @@
                     </li>
                     <li class="ne-chat-msg align-right">
                         <div class="msg">
-                            6'
-                            <span class="active">
-                                <i class="ne-icon-ripple"></i>
-                            </span>
-                        </div>
-                        <div class="photo">
-                            <a>
-                                <img class="bg-green border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
-                            </a>
-                        </div>
-                    </li>
-                    <li class="ne-chat-msg align-right">
-                        <div class="msg">
                             <div class="ne-cell padding-0">
                                 <div class="ne-cell-left">
-                                    <i class="ne-icon-docs ne-flaticon border-circle bg-cyan"></i>
+                                    <i class="ne-icon-docs ne-flaticon border-circle bg-white primary"></i>
                                 </div>
-                                <div class="ne-cell-center text-excerpt">
-                                    <strong>健康报告</strong>
-                                    <p class="line-clamp-1">
+                                <div class="ne-cell-center">
+                                    <p class="text-title white">健康报告</p>
+                                    <p class="text-meta line-clamp-1 white">
                                         2016-05-01
                                     </p>
                                 </div>
@@ -260,7 +233,7 @@
                         </div>
                         <div class="photo">
                             <a>
-                                <img class="bg-green border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                                <img class="bg-blue border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
                             </a>
                         </div>
                     </li>
@@ -271,7 +244,7 @@
                             </a>
                         </div>
                         <div class="msg">
-                            <img class="bg-light iconsize-large border-round" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+                            <i class="ne-icon-frown-f yellow" style="opacity: 1;"></i>
                         </div>
                     </li>
                 </ul>

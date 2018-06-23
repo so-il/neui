@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
@@ -8,51 +9,175 @@
 
     <!-- mandatory styles -->
     <link rel="stylesheet" href="../../dist/neui.css" />
+    <style>
+        .ne-table-td,
+        .ne-table-th,
+        .ne-table td,
+        .ne-table th {
+            text-align: center;
+        }
+    </style>
 </head>
+
 <body>
     <section class="ne-page active" ne-role="page">
         <div class="ne-page-body">
-            <h4 class="hr-title">字号</h4>
-            <fieldset class="ne-fieldset">
-                <div class="ne-field border-none">
-                    <label class="ne-label w6 grey">xx-small：</label>
-                    <p><span class="size-xx-small margin-right-10">文字</span><span class="size-xx-small  margin-right-10 weight-bold">文字</span><span class="size-xx-small  margin-right-10 weight-bolder">文字</span></p>
+            <div class="ne-panel">
+                <div class="ne-panel-header">
+                    <div class="header-title">字体</div>
                 </div>
-                <div class="ne-field border-none">
-                    <label class="ne-label w6 grey">x-small：</label>
-                    <p><span class="size-x-small margin-right-10">文字</span><span class="size-x-small  margin-right-10 weight-bold">文字</span><span class="size-x-small  margin-right-10 weight-bolder">文字</span></p>
+                <div class="ne-panel-body">
+                    <div class="ne-cell align-center">
+                        <span class="block size-x-large padding-20">系统默认</span>
+                    </div>
                 </div>
-                <div class="ne-field border-none">
-                    <label class="ne-label w6 grey">smaller：</label>
-                    <p><span class="size-smaller margin-right-10">文字</span><span class="size-smaller  margin-right-10 weight-bold">文字</span><span class="size-smaller  margin-right-10 weight-bolder">文字</span></p>
+            </div>
+            <hr class="hr-blank">
+            <div class="ne-panel">
+                <div class="ne-panel-header">
+                    <div class="header-title">字号、字重</div>
                 </div>
+                <div class="ne-panel-body">
+                    <table class="ne-table border-none">
+                        <thead>
+                            <tr>
+                                <th class="grey-7"> </th>
+                                <th class="grey-7"> normal </th>
+                                <th class="grey-7"> bold </th>
+                                <th class="grey-7"> bolder </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="align-right grey-7">xx-small :</td>
+                                <td>
+                                    <span class="size-xx-small">文字</span>
+                                </td>
+                                <td>
+                                    <span class="size-xx-small  weight-bold">文字</span>
+                                </td>
+                                <td>
+                                    <span class="size-xx-small  weight-bolder">文字</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-right grey-7">x-small :</td>
+                                <td>
+                                    <span class="size-x-small">文字</span>
+                                </td>
+                                <td>
+                                    <span class="size-x-small  weight-bold">文字</span>
+                                </td>
+                                <td>
+                                    <span class="size-x-small  weight-bolder">文字</span>
+                                </td>
+                            </tr>
 
-                <div class="ne-field border-none">
-                    <label class="ne-label w6 grey">small：</label>
-                    <p><span class="size-small margin-right-10">文字</span><span class="size-small  margin-right-10 weight-bold">文字</span><span class="size-small  margin-right-10 weight-bolder">文字</span></p>
+                            <tr>
+                                <td class="align-right grey-7">smaller :</td>
+                                <td>
+                                    <span class="size-smaller">文字</span>
+                                </td>
+                                <td>
+                                    <span class="size-smaller  weight-bold">文字</span>
+                                </td>
+                                <td>
+                                    <span class="size-smaller  weight-bolder">文字</span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="align-right grey-7">small :</td>
+                                <td>
+                                    <span class="size-small">文字</span>
+                                </td>
+                                <td>
+                                    <span class="size-small  weight-bold">文字</span>
+                                </td>
+                                <td>
+                                    <span class="size-small  weight-bolder">文字</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-right grey-7">normal :</td>
+                                <td>
+                                    <span class="size-normal">文字</span>
+                                </td>
+                                <td>
+                                    <span class="size-normal  weight-bold">文字</span>
+                                </td>
+                                <td>
+                                    <span class="size-normal  weight-bolder">文字</span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="align-right grey-7">large :</td>
+                                <td>
+                                    <span class="size-large">文字</span>
+                                </td>
+                                <td>
+                                    <span class="size-large  weight-bold">文字</span>
+                                </td>
+                                <td>
+                                    <span class="size-large  weight-bolder">文字</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-right grey-7">larger :</td>
+                                <td>
+                                    <span class="size-larger">文字</span>
+                                </td>
+                                <td>
+                                    <span class="size-larger  weight-bold">文字</span>
+                                </td>
+                                <td>
+                                    <span class="size-larger  weight-bolder">文字</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-right grey-7">x-large :</td>
+                                <td>
+                                    <span class="size-x-large">文字</span>
+                                </td>
+                                <td>
+                                    <span class="size-x-large  weight-bold">文字</span>
+                                </td>
+                                <td>
+                                    <span class="size-x-large  weight-bolder">文字</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-right grey-7">xx-large :</td>
+                                <td>
+                                    <span class="size-xx-large">文字</span>
+                                </td>
+                                <td>
+                                    <span class="size-xx-large  weight-bold">文字</span>
+                                </td>
+                                <td>
+                                    <span class="size-xx-large  weight-bolder">文字</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-right grey-7">double :</td>
+                                <td>
+                                    <span class="size-double">文字</span>
+                                </td>
+                                <td>
+                                    <span class="size-double  weight-bold">文字</span>
+                                </td>
+                                <td>
+                                    <span class="size-double  weight-bolder">文字</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="ne-field border-none">
-                    <label class="ne-label w6 grey">normal：</label>
-                    <p><span class="size-normal margin-right-10">文字</span><span class="size-normal  margin-right-10 weight-bold">文字</span><span class="size-normal  margin-right-10 weight-bolder">文字</span></p>
-                </div>
-                <div class="ne-field border-none">
-                    <label class="ne-label w6 grey">large：</label>
-                    <p><span class="size-large margin-right-10">文字</span><span class="size-large  margin-right-10 weight-bold">文字</span><span class="size-large  margin-right-10 weight-bolder">文字</span></p>
-                </div>
-                <div class="ne-field border-none">
-                    <label class="ne-label w6 grey">larger：</label>
-                    <p><span class="size-larger margin-right-10">文字</span><span class="size-larger  margin-right-10 weight-bold">文字</span><span class="size-larger  margin-right-10 weight-bolder">文字</span></p>
-                </div>
-                <div class="ne-field border-none">
-                    <label class="ne-label w6 grey">x-large：</label>
-                    <p><span class="size-x-large margin-right-10">文字</span><span class="size-x-large  margin-right-10 weight-bold">文字</span><span class="size-x-large  margin-right-10 weight-bolder">文字</span></p>
-                </div>
-                <div class="ne-field border-none">
-                    <label class="ne-label w6 grey">xx-large：</label>
-                    <p><span class="size-xx-large margin-right-10">文字</span><span class="size-xx-large  margin-right-10 weight-bold">文字</span><span class="size-xx-large  margin-right-10 weight-bolder">文字</span></p>
-                </div>
-            </fieldset>
+            </div>
+
         </div>
     </section>
 </body>
+
 </html>

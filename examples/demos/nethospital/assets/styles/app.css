@@ -35,13 +35,18 @@ canvas.bg-digit {
 }
 
 /*profile*/
+.profile-header,.profile-header>.ne-navbar{
+    border: 0;
+    background-color: #5bc583;
+    color: #fff;
+}
+
 .profile {
     display: block;
     padding-top: 1.5em;
     padding-bottom: 1.5em;
     color: #fff;
-    background-color: #20a6a5;
-    background: linear-gradient(10deg, #5bc583 0, #20a6a5 80%);
+    background-color: #5bc583;
 }
 
 .profile-avatar.squarebox {
@@ -116,6 +121,9 @@ canvas.bg-digit {
     border-left: 0;
     border-right: 0;
 }
+.table-yuyue .ne-table-tr{
+    table-layout: fixed;
+}
 
     .table-yuyue .ne-table-tbody .ne-table-tr:nth-of-type(even) {
         background-color: #fff;
@@ -164,6 +172,8 @@ canvas.bg-digit {
 .table-yuyue-w, .table-yuyue-d {
     display: block;
     line-height: 1.2;
+    white-space: nowrap;
+    text-align: center;
 }
 
 .table-yuyue-d {
@@ -370,3 +380,7 @@ canvas.bg-digit {
     z-index: 0;
 }
 
+
+.ne-tab.active{
+    color:#00a950;
+}
