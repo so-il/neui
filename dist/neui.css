@@ -2804,6 +2804,15 @@ input[type=checkbox] {
   font-weight: normal;
   text-rendering: optimizeLegibility;
 }
+[class^="ne-icon-"],
+.ne-icon {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.42857em;
+  line-height: 1.005;
+  text-align: center;
+  opacity: .8;
+}
 [class^="ne-icon-"] {
   font-family: 'neui';
   font-style: normal;
@@ -2811,18 +2820,18 @@ input[type=checkbox] {
   font-variant: normal;
   text-transform: none;
   text-decoration: none;
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 1.42857em;
-  line-height: 1.005;
-  text-align: center;
-  opacity: .8;
   -webkit-font-smoothing: antialiased;
 }
-[class^="ne-icon-"].normalsize {
+[class^="ne-icon-"].normalsize,
+.ne-icon.normalsize {
   font-size: initial;
   width: initial;
   height: initial;
+}
+svg.ne-icon {
+  fill: currentColor;
+  width: 1em;
+  height: 1em;
 }
 .ne-icon-circle::before {
   content: "\F002";

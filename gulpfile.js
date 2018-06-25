@@ -29,29 +29,34 @@ var banner = [
     iconPath = stylePath + 'icon/neui-icons/Web-TT/';
 
 gulp.task('build:style', function (callback) {
-    gulp.src([
-            stylePath + 'neui.less',
-            stylePath + 'lib/reset.less',
-            stylePath + 'lib/color.less',
-            stylePath + 'lib/layout.less',
-            stylePath + 'lib/animate.less',
-            stylePath + 'lib/fragment.less',
-            stylePath + 'lib/single.less',
-            stylePath + 'ui/*.less'
-        ])
-        .pipe(concat(pkg.name + '.css'))
-        .pipe(less().on('error', function (e) {
-            console.error(e)
-        }))
-        .pipe(header(banner, {
-            pkg: pkg
-        }))
-        .pipe(gulp.dest(distPath))
-        .pipe(nano())
-        .pipe(rename(function (path) {
-            path.basename += '.min'
-        }))
-        .pipe(gulp.dest(distPath));
+    var stream_ne = gulp.src([
+        stylePath + 'neui.less',
+        stylePath + 'lib/reset.less',
+        stylePath + 'lib/color.less',
+        stylePath + 'lib/layout.less',
+        stylePath + 'lib/animate.less',
+        stylePath + 'lib/fragment.less',
+        stylePath + 'lib/single.less'
+    ]).pipe(concat(pkg.name + '.css'));
+    var stream_ui = gulp.src([
+        stylePath + 'ui/*.less'
+    ]).pipe(concat(pkg.name + '.css'));
+    setTimeout(function () {
+        merge([stream_ne, stream_ui])
+            .pipe(concat(pkg.name + '.css'))
+            .pipe(less().on('error', function (e) {
+                console.error(e)
+            }))
+            .pipe(header(banner, {
+                pkg: pkg
+            }))
+            .pipe(gulp.dest(distPath))
+            .pipe(nano())
+            .pipe(rename(function (path) {
+                path.basename += '.min'
+            }))
+            .pipe(gulp.dest(distPath));
+    }, 500);
     callback();
 });
 
