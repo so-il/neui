@@ -1,9 +1,9 @@
 ﻿window.Ne = window.Ne || {};
 var Ne=window.Ne;
-Ne.touch=require('../../../NeTouch');
-Ne.render=require('../../../NeRender');
-Ne.motion=require('../../../NeMotion');
-Ne.dom=require('../../../NeDom');
+Ne.touch=require('./lib/touch');
+Ne.render=require('./lib/render/index');
+Ne.motion=require('./lib/motion/index');
+Ne.dom=require('./lib/dom/index');
 Ne._=require('./lib/type');
 Ne.component = require('./lib/component');
 Ne.acts = Ne.component.acts;
